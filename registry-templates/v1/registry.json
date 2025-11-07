@@ -1,0 +1,17 @@
+{
+  "$schema": "./$schema.json",
+  "manifest_version": 1,
+  "name": "InPageEdit Official Plugins",
+  "base_url": "https://registry.ipe.wiki/",
+  "maintainers": [
+    {
+      "name": "Dragon Fish",
+      "url": "https://blog.epb.wiki"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/inpageedit/plugin-registry.git"
+  },
+  "packages": []
+}

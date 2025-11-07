@@ -1,0 +1,28 @@
+{
+  "name": "@inpageedit/plugin-sample",
+  "description": "Sample plugin for InPageEdit",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "module": "./dist/index.mjs",
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs"
+    }
+  },
+  "scripts": {
+    "dev": "unbuild --watch",
+    "build": "unbuild"
+  },
+  "$ipe": {
+    "loader": {
+      "kind": "module",
+      "entry": "dist/index.mjs",
+      "styles": [],
+      "main_export": "default"
+    }
+  }
+}

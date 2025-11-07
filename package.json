@@ -1,0 +1,24 @@
+{
+  "name": "@inpageedit/plugin-central",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "npm run clean && tsx scripts/build.ts",
+    "new": "tsx scripts/new.ts",
+    "clean": "rimraf dist"
+  },
+  "devDependencies": {
+    "@inpageedit/core": "^0.11.1",
+    "@types/node": "^24.8.1",
+    "consola": "^3.4.2",
+    "rimraf": "^6.0.1",
+    "schemastery": "^3.17.1",
+    "tsx": "^4.20.6",
+    "types-mediawiki": "^2.0.0",
+    "typescript": "^5.9.3",
+    "unbuild": "^3.6.1"
+  },
+  "dependencies": {
+    "jsx-dom": "^8.1.6"
+  }
+}

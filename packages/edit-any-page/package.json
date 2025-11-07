@@ -1,0 +1,30 @@
+{
+  "name": "inpageedit-plugin-edit-any-page",
+  "description": "Add \"edit any page\" button to toolbox",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "module": "./dist/index.mjs",
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs"
+    }
+  },
+  "scripts": {
+    "dev": "unbuild --watch",
+    "build": "unbuild"
+  },
+  "$ipe": {
+    "name": "Edit Any Page",
+    "description": "Add \"edit any page\" button to toolbox",
+    "loader": {
+      "kind": "module",
+      "entry": "dist/index.mjs",
+      "styles": [],
+      "main_export": "default"
+    }
+  }
+}
