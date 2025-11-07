@@ -4,7 +4,7 @@ import type {} from '@inpageedit/core/plugins/toolbox/index'
 declare global {
   interface Window {
     mw: {
-      addWikiEditor: (textarea: HTMLElement) => void
+      addWikiEditor: (textarea: JQuery<HTMLTextAreaElement>) => void
     }
   }
 }
@@ -14,16 +14,16 @@ export default defineIPEPlugin({
   apply(ctx) {
     ctx.set('plugin:wiki-editor', true)
     ctx.on('quick-edit/wiki-page', async (payload) => {
-      const $textarea = payload.modal
+      const textarea = payload.modal
         .get$content()
         .querySelector<HTMLTextAreaElement>('textarea[name="text"]')!
       const registered = !!mw.loader.getState('ext.wikiEditor')
-      if (!$textarea || !registered) {
+      if (!textarea || !registered) {
         return
       }
       await mw.loader.using(['ext.wikiEditor'])
       if (typeof window.mw?.addWikiEditor === 'function') {
-        window.mw.addWikiEditor($textarea)
+        window.mw.addWikiEditor($(textarea))
       }
     })
   },
