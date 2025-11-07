@@ -44,5 +44,9 @@ export default defineIPEPlugin({
         )
       },
     })
+
+    ctx.on('dispose', () => {
+      ctx.toolbox.removeButton('edit-any-page')
+    })
   },
 })

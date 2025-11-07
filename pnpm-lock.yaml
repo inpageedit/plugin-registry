@@ -42,9 +42,11 @@ importers:
 
   packages/_boilerplate: {}
 
+  packages/code-mirror: {}
+
   packages/edit-any-page: {}
 
-  packages/test: {}
+  packages/wiki-editor: {}
 
 packages:
 

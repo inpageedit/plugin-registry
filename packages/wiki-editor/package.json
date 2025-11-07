@@ -1,7 +1,9 @@
 {
-  "name": "@inpageedit/plugin-sample",
-  "description": "Sample plugin for InPageEdit",
+  "name": "inpageedit-plugin-wiki-editor",
+  "description": "WikiEditor for InPageEdit",
   "version": "1.0.0",
+  "author": "dragon-fish",
+  "license": "MIT",
   "private": true,
   "type": "module",
   "module": "./dist/index.mjs",
@@ -18,7 +20,7 @@
     "build": "unbuild"
   },
   "$ipe": {
-    "name": "Sample Plugin",
+    "name": "WikiEditor",
     "loader": {
       "kind": "module",
       "entry": "dist/index.mjs",

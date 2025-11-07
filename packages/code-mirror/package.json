@@ -1,6 +1,7 @@
 {
-  "name": "@inpageedit/plugin-sample",
-  "description": "Sample plugin for InPageEdit",
+  "name": "inpageedit-plugin-code-mirror",
+  "description": "CodeMirror6 for InPageEdit",
+  "author": "bhsd-harry",
   "version": "1.0.0",
   "private": true,
   "type": "module",
@@ -18,7 +19,7 @@
     "build": "unbuild"
   },
   "$ipe": {
-    "name": "Sample Plugin",
+    "name": "CodeMirror6",
     "loader": {
       "kind": "module",
       "entry": "dist/index.mjs",
