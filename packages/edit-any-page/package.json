@@ -2,6 +2,8 @@
   "name": "inpageedit-plugin-edit-any-page",
   "description": "Add \"edit any page\" button to toolbox",
   "version": "1.0.0",
+  "author": "dragon-fish",
+  "license": "MIT",
   "private": true,
   "type": "module",
   "module": "./dist/index.mjs",

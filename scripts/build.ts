@@ -11,6 +11,7 @@ import {
   writeFile,
 } from 'node:fs/promises'
 import { DIST_DIR, run, ROOT_DIR } from './utils/index.js'
+import { PluginStorePackage } from './utils/PluginStoreSchema.js'
 
 // constants
 const PKGS_DIR = resolve(ROOT_DIR, 'packages')
@@ -20,21 +21,6 @@ const REGISTRY_TEMPLATE = resolve(
   'registry-templates/v1/registry.json'
 )
 const REGISTRY_OUTPUT = resolve(DIST_DIR, 'registry.v1.json')
-
-// types
-interface PackageInfo {
-  name: string
-  version: string
-  description?: string | null
-  author?: string | null
-  license?: string | null
-  loader: {
-    kind: string
-    entry?: string | null
-    styles?: string[]
-    main_export?: string | null
-  }
-}
 
 // helpers
 async function getPackages() {
@@ -181,7 +167,7 @@ async function copyPackageFiles(pkgName: string) {
 
 async function extractPackageInfo(
   pkgName: string
-): Promise<PackageInfo | null> {
+): Promise<PluginStorePackage | null> {
   try {
     const pkgJsonPath = join(PKGS_DIR, pkgName, 'package.json')
     const pkgJsonContent = await readFile(pkgJsonPath, 'utf-8')
@@ -202,10 +188,9 @@ async function extractPackageInfo(
     }
 
     return {
-      // $ipe.name 可以覆写 package.json 的 name
+      id: pkgName,
       name: ipeConfig.name || pkgJson.name || pkgName,
       version: pkgJson.version || '0.0.0',
-      // $ipe.description 可以覆写 package.json 的 description
       description: ipeConfig.description || pkgJson.description || null,
       author:
         typeof pkgJson.author === 'string'
@@ -237,7 +222,7 @@ async function generateRegistry(packages: string[]) {
   const registry = JSON.parse(templateContent)
 
   // 提取所有包的信息
-  const packageInfos: PackageInfo[] = []
+  const packageInfos: PluginStorePackage[] = []
   for (const pkgName of packages) {
     const info = await extractPackageInfo(pkgName)
     if (info) {

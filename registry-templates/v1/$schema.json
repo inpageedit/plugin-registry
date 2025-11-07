@@ -89,11 +89,16 @@
         "type": "object",
         "additionalProperties": false,
         "required": [
+          "id",
           "name",
           "version",
           "loader"
         ],
         "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier for the plugin"
+          },
           "name": {
             "type": "string"
           },
