@@ -1,6 +1,6 @@
 #!/usr/bin/env tsx
 
-import { resolve, basename, join } from 'node:path'
+import { resolve, join } from 'node:path'
 import {
   readdir,
   mkdir,
@@ -202,6 +202,9 @@ async function extractPackageInfo(
           ? pkgJson.author
           : pkgJson.author?.name || null,
       license: pkgJson.license || null,
+      categories: Array.isArray(ipeConfig.categories)
+        ? ipeConfig.categories
+        : [],
       loader: {
         kind: loaderInfo.kind,
         entry: prefixPath(loaderInfo.entry),
@@ -239,8 +242,11 @@ async function generateRegistry(packages: string[]) {
   // 填充 packages 字段
   registry.packages = packageInfos
 
-  // 更新 updated_at 字段
-  registry.updated_at = new Date().toISOString()
+  // 更新 last_modified 字段（原 updated_at 重命名）
+  registry.last_modified = new Date().toISOString()
+  if (registry.updated_at) {
+    delete registry.updated_at
+  }
 
   // 写入输出文件
   await writeFile(REGISTRY_OUTPUT, JSON.stringify(registry, null, 2), 'utf-8')

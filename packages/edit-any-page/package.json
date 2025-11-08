@@ -22,6 +22,9 @@
   "$ipe": {
     "name": "Edit Any Page",
     "description": "Add \"edit any page\" button to toolbox",
+    "categories": [
+      "toolbox"
+    ],
     "loader": {
       "kind": "module",
       "entry": "dist/index.mjs",

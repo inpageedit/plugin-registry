@@ -21,6 +21,9 @@
   },
   "$ipe": {
     "name": "WikiEditor",
+    "categories": [
+      "editor"
+    ],
     "loader": {
       "kind": "module",
       "entry": "dist/index.mjs",

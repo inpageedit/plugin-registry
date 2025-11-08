@@ -19,6 +19,7 @@
   },
   "$ipe": {
     "name": "Sample Plugin",
+    "categories": [],
     "loader": {
       "kind": "module",
       "entry": "dist/index.mjs",

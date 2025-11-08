@@ -25,6 +25,7 @@ export interface PluginStorePackage {
   description?: string
   author?: string
   license?: string
+  categories?: string[]
   loader: PluginStorePackageLoader
 }
 

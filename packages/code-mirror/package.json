@@ -20,6 +20,9 @@
   },
   "$ipe": {
     "name": "CodeMirror6",
+    "categories": [
+      "editor"
+    ],
     "loader": {
       "kind": "module",
       "entry": "dist/index.mjs",
