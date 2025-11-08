@@ -18,9 +18,14 @@ const PKGS_DIR = resolve(ROOT_DIR, 'packages')
 const PUBLIC_DIR = resolve(ROOT_DIR, 'public')
 const REGISTRY_TEMPLATE = resolve(
   ROOT_DIR,
-  'registry-templates/v1/registry.json'
+  'registry-templates/v1/registry.v1.json'
+)
+const REGISTRY_SCHEMA = resolve(
+  ROOT_DIR,
+  'registry-templates/v1/registry.v1.schema.json'
 )
 const REGISTRY_OUTPUT = resolve(DIST_DIR, 'registry.v1.json')
+const REGISTRY_OUTPUT_SCHEMA = resolve(DIST_DIR, 'registry.v1.schema.json')
 
 // helpers
 async function getPackages() {
@@ -234,8 +239,14 @@ async function generateRegistry(packages: string[]) {
   // 填充 packages 字段
   registry.packages = packageInfos
 
+  // 更新 updated_at 字段
+  registry.updated_at = new Date().toISOString()
+
   // 写入输出文件
   await writeFile(REGISTRY_OUTPUT, JSON.stringify(registry, null, 2), 'utf-8')
+  // 复制 schema 文件到 dist
+  await copyFile(REGISTRY_SCHEMA, REGISTRY_OUTPUT_SCHEMA)
+
   consola.success(
     `Registry generated at ${REGISTRY_OUTPUT} with ${packageInfos.length} packages`
   )
