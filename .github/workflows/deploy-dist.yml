@@ -1,0 +1,37 @@
+name: Push dist files to dist branch
+
+# Controls when the workflow will run
+on:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+
+jobs:
+  push:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: lts/*
+
+      - name: Resolve Dependencies
+        run: |
+          npm i -g pnpm
+          pnpm i
+
+      - name: Build Packages
+        run: |
+          pnpm build
+
+      - name: Publish GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
+          publish_branch: dist
+          force_orphan: true

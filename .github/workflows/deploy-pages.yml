@@ -1,4 +1,4 @@
-name: Deploy Documentation to GitHub Pages
+name: Deploy to GitHub Pages
 
 # Controls when the workflow will run
 on:
@@ -45,15 +45,6 @@ jobs:
         run: pnpm install
       - name: Build
         run: pnpm build
-
-      # Push to dist branch
-      - name: Push to dist branch
-        uses: peaceiris/actions-gh-pages@v4
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist
-          publish_branch: dist
-          force_orphan: true
 
       # Upload artifact to GitHub Pages
       - name: Setup Pages
