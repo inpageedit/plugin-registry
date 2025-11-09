@@ -11,9 +11,9 @@ export default defineIPEPlugin({
   apply: (ctx) => {
     ctx.set('plugin:code-mirror-v6', true)
 
-    let preferWikiEditor = false
+    const preferWikiEditor = []
     ctx.inject(['plugin:wiki-editor'], () => {
-      preferWikiEditor = true
+      preferWikiEditor.push('wikiEditor')
       for (let [_, scope] of ctx.registry.entries()) {
         if (scope.name === 'wiki-editor') {
           scope.dispose()
@@ -31,14 +31,12 @@ export default defineIPEPlugin({
         )
         const { CodeMirror } = pkg
         const cm = await CodeMirror.fromTextArea(
-          modal.get$content().querySelector('textarea[name="text"]')!,
+          modal.get$content().querySelector<HTMLTextAreaElement>('textarea[name="text"]')!,
           contentmodel,
           ns,
-          title
+          title,
+          preferWikiEditor
         )
-        if (preferWikiEditor) {
-          cm.prefer({ wikiEditor: true })
-        }
       }
     )
   },
