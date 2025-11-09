@@ -1,0 +1,112 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://registry.ipe.wiki/ipe-package.schema.v1.json",
+  "title": "InPageEdit Plugin Package Configuration Schema",
+  "description": "JSON Schema for package.json files with InPageEdit plugin configuration ($ipe field)",
+  "allOf": [
+    {
+      "$ref": "https://json.schemastore.org/package.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "$ipe": {
+          "type": "object",
+          "description": "InPageEdit plugin configuration",
+          "additionalProperties": false,
+          "required": [
+            "loader"
+          ],
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "Display name of the plugin (shown in plugin manager)"
+            },
+            "description": {
+              "type": "string",
+              "description": "Detailed description of the plugin"
+            },
+            "categories": {
+              "type": "array",
+              "description": "Plugin categories for filtering and organization",
+              "items": {
+                "type": "string"
+              },
+              "default": []
+            },
+            "loader": {
+              "type": "object",
+              "description": "Production loader configuration (required)",
+              "additionalProperties": false,
+              "required": [
+                "kind"
+              ],
+              "properties": {
+                "kind": {
+                  "type": "string",
+                  "enum": [
+                    "autoload",
+                    "module",
+                    "umd",
+                    "styles"
+                  ],
+                  "description": "Loader type: 'module' for ES modules, 'umd' for UMD modules, 'autoload' for auto-execution, 'styles' for stylesheets only"
+                },
+                "entry": {
+                  "description": "Entry file path relative to package root (e.g., 'dist/index.mjs'). Set to null for style-only packages.",
+                  "anyOf": [
+                    {
+                      "type": "string"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "styles": {
+                  "type": "array",
+                  "description": "Array of stylesheet paths relative to package root (e.g., ['dist/style.css'])",
+                  "items": {
+                    "type": "string"
+                  },
+                  "default": []
+                },
+                "main_export": {
+                  "description": "Name of the main export for module/UMD loaders (e.g., 'default', 'MyPlugin'). Set to null if not applicable.",
+                  "anyOf": [
+                    {
+                      "type": "string"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                }
+              }
+            },
+            "dev_loader": {
+              "type": "object",
+              "description": "Development loader configuration (optional, used by dev server to load source files instead of build artifacts)",
+              "additionalProperties": false,
+              "properties": {
+                "entry": {
+                  "type": "string",
+                  "description": "Entry file path for development (e.g., 'src/index.ts'). Points to source files instead of build artifacts."
+                },
+                "styles": {
+                  "type": "array",
+                  "description": "Array of stylesheet paths for development (e.g., ['src/style.scss']). Points to source stylesheets.",
+                  "items": {
+                    "type": "string"
+                  },
+                  "default": []
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}
+

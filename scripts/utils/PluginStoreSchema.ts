@@ -3,6 +3,7 @@ export interface PluginStoreRegistry {
   name: string
   base_url: string
   homepage?: string
+  last_modified?: string
   maintainers?: PluginStoreRegistryMaintainer[]
   repository?: PluginStoreRegistryRepository
   packages: PluginStorePackage[]

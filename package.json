@@ -5,6 +5,7 @@
   "scripts": {
     "build": "npm run clean && tsx scripts/build.ts",
     "new": "tsx scripts/new.ts",
+    "dev": "vite",
     "clean": "rimraf dist"
   },
   "devDependencies": {
@@ -20,7 +21,9 @@
     "unbuild": "^3.6.1"
   },
   "dependencies": {
-    "jsx-dom": "^8.1.6"
+    "jsx-dom": "^8.1.6",
+    "sass-embedded": "^1.93.3",
+    "vite": "^7.2.2"
   },
   "peerDependencies": {
     "@cordisjs/core": "^3.18.1"

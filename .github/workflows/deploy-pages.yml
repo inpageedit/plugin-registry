@@ -1,4 +1,4 @@
-name: Deploy Documentation to GitHub Pages
+name: Deploy to GitHub Pages
 
 # Controls when the workflow will run
 on:

@@ -1,9 +1,7 @@
 {
-  "name": "inpageedit-plugin-wiki-editor",
-  "description": "WikiEditor for InPageEdit",
+  "name": "inpageedit-plugin-april-fool-2023",
+  "description": "My Little IPE",
   "version": "1.0.0",
-  "author": "dragon-fish",
-  "license": "MIT",
   "private": true,
   "type": "module",
   "module": "./dist/index.mjs",
@@ -16,23 +14,30 @@
     }
   },
   "scripts": {
-    "dev": "unbuild --watch",
-    "build": "unbuild"
+    "dev": "vite build --watch",
+    "build": "vite build"
   },
   "$ipe": {
-    "name": "WikiEditor",
+    "name": "My Little IPE",
+    "description": "IPE Chan - Your powerful MediaWiki AI assistant (April Fool's Day 2023)",
     "categories": [
-      "editor"
+      "fun",
+      "april-fool",
+      "easter-egg"
     ],
     "loader": {
       "kind": "module",
       "entry": "dist/index.mjs",
-      "styles": [],
+      "styles": [
+        "dist/style.css"
+      ],
       "main_export": "default"
     },
     "dev_loader": {
       "entry": "src/index.ts",
-      "styles": []
+      "styles": [
+        "src/style.scss"
+      ]
     }
   }
 }
