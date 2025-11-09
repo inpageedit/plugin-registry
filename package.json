@@ -8,6 +8,7 @@
     "clean": "rimraf dist"
   },
   "devDependencies": {
+    "@cordisjs/core": "^3.18.1",
     "@inpageedit/core": "^0.11.1",
     "@types/node": "^24.8.1",
     "consola": "^3.4.2",
@@ -20,5 +21,8 @@
   },
   "dependencies": {
     "jsx-dom": "^8.1.6"
+  },
+  "peerDependencies": {
+    "@cordisjs/core": "^3.18.1"
   }
 }

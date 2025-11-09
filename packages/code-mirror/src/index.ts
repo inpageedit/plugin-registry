@@ -1,25 +1,21 @@
 import { defineIPEPlugin } from '~~/defineIPEPlugin.js'
+import type { ForkScope } from '@cordisjs/core'
 
 declare module '@inpageedit/core' {
   export interface InPageEdit {
-    'plugin:code-mirror-v6': boolean
+    'plugin:code-mirror-v6': ForkScope
   }
 }
 
 export default defineIPEPlugin({
   name: 'code-mirror-v6',
   apply: (ctx) => {
-    ctx.set('plugin:code-mirror-v6', true)
+    ctx.set('plugin:code-mirror-v6', ctx.scope)
 
-    const preferWikiEditor = []
-    ctx.inject(['plugin:wiki-editor'], () => {
+    const preferWikiEditor: string[] = []
+    ctx.inject(['plugin:wiki-editor'], (ctx) => {
       preferWikiEditor.push('wikiEditor')
-      for (let [_, scope] of ctx.registry.entries()) {
-        if (scope.name === 'wiki-editor') {
-          scope.dispose()
-          break
-        }
-      }
+      ctx.get('plugin:wiki-editor')?.dispose()
     })
 
     ctx.on(
@@ -30,8 +26,10 @@ export default defineIPEPlugin({
           /* @vite-ignore */ 'https://cdn.jsdelivr.net/npm/@bhsd/codemirror-mediawiki/dist/mw.min.js'
         )
         const { CodeMirror } = pkg
-        const cm = await CodeMirror.fromTextArea(
-          modal.get$content().querySelector<HTMLTextAreaElement>('textarea[name="text"]')!,
+        CodeMirror.fromTextArea(
+          modal
+            .get$content()
+            .querySelector<HTMLTextAreaElement>('textarea[name="text"]')!,
           contentmodel,
           ns,
           title,
