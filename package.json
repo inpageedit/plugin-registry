@@ -19,6 +19,8 @@
     "unbuild": "^3.6.1"
   },
   "dependencies": {
-    "jsx-dom": "^8.1.6"
+    "jsx-dom": "^8.1.6",
+    "sass-embedded": "^1.93.3",
+    "vite": "^7.2.2"
   }
 }
