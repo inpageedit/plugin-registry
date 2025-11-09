@@ -30,13 +30,15 @@ export default defineIPEPlugin({
           /* @vite-ignore */ 'https://cdn.jsdelivr.net/npm/@bhsd/codemirror-mediawiki/dist/mw.min.js'
         )
         const { CodeMirror } = pkg
-        const cm = CodeMirror.fromTextArea(
+        const cm = await CodeMirror.fromTextArea(
           modal.get$content().querySelector('textarea[name="text"]')!,
           contentmodel,
           ns,
           title
         )
-        cm.prefer({ wikiEditor: preferWikiEditor })
+        if (preferWikiEditor) {
+          cm.prefer({ wikiEditor: true })
+        }
       }
     )
   },
