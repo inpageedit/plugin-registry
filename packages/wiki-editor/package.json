@@ -29,6 +29,10 @@
       "entry": "dist/index.mjs",
       "styles": [],
       "main_export": "default"
+    },
+    "dev_loader": {
+      "entry": "src/index.ts",
+      "styles": []
     }
   }
 }

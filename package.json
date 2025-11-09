@@ -5,6 +5,7 @@
   "scripts": {
     "build": "npm run clean && tsx scripts/build.ts",
     "new": "tsx scripts/new.ts",
+    "dev": "vite",
     "clean": "rimraf dist"
   },
   "devDependencies": {

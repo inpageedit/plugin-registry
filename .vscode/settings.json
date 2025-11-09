@@ -1,0 +1,11 @@
+{
+  "json.schemas": [
+    {
+      "fileMatch": [
+        "packages/*/package.json"
+      ],
+      "url": "./registry-templates/v1/ipe-package.schema.v1.json"
+    }
+  ]
+}
+

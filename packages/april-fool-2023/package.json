@@ -32,6 +32,12 @@
         "dist/style.css"
       ],
       "main_export": "default"
+    },
+    "dev_loader": {
+      "entry": "src/index.ts",
+      "styles": [
+        "src/style.scss"
+      ]
     }
   }
 }
