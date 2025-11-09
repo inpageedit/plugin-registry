@@ -10,6 +10,11 @@ export default defineConfig({
       cssFileName: 'style',
     },
     sourcemap: true,
+    rollupOptions: {
+      output: {
+        inlineDynamicImports: false,
+      },
+    },
   },
   resolve: {
     alias: {

@@ -27,7 +27,7 @@
     ],
     "loader": {
       "kind": "module",
-      "entry": "dist/index.js",
+      "entry": "dist/index.mjs",
       "styles": [
         "dist/style.css"
       ],
