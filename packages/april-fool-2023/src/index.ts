@@ -5,7 +5,7 @@
  */
 
 import { defineIPEPlugin } from '~~/defineIPEPlugin.js'
-import './style.scss'
+import css from './style.scss?inline'
 
 // 随机对话内容
 const RANDOM_DIALOGS: string[] = [
@@ -46,47 +46,42 @@ const randomNum = (min = 0, max = 0): number =>
   Math.floor(Math.random() * (max - min + 1) + min)
 
 // 动画工具函数
-const fadeIn = (element: HTMLElement, duration = 240): Promise<void> => {
+const fadeIn = async (
+  element: HTMLElement,
+  duration = 240,
+  easing = 'ease-in-out'
+): Promise<void> => {
   return new Promise((resolve) => {
-    element.style.display = 'block'
+    element.style.display = ''
     element.style.opacity = '0'
-    const start = Date.now()
-
-    const animate = () => {
-      const elapsed = Date.now() - start
-      const progress = Math.min(elapsed / duration, 1)
-      element.style.opacity = String(progress)
-
-      if (progress < 1) {
-        requestAnimationFrame(animate)
-      } else {
-        resolve()
-      }
-    }
-
-    requestAnimationFrame(animate)
+    const anim = element.animate([{ opacity: 0 }, { opacity: 1 }], {
+      duration,
+      easing,
+    })
+    anim.addEventListener('finish', () => {
+      element.style.opacity = '1'
+      resolve()
+    })
   })
 }
 
-const fadeOut = (element: HTMLElement, duration = 240): Promise<void> => {
+const fadeOut = (
+  element: HTMLElement,
+  duration = 240,
+  easing = 'ease-in-out'
+): Promise<void> => {
   return new Promise((resolve) => {
-    const start = Date.now()
-    const startOpacity = parseFloat(element.style.opacity || '1')
-
-    const animate = () => {
-      const elapsed = Date.now() - start
-      const progress = Math.min(elapsed / duration, 1)
-      element.style.opacity = String(startOpacity * (1 - progress))
-
-      if (progress < 1) {
-        requestAnimationFrame(animate)
-      } else {
-        element.style.display = 'none'
-        resolve()
-      }
-    }
-
-    requestAnimationFrame(animate)
+    element.style.display = ''
+    element.style.opacity = '1'
+    const anim = element.animate([{ opacity: 1 }, { opacity: 0 }], {
+      duration,
+      easing,
+    })
+    anim.addEventListener('finish', () => {
+      element.style.opacity = '0'
+      element.style.display = 'none'
+      resolve()
+    })
   })
 }
 
@@ -156,6 +151,13 @@ class LittlePet {
     event: string
     handler: EventListener
   }> = []
+  private transitionChain: Promise<void> = Promise.resolve()
+  private isDialogHiding = false
+  private hoverDelegates: Array<{
+    selector: string
+    lastTarget: HTMLElement | null
+    trigger: () => void
+  }> = []
 
   constructor(configs: LittlePetConfig) {
     this.configs = configs
@@ -165,10 +167,18 @@ class LittlePet {
     this.dialogElement = this.role.querySelector('pet-dialog')!
     this.bodyElement = this.role.querySelector('pet-body')!
 
+    this.setupStyle()
     this.bindDynamicEffects()
     this.setupDialogCleanup()
     this.setupRandomTalk()
     this.setupClickHandler()
+  }
+
+  private setupStyle(): void {
+    const style = document.createElement('style')
+    style.textContent = css
+    style.dataset.littlePet = 'true'
+    this.role.appendChild(style)
   }
 
   private createRole(): HTMLElement {
@@ -229,6 +239,25 @@ class LittlePet {
       dialog.style.transform = `translateY(${y / -160}px) translateX(${
         x / -100
       }px)`
+
+      // 统一 mousemove 委托触发 mouseenter（基于选择器）
+      if (this.hoverDelegates.length) {
+        const pointEl = document.elementFromPoint(
+          clientX,
+          clientY
+        ) as HTMLElement | null
+        for (const d of this.hoverDelegates) {
+          const matched = pointEl
+            ? (pointEl.closest(d.selector) as HTMLElement | null)
+            : null
+          if (matched !== d.lastTarget) {
+            d.lastTarget = matched
+            if (matched) {
+              d.trigger()
+            }
+          }
+        }
+      }
     }
 
     this.mouseMoveHandler = handler
@@ -253,8 +282,15 @@ class LittlePet {
     // 定时清理对话框
     this.cleanupTimer = window.setInterval(() => {
       const now = Date.now()
-      if (now > this.dialogEndTime) {
-        fadeOut(this.dialogElement, 240)
+      if (
+        now > this.dialogEndTime &&
+        !this.isDialogHiding &&
+        this.dialogElement.style.display !== 'none'
+      ) {
+        this.isDialogHiding = true
+        fadeOut(this.dialogElement, 240).finally(() => {
+          this.isDialogHiding = false
+        })
       }
     }, 50)
   }
@@ -301,36 +337,40 @@ class LittlePet {
     const finalContent = Array.isArray(content) ? pick(content) : content
     if (!finalContent) return this
 
-    const now = Date.now()
-    const dialog = this.dialogElement
-    const endTimeOriginal = this.dialogEndTime
-    this.dialogEndTime = now + duration
+    // 串行化过渡动画与 DOM 写入，避免并发条件竞争
+    await (this.transitionChain = this.transitionChain.then(async () => {
+      const now = Date.now()
+      const dialog = this.dialogElement
+      const endTimeOriginal = this.dialogEndTime
+      this.dialogEndTime = now + duration
 
-    if (now <= endTimeOriginal + 240) {
-      await fadeOut(dialog, 120)
-      await sleep(120)
-    }
+      if (now <= endTimeOriginal + 240) {
+        await fadeOut(dialog, 120)
+        await sleep(120)
+      }
 
-    const nameDiv = document.createElement('div')
-    nameDiv.style.fontWeight = '700'
-    nameDiv.textContent = this.configs.name + ': '
+      const nameDiv = document.createElement('div')
+      nameDiv.style.fontWeight = '700'
+      nameDiv.textContent = this.configs.name + ': '
 
-    dialog.innerHTML = ''
-    dialog.appendChild(nameDiv)
+      dialog.innerHTML = ''
+      dialog.appendChild(nameDiv)
 
-    if (raw) {
-      const contentDiv = document.createElement('div')
-      contentDiv.innerHTML = finalContent
-      dialog.appendChild(contentDiv)
-    } else {
-      const contentDiv = document.createElement('div')
-      contentDiv.textContent = finalContent
-      dialog.appendChild(contentDiv)
-    }
+      if (raw) {
+        const contentDiv = document.createElement('div')
+        contentDiv.innerHTML = finalContent
+        dialog.appendChild(contentDiv)
+      } else {
+        const contentDiv = document.createElement('div')
+        contentDiv.textContent = finalContent
+        dialog.appendChild(contentDiv)
+      }
 
-    await fadeIn(dialog, 240)
+      await fadeIn(dialog, 240)
+    }))
+
+    // 不阻塞后续 say 的过渡，仅保持返回 Promise 在可见时长后完成
     await sleep(duration)
-
     return this
   }
 
@@ -351,6 +391,23 @@ class LittlePet {
       } else {
         this.dialogList.push(content)
       }
+      return this
+    }
+
+    // 统一用 mousemove 代理 mouseenter（仅字符串选择器支持）
+    if (
+      type === 'event' &&
+      event === 'mouseenter' &&
+      typeof target === 'string'
+    ) {
+      const trigger = () => {
+        this.say({ content, duration, raw })
+      }
+      this.hoverDelegates.push({
+        selector: target,
+        lastTarget: null,
+        trigger,
+      })
       return this
     }
 
@@ -403,6 +460,7 @@ class LittlePet {
       element.removeEventListener(event, handler)
     }
     this.eventListeners = []
+    this.hoverDelegates = []
 
     // 显示告别消息并移除元素
     await this.say({

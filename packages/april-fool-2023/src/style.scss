@@ -8,7 +8,14 @@ pet {
   z-index: 1000;
 }
 
-:is(pet, pet *) {
+pet,
+pet-body,
+pet-ears,
+pet-ear,
+pet-eyes,
+pet-eye,
+pet-mouth,
+pet-dialog {
   display: block;
   box-sizing: border-box;
 }
