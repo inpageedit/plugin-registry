@@ -1,5 +1,6 @@
 import { defineIPEPlugin } from '~~/defineIPEPlugin.js'
 import type {} from '@inpageedit/core/plugins/toolbox/index'
+import type { ForkScope } from '@cordisjs/core'
 
 declare global {
   interface Window {
@@ -9,10 +10,16 @@ declare global {
   }
 }
 
+declare module '@inpageedit/core' {
+  export interface InPageEdit {
+    'plugin:wiki-editor': ForkScope
+  }
+}
+
 export default defineIPEPlugin({
   name: 'wiki-editor',
   apply(ctx) {
-    ctx.set('plugin:wiki-editor', true)
+    ctx.set('plugin:wiki-editor', ctx.scope)
     ctx.on('quick-edit/wiki-page', async (payload) => {
       const textarea = payload.modal
         .get$content()

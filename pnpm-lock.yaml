@@ -18,6 +18,9 @@ importers:
         specifier: ^7.2.2
         version: 7.2.2(@types/node@24.10.0)(jiti@2.6.1)(lightningcss@1.30.2)(sass-embedded@1.93.3)(sass@1.93.3)(tsx@4.20.6)
     devDependencies:
+      '@cordisjs/core':
+        specifier: ^3.18.1
+        version: 3.18.1
       '@inpageedit/core':
         specifier: ^0.11.1
         version: 0.11.1(typescript@5.9.3)
