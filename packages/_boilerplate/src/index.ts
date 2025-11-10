@@ -1,7 +1,6 @@
 import './style.scss'
 
 import { defineIPEPlugin } from '~~/defineIPEPlugin.js'
-import type {} from '@inpageedit/core/plugins/toolbox/index'
 
 export default defineIPEPlugin({
   name: 'plugin-sample',

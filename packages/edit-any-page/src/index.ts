@@ -1,7 +1,4 @@
 import { defineIPEPlugin } from '~~/defineIPEPlugin.js'
-import type {} from '@inpageedit/core/services/ModalService'
-import type {} from '@inpageedit/core/plugins/toolbox/index'
-import type {} from '@inpageedit/core/plugins/quick-edit/index'
 
 export default defineIPEPlugin({
   name: 'edit-any-page',

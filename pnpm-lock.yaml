@@ -19,8 +19,8 @@ importers:
         specifier: ^3.18.1
         version: 3.18.1
       '@inpageedit/core':
-        specifier: ^0.11.1
-        version: 0.11.1(typescript@5.9.3)
+        specifier: ^0.13.1
+        version: 0.13.1(typescript@5.9.3)
       '@types/node':
         specifier: ^24.8.1
         version: 24.10.0
@@ -247,8 +247,8 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@inpageedit/core@0.11.1':
-    resolution: {integrity: sha512-sJJQwmYu+bTeKAeNHLeF4t1W+MBMvs86o2bxWPe79BqRsH/4lyBPt9QiNMGyK6dsprMJj65SnMbHWI/B9AUesQ==}
+  '@inpageedit/core@0.13.1':
+    resolution: {integrity: sha512-IMFcPha++Iq4VVgekNsGmWBeprMZmQOlFfqcuOEu4EPnwPKrvFWYtKcUw1Pt+nyfpPvVZUWKz24A1QrVXZ5q1A==}
 
   '@inpageedit/logger@0.1.0':
     resolution: {integrity: sha512-6QwdbtkH/Bwg/P/+s0uVPzxbMpk8GSPzJmafyJKCEtUdgbNXSm22mqltCbN8k2EuSV45Dn+nwouHKTSqFY1A1A==}
@@ -829,8 +829,8 @@ packages:
   hookable@5.5.3:
     resolution: {integrity: sha512-Yc+BQe8SvoXH1643Qez1zqLRmbA5rCL+sSmk6TVos0LWVfNIB7PGncdlId77WzLGSIB5KaWgTaNTs2lNVEI6VQ==}
 
-  idb-plus@0.1.0:
-    resolution: {integrity: sha512-dzzCdzyZxrgSCqeRldKLZp0JJY67xzEyNcXcDUjYyNZFTHi6bJ9nw31r+mWA2uQO/roqMpExqJY+kChi+3fMFw==}
+  idb-plus@0.2.0:
+    resolution: {integrity: sha512-ZOPVlIn9uq2JS9xuRY7cxIp4jYiTPM1s+IIDfVSbNGmgegc0Qa/BHvBlFcauy0mwLb9wKjYH0beABXHK2AKCfw==}
 
   immutable@5.1.4:
     resolution: {integrity: sha512-p6u1bG3YSnINT5RQmx/yRZBpenIl30kVxkTLDyHLIMk0gict704Q9n+thfDI7lTRm9vXdDYutVzXhzcThxTnXA==}
@@ -1707,12 +1707,12 @@ snapshots:
   '@esbuild/win32-x64@0.25.12':
     optional: true
 
-  '@inpageedit/core@0.11.1(typescript@5.9.3)':
+  '@inpageedit/core@0.13.1(typescript@5.9.3)':
     dependencies:
       '@cordisjs/core': 3.18.1
       '@inpageedit/logger': 0.1.0
       '@inpageedit/modal': 1.0.1
-      idb-plus: 0.1.0
+      idb-plus: 0.2.0
       schemastery: 3.17.1
       schemastery-form: 0.2.1(schemastery@3.17.1)(vue@3.5.24(typescript@5.9.3))
       vue: 3.5.24(typescript@5.9.3)
@@ -2276,7 +2276,7 @@ snapshots:
 
   hookable@5.5.3: {}
 
-  idb-plus@0.1.0: {}
+  idb-plus@0.2.0: {}
 
   immutable@5.1.4: {}
 

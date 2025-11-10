@@ -1,14 +1,6 @@
-import { type InPageEdit } from '@inpageedit/core'
-import { IPEModal } from '@inpageedit/core/services/ModalService'
-import { IWikiPage } from '@inpageedit/core/dist/models/WikiPage/index.js'
+import type { InPageEdit, IPEModal, IWikiPage } from '@inpageedit/core'
 // import * as React from 'jsx-dom'
 import { BasePlugin } from '~~/defineIPEPlugin.js'
-import type {} from '@inpageedit/core/plugins/toolbox/index'
-import type {} from '@inpageedit/core/services/ApiService'
-import type {} from '@inpageedit/core/services/CurrentPageService'
-import type {} from '@inpageedit/core/services/WikiMetadataService'
-import type {} from '@inpageedit/core/services/WikiPageService'
-import type {} from '@inpageedit/core/services/PreferencesService'
 import { useText } from 'jsx-dom'
 
 declare module '@inpageedit/core' {
