@@ -1,0 +1,44 @@
+{
+  "name": "inpageedit-plugin-quick-delete",
+  "description": "Advanced quick delete plugin",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "module": "./dist/index.mjs",
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs"
+    }
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build"
+  },
+  "dependencies": {
+    "jsx-dom": "^8.1.6"
+  },
+  "$ipe": {
+    "name": "Quick Delete",
+    "categories": [
+      "editor",
+      "administration"
+    ],
+    "loader": {
+      "kind": "module",
+      "entry": "dist/index.mjs",
+      "styles": [
+        "dist/style.css"
+      ],
+      "main_export": "PluginQuickDelete"
+    },
+    "dev_loader": {
+      "entry": "src/index.tsx",
+      "styles": [
+        "src/style.scss"
+      ]
+    }
+  }
+}

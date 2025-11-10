@@ -1,5 +1,5 @@
 {
-  "include": ["packages/**/*", "plugins/**/*", "common"],
+  "include": ["src", "src/**/*.tsx", "../../common/**/*"],
   "compilerOptions": {
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
     "composite": true,
@@ -9,12 +9,14 @@
     "moduleResolution": "bundler",
     "strict": true,
     "sourceMap": true,
+    "jsx": "react-jsx",
+    "jsxImportSource": "jsx-dom",
     "lib": ["ESNext", "DOM", "DOM.Iterable"],
     "types": ["vite/client"],
     "skipLibCheck": true,
     "noEmit": true,
     "paths": {
-      "~~/*": ["./common/*"]
+      "~~/*": ["./../../common/*"]
     }
   }
 }
