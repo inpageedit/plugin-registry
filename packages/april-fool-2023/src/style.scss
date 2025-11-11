@@ -9,6 +9,7 @@ pet {
 }
 
 pet,
+pet-entity,
 pet-body,
 pet-ears,
 pet-ear,
@@ -26,7 +27,17 @@ pet-dialog {
   }
 }
 
+pet-entity {
+  position: relative;
+  /* 基于底部中心的 y 轴收缩呼吸（整体包含耳朵与身体） */
+  transform-origin: 50% 100%;
+  animation: pet-breathe 6s ease infinite;
+  will-change: transform;
+  z-index: 0;
+}
+
 pet-body {
+  position: relative;
   width: 6em;
   height: 4.5em;
   background-color: #2584ff;
@@ -37,17 +48,20 @@ pet-body {
     #0165ff
   );
   border-radius: 5em 5em 2.5em 2.5em;
-  animation: pet-breathe 6s ease infinite;
+  /* 主体层级高于耳朵/阴影，以便它们位于后方 */
+  z-index: 1;
   cursor: grab;
+  /* 触摸拖拽时避免滚动手势干扰 */
+  touch-action: none;
 }
 
 pet-body:active {
   cursor: grabbing;
 }
 
-pet-body::after {
-  content: '';
+pet-shadow {
   position: absolute;
+  content: '';
   width: 125%;
   height: 40%;
   border-radius: 50%;
@@ -55,14 +69,15 @@ pet-body::after {
   bottom: -20%;
   background-color: rgba(0, 0, 0, 0.35);
   filter: blur(5px);
-  z-index: -1;
+  z-index: 0;
+  pointer-events: none;
 }
 
 pet-ears {
   position: absolute;
   top: -0.4em;
   width: 100%;
-  z-index: -1;
+  z-index: 0;
 }
 
 pet-ear {
@@ -151,7 +166,8 @@ pet-mouth::after {
 
 pet-dialog {
   position: absolute;
-  left: 6em;
+  /* 默认在右侧，可用 CSS 变量调整距离 */
+  left: var(--pet-dialog-offset, 6em);
   bottom: calc(100% - 1em);
   background-color: rgba(255, 255, 255, 0.9);
   border: 0.2em solid #4d9fea;
@@ -164,19 +180,30 @@ pet-dialog {
   font-size: 1.12em;
   line-height: 1.6;
   z-index: -2;
+  cursor: pointer;
+}
+
+/* 位于中轴线右侧时，对话框显示在左边 */
+pet[dialog-side='left'] pet-dialog {
+  right: var(--pet-dialog-offset, 6em);
+  left: auto;
+}
+
+/* 位于中轴线左侧时，对话框显示在右边（默认） */
+pet[dialog-side='right'] pet-dialog {
+  left: var(--pet-dialog-offset, 6em);
+  right: auto;
 }
 
 @keyframes pet-breathe {
   0% {
-    height: 4.5em;
+    transform: scaleY(1);
   }
-
   20% {
-    height: 4em;
+    transform: scaleY(0.89);
   }
-
   50% {
-    height: 4.5em;
+    transform: scaleY(1);
   }
 }
 

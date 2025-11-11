@@ -54,6 +54,7 @@ const fadeIn = async (
   return new Promise((resolve) => {
     element.style.display = ''
     element.style.opacity = '0'
+    element.style.pointerEvents = ''
     const anim = element.animate([{ opacity: 0 }, { opacity: 1 }], {
       duration,
       easing,
@@ -73,6 +74,7 @@ const fadeOut = (
   return new Promise((resolve) => {
     element.style.display = ''
     element.style.opacity = '1'
+    element.style.pointerEvents = 'none'
     const anim = element.animate([{ opacity: 1 }, { opacity: 0 }], {
       duration,
       easing,
@@ -83,36 +85,6 @@ const fadeOut = (
       resolve()
     })
   })
-}
-
-// 双击检测类
-class DoubleClickDetector {
-  private clicks = 0
-  private timer: number | null = null
-  private delay = 180
-
-  detect(callback: () => void): void {
-    this.clicks++
-
-    if (this.clicks === 1) {
-      this.timer = window.setTimeout(() => {
-        this.clicks = 0
-      }, this.delay)
-    } else {
-      if (this.timer !== null) {
-        clearTimeout(this.timer)
-      }
-      this.clicks = 0
-      callback()
-    }
-  }
-
-  reset(): void {
-    if (this.timer !== null) {
-      clearTimeout(this.timer)
-    }
-    this.clicks = 0
-  }
 }
 
 interface LittlePetConfig {
@@ -145,7 +117,16 @@ class LittlePet {
   private randomTalkTimer: number | null = null
   private cleanupTimer: number | null = null
   private mouseMoveHandler: ((e: MouseEvent | TouchEvent) => void) | null = null
-  private dialogDoubleClick = new DoubleClickDetector()
+  private dragging = false
+  private dragDeltaX = 0
+  private dragDeltaY = 0
+  private lastCenterX = 0
+  private lastCenterY = 0
+  private readonly storageKey = 'april-fool-2023:position'
+  private dragMoved = false
+  private startPointerX = 0
+  private startPointerY = 0
+  private suppressNextClick = false
   private eventListeners: Array<{
     element: HTMLElement | Document
     event: string
@@ -172,6 +153,7 @@ class LittlePet {
     this.setupDialogCleanup()
     this.setupRandomTalk()
     this.setupClickHandler()
+    this.setupDragAndPosition()
   }
 
   private setupStyle(): void {
@@ -183,6 +165,7 @@ class LittlePet {
 
   private createRole(): HTMLElement {
     const pet = document.createElement('pet')
+    const entity = document.createElement('pet-entity')
     const body = document.createElement('pet-body')
     const ears = document.createElement('pet-ears')
     const earLeft = document.createElement('pet-ear')
@@ -204,10 +187,18 @@ class LittlePet {
     const dialog = document.createElement('pet-dialog')
     dialog.style.display = 'none'
 
-    body.appendChild(ears)
+    // 新增：阴影节点，放入实体容器中，作为 body 的兄弟，位于底层
+    const shadow = document.createElement('pet-shadow')
+
+    // 实体容器：承载耳朵、身体与阴影，并承担呼吸动画
     body.appendChild(eyes)
     body.appendChild(mouth)
-    pet.appendChild(body)
+    entity.appendChild(body)
+    entity.appendChild(ears)
+    entity.appendChild(shadow)
+
+    // 根元素装配：实体容器 + 对话框
+    pet.appendChild(entity)
     pet.appendChild(dialog)
 
     return pet
@@ -236,6 +227,10 @@ class LittlePet {
       mouth.style.transform = `translateY(${y / 300}px) translateX(${
         x / 200
       }px)`
+      // 口部需要保留基础的水平居中偏移（CSS 中有 translateX(-50%)）
+      mouth.style.transform = `translateX(-50%) translateY(${
+        y / 300
+      }px) translateX(${x / 200}px)`
       dialog.style.transform = `translateY(${y / -160}px) translateX(${
         x / -100
       }px)`
@@ -266,17 +261,14 @@ class LittlePet {
   }
 
   private setupDialogCleanup(): void {
-    // 双击对话框隐藏
-    const dialogClickHandler = () => {
-      this.dialogDoubleClick.detect(() => {
-        this.dialogEndTime = Date.now()
-      })
+    const clickToHide = () => {
+      this.dialogEndTime = Date.now()
     }
-    this.dialogElement.addEventListener('click', dialogClickHandler)
+    this.dialogElement.addEventListener('click', clickToHide)
     this.eventListeners.push({
       element: this.dialogElement,
       event: 'click',
-      handler: dialogClickHandler,
+      handler: clickToHide,
     })
 
     // 定时清理对话框
@@ -314,6 +306,12 @@ class LittlePet {
 
   private setupClickHandler(): void {
     const clickHandler = () => {
+      // 若刚结束拖拽，则抑制一次点击对话
+      if (this.suppressNextClick) {
+        this.suppressNextClick = false
+        return
+      }
+      // 宠物点击允许随时打断当前对话
       this.say({
         content: pick(this.dialogList),
       })
@@ -324,6 +322,254 @@ class LittlePet {
       event: 'click',
       handler: clickHandler,
     })
+  }
+
+  private setupDragAndPosition(): void {
+    // 初始应用已保存位置，或根据当前默认位置更新对话框朝向
+    this.applySavedPosition()
+    this.updateDialogSideByCenter()
+    // 拖拽（鼠标）
+    const onMouseDown = (e: MouseEvent) => {
+      // 仅主键
+      if (e.button !== 0) return
+      this.startDrag(e.clientX, e.clientY)
+      e.preventDefault()
+    }
+    const onMouseMove = (e: MouseEvent) => {
+      if (!this.dragging) return
+      this.onDrag(e.clientX, e.clientY)
+      e.preventDefault()
+    }
+    const onMouseUp = () => {
+      if (!this.dragging) return
+      this.endDrag()
+    }
+    this.bodyElement.addEventListener('mousedown', onMouseDown)
+    document.addEventListener('mousemove', onMouseMove)
+    document.addEventListener('mouseup', onMouseUp)
+    this.eventListeners.push(
+      {
+        element: this.bodyElement,
+        event: 'mousedown',
+        handler: onMouseDown as unknown as EventListener,
+      },
+      {
+        element: document,
+        event: 'mousemove',
+        handler: onMouseMove as unknown as EventListener,
+      },
+      {
+        element: document,
+        event: 'mouseup',
+        handler: onMouseUp as unknown as EventListener,
+      }
+    )
+
+    // 拖拽（触摸）
+    let activeTouchId: number | null = null
+    const onTouchStart = (e: TouchEvent) => {
+      if (activeTouchId !== null) return
+      const t = e.changedTouches[0]
+      activeTouchId = t.identifier
+      this.startDrag(t.clientX, t.clientY)
+      // 若页面有滚动手势，依赖 CSS touch-action: none
+    }
+    const onTouchMove = (e: TouchEvent) => {
+      if (!this.dragging || activeTouchId === null) return
+      for (const t of Array.from(e.changedTouches)) {
+        if (t.identifier === activeTouchId) {
+          this.onDrag(t.clientX, t.clientY)
+          break
+        }
+      }
+    }
+    const endTouchCommon = (e: TouchEvent) => {
+      if (activeTouchId === null) return
+      for (const t of Array.from(e.changedTouches)) {
+        if (t.identifier === activeTouchId) {
+          activeTouchId = null
+          if (this.dragging) this.endDrag()
+          break
+        }
+      }
+    }
+    this.bodyElement.addEventListener('touchstart', onTouchStart, {
+      passive: true,
+    })
+    document.addEventListener('touchmove', onTouchMove, { passive: true })
+    document.addEventListener('touchend', endTouchCommon, { passive: true })
+    document.addEventListener('touchcancel', endTouchCommon, { passive: true })
+    this.eventListeners.push(
+      {
+        element: this.bodyElement,
+        event: 'touchstart',
+        handler: onTouchStart as EventListener,
+      },
+      {
+        element: document,
+        event: 'touchmove',
+        handler: onTouchMove as EventListener,
+      },
+      {
+        element: document,
+        event: 'touchend',
+        handler: endTouchCommon as EventListener,
+      },
+      {
+        element: document,
+        event: 'touchcancel',
+        handler: endTouchCommon as EventListener,
+      }
+    )
+
+    // 窗口尺寸变化时按保存的相对位置重算
+    const onResize = () => {
+      this.applySavedPosition()
+      this.updateDialogSideByCenter()
+    }
+    window.addEventListener('resize', onResize)
+    this.eventListeners.push({
+      element: window as unknown as Document,
+      event: 'resize',
+      handler: onResize as unknown as EventListener,
+    })
+  }
+
+  private startDrag(pointerX: number, pointerY: number): void {
+    const bodyRect = this.bodyElement.getBoundingClientRect()
+    const centerX = bodyRect.left + bodyRect.width / 2
+    const centerY = bodyRect.top + bodyRect.height / 2
+    this.dragDeltaX = centerX - pointerX
+    this.dragDeltaY = centerY - pointerY
+    this.startPointerX = pointerX
+    this.startPointerY = pointerY
+    this.dragMoved = false
+    this.dragging = true
+  }
+
+  private onDrag(pointerX: number, pointerY: number): void {
+    // 判定是否发生明显拖动（阈值约 3px）
+    if (!this.dragMoved) {
+      const dx = pointerX - this.startPointerX
+      const dy = pointerY - this.startPointerY
+      if (dx * dx + dy * dy > 9) {
+        this.dragMoved = true
+      }
+    }
+    const centerX = pointerX + this.dragDeltaX
+    const centerY = pointerY + this.dragDeltaY
+    this.updatePosition(centerX, centerY, false)
+  }
+
+  private endDrag(): void {
+    this.dragging = false
+    // 若发生拖拽，则抑制下一次 click
+    if (this.dragMoved) {
+      this.suppressNextClick = true
+    }
+    // 保存最终位置（相对、以中心点为准，按象限记录）
+    this.savePositionByCenter(this.lastCenterX, this.lastCenterY)
+  }
+
+  private clampCenter(
+    centerX: number,
+    centerY: number
+  ): { x: number; y: number } {
+    const vw = window.innerWidth
+    const vh = window.innerHeight
+    const bodyRect = this.bodyElement.getBoundingClientRect()
+    const halfW = bodyRect.width / 2
+    const halfH = bodyRect.height / 2
+    const x = Math.min(Math.max(centerX, halfW), vw - halfW)
+    const y = Math.min(Math.max(centerY, halfH), vh - halfH)
+    return { x, y }
+  }
+
+  private updatePosition(centerX: number, centerY: number, save = false): void {
+    const { x, y } = this.clampCenter(centerX, centerY)
+    const bodyRect = this.bodyElement.getBoundingClientRect()
+    const left = Math.round(x - bodyRect.width / 2)
+    const top = Math.round(y - bodyRect.height / 2)
+    // 采用 left/top，清空 right/bottom
+    const roleStyle = this.role.style
+    roleStyle.left = `${left}px`
+    roleStyle.top = `${top}px`
+    roleStyle.right = ''
+    roleStyle.bottom = ''
+    this.lastCenterX = x
+    this.lastCenterY = y
+    this.updateDialogSideByCenter()
+    if (save) {
+      this.savePositionByCenter(x, y)
+    }
+  }
+
+  private updateDialogSideByCenter(): void {
+    const vw = window.innerWidth
+    const centerX = this.getCurrentCenterX()
+    // 位于中轴线左侧 => 对话框在右侧；反之亦然
+    const side = centerX <= vw / 2 ? 'right' : 'left'
+    this.role.setAttribute('dialog-side', side)
+  }
+
+  private getCurrentCenterX(): number {
+    if (this.lastCenterX) return this.lastCenterX
+    const bodyRect = this.bodyElement.getBoundingClientRect()
+    return bodyRect.left + bodyRect.width / 2
+  }
+
+  private savePositionByCenter(centerX: number, centerY: number): void {
+    const vw = window.innerWidth
+    const vh = window.innerHeight
+    const h = centerX <= vw / 2 ? 'left' : 'right'
+    const v = centerY <= vh / 2 ? 'top' : 'bottom'
+    const xRel = h === 'left' ? centerX / vw : (vw - centerX) / vw
+    const yRel = v === 'top' ? centerY / vh : (vh - centerY) / vh
+    const payload = { h, v, xRel, yRel, t: Date.now() }
+    try {
+      localStorage.setItem(this.storageKey, JSON.stringify(payload))
+    } catch {}
+  }
+
+  private loadSaved(): {
+    h: 'left' | 'right'
+    v: 'top' | 'bottom'
+    xRel: number
+    yRel: number
+  } | null {
+    try {
+      const raw = localStorage.getItem(this.storageKey)
+      if (!raw) return null
+      const data = JSON.parse(raw)
+      if (!data || typeof data !== 'object') return null
+      const { h, v, xRel, yRel } = data as {
+        h: 'left' | 'right'
+        v: 'top' | 'bottom'
+        xRel: number
+        yRel: number
+      }
+      if (!h || !v || typeof xRel !== 'number' || typeof yRel !== 'number')
+        return null
+      return { h, v, xRel, yRel }
+    } catch {
+      return null
+    }
+  }
+
+  private applySavedPosition(): void {
+    const saved = this.loadSaved()
+    if (!saved) {
+      // 没有保存的相对位置，使用 CSS 默认定位，但补充记录 center
+      const bodyRect = this.bodyElement.getBoundingClientRect()
+      this.lastCenterX = bodyRect.left + bodyRect.width / 2
+      this.lastCenterY = bodyRect.top + bodyRect.height / 2
+      return
+    }
+    const vw = window.innerWidth
+    const vh = window.innerHeight
+    const centerX = saved.h === 'left' ? vw * saved.xRel : vw - vw * saved.xRel
+    const centerY = saved.v === 'top' ? vh * saved.yRel : vh - vh * saved.yRel
+    this.updatePosition(centerX, centerY, false)
   }
 
   async say({
@@ -406,7 +652,11 @@ class LittlePet {
       this.hoverDelegates.push({
         selector: target,
         lastTarget: null,
-        trigger,
+        trigger: () => {
+          // 对话未结束时，不触发 hover 对话
+          if (Date.now() < this.dialogEndTime) return
+          trigger()
+        },
       })
       return this
     }
@@ -426,6 +676,8 @@ class LittlePet {
 
     // event 类型的 content 可以是数组，触发时随机选一个
     const handler = () => {
+      // 对话未结束时，不触发除宠物点击外的事件对话
+      if (Date.now() < this.dialogEndTime) return
       this.say({ content, duration, raw })
     }
 
