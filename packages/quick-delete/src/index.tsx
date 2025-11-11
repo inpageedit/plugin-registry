@@ -1,5 +1,4 @@
 import type { InPageEdit, IPEModal, IWikiPage } from '@inpageedit/core'
-// import * as React from 'jsx-dom'
 import { BasePlugin } from '~~/defineIPEPlugin.js'
 import { useText } from 'jsx-dom'
 
@@ -14,7 +13,7 @@ declare module '@inpageedit/core' {
     'quick-delete/show-modal'(
       payload: Omit<QuickDeleteInitPayload, 'wikiPage'>
     ): void
-    'quick-delete/submit'(
+    'quick-delete/delete-one'(
       payload: QuickDeleteSubmitPayload & { ctx: InPageEdit }
     ): void
   }
@@ -38,6 +37,7 @@ export interface QuickDeleteInitPayload {
 export interface QuickDeleteSubmitPayload {
   wikiPage: IWikiPage
   reason?: string
+  deletetalk?: boolean
 }
 
 const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms))
@@ -62,6 +62,15 @@ export class PluginQuickDelete extends BasePlugin {
       this.injectToolbox(ctx)
       ctx.on('dispose', () => {
         this.removeToolbox(ctx)
+      })
+    })
+    this.ctx.inject(['analytics'], (ctx) => {
+      ctx.on('quick-delete/delete-one', (payload) => {
+        ctx.analytics.addEvent(
+          'quick-delete',
+          'delete-one',
+          payload.wikiPage.title
+        )
       })
     })
 
@@ -98,6 +107,10 @@ export class PluginQuickDelete extends BasePlugin {
       reloadAfterDelete: true,
       ...payload,
     } as QuickDeleteOptions
+    this.ctx.emit('quick-delete/init-options', {
+      ctx: this.ctx,
+      options: payload as QuickDeleteOptions,
+    })
 
     const modal = this.ctx.modal.show({
       title: 'Batch Delete',
@@ -281,6 +294,11 @@ export class PluginQuickDelete extends BasePlugin {
         },
       },
     ])
+    this.ctx.emit('quick-delete/show-modal', {
+      ctx: this.ctx,
+      modal,
+      options: payload as QuickDeleteOptions,
+    })
 
     this._modal = modal
     modal.on(modal.Event.Close, () => {
@@ -295,7 +313,14 @@ export class PluginQuickDelete extends BasePlugin {
     deletetalk: boolean
   ): Promise<Awaited<ReturnType<IWikiPage['delete']>>> {
     const page = this.ctx.wikiPage.newBlankPage({ title })
-    return page.delete(reason, { deletetalk })
+    const result = await page.delete(reason, { deletetalk })
+    this.ctx.emit('quick-delete/delete-one', {
+      ctx: this.ctx,
+      wikiPage: page,
+      reason,
+      deletetalk,
+    })
+    return result
   }
 
   private async injectToolbox(ctx: InPageEdit) {
