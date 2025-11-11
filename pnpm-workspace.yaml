@@ -1,3 +1,4 @@
 packages:
+  - i18n
   - 'packages/*'
   - 'plugins/*'

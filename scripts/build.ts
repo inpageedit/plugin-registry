@@ -299,6 +299,15 @@ async function copyPublicFiles() {
   consola.success('Public files copied successfully')
 }
 
+async function buildI18n() {
+  consola.info('Building i18n...')
+  await run('pnpm', ['--filter', 'i18n-data', 'run', 'build'])
+  await cp(resolve(ROOT_DIR, 'i18n', 'dist'), resolve(DIST_DIR, 'i18n'), {
+    recursive: true,
+  })
+  consola.success('i18n built successfully')
+}
+
 // main
 async function main() {
   consola.info('Building all packages...')
@@ -340,6 +349,8 @@ async function main() {
 
   // 生成 registry
   await generateRegistry(packages)
+
+  await buildI18n()
 
   // 复制 public 文件到 dist
   await copyPublicFiles()

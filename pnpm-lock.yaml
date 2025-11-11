@@ -46,6 +46,18 @@ importers:
         specifier: ^3.6.1
         version: 3.6.1(sass@1.93.3)(typescript@5.9.3)(vue@3.5.24(typescript@5.9.3))
 
+  i18n:
+    devDependencies:
+      '@types/node':
+        specifier: ^24.10.0
+        version: 24.10.0
+      tsx:
+        specifier: ^4.20.6
+        version: 4.20.6
+      typescript:
+        specifier: ^5.9.3
+        version: 5.9.3
+
   packages/_boilerplate: {}
 
   packages/april-fool-2023: {}
