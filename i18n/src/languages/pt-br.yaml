@@ -1,10 +1,15 @@
 __meta__:
   code: pt-br
   name: Português do Brasil (pt-br)
-  timestamp: 2025-11-12T09:09:23.112Z
+  timestamp: 2025-11-12T11:14:44.906Z
   model: deepseek-v3.1
 
 # Preferences UI
+Configure Preferences: Configurar Preferências
+InPageEdit Preferences: Preferências do InPageEdit
+Preferences Saved: Preferências salvas
+Some settings may take effect after reloading the page.: Algumas configurações podem entrar em vigor após recarregar a página.
+# SchemaForm for Preferences
 prefs:
   about:
     label: Sobre
@@ -19,8 +24,11 @@ prefs:
       header: Junte-se a nós
       github: GitHub
       qqgroup: Grupo QQ
-    copyright: 'InPageEdit-NEXT Copyright © 2025-{{ new Date().getFullYear() }}
-      dragon-fish'
+    copyright: 'InPageEdit-NEXT Copyright © 2025-{{ new Date().getFullYear() }} dragon-fish'
+  editor:
+    label: Editor
+  general:
+    label: Geral
   inArticleLinks:
     $: Preferências de links no artigo
     label: Links no Artigo
@@ -31,8 +39,7 @@ prefs:
       enable: Ativar links no artigo para edição rápida
       redlinks: Mostrar botão de edição rápida para links vermelhos
   quickPreview:
-    keyshortcut:
-      Atalho de tecla para abrir a pré-visualização rápida no modal de
+    keyshortcut: Atalho de tecla para abrir pré-visualização rápida no modal de
       edição rápida
   toolboxAlwaysShow:
     $: Preferências da Toolbox™
@@ -42,9 +49,9 @@ prefs:
     editSummary: Resumo de edição padrão para edições rápidas
     editMinor: Marcar opção "edição menor" por padrão
     outSideClose: Fechar modal do editor clicando fora
-    watchList: Opções da lista de vigilância
+    watchList: Opções de lista de vigilância
     keyshortcut:
-      save: atalho de tecla para o botão salvar (deixe em branco para desativar)
+      save: atalho de tecla do botão salvar (deixe em branco para desativar)
     editFont: Fonte a ser usada na área de texto da edição rápida
   quickDiff:
     keyshortcut: Atalho de tecla para abrir diff rápido no modal de edição rápida
@@ -60,6 +67,8 @@ prefs:
   analytics:
     $: InPageEdit Analytics
     enabled: Compartilhar meus dados de uso com a comunidade.
+  sync:
+    label: Sincronizar
 
 # Watchlist options
 watchlist:
@@ -70,10 +79,14 @@ watchlist:
 
 # Common buttons
 OK: OK
-Cancel: Cancelar
 Yes: Sim
-No: Não
 Submit: Enviar
+Save: Salvar
+Enable: Ativar
+No: Não
+Cancel: Cancelar
+Close: Fechar
+Disable: Desativar
 
 # Common form fields
 Summary: Resumo
@@ -81,40 +94,78 @@ Reason: Motivo
 Watchlist: Lista de vigilância
 Minor edit: Edição menor
 
+# Common notifications
+Success: Sucesso
+Warning: Aviso
+Attention: Atenção
+Important: Importante
+Failed: Falhou
+Error: Erro
+Info: Informação
+
 # PluginQuickEdit
 Quick Edit: Edição Rápida
+Quick Create: Criação Rápida
+New section: Nova seção
+Not editable: Não editável
 Reload after save: Recarregar após salvar
-Preview: Pré-visualizar
-Diff: Diff
 All edit contents will be lost after closing the modal. Are you sure you want to close?:
   >-
   Todo o conteúdo editado será perdido após fechar o modal. Tem certeza que
   deseja fechar?
 Give Up: Desistir
 Continue Editing: Continuar Editando
+'You are editing a <em>historical version</em> version; the content is not the latest!':
+  Você está editando uma versão <em>histórica</em>; o conteúdo não é o mais
+  recente!
+This page does not exist.: Esta página não existe.
+Topic for new section, this will be the h2 heading: Tópico para nova seção, será o cabeçalho h2
+Submission Successful: Envio bem-sucedido
+Submission Error: Erro no envio
+Your changes have been saved.: Suas alterações foram salvas.
+Special page is not editable.: Página especial não é editável.
 
 # PluginStore
 Plugin Store: Loja de Plugins
-Registry URLs: URLs do Registro
+Registry URLs: URLs de Registro
 CDN to install packages from npm: CDN para instalar pacotes do npm
 Installed plugins: Plugins instalados
 Plugins: Plugins
 Registries: Registros
 Search plugins...: Buscar plugins...
+Refreshing...: Atualizando...
+Refresh: Atualizar
+No matching plugins found: Nenhum plugin correspondente encontrado
 Install: Instalar
 Add: Adicionar
 Remove: Remover
-Remove registry: Remover registro
-"Há {{ count }} {{ count < 1 ? 'plugin' : 'plugins' }} instalado{{ count < 1 ? '' : 's' }} deste registro":
-  "Há {{ count }} {{ count < 1 ? 'plugin' : 'plugins' }} instalado{{ count < 1 ?
-  '' : 's' }} deste registro"
-Remove only: Remover apenas
-Remove and uninstall plugins: Remover e desinstalar plugins
-Registry added.: Registro adicionado.
-Registry removed.: Registro removido.
-"Registro removido e {{ count }} {{ count < 1 ? 'plugin' : 'plugins' }} desinstalado{{ count < 1 ? '' : 's' }}.":
-  "Registro removido e {{ count }} {{ count < 1 ? 'plugin' : 'plugins' }}
-  desinstalado{{ count < 1 ? '' : 's' }}."
+Adding...: Adicionando...
+No registries configured: Nenhum registro configurado
+Setup default registry: Configurar registro padrão
+Add registry URL: Adicionar URL de registro
+plugin-store:
+  tags:
+    broken: '⚠️ quebrado'
+    installed: '✓'
+  broken:
+    registry-unavailable:
+      '[Recomendado desinstalar] O registro está indisponível.
+      Tente atualizar ou readicionar o registro para corrigir este problema.'
+    plugin-removed:
+      '[Recomendado desinstalar] Este plugin foi removido do registro.
+      Tente atualizar o registro para confirmar.'
+  remove-registry:
+    title: Remover registro
+    tip-content: 'Remover registro:'
+    confirm-content: "Há {{ count }} {{ count === 1 ? 'plugin' : 'plugins' }}
+      instalado(s) deste registro:"
+    remove-success: Registro removido.
+    remove-with-plugins-success:
+      "Registro removido e {{ count }} {{ count === 1 ?
+      'plugin' : 'plugins' }} desinstalado(s)."
+    buttons:
+      remove-only: Remover apenas
+      remove-and-uninstall: Remover e desinstalar plugins
 
 # PluginQuickMove
 Quick Move: Movimentação Rápida
@@ -135,15 +186,27 @@ Create Redirect: Criar Redirecionamento
 
 # PluginQuickPreview
 Quick Preview: Pré-visualização Rápida
-Preview - Loading...: Pré-visualização - Carregando...
-'Pré-visualização - {{ $1 }}': 'Pré-visualização - {{ $1 }}'
+Preview: Pré-visualizar
+Preview - Loading...: Pré-visualizar - Carregando...
+'Preview - {{ $1 }}': 'Pré-visualizar - {{ $1 }}'
 
 # PluginQuickDiff
 Quick Diff: Diff Rápido
+Diff: Diff
 No changes: Sem alterações
 Loading diff...: Carregando diff...
 Differences: Diferenças
-Unsaved Changes: Alterações Não Salvas
+Unsaved Changes: Alterações não salvas
+Original content: Conteúdo original
+Your content: Seu conteúdo
+quick-diff:
+  previous: Anterior
+  next: Próximo
+  newest-version: Versão mais recente
+  oldest-version: Versão mais antiga
+  original-compare-page: Página de Comparação Original
+  failed-to-load-diff: Falha ao carregar diff
+  x-bytes: "{{ $1 }} byte{{ $1 !== 1 ? 's' : '' }}"
 
 # PluginPreferencesSync
 Sync: Sincronizar
@@ -153,6 +216,7 @@ Restore: Restaurar
 Import and export preferences: Importar e exportar preferências
 Import from file: Importar de arquivo
 Import from URL: Importar de URL
+'Enter the URL of the preferences JSON file:': 'Digite a URL do arquivo JSON de preferências:'
 Save as file: Salvar como arquivo
 
 # AnalyticsService
@@ -164,17 +228,19 @@ InPageEdit Analytics is the companion analytics platform for the InPageEdit NEXT
   otimizar o design de recursos e melhorar a experiência do usuário.
 What data will be collected?: Quais dados serão coletados?
 Usage data: Dados de uso
-When and which features you use, what pages you edit, etc.: Quando e quais recursos você usa, quais páginas você edita, etc.
+When and which features you use, what pages you edit, etc.: Quando e quais recursos você usa, quais páginas edita, etc.
 User information: Informações do usuário
 Your user name and user ID.: Seu nome de usuário e ID de usuário.
 Site information: Informações do site
-'URL e nome deste wiki.': 'URL e nome deste wiki.'
-NO sensitive data will be collected.: NENHUM dado sensível será coletado.
+"This wiki's url and site name.": 'URL e nome deste wiki.'
+NO sensitive data will be collected.: Nenhum dado sensível será coletado.
 Analytics Platform: Plataforma de Análise
 View My Data: Ver Meus Dados
+Enable Analytics: Ativar Análise
+Help us improve InPageEdit by sharing your usage data with us.: Ajude-nos a melhorar o InPageEdit compartilhando seus dados de uso conosco.
 
 # WikiMetadataService
-Wiki Informations: Informações da Wiki
+Wiki Informations: Informações do Wiki
 Site: Site
 User: Usuário
 Groups: Grupos

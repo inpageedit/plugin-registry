@@ -1,4 +1,9 @@
 # Preferences UI
+Configure Preferences: Configure Preferences
+InPageEdit Preferences: InPageEdit Preferences
+Preferences Saved: Preferences Saved
+Some settings may take effect after reloading the page.: Some settings may take effect after reloading the page.
+# SchemaForm for Preferences
 prefs:
   about:
     label: About
@@ -14,6 +19,10 @@ prefs:
       github: GitHub
       qqgroup: QQ Group
     copyright: 'InPageEdit-NEXT Copyright © 2025-{{ new Date().getFullYear() }} dragon-fish'
+  editor:
+    label: Editor
+  general:
+    label: General
   inArticleLinks:
     $: In-article links preferences
     label: In-article Links
@@ -51,6 +60,8 @@ prefs:
   analytics:
     $: InPageEdit Analytics
     enabled: Share my usage data with the community.
+  sync:
+    label: Sync
 
 # Watchlist options
 watchlist:
@@ -61,10 +72,14 @@ watchlist:
 
 # Common buttons
 OK: OK
-Cancel: Cancel
 Yes: Yes
-No: No
 Submit: Submit
+Save: Save
+Enable: Enable
+No: No
+Cancel: Cancel
+Close: Close
+Disable: Disable
 
 # Common form fields
 Summary: Summary
@@ -72,16 +87,33 @@ Reason: Reason
 Watchlist: Watchlist
 Minor edit: Minor edit
 
+# Common notifications
+Success: Success
+Warning: Warning
+Attention: Attention
+Important: Important
+Failed: Failed
+Error: Error
+Info: Info
+
 # PluginQuickEdit
 Quick Edit: Quick Edit
+Quick Create: Quick Create
+New section: New section
+Not editable: Not editable
 Reload after save: Reload after save
-Preview: Preview
-Diff: Diff
 All edit contents will be lost after closing the modal. Are you sure you want to close?:
   >-
   All edit contents will be lost after closing the modal. Are you sure you want to close?
 Give Up: Give Up
 Continue Editing: Continue Editing
+'You are editing a <em>historical version</em> version; the content is not the latest!': You are editing a <em>historical version</em> version; the content is not the latest!
+This page does not exist.: This page does not exist.
+Topic for new section, this will be the h2 heading: Topic for new section, this will be the h2 heading
+Submission Successful: Submission Successful
+Submission Error: Submission Error
+Your changes have been saved.: Your changes have been saved.
+Special page is not editable.: Special page is not editable.
 
 # PluginStore
 Plugin Store: Plugin Store
@@ -91,16 +123,32 @@ Installed plugins: Installed plugins
 Plugins: Plugins
 Registries: Registries
 Search plugins...: Search plugins...
+Refreshing...: Refreshing...
+Refresh: Refresh
+No matching plugins found: No matching plugins found
 Install: Install
 Add: Add
 Remove: Remove
-Remove registry: Remove registry
-"There {{ count < 1 ? 'is' : 'are' }} {{ count }} installed {{ count < 1 ? 'plugin' : 'plugins' }} from this registry": "There {{ count < 1 ? 'is' : 'are' }} {{ count }} installed {{ count < 1 ? 'plugin' : 'plugins' }} from this registry"
-Remove only: Remove only
-Remove and uninstall plugins: Remove and uninstall plugins
-Registry added.: Registry added.
-Registry removed.: Registry removed.
-"Registry removed and {{ count }} {{ count < 1 ? 'plugin' : 'plugins' }} uninstalled.": "Registry removed and {{ count }} {{ count < 1 ? 'plugin' : 'plugins' }} uninstalled."
+Adding...: Adding...
+No registries configured: No registries configured
+Setup default registry: Setup default registry
+Add registry URL: Add registry URL
+plugin-store:
+  tags:
+    broken: '⚠️ broken'
+    installed: '✓'
+  broken:
+    registry-unavailable: '[Recommend to uninstall] The registry is unavailable. Try refreshing or re-adding the registry to fix this issue.'
+    plugin-removed: '[Recommend to uninstall] This plugin was removed from the registry. Try refreshing the registry to confirm.'
+  remove-registry:
+    title: Remove registry
+    tip-content: 'Remove registry:'
+    confirm-content: "There {{ count < 1 ? 'is' : 'are' }} {{ count }} installed {{ count < 1 ? 'plugin' : 'plugins' }} from this registry:"
+    remove-success: Registry removed.
+    remove-with-plugins-success: "Registry removed and {{ count }} {{ count < 1 ? 'plugin' : 'plugins' }} uninstalled."
+    buttons:
+      remove-only: Remove only
+      remove-and-uninstall: Remove and uninstall plugins
 
 # PluginQuickMove
 Quick Move: Quick Move
@@ -121,15 +169,27 @@ Create Redirect: Create Redirect
 
 # PluginQuickPreview
 Quick Preview: Quick Preview
+Preview: Preview
 Preview - Loading...: Preview - Loading...
 'Preview - {{ $1 }}': 'Preview - {{ $1 }}'
 
 # PluginQuickDiff
 Quick Diff: Quick Diff
+Diff: Diff
 No changes: No changes
 Loading diff...: Loading diff...
 Differences: Differences
 Unsaved Changes: Unsaved Changes
+Original content: Original content
+Your content: Your content
+quick-diff:
+  previous: Previous
+  next: Next
+  newest-version: Newest version
+  oldest-version: Oldest version
+  original-compare-page: Original Compare Page
+  failed-to-load-diff: Failed to load diff
+  x-bytes: "{{ $1 }} byte{{ $1 !== 1 ? 's' : '' }}"
 
 # PluginPreferencesSync
 Sync: Sync
@@ -139,6 +199,7 @@ Restore: Restore
 Import and export preferences: Import and export preferences
 Import from file: Import from file
 Import from URL: Import from URL
+'Enter the URL of the preferences JSON file:': 'Enter the URL of the preferences JSON file:'
 Save as file: Save as file
 
 # AnalyticsService
@@ -154,6 +215,8 @@ Site information: Site information
 NO sensitive data will be collected.: NO sensitive data will be collected.
 Analytics Platform: Analytics Platform
 View My Data: View My Data
+Enable Analytics: Enable Analytics
+Help us improve InPageEdit by sharing your usage data with us.: Help us improve InPageEdit by sharing your usage data with us.
 
 # WikiMetadataService
 Wiki Informations: Wiki Informations

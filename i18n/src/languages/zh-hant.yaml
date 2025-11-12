@@ -1,16 +1,21 @@
 __meta__:
   code: zh-hant
   name: 中文(繁體) (zh-hant)
-  timestamp: 2025-11-12T09:10:39.804Z
+  timestamp: 2025-11-12T11:16:14.783Z
   model: deepseek-v3.1
 
 # Preferences UI
+Configure Preferences: 設定偏好設定
+InPageEdit Preferences: InPageEdit 偏好設定
+Preferences Saved: 偏好設定已儲存
+Some settings may take effect after reloading the page.: 部分設定可能需要重新載入頁面後才會生效。
+# SchemaForm for Preferences
 prefs:
   about:
     label: 關於
     description: 關於 InPageEdit
     header: '✏️ InPageEdit NEXT'
-    intro: '🚀 適用於 MediaWiki 的模組化、可擴充的超級增強插件。'
+    intro: '🚀 適用於 MediaWiki 的模組化、可擴充的超級外掛。'
     portals:
       header: 入口網站
       officialwebsite: 官方網站
@@ -20,6 +25,10 @@ prefs:
       github: GitHub
       qqgroup: QQ 群組
     copyright: 'InPageEdit-NEXT 版權所有 © 2025-{{ new Date().getFullYear() }} dragon-fish'
+  editor:
+    label: 編輯器
+  general:
+    label: 一般設定
   inArticleLinks:
     $: 文章內連結偏好設定
     label: 文章內連結
@@ -30,10 +39,10 @@ prefs:
       enable: 為快速編輯啟用文章內連結
       redlinks: 為紅鏈顯示快速編輯按鈕
   quickPreview:
-    keyshortcut: 在快速編輯模態框中開啟快速預覽的按鍵捷徑
+    keyshortcut: 在快速編輯模態框中開啟快速預覽的快速鍵
   toolboxAlwaysShow:
-    $: 工具盒™ 偏好設定
-    description: 預設開啟工具盒™
+    $: Toolbox™ 偏好設定
+    description: 預設開啟 Toolbox™
   quickEdit:
     $: 快速編輯選項
     editSummary: 快速編輯的預設編輯摘要
@@ -41,10 +50,10 @@ prefs:
     outSideClose: 點擊外部關閉編輯器模態框
     watchList: 監視清單選項
     keyshortcut:
-      save: 儲存按鈕的按鍵捷徑（留空以停用）
+      save: 儲存按鈕快速鍵（留空以停用）
     editFont: 快速編輯文字區域使用的字型
   quickDiff:
-    keyshortcut: 在快速編輯模態框中開啟快速差異比較的按鍵捷徑
+    keyshortcut: 在快速編輯模態框中開啟快速差異比較的快速鍵
   quickRedirect:
     $: 快速重新導向選項
     reason: 快速重新導向的預設原因
@@ -56,7 +65,9 @@ prefs:
     language: 語言
   analytics:
     $: InPageEdit Analytics
-    enabled: 與社群分享我的使用資料
+    enabled: 與社群分享我的使用資料。
+  sync:
+    label: 同步
 
 # Watchlist options
 watchlist:
@@ -67,10 +78,14 @@ watchlist:
 
 # Common buttons
 OK: 確定
-Cancel: 取消
 Yes: 是
-No: 否
 Submit: 提交
+Save: 儲存
+Enable: 啟用
+No: 否
+Cancel: 取消
+Close: 關閉
+Disable: 停用
 
 # Common form fields
 Summary: 摘要
@@ -78,40 +93,72 @@ Reason: 原因
 Watchlist: 監視清單
 Minor edit: 小編輯
 
+# Common notifications
+Success: 成功
+Warning: 警告
+Attention: 注意
+Important: 重要
+Failed: 失敗
+Error: 錯誤
+Info: 資訊
+
 # PluginQuickEdit
 Quick Edit: 快速編輯
+Quick Create: 快速建立
+New section: 新章節
+Not editable: 不可編輯
 Reload after save: 儲存後重新載入
-Preview: 預覽
-Diff: 差異比較
-All edit contents will be lost after closing the modal. Are you sure you want to close?:
-  >-
-  關閉模態框後所有編輯內容將會遺失。您確定要關閉嗎？
+All edit contents will be lost after closing the modal. Are you sure you want to close?: >-
+  關閉模態框後，所有編輯內容將會遺失。確定要關閉嗎？
 Give Up: 放棄
 Continue Editing: 繼續編輯
+'You are editing a <em>historical version</em> version; the content is not the latest!': 您正在編輯<em>歷史版本</em>；內容並非最新！
+This page does not exist.: 此頁面不存在。
+Topic for new section, this will be the h2 heading: 新章節主題，這將是 h2 標題
+Submission Successful: 提交成功
+Submission Error: 提交錯誤
+Your changes have been saved.: 您的變更已儲存。
+Special page is not editable.: 特殊頁面不可編輯。
 
 # PluginStore
-Plugin Store: 插件商店
+Plugin Store: 外掛商店
 Registry URLs: 註冊表網址
 CDN to install packages from npm: 從 npm 安裝套件的 CDN
-Installed plugins: 已安裝的插件
-Plugins: 插件
+Installed plugins: 已安裝外掛
+Plugins: 外掛
 Registries: 註冊表
-Search plugins...: 搜尋插件...
+Search plugins...: 搜尋外掛...
+Refreshing...: 重新整理中...
+Refresh: 重新整理
+No matching plugins found: 找不到符合的外掛
 Install: 安裝
 Add: 新增
 Remove: 移除
-Remove registry: 移除註冊表
-"There {{ count < 1 ? 'is' : 'are' }} {{ count }} installed {{ count < 1 ? 'plugin' : 'plugins' }} from this registry": "此註冊表有 {{ count }} 個已安裝的{{ count < 1 ? '插件' : '插件' }}"
-Remove only: 僅移除
-Remove and uninstall plugins: 移除並解除安裝插件
-Registry added.: 註冊表已新增。
-Registry removed.: 註冊表已移除。
-"Registry removed and {{ count }} {{ count < 1 ? 'plugin' : 'plugins' }} uninstalled.": "註冊表已移除，並解除安裝了 {{ count }} 個{{ count < 1 ? '插件' : '插件' }}。"
+Adding...: 新增中...
+No registries configured: 未設定註冊表
+Setup default registry: 設定預設註冊表
+Add registry URL: 新增註冊表網址
+plugin-store:
+  tags:
+    broken: '⚠️ 損壞'
+    installed: '✓'
+  broken:
+    registry-unavailable: '[建議解除安裝] 註冊表無法使用。請嘗試重新整理或重新新增註冊表以修復此問題。'
+    plugin-removed: '[建議解除安裝]此外掛已從註冊表中移除。請嘗試重新整理註冊表以確認。'
+  remove-registry:
+    title: 移除註冊表
+    tip-content: 移除註冊表：
+    confirm-content: "此註冊表安裝了 {{ count }} 個外掛："
+    remove-success: 註冊表已移除。
+    remove-with-plugins-success: "註冊表已移除，並解除安裝了 {{ count }} 個外掛。"
+    buttons:
+      remove-only: 僅移除
+      remove-and-uninstall: 移除並解除安裝外掛
 
 # PluginQuickMove
 Quick Move: 快速移動
-Move from: 移動來源
-Move to: 移動目標
+Move from: 從何處移動
+Move to: 移動至何處
 Move talk page: 移動討論頁
 Move subpages (up to 100): 移動子頁面（最多 100 個）
 Move without leaving a redirect: 移動而不留下重新導向
@@ -119,23 +166,35 @@ Move: 移動
 
 # PluginQuickRedirect
 Quick Redirect: 快速重新導向
-Redirect from: 重新導向來源
-Redirect to: 重新導向目標
-Force create redirect even if the from page already exists: 即使來源頁面已存在也強制建立重新導向
+Redirect from: 從何處重新導向
+Redirect to: 重新導向至何處
+Force create redirect even if the from page already exists: 即使來源頁面已存在，仍強制建立重新導向
 Delete from page if it exists: 如果來源頁面存在則將其刪除
 Create Redirect: 建立重新導向
 
 # PluginQuickPreview
 Quick Preview: 快速預覽
+Preview: 預覽
 Preview - Loading...: 預覽 - 載入中...
 'Preview - {{ $1 }}': '預覽 - {{ $1 }}'
 
 # PluginQuickDiff
 Quick Diff: 快速差異比較
+Diff: 差異
 No changes: 無變更
-Loading diff...: 載入差異比較中...
-Differences: 差異
+Loading diff...: 載入差異中...
+Differences: 差異之處
 Unsaved Changes: 未儲存的變更
+Original content: 原始內容
+Your content: 您的內容
+quick-diff:
+  previous: 上一筆
+  next: 下一筆
+  newest-version: 最新版本
+  oldest-version: 最舊版本
+  original-compare-page: 原始比較頁面
+  failed-to-load-diff: 載入差異失敗
+  x-bytes: "{{ $1 }} 位元組"
 
 # PluginPreferencesSync
 Sync: 同步
@@ -145,28 +204,31 @@ Restore: 還原
 Import and export preferences: 匯入與匯出偏好設定
 Import from file: 從檔案匯入
 Import from URL: 從網址匯入
+'Enter the URL of the preferences JSON file:': '請輸入偏好設定 JSON 檔案的網址：'
 Save as file: 另存為檔案
 
 # AnalyticsService
 InPageEdit Analytics: InPageEdit Analytics
 InPageEdit Analytics is the companion analytics platform for the InPageEdit NEXT project. By collecting and displaying usage data from around the world, it helps developers and the community better understand how the tool is used, optimize feature design, and enhance user experience.:
   InPageEdit Analytics 是 InPageEdit NEXT
-  專案的配套分析平台。透過收集和展示來自全球的使用資料，它幫助開發者和社群更好地了解此工具的使用情況、優化功能設計並提升使用者體驗。
+  專案的配套分析平台。透過收集和顯示來自全球的使用資料，它有助於開發者和社群更好地了解工具的使用情況、最佳化功能設計並提升使用者體驗。
 What data will be collected?: 將會收集哪些資料？
 Usage data: 使用資料
 When and which features you use, what pages you edit, etc.: 您何時使用了哪些功能、編輯了哪些頁面等。
 User information: 使用者資訊
 Your user name and user ID.: 您的使用者名稱和使用者 ID。
 Site information: 網站資訊
-"This wiki's url and site name.": '此維基的網址和站點名稱。'
+"This wiki's url and site name.": "此 wiki 的網址和網站名稱。"
 NO sensitive data will be collected.: 不會收集任何敏感資料。
 Analytics Platform: 分析平台
 View My Data: 檢視我的資料
+Enable Analytics: 啟用分析
+Help us improve InPageEdit by sharing your usage data with us.: 透過與我們分享您的使用資料，幫助我們改進 InPageEdit。
 
 # WikiMetadataService
-Wiki Informations: 維基資訊
-Site: 站點
+Wiki Informations: Wiki 資訊
+Site: 網站
 User: 使用者
 Groups: 群組
-If the information shown above is incorrect (for example, the user is not you), click the button below.: 如果上方顯示的資訊不正確（例如，該使用者不是您），請點擊下方的按鈕。
+If the information shown above is incorrect (for example, the user is not you), click the button below.: 如果上方顯示的資訊不正確（例如，使用者並非您本人），請點選下方的按鈕。
 Clear caches & Reload: 清除快取並重新載入

@@ -7,7 +7,7 @@ import {
   ChatCompletionCreateParamsStreaming,
 } from 'openai/resources/index.mjs'
 import consola from 'consola'
-import { parseDocument, isMap } from 'yaml'
+import { parseDocument, stringify } from 'yaml'
 
 const LANGUAGES_SRC_DIR = resolve(import.meta.dirname, '../src/languages')
 const OUTPUT_DIR = resolve(import.meta.dirname, './.llm-output')
@@ -20,7 +20,7 @@ const SOURCE_LANGUAGE_CONTENT = await readFile(
   'utf-8'
 )
 const TARGET_LANGUAGES = {
-  ar: 'العربية (ar)',
+  // ar: 'العربية (ar)',
   fr: 'Français (fr)',
   hi: 'Hindī (hi)',
   ja: '日本語 (ja)',
@@ -49,66 +49,68 @@ for (const [code, name] of Object.entries(TARGET_LANGUAGES)) {
     '%SOURCE_LANGUAGE_CONTENT%',
     SOURCE_LANGUAGE_CONTENT
   ).replace('%OUTPUT_LANGUAGE%', name)
-  const stream = await client.chat.completions.create({
-    model: process.env.OPENAI_MODEL!,
-    messages: [{ role: 'user', content: prompt }],
-    stream: true,
-    enable_thinking: true,
-  } as ChatCompletionCreateParamsStreaming)
+
   let content = ''
-  let thinkEnd: null | boolean = null
-  for await (const chunk of stream) {
-    const delta = chunk.choices[0].delta as ChatCompletionChunk.Choice.Delta & {
-      reasoning_content?: string
-    }
-    if (delta.reasoning_content) {
-      if (thinkEnd === null) {
-        thinkEnd = false
-        process.stdout.write('\n<think>\n')
+
+  try {
+    const stream = await client.chat.completions.create({
+      model: process.env.OPENAI_MODEL!,
+      messages: [{ role: 'user', content: prompt }],
+      stream: true,
+      enable_thinking: true,
+    } as ChatCompletionCreateParamsStreaming)
+    let thinkEnd: null | boolean = null
+    for await (const chunk of stream) {
+      const delta = chunk.choices[0]
+        .delta as ChatCompletionChunk.Choice.Delta & {
+        reasoning_content?: string
       }
-      process.stdout.write(delta.reasoning_content)
-    }
-    if (delta.content) {
-      if (thinkEnd === false) {
-        thinkEnd = true
-        process.stdout.write('\n</think>\n')
-        process.stdout.write('\n<content>\n')
+      if (delta.reasoning_content) {
+        if (thinkEnd === null) {
+          thinkEnd = false
+          process.stdout.write('\n<think>\n')
+        }
+        process.stdout.write(delta.reasoning_content)
       }
-      content += delta.content
-      process.stdout.write(delta.content)
+      if (delta.content) {
+        if (thinkEnd === false) {
+          thinkEnd = true
+          process.stdout.write('\n</think>\n')
+          process.stdout.write('\n<content>\n')
+        }
+        content += delta.content
+        process.stdout.write(delta.content)
+      }
     }
-  }
-  process.stdout.write('\n</content>\n')
+    process.stdout.write('\n</content>\n')
 
-  if (content.includes('```')) {
-    content = content.replace(/```ya?ml\n|```/g, '')
-  }
-
-  const doc = parseDocument(content)
-  const meta = {
-    code,
-    name,
-    timestamp: new Date().toISOString(),
-    model: process.env.OPENAI_MODEL!,
-  }
-  if (isMap(doc.contents)) {
-    // Ensure __meta__ exists and stays at the top
-    doc.contents.delete('__meta__')
-    const pair = doc.createPair('__meta__', meta)
-    ;(doc.contents as any).items.unshift(pair as any)
-    // append a blank line after __meta__ by inserting spaceBefore on the next item
-    if ((doc.contents as any).items.length > 1) {
-      ;(doc.contents as any).items[0].spaceAfter = 1
+    if (content.includes('```')) {
+      content = content.replace(/```ya?ml\n|```/g, '')
     }
-  } else {
-    // Fallback: if root is not a map, just set __meta__ (appends at end)
-    doc.set('__meta__', meta)
+
+    const doc = parseDocument(content)
+    const meta = {
+      code,
+      name,
+      timestamp: new Date().toISOString(),
+      model: process.env.OPENAI_MODEL!,
+    }
+    const yaml = `${stringify({ __meta__: meta })}\n${doc.toString()}`
+
+    await writeFile(resolve(OUTPUT_DIR, `${code}.yaml`), yaml)
+
+    consola.success(`[${code}] ${name} translated successfully`)
+  } catch (e) {
+    consola.error(`[${code}] ${name} translation failed: ${e}`)
+    await writeFile(
+      resolve(import.meta.dirname, 'llm-error.log'),
+      `[${new Date().toISOString()}] ${code} ${name} ${e}\n${content}\n\n`,
+      {
+        flag: 'a',
+        encoding: 'utf-8',
+      }
+    )
   }
-  const yaml = doc.toString()
-
-  await writeFile(resolve(OUTPUT_DIR, `${code}.yaml`), yaml)
-
-  consola.success(`[${code}] ${name} translated successfully`)
 }
 
 consola.success('LLM translation completed')

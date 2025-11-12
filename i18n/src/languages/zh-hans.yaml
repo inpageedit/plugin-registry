@@ -1,18 +1,23 @@
 __meta__:
   code: zh-hans
   name: 中文(简体) (zh-hans)
-  timestamp: 2025-11-12T09:10:00.167Z
+  timestamp: 2025-11-12T11:15:29.053Z
   model: deepseek-v3.1
 
 # Preferences UI
+Configure Preferences: 配置首选项
+InPageEdit Preferences: InPageEdit 首选项
+Preferences Saved: 首选项已保存
+Some settings may take effect after reloading the page.: 部分设置可能需要重新加载页面后生效。
+# SchemaForm for Preferences
 prefs:
   about:
     label: 关于
     description: 关于 InPageEdit
     header: '✏️ InPageEdit NEXT'
-    intro: '🚀 MediaWiki 的模块化、可扩展、超级增强插件。'
+    intro: '🚀 专为 MediaWiki 设计的模块化、可扩展的超级插件。'
     portals:
-      header: 门户
+      header: 门户网站
       officialwebsite: 官方网站
       updatelogs: 更新日志
     joinus:
@@ -20,8 +25,12 @@ prefs:
       github: GitHub
       qqgroup: QQ 群
     copyright: 'InPageEdit-NEXT 版权所有 © 2025-{{ new Date().getFullYear() }} dragon-fish'
+  editor:
+    label: 编辑器
+  general:
+    label: 通用
   inArticleLinks:
-    $: 页内链偏好设置
+    $: 页内链首选项
     label: 页内链
     enable: 启用页内链
     quickDiff:
@@ -30,21 +39,21 @@ prefs:
       enable: 为快速编辑启用页内链
       redlinks: 为红链显示快速编辑按钮
   quickPreview:
-    keyshortcut: 在快速编辑模态框中打开快速预览的快捷键
+    keyshortcut: 在快速编辑弹窗中打开快速预览的快捷键
   toolboxAlwaysShow:
-    $: 工具盒™ 偏好设置
+    $: 工具盒™首选项
     description: 默认展开工具盒™
   quickEdit:
     $: 快速编辑选项
     editSummary: 快速编辑的默认编辑摘要
     editMinor: 默认勾选“小编辑”选项
-    outSideClose: 点击外部关闭编辑器模态框
+    outSideClose: 点击外部关闭编辑器弹窗
     watchList: 监视列表选项
     keyshortcut:
-      save: 保存按钮快捷键（留空则禁用）
+      save: 保存按钮快捷键（留空禁用）
     editFont: 快速编辑文本区域使用的字体
   quickDiff:
-    keyshortcut: 在快速编辑模态框中打开快速差异的快捷键
+    keyshortcut: 在快速编辑弹窗中打开快速差异的快捷键
   quickRedirect:
     $: 快速重定向选项
     reason: 快速重定向的默认原因
@@ -52,25 +61,31 @@ prefs:
     $: 快速移动选项
     reason: 快速移动的默认原因
   language:
-    $: 语言偏好设置
+    $: 语言首选项
     language: 语言
   analytics:
     $: InPageEdit Analytics
-    enabled: 与社区分享我的使用数据
+    enabled: 与社区分享我的使用数据。
+  sync:
+    label: 同步
 
 # Watchlist options
 watchlist:
-  preferences: 遵循 MediaWiki 偏好设置
+  preferences: 遵循 MW 首选项
   nochange: 保持当前状态
   watch: 添加到监视列表
-  unwatch: 从监视列表中移除
+  unwatch: 从监视列表移除
 
 # Common buttons
 OK: 确定
-Cancel: 取消
 Yes: 是
-No: 否
 Submit: 提交
+Save: 保存
+Enable: 启用
+No: 否
+Cancel: 取消
+Close: 关闭
+Disable: 禁用
 
 # Common form fields
 Summary: 摘要
@@ -78,16 +93,33 @@ Reason: 原因
 Watchlist: 监视列表
 Minor edit: 小编辑
 
+# Common notifications
+Success: 成功
+Warning: 警告
+Attention: 注意
+Important: 重要
+Failed: 失败
+Error: 错误
+Info: 信息
+
 # PluginQuickEdit
 Quick Edit: 快速编辑
+Quick Create: 快速创建
+New section: 新建章节
+Not editable: 不可编辑
 Reload after save: 保存后重新加载
-Preview: 预览
-Diff: 差异
 All edit contents will be lost after closing the modal. Are you sure you want to close?:
   >-
-  关闭模态框后所有编辑内容将会丢失。确定要关闭吗？
+  关闭弹窗后所有编辑内容将会丢失。确定要关闭吗？
 Give Up: 放弃
 Continue Editing: 继续编辑
+'You are editing a <em>historical version</em> version; the content is not the latest!': 您正在编辑一个<em>历史版本</em>；内容不是最新的！
+This page does not exist.: 此页面不存在。
+Topic for new section, this will be the h2 heading: 新章节的主题，这将作为二级标题
+Submission Successful: 提交成功
+Submission Error: 提交错误
+Your changes have been saved.: 您的更改已保存。
+Special page is not editable.: 特殊页面不可编辑。
 
 # PluginStore
 Plugin Store: 插件商店
@@ -97,55 +129,84 @@ Installed plugins: 已安装插件
 Plugins: 插件
 Registries: 注册表
 Search plugins...: 搜索插件...
+Refreshing...: 刷新中...
+Refresh: 刷新
+No matching plugins found: 未找到匹配的插件
 Install: 安装
 Add: 添加
 Remove: 移除
-Remove registry: 移除注册表
-"There {{ count < 1 ? 'is' : 'are' }} {{ count }} installed {{ count < 1 ? 'plugin' : 'plugins' }} from this registry": '此注册表安装了 {{ count }} 个插件'
-Remove only: 仅移除
-Remove and uninstall plugins: 移除并卸载插件
-Registry added.: 注册表已添加。
-Registry removed.: 注册表已移除。
-"Registry removed and {{ count }} {{ count < 1 ? 'plugin' : 'plugins' }} uninstalled.": '注册表已移除，并卸载了 {{ count }} 个插件。'
+Adding...: 添加中...
+No registries configured: 未配置注册表
+Setup default registry: 设置默认注册表
+Add registry URL: 添加注册表 URL
+plugin-store:
+  tags:
+    broken: '⚠️ 已损坏'
+    installed: '✓'
+  broken:
+    registry-unavailable: '[建议卸载] 注册表不可用。尝试刷新或重新添加注册表以修复此问题。'
+    plugin-removed: '[建议卸载] 此插件已从注册表中移除。尝试刷新注册表以确认。'
+  remove-registry:
+    title: 移除注册表
+    tip-content: '移除注册表：'
+    confirm-content: "此注册表有 {{ count }} 个已安装的{{ count < 1 ? '插件' : '插件' }}："
+    remove-success: 注册表已移除。
+    remove-with-plugins-success: "注册表已移除，并卸载了 {{ count }} 个{{ count < 1 ? '插件' : '插件' }}。"
+    buttons:
+      remove-only: 仅移除
+      remove-and-uninstall: 移除并卸载插件
 
 # PluginQuickMove
 Quick Move: 快速移动
 Move from: 移动自
-Move to: 移动到
+Move to: 移动至
 Move talk page: 移动讨论页
 Move subpages (up to 100): 移动子页面（最多 100 个）
-Move without leaving a redirect: 移动而不留下重定向
+Move without leaving a redirect: 移动而不留重定向
 Move: 移动
 
 # PluginQuickRedirect
 Quick Redirect: 快速重定向
 Redirect from: 重定向自
-Redirect to: 重定向到
+Redirect to: 重定向至
 Force create redirect even if the from page already exists: 即使来源页面已存在也强制创建重定向
 Delete from page if it exists: 如果来源页面存在则删除它
 Create Redirect: 创建重定向
 
 # PluginQuickPreview
 Quick Preview: 快速预览
+Preview: 预览
 Preview - Loading...: 预览 - 加载中...
 'Preview - {{ $1 }}': '预览 - {{ $1 }}'
 
 # PluginQuickDiff
 Quick Diff: 快速差异
+Diff: 差异
 No changes: 无更改
 Loading diff...: 加载差异中...
 Differences: 差异
 Unsaved Changes: 未保存的更改
+Original content: 原始内容
+Your content: 您的内容
+quick-diff:
+  previous: 上一版本
+  next: 下一版本
+  newest-version: 最新版本
+  oldest-version: 最旧版本
+  original-compare-page: 原始比较页面
+  failed-to-load-diff: 加载差异失败
+  x-bytes: '{{ $1 }} 字节'
 
 # PluginPreferencesSync
 Sync: 同步
-Backup your preferences via user page: 通过用户页面备份您的偏好设置
+Backup your preferences via user page: 通过用户页面备份您的首选项
 Backup: 备份
 Restore: 恢复
-Import and export preferences: 导入和导出偏好设置
+Import and export preferences: 导入和导出首选项
 Import from file: 从文件导入
 Import from URL: 从 URL 导入
-Save as file: 另存为文件
+'Enter the URL of the preferences JSON file:': '输入首选项 JSON 文件的 URL:'
+Save as file: 保存为文件
 
 # AnalyticsService
 InPageEdit Analytics: InPageEdit Analytics
@@ -154,14 +215,16 @@ InPageEdit Analytics is the companion analytics platform for the InPageEdit NEXT
   项目的配套分析平台。通过收集和展示来自全球的使用数据，它帮助开发者和社区更好地了解该工具的使用情况、优化功能设计并提升用户体验。
 What data will be collected?: 会收集哪些数据？
 Usage data: 使用数据
-When and which features you use, what pages you edit, etc.: 您何时使用了哪些功能、编辑了哪些页面等。
+When and which features you use, what pages you edit, etc.: 您何时使用哪些功能、编辑哪些页面等。
 User information: 用户信息
-Your user name and user ID.: 您的用户名和用户ID。
+Your user name and user ID.: 您的用户名和用户 ID。
 Site information: 站点信息
-"This wiki's url and site name.": '此wiki的网址和站点名称。'
+"This wiki's url and site name.": '此 wiki 的 URL 和站点名称。'
 NO sensitive data will be collected.: 不会收集任何敏感数据。
 Analytics Platform: 分析平台
 View My Data: 查看我的数据
+Enable Analytics: 启用分析
+Help us improve InPageEdit by sharing your usage data with us.: 通过与我们分享您的使用数据，帮助我们改进 InPageEdit。
 
 # WikiMetadataService
 Wiki Informations: Wiki 信息

@@ -114,7 +114,7 @@ for (const file of languageFiles) {
     })
   }
   await writeFile(dstFile, JSON.stringify(data, null, 2))
-  consola.success(` ├ ${file}.json`)
+  consola.success(` ├ ${dstFile}`)
 }
 consola.success('Languages files written successfully')
 
