@@ -2,8 +2,26 @@ project_id_env: CROWDIN_PROJECT_ID
 api_token_env: CROWDIN_PERSONAL_TOKEN
 base_path: .
 preserve_hierarchy: 1
+# 只导出已翻译的条目
+# skip_untranslated_strings: true
+# 只导出已审核的翻译
+# export_only_approved: true
+
 files:
   - source: i18n/src/languages/en.yaml
+    translation: i18n/src/languages/%locale%.yaml
     ignore:
       - i18n/**/dist/**
-    translation: i18n/src/languages/%locale%.yaml
+
+    languages_mapping:
+      locale:
+        en: en # 一般不会导出，但映射留着无妨
+        ar: ar
+        fr: fr
+        hi: hi
+        ja: ja
+        nl: nl
+        pl: pl
+        pt-BR: pt-br
+        zh-CN: zh-hans
+        zh-TW: zh-hant
