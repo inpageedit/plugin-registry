@@ -1,248 +1,212 @@
-__meta__:
-  code: pl
-  name: Polski (pl)
-  timestamp: 2025-11-12T11:13:45.751Z
-  model: deepseek-v3.1
-
 # Preferences UI
-Configure Preferences: Konfiguruj preferencje
-InPageEdit Preferences: Preferencje InPageEdit
-Preferences Saved: Preferencje zapisane
-Some settings may take effect after reloading the page.: Niektóre ustawienia mogą zacząć obowiązywać po przeładowaniu strony.
+Configure Preferences: Configure Preferences
+InPageEdit Preferences: InPageEdit Preferences
+Preferences Saved: Preferences Saved
+Some settings may take effect after reloading the page.: Some settings may take effect after reloading the page.
 # SchemaForm for Preferences
 prefs:
   about:
-    label: Informacje
-    description: O InPageEdit
+    label: About
+    description: About InPageEdit
     header: '✏️ InPageEdit NEXT'
-    intro: '🚀 Modułowe, rozszerzalne, superwydajne rozszerzenie dla MediaWiki.'
+    intro: '🚀 Modular, Extensible Supercharged Plugin for MediaWiki.'
     portals:
-      header: Portale
-      officialwebsite: Oficjalna strona
-      updatelogs: Dzienniki aktualizacji
+      header: Portals
+      officialwebsite: Official Website
+      updatelogs: Update Logs
     joinus:
-      header: Dołącz do nas
+      header: Join us
       github: GitHub
-      qqgroup: Grupa QQ
+      qqgroup: QQ Group
     copyright: 'InPageEdit-NEXT Copyright © 2025-{{ new Date().getFullYear() }} dragon-fish'
   editor:
-    label: Edytor
+    label: Editor
   general:
-    label: Ogólne
+    label: General
   inArticleLinks:
-    $: Preferencje linków w artykule
-    label: Linki w artykule
-    enable: Włącz linki w artykule
+    $: In-article links preferences
+    label: In-article Links
+    enable: Enable in-article links
     quickDiff:
-      enable: Włącz linki w artykule dla szybkiego porównania
+      enable: Enable in-article links for quick diff
     quickEdit:
-      enable: Włącz linki w artykule dla szybkiej edycji
-      redlinks: Pokaż przycisk szybkiej edycji dla czerwonych linków
+      enable: Enable in-article links for quick edit
+      redlinks: Show quick edit button for redlinks
   quickPreview:
-    keyshortcut: Skrót klawiszowy do otwarcia szybkiego podglądu w oknie szybkiej edycji
+    keyshortcut: Key shortcut to open quick preview in quick edit modal
   toolboxAlwaysShow:
-    $: Preferencje Toolbox™
-    description: Otwieraj Toolbox™ domyślnie
+    $: Toolbox™ preferences
+    description: Make the Toolbox™ opened by default
   quickEdit:
-    $: Opcje szybkiej edycji
-    editSummary: Domyślny opis zmian dla szybkich edycji
-    editMinor: Domyślnie zaznacz opcję "drobna zmiana"
-    outSideClose: Zamykaj okno edytora poprzez kliknięcie na zewnątrz
-    watchList: Opcje listy obserwowanych
+    $: Quick edit options
+    editSummary: Default edit summary for quick edits
+    editMinor: Default to checking "minor edit" option
+    outSideClose: Close editor modal by clicking outside
+    watchList: Watchlist options
     keyshortcut:
-      save: skrót klawiszowy przycisku zapisz (puste aby wyłączyć)
-    editFont: Czcionka używana w polu tekstowym szybkiej edycji
+      save: save button key shortcut (blank to disable)
+    editFont: Font to use in quick edit's textarea
   quickDiff:
-    keyshortcut: Skrót klawiszowy do otwarcia szybkiego porównania w oknie szybkiej edycji
+    keyshortcut: Key shortcut to open quick diff in quick edit modal
   quickRedirect:
-    $: Opcje szybkiego przekierowania
-    reason: Domyślny powód szybkiego przekierowania
+    $: Quick redirect options
+    reason: Default reason for quick redirect
   quickMove:
-    $: Opcje szybkiego przenoszenia
-    reason: Domyślny powód szybkiego przenoszenia
+    $: Quick move options
+    reason: Default reason for quick move
   language:
-    $: Preferencje językowe
-    language: Język
+    $: Language preferences
+    language: Language
   analytics:
     $: InPageEdit Analytics
-    enabled: Udostępniaj moje dane użycia społeczności.
+    enabled: Share my usage data with the community.
   sync:
-    label: Synchronizuj
-
+    label: Sync
 # Watchlist options
 watchlist:
-  preferences: Zgodnie z preferencjami MW
-  nochange: Zachowaj obecny status
-  watch: Dodaj do listy obserwowanych
-  unwatch: Usuń z listy obserwowanych
-
+  preferences: Follow MW preferences
+  nochange: Keep current status
+  watch: Add to watchlist
+  unwatch: Remove from watchlist
 # Common buttons
 OK: OK
-Yes: Tak
-Submit: Wyślij
-Save: Zapisz
-Enable: Włącz
-No: Nie
-Cancel: Anuluj
-Close: Zamknij
-Disable: Wyłącz
-
+Yes: Yes
+Submit: Submit
+Save: Save
+Enable: Enable
+No: No
+Cancel: Cancel
+Close: Close
+Disable: Disable
 # Common form fields
-Summary: Opis zmian
-Reason: Powód
-Watchlist: Lista obserwowanych
-Minor edit: Drobna zmiana
-
+Summary: Summary
+Reason: Reason
+Watchlist: Watchlist
+Minor edit: Minor edit
 # Common notifications
-Success: Sukces
-Warning: Ostrzeżenie
-Attention: Uwaga
-Important: Ważne
-Failed: Niepowodzenie
-Error: Błąd
-Info: Informacja
-
+Success: Success
+Warning: Warning
+Attention: Attention
+Important: Important
+Failed: Failed
+Error: Error
+Info: Info
 # PluginQuickEdit
-Quick Edit: Szybka edycja
-Quick Create: Szybkie tworzenie
-New section: Nowa sekcja
-Not editable: Nieedytowalne
-Reload after save: Przeładuj po zapisaniu
-All edit contents will be lost after closing the modal. Are you sure you want to close?:
-  >-
-  Cała zawartość edycji zostanie utracona po zamknięciu okna. Czy na pewno
-  chcesz zamknąć?
-Give Up: Porzuć
-Continue Editing: Kontynuuj edycję
-'You are editing a <em>historical version</em> version; the content is not the latest!': Edytujesz <em>historyczną wersję</em>; zawartość nie jest najnowsza!
-This page does not exist.: Ta strona nie istnieje.
-Topic for new section, this will be the h2 heading: Temat nowej sekcji, będzie to nagłówek h2
-Submission Successful: Przesłano pomyślnie
-Submission Error: Błąd przesyłania
-Your changes have been saved.: Twoje zmiany zostały zapisane.
-Special page is not editable.: Strona specjalna nie jest edytowalna.
-
+Quick Edit: Quick Edit
+Quick Create: Quick Create
+New section: New section
+Not editable: Not editable
+Reload after save: Reload after save
+All edit contents will be lost after closing the modal. Are you sure you want to close?: '>- All edit contents will be lost after closing the modal. Are you sure you want to close?'
+Give Up: Give Up
+Continue Editing: Continue Editing
+'You are editing a <em>historical version</em> version; the content is not the latest!': You are editing a <em>historical version</em> version; the content is not the latest!
+This page does not exist.: This page does not exist.
+Topic for new section, this will be the h2 heading: Topic for new section, this will be the h2 heading
+Submission Successful: Submission Successful
+Submission Error: Submission Error
+Your changes have been saved.: Your changes have been saved.
+Special page is not editable.: Special page is not editable.
 # PluginStore
-Plugin Store: Sklep z wtyczkami
-Registry URLs: Adresy URL rejestrów
-CDN to install packages from npm: CDN do instalowania pakietów z npm
-Installed plugins: Zainstalowane wtyczki
-Plugins: Wtyczki
-Registries: Rejestry
-Search plugins...: Szukaj wtyczek...
-Refreshing...: Odświeżanie...
-Refresh: Odśwież
-No matching plugins found: Nie znaleziono pasujących wtyczek
-Install: Zainstaluj
-Add: Dodaj
-Remove: Usuń
-Adding...: Dodawanie...
-No registries configured: Nie skonfigurowano rejestrów
-Setup default registry: Skonfiguruj domyślny rejestr
-Add registry URL: Dodaj adres URL rejestru
+Plugin Store: Plugin Store
+Registry URLs: Registry URLs
+CDN to install packages from npm: CDN to install packages from npm
+Installed plugins: Installed plugins
+Plugins: Plugins
+Registries: Registries
+Search plugins...: Search plugins...
+Refreshing...: Refreshing...
+Refresh: Refresh
+No matching plugins found: No matching plugins found
+Install: Install
+Add: Add
+Remove: Remove
+Adding...: Adding...
+No registries configured: No registries configured
+Setup default registry: Setup default registry
+Add registry URL: Add registry URL
 plugin-store:
   tags:
-    broken: '⚠️ uszkodzone'
+    broken: '⚠️ broken'
     installed: '✓'
   broken:
-    registry-unavailable: '[Zaleca się odinstalowanie] Rejestr jest niedostępny.
-      Spróbuj odświeżyć lub dodać ponownie rejestr, aby rozwiązać problem.'
-    plugin-removed: '[Zaleca się odinstalowanie] Ta wtyczka została usunięta z
-      rejestru. Spróbuj odświeżyć rejestr, aby potwierdzić.'
+    registry-unavailable: '[Recommend to uninstall] The registry is unavailable. Try refreshing or re-adding the registry to fix this issue.'
+    plugin-removed: '[Recommend to uninstall] This plugin was removed from the registry. Try refreshing the registry to confirm.'
   remove-registry:
-    title: Usuń rejestr
-    tip-content: 'Usuń rejestr:'
-    confirm-content: "Z tego rejestru {{ count === 1 ? 'została zainstalowana' :
-      'zostały zainstalowane' }} {{ count }} {{ count === 1 ? 'wtyczka' :
-      'wtyczki' }}:"
-    remove-success: Rejestr usunięty.
-    remove-with-plugins-success:
-      "Rejestr usunięty i {{ count }} {{ count === 1 ?
-      'wtyczka' : 'wtyczki' }} odinstalowane."
+    title: Remove registry
+    tip-content: 'Remove registry:'
+    confirm-content: "There {{ count < 1 ? 'is' : 'are' }} {{ count }} installed {{ count < 1 ? 'plugin' : 'plugins' }} from this registry:"
+    remove-success: Registry removed.
+    remove-with-plugins-success: "Registry removed and {{ count }} {{ count < 1 ? 'plugin' : 'plugins' }} uninstalled."
     buttons:
-      remove-only: Tylko usuń
-      remove-and-uninstall: Usuń i odinstaluj wtyczki
-
+      remove-only: Remove only
+      remove-and-uninstall: Remove and uninstall plugins
 # PluginQuickMove
-Quick Move: Szybkie przenoszenie
-Move from: Przenieś z
-Move to: Przenieś do
-Move talk page: Przenieś stronę dyskusji
-Move subpages (up to 100): Przenieś podstrony (do 100)
-Move without leaving a redirect: Przenieś bez pozostawiania przekierowania
-Move: Przenieś
-
+Quick Move: Quick Move
+Move from: Move from
+Move to: Move to
+Move talk page: Move talk page
+Move subpages (up to 100): Move subpages (up to 100)
+Move without leaving a redirect: Move without leaving a redirect
+Move: Move
 # PluginQuickRedirect
-Quick Redirect: Szybkie przekierowanie
-Redirect from: Przekieruj z
-Redirect to: Przekieruj do
-Force create redirect even if the from page already exists: Wymuś utworzenie przekierowania, nawet jeśli strona źródłowa już istnieje
-Delete from page if it exists: Usuń stronę źródłową, jeśli istnieje
-Create Redirect: Utwórz przekierowanie
-
+Quick Redirect: Quick Redirect
+Redirect from: Redirect from
+Redirect to: Redirect to
+Force create redirect even if the from page already exists: Force create redirect even if the from page already exists
+Delete from page if it exists: Delete from page if it exists
+Create Redirect: Create Redirect
 # PluginQuickPreview
-Quick Preview: Szybki podgląd
-Preview: Podgląd
-Preview - Loading...: Podgląd - Ładowanie...
-'Preview - {{ $1 }}': 'Podgląd - {{ $1 }}'
-
+Quick Preview: Quick Preview
+Preview: Preview
+Preview - Loading...: Preview - Loading...
+'Preview - {{ $1 }}': 'Preview - {{ $1 }}'
 # PluginQuickDiff
-Quick Diff: Szybkie porównanie
-Diff: Różnice
-No changes: Brak zmian
-Loading diff...: Ładowanie różnic...
-Differences: Różnice
-Unsaved Changes: Niezapisane zmiany
-Original content: Oryginalna zawartość
-Your content: Twoja zawartość
+Quick Diff: Quick Diff
+Diff: Diff
+No changes: No changes
+Loading diff...: Loading diff...
+Differences: Differences
+Unsaved Changes: Unsaved Changes
+Original content: Original content
+Your content: Your content
 quick-diff:
-  previous: Poprzednia
-  next: Następna
-  newest-version: Najnowsza wersja
-  oldest-version: Najstarsza wersja
-  original-compare-page: Oryginalna strona porównania
-  failed-to-load-diff: Nie udało się załadować różnic
-  x-bytes:
-    "{{ $1 }} bajt{{ $1 % 10 >= 2 && $1 % 10 <= 4 && ($1 % 100 < 10 || $1 %
-    100 >= 20) ? 'y' : ($1 !== 1 ? 'ów' : '') }}"
-
+  previous: Previous
+  next: Next
+  newest-version: Newest version
+  oldest-version: Oldest version
+  original-compare-page: Original Compare Page
+  failed-to-load-diff: Failed to load diff
+  x-bytes: "{{ $1 }} byte{{ $1 !== 1 ? 's' : '' }}"
 # PluginPreferencesSync
-Sync: Synchronizuj
-Backup your preferences via user page: Utwórz kopię zapasową preferencji poprzez stronę użytkownika
-Backup: Kopia zapasowa
-Restore: Przywróć
-Import and export preferences: Importuj i eksportuj preferencje
-Import from file: Importuj z pliku
-Import from URL: Importuj z URL
-'Enter the URL of the preferences JSON file:': 'Wprowadź URL pliku JSON z preferencjami:'
-Save as file: Zapisz jako plik
-
+Sync: Sync
+Backup your preferences via user page: Backup your preferences via user page
+Backup: Backup
+Restore: Restore
+Import and export preferences: Import and export preferences
+Import from file: Import from file
+Import from URL: Import from URL
+'Enter the URL of the preferences JSON file:': 'Enter the URL of the preferences JSON file:'
+Save as file: Save as file
 # AnalyticsService
 InPageEdit Analytics: InPageEdit Analytics
-InPageEdit Analytics is the companion analytics platform for the InPageEdit NEXT project. By collecting and displaying usage data from around the world, it helps developers and the community better understand how the tool is used, optimize feature design, and enhance user experience.:
-  InPageEdit Analytics to platforma analityczna towarzysząca projektowi
-  InPageEdit NEXT. Poprzez zbieranie i wyświetlanie danych użycia z całego
-  świata pomaga programistom i społeczności lepiej zrozumieć, jak narzędzie jest
-  używane, zoptymalizować projekt funkcji i poprawić doświadczenie użytkownika.
-What data will be collected?: Jakie dane będą zbierane?
-Usage data: Dane użycia
-When and which features you use, what pages you edit, etc.: Kiedy i których funkcji używasz, jakie strony edytujesz itp.
-User information: Informacje o użytkowniku
-Your user name and user ID.: Twoja nazwa użytkownika i identyfikator użytkownika.
-Site information: Informacje o witrynie
-"This wiki's url and site name.": 'Adres URL tej wiki i nazwa witryny.'
-NO sensitive data will be collected.: NIE będą zbierane żadne wrażliwe dane.
-Analytics Platform: Platforma Analityczna
-View My Data: Zobacz moje dane
-Enable Analytics: Włącz analitykę
-Help us improve InPageEdit by sharing your usage data with us.: Pomóż nam ulepszyć InPageEdit, dzieląc się z nami swoimi danymi użycia.
-
+InPageEdit Analytics is the companion analytics platform for the InPageEdit NEXT project. By collecting and displaying usage data from around the world, it helps developers and the community better understand how the tool is used, optimize feature design, and enhance user experience.: InPageEdit Analytics is the companion analytics platform for the InPageEdit NEXT project. By collecting and displaying usage data from around the world, it helps developers and the community better understand how the tool is used, optimize feature design, and enhance user experience.
+What data will be collected?: What data will be collected?
+Usage data: Usage data
+When and which features you use, what pages you edit, etc.: When and which features you use, what pages you edit, etc.
+User information: User information
+Your user name and user ID.: Your user name and user ID.
+Site information: Site information
+"This wiki's url and site name.": "This wiki's url and site name."
+NO sensitive data will be collected.: NO sensitive data will be collected.
+Analytics Platform: Analytics Platform
+View My Data: View My Data
+Enable Analytics: Enable Analytics
+Help us improve InPageEdit by sharing your usage data with us.: Help us improve InPageEdit by sharing your usage data with us.
 # WikiMetadataService
-Wiki Informations: Informacje o Wiki
-Site: Witryna
-User: Użytkownik
-Groups: Grupy
-If the information shown above is incorrect (for example, the user is not you), click the button below.:
-  Jeśli wyświetlane powyżej informacje są nieprawidłowe (na przykład użytkownik
-  to nie ty), kliknij przycisk poniżej.
-Clear caches & Reload: Wyczyść pamięć podręczną i przeładuj
+Wiki Informations: Wiki Informations
+Site: Site
+User: User
+Groups: Groups
+If the information shown above is incorrect (for example, the user is not you), click the button below.: If the information shown above is incorrect (for example, the user is not you), click the button below.
+Clear caches & Reload: Clear caches & Reload
