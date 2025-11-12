@@ -3,19 +3,7 @@ api_token_env: CROWDIN_PERSONAL_TOKEN
 base_path: .
 preserve_hierarchy: 1
 files:
-  - source: /i18n/languages/en.yaml
-    translation: /i18n/languages/%locale%.yaml
+  - source: i18n/src/languages/en.yaml
     ignore:
-      - /i18n/**/dist/**
-    languages_mapping:
-      locale:
-        en: en
-        ar: ar
-        fr: fr
-        hi: hi
-        ja: ja
-        nl: nl
-        pl: pl
-        pt-BR: pt-br
-        zh-CN: zh-hans
-        zh-TW: zh-hant
+      - i18n/**/dist/**
+    translation: i18n/src/languages/%locale%.yaml
