@@ -1,0 +1,182 @@
+[
+  {
+    "code": "ar_SA",
+    "iso_name": "Arabic (Saudi Arabia)",
+    "endonym": "العربية (السعودية)",
+    "mw_code": "ar"
+  },
+  {
+    "code": "bn_BD",
+    "iso_name": "Bengali (Bangladesh)",
+    "endonym": "বাংলা (বাংলাদেশ)",
+    "mw_code": "bn"
+  },
+  {
+    "code": "de_DE",
+    "iso_name": "German (Germany)",
+    "endonym": "Deutsch (Deutschland)",
+    "mw_code": "de"
+  },
+  {
+    "code": "el_GR",
+    "iso_name": "Greek (Greece)",
+    "endonym": "Ελληνικά (Ελλάδα)",
+    "mw_code": "el"
+  },
+  {
+    "code": "en_US",
+    "iso_name": "English (United States)",
+    "endonym": "English (United States)",
+    "mw_code": "en"
+  },
+  {
+    "code": "es_ES",
+    "iso_name": "Spanish (Spain)",
+    "endonym": "Español (España)",
+    "mw_code": "es"
+  },
+  {
+    "code": "es_MX",
+    "iso_name": "Spanish (Mexico)",
+    "endonym": "Español (México)",
+    "mw_code": "es-mx"
+  },
+  {
+    "code": "fa_IR",
+    "iso_name": "Persian (Iran)",
+    "endonym": "فارسی (ایران)",
+    "mw_code": "fa"
+  },
+  {
+    "code": "fr_FR",
+    "iso_name": "French (France)",
+    "endonym": "Français (France)",
+    "mw_code": "fr"
+  },
+  {
+    "code": "he_IL",
+    "iso_name": "Hebrew (Israel)",
+    "endonym": "עברית (ישראל)",
+    "mw_code": "he"
+  },
+  {
+    "code": "hi_IN",
+    "iso_name": "Hindi (India)",
+    "endonym": "हिन्दी (भारत)",
+    "mw_code": "hi"
+  },
+  {
+    "code": "id_ID",
+    "iso_name": "Indonesian (Indonesia)",
+    "endonym": "Bahasa Indonesia",
+    "mw_code": "id"
+  },
+  {
+    "code": "it_IT",
+    "iso_name": "Italian (Italy)",
+    "endonym": "Italiano (Italia)",
+    "mw_code": "it"
+  },
+  {
+    "code": "ja_JP",
+    "iso_name": "Japanese (Japan)",
+    "endonym": "日本語（日本）",
+    "mw_code": "ja"
+  },
+  {
+    "code": "ko_KR",
+    "iso_name": "Korean (South Korea)",
+    "endonym": "한국어 (대한민국)",
+    "mw_code": "ko"
+  },
+  {
+    "code": "ms_MY",
+    "iso_name": "Malay (Malaysia)",
+    "endonym": "Bahasa Melayu (Malaysia)",
+    "mw_code": "ms"
+  },
+  {
+    "code": "nl_NL",
+    "iso_name": "Dutch (Netherlands)",
+    "endonym": "Nederlands (Nederland)",
+    "mw_code": "nl"
+  },
+  {
+    "code": "pl_PL",
+    "iso_name": "Polish (Poland)",
+    "endonym": "Polski (Polska)",
+    "mw_code": "pl"
+  },
+  {
+    "code": "pt_BR",
+    "iso_name": "Portuguese (Brazil)",
+    "endonym": "Português (Brasil)",
+    "mw_code": "pt-br"
+  },
+  {
+    "code": "pt_PT",
+    "iso_name": "Portuguese (Portugal)",
+    "endonym": "Português (Portugal)",
+    "mw_code": "pt"
+  },
+  {
+    "code": "ro_RO",
+    "iso_name": "Romanian (Romania)",
+    "endonym": "Română (România)",
+    "mw_code": "ro"
+  },
+  {
+    "code": "ru_RU",
+    "iso_name": "Russian (Russia)",
+    "endonym": "Русский (Россия)",
+    "mw_code": "ru"
+  },
+  {
+    "code": "sw_KE",
+    "iso_name": "Swahili (Kenya)",
+    "endonym": "Kiswahili (Kenya)",
+    "mw_code": "sw"
+  },
+  {
+    "code": "ta_IN",
+    "iso_name": "Tamil (India)",
+    "endonym": "தமிழ் (இந்தியா)",
+    "mw_code": "ta"
+  },
+  {
+    "code": "th_TH",
+    "iso_name": "Thai (Thailand)",
+    "endonym": "ไทย (ประเทศไทย)",
+    "mw_code": "th"
+  },
+  {
+    "code": "tr_TR",
+    "iso_name": "Turkish (Turkey)",
+    "endonym": "Türkçe (Türkiye)",
+    "mw_code": "tr"
+  },
+  {
+    "code": "uk_UA",
+    "iso_name": "Ukrainian (Ukraine)",
+    "endonym": "Українська (Україна)",
+    "mw_code": "uk"
+  },
+  {
+    "code": "vi_VN",
+    "iso_name": "Vietnamese (Vietnam)",
+    "endonym": "Tiếng Việt (Việt Nam)",
+    "mw_code": "vi"
+  },
+  {
+    "code": "zh_CN",
+    "iso_name": "Chinese (Simplified)",
+    "endonym": "中文（简体）",
+    "mw_code": "zh-hans"
+  },
+  {
+    "code": "zh_TW",
+    "iso_name": "Chinese (Traditional)",
+    "endonym": "中文（繁體）",
+    "mw_code": "zh-hant"
+  }
+]

@@ -9,4 +9,4 @@ preserve_hierarchy: 1
 
 files:
   - source: /i18n/src/en.yaml
-    translation: /i18n/src/languages/%osx_locale%.yaml
+    translation: /i18n/src/languages/%locale_with_underscore%.yaml
