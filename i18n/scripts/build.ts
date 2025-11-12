@@ -15,7 +15,7 @@ const SRC_DIR = resolve(import.meta.dirname, '../src')
 const DST_DIR = resolve(import.meta.dirname, '../dist')
 const LANGUAGES_SRC_DIR = resolve(SRC_DIR, 'languages')
 const BASE_LANGUAGE = 'en'
-const BASE_SRC_FILE = resolve(LANGUAGES_SRC_DIR, `${BASE_LANGUAGE}.yaml`)
+const BASE_SRC_FILE = resolve(SRC_DIR, `${BASE_LANGUAGE}.yaml`)
 const FALLBACKS_FILE = resolve(SRC_DIR, 'fallbacks.json')
 const INDEX_DST_FILE = resolve(DST_DIR, 'index.json')
 
@@ -73,6 +73,7 @@ const languages = languageFiles.map((file) =>
 consola.info('Collecting all languages...')
 // Collect all languages: files in dist + all keys/values from fallbacks
 const allLanguages = new Set<string>(languages)
+allLanguages.add(BASE_LANGUAGE)
 Object.entries(fallbacks).forEach(([from, to]) => {
   allLanguages.add(from)
   allLanguages.add(to)
@@ -104,19 +105,21 @@ for (const file of languageFiles) {
   const srcFile = resolve(LANGUAGES_SRC_DIR, file)
   const dstFile = resolve(DST_DIR, `${code}.json`)
   const data = await readI18nJSON(srcFile)
-  if (code !== BASE_LANGUAGE) {
-    // Fill missing keys from base language
-    Object.entries(base).forEach(([key, value]) => {
-      if (!data[key]) {
-        consola.warn(`${file} is missing key: "${key}"`)
-        data[key] = value
-      }
-    })
-  }
+  // Fill missing keys from base language
+  Object.entries(base).forEach(([key, value]) => {
+    if (!data[key]) {
+      consola.warn(`${file} is missing key: "${key}"`)
+      data[key] = value
+    }
+  })
   await writeFile(dstFile, JSON.stringify(data, null, 2))
   consola.success(` ├ ${dstFile}`)
 }
 consola.success('Languages files written successfully')
+
+consola.info('Writing base language file...')
+await writeFile(resolve(DST_DIR, 'en.json'), JSON.stringify(base, null, 2))
+consola.success('Base language file written successfully')
 
 consola.info('Writing index file...')
 await writeFile(INDEX_DST_FILE, JSON.stringify(index, null, 2))

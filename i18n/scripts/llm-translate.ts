@@ -9,14 +9,8 @@ import {
 import consola from 'consola'
 import { parseDocument, stringify } from 'yaml'
 
-const LANGUAGES_SRC_DIR = resolve(import.meta.dirname, '../src/languages')
-const OUTPUT_DIR = resolve(import.meta.dirname, './.llm-output')
-const BASE_PROMPT = await readFile(
-  resolve(import.meta.dirname, './translate.prompt.md'),
-  'utf-8'
-)
 const SOURCE_LANGUAGE_CONTENT = await readFile(
-  resolve(LANGUAGES_SRC_DIR, 'en.yaml'),
+  resolve(import.meta.dirname, '../src/en.yaml'),
   'utf-8'
 )
 const TARGET_LANGUAGES = {
@@ -30,6 +24,11 @@ const TARGET_LANGUAGES = {
   'zh-hans': '中文(简体) (zh-hans)',
   'zh-hant': '中文(繁體) (zh-hant)',
 }
+const BASE_PROMPT = await readFile(
+  resolve(import.meta.dirname, './translate.prompt.md'),
+  'utf-8'
+)
+const OUTPUT_DIR = resolve(import.meta.dirname, './.llm-output')
 
 try {
   mkdir(OUTPUT_DIR, { recursive: true })

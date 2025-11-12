@@ -8,5 +8,5 @@ preserve_hierarchy: 1
 # export_only_approved: true
 
 files:
-  - source: /i18n/src/languages/en.yaml
+  - source: /i18n/src/en.yaml
     translation: /i18n/src/languages/%osx_locale%.yaml
