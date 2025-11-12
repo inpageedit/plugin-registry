@@ -8,20 +8,5 @@ preserve_hierarchy: 1
 # export_only_approved: true
 
 files:
-  - source: i18n/src/languages/en.yaml
-    translation: i18n/src/languages/%locale%.yaml
-    ignore:
-      - i18n/**/dist/**
-
-    languages_mapping:
-      locale:
-        en: en # 一般不会导出，但映射留着无妨
-        ar: ar
-        fr: fr
-        hi: hi
-        ja: ja
-        nl: nl
-        pl: pl
-        pt-BR: pt-br
-        zh-CN: zh-hans
-        zh-TW: zh-hant
+  - source: /i18n/src/languages/en.yaml
+    translation: /i18n/src/languages/%osx_locale%.yaml
