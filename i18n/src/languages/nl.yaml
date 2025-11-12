@@ -1,242 +1,212 @@
-__meta__:
-  code: nl
-  name: Nederlands (nl)
-  timestamp: 2025-11-12T11:12:36.187Z
-  model: deepseek-v3.1
-
-# Voorkeuren UI
-Configure Preferences: Voorkeuren configureren
-InPageEdit Preferences: InPageEdit-voorkeuren
-Preferences Saved: Voorkeuren opgeslagen
-Some settings may take effect after reloading the page.: Sommige instellingen zijn mogelijk pas actief na het herladen van de pagina.
-# SchemaForm voor Voorkeuren
+# Preferences UI
+Configure Preferences: Configure Preferences
+InPageEdit Preferences: InPageEdit Preferences
+Preferences Saved: Preferences Saved
+Some settings may take effect after reloading the page.: Some settings may take effect after reloading the page.
+# SchemaForm for Preferences
 prefs:
   about:
-    label: Over
-    description: Over InPageEdit
+    label: About
+    description: About InPageEdit
     header: '✏️ InPageEdit NEXT'
-    intro: '🚀 Modulaire, uitbreidbare supercharged plugin voor MediaWiki.'
+    intro: '🚀 Modular, Extensible Supercharged Plugin for MediaWiki.'
     portals:
       header: Portals
-      officialwebsite: Officiële website
-      updatelogs: Updatelogboeken
+      officialwebsite: Official Website
+      updatelogs: Update Logs
     joinus:
-      header: Doe mee
+      header: Join us
       github: GitHub
-      qqgroup: QQ-groep
-    copyright: 'InPageEdit-NEXT Copyright © 2025-{{ new Date().getFullYear() }}
-      dragon-fish'
+      qqgroup: QQ Group
+    copyright: 'InPageEdit-NEXT Copyright © 2025-{{ new Date().getFullYear() }} dragon-fish'
   editor:
-    label: Bewerker
+    label: Editor
   general:
-    label: Algemeen
+    label: General
   inArticleLinks:
-    $: Voorkeuren voor koppelingen in artikel
-    label: Koppelingen in artikel
-    enable: Koppelingen in artikel inschakelen
+    $: In-article links preferences
+    label: In-article Links
+    enable: Enable in-article links
     quickDiff:
-      enable: Koppelingen in artikel voor snelverschil inschakelen
+      enable: Enable in-article links for quick diff
     quickEdit:
-      enable: Koppelingen in artikel voor snelle bewerking inschakelen
-      redlinks: Knop voor snelle bewerking tonen voor roodlinken
+      enable: Enable in-article links for quick edit
+      redlinks: Show quick edit button for redlinks
   quickPreview:
-    keyshortcut: Sneltoets om snelvoorbeeld te openen in modale snelle bewerking
+    keyshortcut: Key shortcut to open quick preview in quick edit modal
   toolboxAlwaysShow:
-    $: Toolbox™-voorkeuren
-    description: Toolbox™ standaard geopend houden
+    $: Toolbox™ preferences
+    description: Make the Toolbox™ opened by default
   quickEdit:
-    $: Opties voor snelle bewerking
-    editSummary: Standaard bewerkingssamenvatting voor snelle bewerkingen
-    editMinor: Standaard optie "kleine bewerking" aanvinken
-    outSideClose: Bewerkingsmodaal sluiten door buiten te klikken
-    watchList: Volglijstopties
+    $: Quick edit options
+    editSummary: Default edit summary for quick edits
+    editMinor: Default to checking "minor edit" option
+    outSideClose: Close editor modal by clicking outside
+    watchList: Watchlist options
     keyshortcut:
-      save: sneltoets voor opslaanknop (leeglaten om uit te schakelen)
-    editFont: Lettertype voor gebruik in tekstgebied van snelle bewerking
+      save: save button key shortcut (blank to disable)
+    editFont: Font to use in quick edit's textarea
   quickDiff:
-    keyshortcut: Sneltoets om snelverschil te openen in modale snelle bewerking
+    keyshortcut: Key shortcut to open quick diff in quick edit modal
   quickRedirect:
-    $: Opties voor snelle doorverwijzing
-    reason: Standaard reden voor snelle doorverwijzing
+    $: Quick redirect options
+    reason: Default reason for quick redirect
   quickMove:
-    $: Opties voor snel verplaatsen
-    reason: Standaard reden voor snel verplaatsen
+    $: Quick move options
+    reason: Default reason for quick move
   language:
-    $: Taalvoorkeuren
-    language: Taal
+    $: Language preferences
+    language: Language
   analytics:
     $: InPageEdit Analytics
-    enabled: Mijn gebruiksgegevens delen met de community.
+    enabled: Share my usage data with the community.
   sync:
-    label: Synchroniseren
-
-# Volglijstopties
+    label: Sync
+# Watchlist options
 watchlist:
-  preferences: Volg MW-voorkeuren
-  nochange: Huidige status behouden
-  watch: Toevoegen aan volglijst
-  unwatch: Verwijderen van volglijst
-
-# Algemene knoppen
+  preferences: Follow MW preferences
+  nochange: Keep current status
+  watch: Add to watchlist
+  unwatch: Remove from watchlist
+# Common buttons
 OK: OK
-Yes: Ja
-Submit: Verzenden
-Save: Opslaan
-Enable: Inschakelen
-No: Nee
-Cancel: Annuleren
-Close: Sluiten
-Disable: Uitschakelen
-
-# Algemene formuliervelden
-Summary: Samenvatting
-Reason: Reden
-Watchlist: Volglijst
-Minor edit: Kleine bewerking
-
-# Algemene meldingen
-Success: Succes
-Warning: Waarschuwing
-Attention: Let op
-Important: Belangrijk
-Failed: Mislukt
-Error: Fout
+Yes: Yes
+Submit: Submit
+Save: Save
+Enable: Enable
+No: No
+Cancel: Cancel
+Close: Close
+Disable: Disable
+# Common form fields
+Summary: Summary
+Reason: Reason
+Watchlist: Watchlist
+Minor edit: Minor edit
+# Common notifications
+Success: Success
+Warning: Warning
+Attention: Attention
+Important: Important
+Failed: Failed
+Error: Error
 Info: Info
-
 # PluginQuickEdit
-Quick Edit: Snelle bewerking
-Quick Create: Snel aanmaken
-New section: Nieuwe sectie
-Not editable: Niet bewerkbaar
-Reload after save: Herladen na opslaan
-All edit contents will be lost after closing the modal. Are you sure you want to close?:
-  >-
-  Alle bewerkingsinhoud gaat verloren na het sluiten van het modaal. Weet u
-  zeker dat u wilt sluiten?
-Give Up: Opgeven
-Continue Editing: Doorgaan met bewerken
-'You are editing a <em>historical version</em> version; the content is not the latest!': U bewerkt een <em>historische versie</em>; de inhoud is niet de nieuwste!
-This page does not exist.: Deze pagina bestaat niet.
-Topic for new section, this will be the h2 heading: Onderwerp voor nieuwe sectie, dit wordt de h2-kop
-Submission Successful: Inzending succesvol
-Submission Error: Fout bij inzending
-Your changes have been saved.: Uw wijzigingen zijn opgeslagen.
-Special page is not editable.: Speciale pagina is niet bewerkbaar.
-
+Quick Edit: Quick Edit
+Quick Create: Quick Create
+New section: New section
+Not editable: Not editable
+Reload after save: Reload after save
+All edit contents will be lost after closing the modal. Are you sure you want to close?: '>- All edit contents will be lost after closing the modal. Are you sure you want to close?'
+Give Up: Give Up
+Continue Editing: Continue Editing
+'You are editing a <em>historical version</em> version; the content is not the latest!': You are editing a <em>historical version</em> version; the content is not the latest!
+This page does not exist.: This page does not exist.
+Topic for new section, this will be the h2 heading: Topic for new section, this will be the h2 heading
+Submission Successful: Submission Successful
+Submission Error: Submission Error
+Your changes have been saved.: Your changes have been saved.
+Special page is not editable.: Special page is not editable.
 # PluginStore
-Plugin Store: Pluginwinkel
-Registry URLs: Register-URL's
-CDN to install packages from npm: CDN om pakketten van npm te installeren
-Installed plugins: Geïnstalleerde plugins
+Plugin Store: Plugin Store
+Registry URLs: Registry URLs
+CDN to install packages from npm: CDN to install packages from npm
+Installed plugins: Installed plugins
 Plugins: Plugins
-Registries: Registers
-Search plugins...: Zoek plugins...
-Refreshing...: Vernieuwen...
-Refresh: Vernieuwen
-No matching plugins found: Geen overeenkomende plugins gevonden
-Install: Installeren
-Add: Toevoegen
-Remove: Verwijderen
-Adding...: Toevoegen...
-No registries configured: Geen registers geconfigureerd
-Setup default registry: Standaardregister instellen
-Add registry URL: Register-URL toevoegen
+Registries: Registries
+Search plugins...: Search plugins...
+Refreshing...: Refreshing...
+Refresh: Refresh
+No matching plugins found: No matching plugins found
+Install: Install
+Add: Add
+Remove: Remove
+Adding...: Adding...
+No registries configured: No registries configured
+Setup default registry: Setup default registry
+Add registry URL: Add registry URL
 plugin-store:
   tags:
-    broken: '⚠️ kapot'
+    broken: '⚠️ broken'
     installed: '✓'
   broken:
-    registry-unavailable: '[Aanbevolen om te verwijderen] Het register is niet beschikbaar. Probeer te vernieuwen of het register opnieuw toe te voegen om dit op te lossen.'
-    plugin-removed: '[Aanbevolen om te verwijderen] Deze plugin is verwijderd uit het register. Vernieuw het register om te bevestigen.'
+    registry-unavailable: '[Recommend to uninstall] The registry is unavailable. Try refreshing or re-adding the registry to fix this issue.'
+    plugin-removed: '[Recommend to uninstall] This plugin was removed from the registry. Try refreshing the registry to confirm.'
   remove-registry:
-    title: Register verwijderen
-    tip-content: 'Register verwijderen:'
-    confirm-content: "Er {{ count < 1 ? 'is' : 'zijn' }} {{ count }} geïnstalleerde {{ count < 1 ? 'plugin' : 'plugins' }} van dit register:"
-    remove-success: Register verwijderd.
-    remove-with-plugins-success: "Register verwijderd en {{ count }} {{ count < 1 ? 'plugin' : 'plugins' }} gedeïnstalleerd."
+    title: Remove registry
+    tip-content: 'Remove registry:'
+    confirm-content: "There {{ count < 1 ? 'is' : 'are' }} {{ count }} installed {{ count < 1 ? 'plugin' : 'plugins' }} from this registry:"
+    remove-success: Registry removed.
+    remove-with-plugins-success: "Registry removed and {{ count }} {{ count < 1 ? 'plugin' : 'plugins' }} uninstalled."
     buttons:
-      remove-only: Alleen verwijderen
-      remove-and-uninstall: Verwijderen en plugins deïnstalleren
-
+      remove-only: Remove only
+      remove-and-uninstall: Remove and uninstall plugins
 # PluginQuickMove
-Quick Move: Snel verplaatsen
-Move from: Verplaatsen van
-Move to: Verplaatsen naar
-Move talk page: Overlegpagina verplaatsen
-Move subpages (up to 100): Subpagina's verplaatsen (tot 100)
-Move without leaving a redirect: Verplaatsen zonder doorverwijzing achter te laten
-Move: Verplaatsen
-
+Quick Move: Quick Move
+Move from: Move from
+Move to: Move to
+Move talk page: Move talk page
+Move subpages (up to 100): Move subpages (up to 100)
+Move without leaving a redirect: Move without leaving a redirect
+Move: Move
 # PluginQuickRedirect
-Quick Redirect: Snelle doorverwijzing
-Redirect from: Doorverwijzen van
-Redirect to: Doorverwijzen naar
-Force create redirect even if the from page already exists: Doorverwijzing forceren aanmaken zelfs als de van-pagina al bestaat
-Delete from page if it exists: Van-pagina verwijderen als deze bestaat
-Create Redirect: Doorverwijzing aanmaken
-
+Quick Redirect: Quick Redirect
+Redirect from: Redirect from
+Redirect to: Redirect to
+Force create redirect even if the from page already exists: Force create redirect even if the from page already exists
+Delete from page if it exists: Delete from page if it exists
+Create Redirect: Create Redirect
 # PluginQuickPreview
-Quick Preview: Snelvoorbeeld
-Preview: Voorbeeld
-Preview - Loading...: Voorbeeld - Laden...
-'Preview - {{ $1 }}': 'Voorbeeld - {{ $1 }}'
-
+Quick Preview: Quick Preview
+Preview: Preview
+Preview - Loading...: Preview - Loading...
+'Preview - {{ $1 }}': 'Preview - {{ $1 }}'
 # PluginQuickDiff
-Quick Diff: Snelverschil
-Diff: Verschil
-No changes: Geen wijzigingen
-Loading diff...: Verschil laden...
-Differences: Verschillen
-Unsaved Changes: Niet-opgeslagen wijzigingen
-Original content: Originele inhoud
-Your content: Uw inhoud
+Quick Diff: Quick Diff
+Diff: Diff
+No changes: No changes
+Loading diff...: Loading diff...
+Differences: Differences
+Unsaved Changes: Unsaved Changes
+Original content: Original content
+Your content: Your content
 quick-diff:
-  previous: Vorige
-  next: Volgende
-  newest-version: Nieuwste versie
-  oldest-version: Oudste versie
-  original-compare-page: Originele vergelijkingspagina
-  failed-to-load-diff: Laden van verschil mislukt
+  previous: Previous
+  next: Next
+  newest-version: Newest version
+  oldest-version: Oldest version
+  original-compare-page: Original Compare Page
+  failed-to-load-diff: Failed to load diff
   x-bytes: "{{ $1 }} byte{{ $1 !== 1 ? 's' : '' }}"
-
 # PluginPreferencesSync
-Sync: Synchroniseren
-Backup your preferences via user page: Back-up van uw voorkeuren maken via gebruikerspagina
-Backup: Back-up
-Restore: Herstellen
-Import and export preferences: Voorkeuren importeren en exporteren
-Import from file: Importeren vanuit bestand
-Import from URL: Importeren vanuit URL
-'Enter the URL of the preferences JSON file:': 'Voer de URL in van het voorkeuren-JSON-bestand:'
-Save as file: Opslaan als bestand
-
+Sync: Sync
+Backup your preferences via user page: Backup your preferences via user page
+Backup: Backup
+Restore: Restore
+Import and export preferences: Import and export preferences
+Import from file: Import from file
+Import from URL: Import from URL
+'Enter the URL of the preferences JSON file:': 'Enter the URL of the preferences JSON file:'
+Save as file: Save as file
 # AnalyticsService
 InPageEdit Analytics: InPageEdit Analytics
-InPageEdit Analytics is the companion analytics platform for the InPageEdit NEXT project. By collecting and displaying usage data from around the world, it helps developers and the community better understand how the tool is used, optimize feature design, and enhance user experience.:
-  InPageEdit Analytics is het begeleidende analyseplatform voor het InPageEdit
-  NEXT-project. Door gebruiksgegevens van over de hele wereld te verzamelen en
-  weer te geven, helpt het ontwikkelaars en de community beter te begrijpen hoe
-  de tool wordt gebruikt, functieontwerp te optimaliseren en de
-  gebruikerservaring te verbeteren.
-What data will be collected?: Welke gegevens worden verzameld?
-Usage data: Gebruiksgegevens
-When and which features you use, what pages you edit, etc.: Wanneer en welke functies u gebruikt, welke pagina's u bewerkt, etc.
-User information: Gebruikersinformatie
-Your user name and user ID.: Uw gebruikersnaam en gebruikers-ID.
-Site information: Site-informatie
-"This wiki's url and site name.": 'De URL en sitenaam van deze wiki.'
-NO sensitive data will be collected.: GEEN gevoelige gegevens worden verzameld.
-Analytics Platform: Analyseplatform
-View My Data: Mijn gegevens bekijken
-Enable Analytics: Analytics inschakelen
-Help us improve InPageEdit by sharing your usage data with us.: Help ons InPageEdit te verbeteren door uw gebruiksgegevens met ons te delen.
-
+InPageEdit Analytics is the companion analytics platform for the InPageEdit NEXT project. By collecting and displaying usage data from around the world, it helps developers and the community better understand how the tool is used, optimize feature design, and enhance user experience.: InPageEdit Analytics is the companion analytics platform for the InPageEdit NEXT project. By collecting and displaying usage data from around the world, it helps developers and the community better understand how the tool is used, optimize feature design, and enhance user experience.
+What data will be collected?: What data will be collected?
+Usage data: Usage data
+When and which features you use, what pages you edit, etc.: When and which features you use, what pages you edit, etc.
+User information: User information
+Your user name and user ID.: Your user name and user ID.
+Site information: Site information
+"This wiki's url and site name.": "This wiki's url and site name."
+NO sensitive data will be collected.: NO sensitive data will be collected.
+Analytics Platform: Analytics Platform
+View My Data: View My Data
+Enable Analytics: Enable Analytics
+Help us improve InPageEdit by sharing your usage data with us.: Help us improve InPageEdit by sharing your usage data with us.
 # WikiMetadataService
-Wiki Informations: Wiki-informatie
+Wiki Informations: Wiki Informations
 Site: Site
-User: Gebruiker
-Groups: Groepen
-If the information shown above is incorrect (for example, the user is not you), click the button below.:
-  Als de bovenstaande informatie onjuist is (bijvoorbeeld, de gebruiker bent u
-  niet), klik dan op de onderstaande knop.
-Clear caches & Reload: Caches wissen & Herladen
+User: User
+Groups: Groups
+If the information shown above is incorrect (for example, the user is not you), click the button below.: If the information shown above is incorrect (for example, the user is not you), click the button below.
+Clear caches & Reload: Clear caches & Reload
