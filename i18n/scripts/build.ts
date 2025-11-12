@@ -20,19 +20,29 @@ const BASE_SRC_FILE = resolve(SRC_DIR, `${BASE_LANGUAGE}.yaml`)
 const FALLBACKS_FILE = resolve(SRC_DIR, 'fallbacks.json')
 const INDEX_DST_FILE = resolve(DST_DIR, 'index.json')
 
-const index: {
+interface I18nIndex {
   manifest_version: number
   base_language: string
   last_modified: string
-  languages: Record<
-    string,
-    {
-      file: string
-      fallback?: string
-      data?: Record<string, string>
-    }
-  >
-} = {
+  languages: Record<string, I18nLanguage>
+}
+
+interface I18nLanguage {
+  file: string
+  iso_name: string
+  endonym: string
+  fallback?: string
+  data?: Record<string, string>
+}
+
+interface LanguagesMap {
+  code: string
+  iso_name: string
+  endonym: string
+  mw_code: string
+}
+
+const index: I18nIndex = {
   manifest_version: 1,
   base_language: BASE_LANGUAGE,
   last_modified: new Date().toISOString(),
@@ -48,9 +58,10 @@ const fallbacks = (await readFile(FALLBACKS_FILE, 'utf-8').then(
 )) as Record<string, string>
 
 consola.info('Reading languages map...')
-const languagesMap = (await readFile(LANGUAGES_MAP_FILE, 'utf-8').then(
-  JSON.parse
-)) as Array<{ code: string; mw_code: string }>
+const languagesMap: LanguagesMap[] = await readFile(
+  LANGUAGES_MAP_FILE,
+  'utf-8'
+).then(JSON.parse)
 
 const normalizeCode = (raw: string) => {
   const mapped = languagesMap.find((i) => i.code === raw)
@@ -96,15 +107,14 @@ Object.entries(fallbacks).forEach(([from, to]) => {
 index.languages = Object.fromEntries(
   Array.from(allLanguages)
     .sort((a, b) => a.localeCompare(b))
-    .map<[string, { file: string; fallback?: string }]>((language) => {
+    .map<[string, I18nLanguage]>((language) => {
       const resolved = resolveLanguageFallbacks(language, fallbacks, languages)
-      const meta: {
-        file: string
-        fallback?: string
-        data?: Record<string, string>
-      } = {
+      const mapped = languagesMap.find((i) => i.mw_code === language)
+      const meta = {
         file: `${resolved}.json`,
-      }
+      } as I18nLanguage
+      if (mapped) meta.iso_name = mapped.iso_name
+      if (mapped) meta.endonym = mapped.endonym
       if (resolved !== language) meta.fallback = resolved
       if (language === BASE_LANGUAGE) meta.data = base
       return [language, meta]
@@ -141,9 +151,9 @@ consola.success('Index file written successfully')
 
 // Check if en.json exists
 try {
-  await access(resolve(DST_DIR, 'en.json'), constants.F_OK)
+  await access(resolve(DST_DIR, `${BASE_LANGUAGE}.json`), constants.F_OK)
 } catch (_) {
-  consola.error('en.json does not exist')
+  consola.error(`${BASE_LANGUAGE}.json does not exist`)
   process.exit(1)
 }
 

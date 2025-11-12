@@ -1,244 +1,0 @@
-__meta__:
-  code: ar
-  name: العربية (ar)
-  timestamp: 2025-11-12T11:00:57.232Z
-  model: deepseek-v3.1
-
-# Preferences UI
-Configure Preferences: تكوين التفضيلات
-InPageEdit Preferences: تفضيلات InPageEdit
-Preferences Saved: تم حفظ التفضيلات
-Some settings may take effect after reloading the page.: قد تصبح بعض الإعدادات فعالة بعد إعادة تحميل الصفحة.
-# SchemaForm for Preferences
-prefs:
-  about:
-    label: حول
-    description: حول InPageEdit
-    header: '✏️ InPageEdit NEXT'
-    intro: '🚀 مكون إضافي معياري وقابل للتوسيع ومُعزز لميدياويكي.'
-    portals:
-      header: البوابات
-      officialwebsite: الموقع الرسمي
-      updatelogs: سجلات التحديثات
-    joinus:
-      header: انضم إلينا
-      github: GitHub
-      qqgroup: مجموعة QQ
-    copyright: 'InPageEdit-NEXT حقوق النشر © 2025-{{ new Date().getFullYear() }}
-      dragon-fish'
-  editor:
-    label: المحرر
-  general:
-    label: عام
-  inArticleLinks:
-    $: تفضيلات الروابط داخل المقالة
-    label: الروابط داخل المقالة
-    enable: تمكين الروابط داخل المقالة
-    quickDiff:
-      enable: تمكين الروابط داخل المقالة للمقارنة السريعة
-    quickEdit:
-      enable: تمكين الروابط داخل المقالة للتحرير السريع
-      redlinks: إظهار زر التحرير السريع للروابط الحمراء
-  quickPreview:
-    keyshortcut: اختصار لوحة المفاتيح لفتح المعاينة السريعة في نافذة التحرير السريع
-  toolboxAlwaysShow:
-    $: تفضيلات Toolbox™
-    description: جعل Toolbox™ مفتوحًا افتراضيًا
-  quickEdit:
-    $: خيارات التحرير السريع
-    editSummary: ملخص التحرير الافتراضي للتحريرات السريعة
-    editMinor: تحديد خيار "تحرير طفيف" افتراضيًا
-    outSideClose: إغلاق نافذة المحرر بالنقر خارجها
-    watchList: خيارات قائمة المراقبة
-    keyshortcut:
-      save: اختصار لوحة المفاتيح لزر الحفظ (اتركه فارغًا لتعطيله)
-    editFont: الخط المستخدم في منطقة نص التحرير السريع
-  quickDiff:
-    keyshortcut: اختصار لوحة المفاتيح لفتح المقارنة السريعة في نافذة التحرير السريع
-  quickRedirect:
-    $: خيارات التحويل السريع
-    reason: السبب الافتراضي للتحويل السريع
-  quickMove:
-    $: خيارات النقل السريع
-    reason: السبب الافتراضي للنقل السريع
-  language:
-    $: تفضيلات اللغة
-    language: اللغة
-  analytics:
-    $: InPageEdit Analytics
-    enabled: مشاركة بيانات استخدامي مع المجتمع.
-  sync:
-    label: مزامنة
-
-# Watchlist options
-watchlist:
-  preferences: اتبع تفضيلات MW
-  nochange: الحفاظ على الحالة الحالية
-  watch: إضافة إلى قائمة المراقبة
-  unwatch: إزالة من قائمة المراقبة
-
-# Common buttons
-OK: موافق
-Yes: نعم
-Submit: إرسال
-Save: حفظ
-Enable: تمكين
-No: لا
-Cancel: إلغاء
-Close: إغلاق
-Disable: تعطيل
-
-# Common form fields
-Summary: الملخص
-Reason: السبب
-Watchlist: قائمة المراقبة
-Minor edit: تحرير طفيف
-
-# Common notifications
-Success: نجاح
-Warning: تحذير
-Attention: انتباه
-Important: مهم
-Failed: فشل
-Error: خطأ
-Info: معلومات
-
-# PluginQuickEdit
-Quick Edit: تحرير سريع
-Quick Create: إنشاء سريع
-New section: قسم جديد
-Not editable: غير قابل للتحرير
-Reload after save: إعادة التحميل بعد الحفظ
-All edit contents will be lost after closing the modal. Are you sure you want to close?:
-  >-
-  سيتم فقدان جميع محتويات التحرير بعد إغلاق النافذة. هل أنت متأكد أنك تريد
-  الإغلاق؟
-Give Up: التخلي
-Continue Editing: متابعة التحرير
-'You are editing a <em>historical version</em> version; the content is not the latest!': أنت تقوم بتحرير نسخة <em>تاريخية</em>؛ المحتوى ليس الأحدث!
-This page does not exist.: هذه الصفحة غير موجودة.
-Topic for new section, this will be the h2 heading: موضوع القسم الجديد، سيكون هذا عنوان h2
-Submission Successful: تم الإرسال بنجاح
-Submission Error: خطأ في الإرسال
-Your changes have been saved.: تم حفظ تغييراتك.
-Special page is not editable.: الصفحة الخاصة غير قابلة للتحرير.
-
-# PluginStore
-Plugin Store: متجر المكونات الإضافية
-Registry URLs: عناوين URL للسجل
-CDN to install packages from npm: CDN لتثبيت الحزم من npm
-Installed plugins: المكونات الإضافية المثبتة
-Plugins: المكونات الإضافية
-Registries: السجلات
-Search plugins...: بحث في المكونات الإضافية...
-Refreshing...: جاري التحديث...
-Refresh: تحديث
-No matching plugins found: لم يتم العثور على مكونات إضافية مطابقة
-Install: تثبيت
-Add: إضافة
-Remove: إزالة
-Adding...: جاري الإضافة...
-No registries configured: لا توجد سجلات مُهيأة
-Setup default registry: إعداد السجل الافتراضي
-Add registry URL: إضافة عنوان URL للسجل
-plugin-store:
-  tags:
-    broken: '⚠️ معطّل'
-    installed: '✓'
-  broken:
-    registry-unavailable: '[يوصى بإلغاء التثبيت] السجل غير متاح. حاول التحديث أو
-      إعادة إضافة السجل لإصلاح هذه المشكلة.'
-    plugin-removed:
-      '[يوصى بإلغاء التثبيت] تمت إزالة هذا المكون الإضافي من السجل.
-      حاول تحديث السجل للتأكد.'
-  remove-registry:
-    title: إزالة السجل
-    tip-content: 'إزالة السجل:'
-    confirm-content: 'هناك {{ count }} مكونًا إضافيًا مثبتًا من هذا السجل:'
-    remove-success: تمت إزالة السجل.
-    remove-with-plugins-success: 'تمت إزالة السجل و{{ count }} مكونًا إضافيًا.'
-    buttons:
-      remove-only: إزالة فقط
-      remove-and-uninstall: إزالة وإلغاء تثبيت المكونات الإضافية
-
-# PluginQuickMove
-Quick Move: نقل سريع
-Move from: النقل من
-Move to: النقل إلى
-Move talk page: نقل صفحة النقاش
-Move subpages (up to 100): نقل الصفحات الفرعية (حتى 100)
-Move without leaving a redirect: النقل دون ترك تحويلة
-Move: نقل
-
-# PluginQuickRedirect
-Quick Redirect: تحويل سريع
-Redirect from: التحويل من
-Redirect to: التحويل إلى
-Force create redirect even if the from page already exists: فرض إنشاء تحويلة حتى إذا كانت صفحة المصدر موجودة بالفعل
-Delete from page if it exists: حذف صفحة المصدر إذا كانت موجودة
-Create Redirect: إنشاء تحويلة
-
-# PluginQuickPreview
-Quick Preview: معاينة سريعة
-Preview: معاينة
-Preview - Loading...: معاينة - جاري التحميل...
-'Preview - {{ $1 }}': 'معاينة - {{ $1 }}'
-
-# PluginQuickDiff
-Quick Diff: مقارنة سريعة
-Diff: مقارنة
-No changes: لا توجد تغييرات
-Loading diff...: جاري تحميل المقارنة...
-Differences: الاختلافات
-Unsaved Changes: تغييرات غير محفوظة
-Original content: المحتوى الأصلي
-Your content: محتواك
-quick-diff:
-  previous: السابق
-  next: التالي
-  newest-version: أحدث نسخة
-  oldest-version: أقدم نسخة
-  original-compare-page: صفحة المقارنة الأصلية
-  failed-to-load-diff: فشل تحميل المقارنة
-  x-bytes: '{{ $1 }} بايت'
-
-# PluginPreferencesSync
-Sync: مزامنة
-Backup your preferences via user page: نسخ احتياطي لتفضيلاتك عبر صفحة المستخدم
-Backup: نسخ احتياطي
-Restore: استعادة
-Import and export preferences: استيراد وتصدير التفضيلات
-Import from file: استيراد من ملف
-Import from URL: استيراد من URL
-'Enter the URL of the preferences JSON file:': 'أدخل عنوان URL لملف JSON التفضيلات:'
-Save as file: حفظ كملف
-
-# AnalyticsService
-InPageEdit Analytics: InPageEdit Analytics
-InPageEdit Analytics is the companion analytics platform for the InPageEdit NEXT project. By collecting and displaying usage data from around the world, it helps developers and the community better understand how the tool is used, optimize feature design, and enhance user experience.:
-  InPageEdit Analytics هو منصة التحليلات المصاحبة لمشروع InPageEdit NEXT. من
-  خلال جمع وعرض بيانات الاستخدام من جميع أنحاء العالم، فهو يساعد المطورين
-  والمجتمع على فهم أفضل لكيفية استخدام الأداة، وتحسين تصميم الميزات، وتعزيز
-  تجربة المستخدم.
-What data will be collected?: ما هي البيانات التي سيتم جمعها؟
-Usage data: بيانات الاستخدام
-When and which features you use, what pages you edit, etc.: متى وأي الميزات تستخدمها، وأي الصفحات تقوم بتحريرها، إلخ.
-User information: معلومات المستخدم
-Your user name and user ID.: اسم المستخدم الخاص بك ومعرف المستخدم.
-Site information: معلومات الموقع
-"This wiki's url and site name.": 'رابط هذا الويكي واسم الموقع.'
-NO sensitive data will be collected.: لن يتم جمع أي بيانات حساسة.
-Analytics Platform: منصة التحليلات
-View My Data: عرض بياناتي
-Enable Analytics: تمكين التحليلات
-Help us improve InPageEdit by sharing your usage data with us.: ساعدنا في تحسين InPageEdit بمشاركة بيانات استخدامك معنا.
-
-# WikiMetadataService
-Wiki Informations: معلومات الويكي
-Site: الموقع
-User: المستخدم
-Groups: المجموعات
-If the information shown above is incorrect (for example, the user is not you), click the button below.:
-  إذا كانت المعلومات المعروضة أعلاه غير صحيحة (على سبيل المثال، المستخدم ليس
-  أنت)، انقر على الزر أدناه.
-Clear caches & Reload: مسح الذاكرة المؤقتة وإعادة التحميل
