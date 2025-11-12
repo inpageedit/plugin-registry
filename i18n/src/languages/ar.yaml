@@ -1,244 +1,212 @@
-__meta__:
-  code: ar
-  name: العربية (ar)
-  timestamp: 2025-11-12T11:00:57.232Z
-  model: deepseek-v3.1
-
 # Preferences UI
-Configure Preferences: تكوين التفضيلات
-InPageEdit Preferences: تفضيلات InPageEdit
-Preferences Saved: تم حفظ التفضيلات
-Some settings may take effect after reloading the page.: قد تصبح بعض الإعدادات فعالة بعد إعادة تحميل الصفحة.
+Configure Preferences: Configure Preferences
+InPageEdit Preferences: InPageEdit Preferences
+Preferences Saved: Preferences Saved
+Some settings may take effect after reloading the page.: Some settings may take effect after reloading the page.
 # SchemaForm for Preferences
 prefs:
   about:
-    label: حول
-    description: حول InPageEdit
+    label: About
+    description: About InPageEdit
     header: '✏️ InPageEdit NEXT'
-    intro: '🚀 مكون إضافي معياري وقابل للتوسيع ومُعزز لميدياويكي.'
+    intro: '🚀 Modular, Extensible Supercharged Plugin for MediaWiki.'
     portals:
-      header: البوابات
-      officialwebsite: الموقع الرسمي
-      updatelogs: سجلات التحديثات
+      header: Portals
+      officialwebsite: Official Website
+      updatelogs: Update Logs
     joinus:
-      header: انضم إلينا
+      header: Join us
       github: GitHub
-      qqgroup: مجموعة QQ
-    copyright: 'InPageEdit-NEXT حقوق النشر © 2025-{{ new Date().getFullYear() }}
-      dragon-fish'
+      qqgroup: QQ Group
+    copyright: 'InPageEdit-NEXT Copyright © 2025-{{ new Date().getFullYear() }} dragon-fish'
   editor:
-    label: المحرر
+    label: Editor
   general:
-    label: عام
+    label: General
   inArticleLinks:
-    $: تفضيلات الروابط داخل المقالة
-    label: الروابط داخل المقالة
-    enable: تمكين الروابط داخل المقالة
+    $: In-article links preferences
+    label: In-article Links
+    enable: Enable in-article links
     quickDiff:
-      enable: تمكين الروابط داخل المقالة للمقارنة السريعة
+      enable: Enable in-article links for quick diff
     quickEdit:
-      enable: تمكين الروابط داخل المقالة للتحرير السريع
-      redlinks: إظهار زر التحرير السريع للروابط الحمراء
+      enable: Enable in-article links for quick edit
+      redlinks: Show quick edit button for redlinks
   quickPreview:
-    keyshortcut: اختصار لوحة المفاتيح لفتح المعاينة السريعة في نافذة التحرير السريع
+    keyshortcut: Key shortcut to open quick preview in quick edit modal
   toolboxAlwaysShow:
-    $: تفضيلات Toolbox™
-    description: جعل Toolbox™ مفتوحًا افتراضيًا
+    $: Toolbox™ preferences
+    description: Make the Toolbox™ opened by default
   quickEdit:
-    $: خيارات التحرير السريع
-    editSummary: ملخص التحرير الافتراضي للتحريرات السريعة
-    editMinor: تحديد خيار "تحرير طفيف" افتراضيًا
-    outSideClose: إغلاق نافذة المحرر بالنقر خارجها
-    watchList: خيارات قائمة المراقبة
+    $: Quick edit options
+    editSummary: Default edit summary for quick edits
+    editMinor: Default to checking "minor edit" option
+    outSideClose: Close editor modal by clicking outside
+    watchList: Watchlist options
     keyshortcut:
-      save: اختصار لوحة المفاتيح لزر الحفظ (اتركه فارغًا لتعطيله)
-    editFont: الخط المستخدم في منطقة نص التحرير السريع
+      save: save button key shortcut (blank to disable)
+    editFont: Font to use in quick edit's textarea
   quickDiff:
-    keyshortcut: اختصار لوحة المفاتيح لفتح المقارنة السريعة في نافذة التحرير السريع
+    keyshortcut: Key shortcut to open quick diff in quick edit modal
   quickRedirect:
-    $: خيارات التحويل السريع
-    reason: السبب الافتراضي للتحويل السريع
+    $: Quick redirect options
+    reason: Default reason for quick redirect
   quickMove:
-    $: خيارات النقل السريع
-    reason: السبب الافتراضي للنقل السريع
+    $: Quick move options
+    reason: Default reason for quick move
   language:
-    $: تفضيلات اللغة
-    language: اللغة
+    $: Language preferences
+    language: Language
   analytics:
     $: InPageEdit Analytics
-    enabled: مشاركة بيانات استخدامي مع المجتمع.
+    enabled: Share my usage data with the community.
   sync:
-    label: مزامنة
-
+    label: Sync
 # Watchlist options
 watchlist:
-  preferences: اتبع تفضيلات MW
-  nochange: الحفاظ على الحالة الحالية
-  watch: إضافة إلى قائمة المراقبة
-  unwatch: إزالة من قائمة المراقبة
-
+  preferences: Follow MW preferences
+  nochange: Keep current status
+  watch: Add to watchlist
+  unwatch: Remove from watchlist
 # Common buttons
-OK: موافق
-Yes: نعم
-Submit: إرسال
-Save: حفظ
-Enable: تمكين
-No: لا
-Cancel: إلغاء
-Close: إغلاق
-Disable: تعطيل
-
+OK: OK
+Yes: Yes
+Submit: Submit
+Save: Save
+Enable: Enable
+No: No
+Cancel: Cancel
+Close: Close
+Disable: Disable
 # Common form fields
-Summary: الملخص
-Reason: السبب
-Watchlist: قائمة المراقبة
-Minor edit: تحرير طفيف
-
+Summary: Summary
+Reason: Reason
+Watchlist: Watchlist
+Minor edit: Minor edit
 # Common notifications
-Success: نجاح
-Warning: تحذير
-Attention: انتباه
-Important: مهم
-Failed: فشل
-Error: خطأ
-Info: معلومات
-
+Success: Success
+Warning: Warning
+Attention: Attention
+Important: Important
+Failed: Failed
+Error: Error
+Info: Info
 # PluginQuickEdit
-Quick Edit: تحرير سريع
-Quick Create: إنشاء سريع
-New section: قسم جديد
-Not editable: غير قابل للتحرير
-Reload after save: إعادة التحميل بعد الحفظ
-All edit contents will be lost after closing the modal. Are you sure you want to close?:
-  >-
-  سيتم فقدان جميع محتويات التحرير بعد إغلاق النافذة. هل أنت متأكد أنك تريد
-  الإغلاق؟
-Give Up: التخلي
-Continue Editing: متابعة التحرير
-'You are editing a <em>historical version</em> version; the content is not the latest!': أنت تقوم بتحرير نسخة <em>تاريخية</em>؛ المحتوى ليس الأحدث!
-This page does not exist.: هذه الصفحة غير موجودة.
-Topic for new section, this will be the h2 heading: موضوع القسم الجديد، سيكون هذا عنوان h2
-Submission Successful: تم الإرسال بنجاح
-Submission Error: خطأ في الإرسال
-Your changes have been saved.: تم حفظ تغييراتك.
-Special page is not editable.: الصفحة الخاصة غير قابلة للتحرير.
-
+Quick Edit: Quick Edit
+Quick Create: Quick Create
+New section: New section
+Not editable: Not editable
+Reload after save: Reload after save
+All edit contents will be lost after closing the modal. Are you sure you want to close?: '>- All edit contents will be lost after closing the modal. Are you sure you want to close?'
+Give Up: Give Up
+Continue Editing: Continue Editing
+'You are editing a <em>historical version</em> version; the content is not the latest!': You are editing a <em>historical version</em> version; the content is not the latest!
+This page does not exist.: This page does not exist.
+Topic for new section, this will be the h2 heading: Topic for new section, this will be the h2 heading
+Submission Successful: Submission Successful
+Submission Error: Submission Error
+Your changes have been saved.: Your changes have been saved.
+Special page is not editable.: Special page is not editable.
 # PluginStore
-Plugin Store: متجر المكونات الإضافية
-Registry URLs: عناوين URL للسجل
-CDN to install packages from npm: CDN لتثبيت الحزم من npm
-Installed plugins: المكونات الإضافية المثبتة
-Plugins: المكونات الإضافية
-Registries: السجلات
-Search plugins...: بحث في المكونات الإضافية...
-Refreshing...: جاري التحديث...
-Refresh: تحديث
-No matching plugins found: لم يتم العثور على مكونات إضافية مطابقة
-Install: تثبيت
-Add: إضافة
-Remove: إزالة
-Adding...: جاري الإضافة...
-No registries configured: لا توجد سجلات مُهيأة
-Setup default registry: إعداد السجل الافتراضي
-Add registry URL: إضافة عنوان URL للسجل
+Plugin Store: Plugin Store
+Registry URLs: Registry URLs
+CDN to install packages from npm: CDN to install packages from npm
+Installed plugins: Installed plugins
+Plugins: Plugins
+Registries: Registries
+Search plugins...: Search plugins...
+Refreshing...: Refreshing...
+Refresh: Refresh
+No matching plugins found: No matching plugins found
+Install: Install
+Add: Add
+Remove: Remove
+Adding...: Adding...
+No registries configured: No registries configured
+Setup default registry: Setup default registry
+Add registry URL: Add registry URL
 plugin-store:
   tags:
-    broken: '⚠️ معطّل'
+    broken: '⚠️ broken'
     installed: '✓'
   broken:
-    registry-unavailable: '[يوصى بإلغاء التثبيت] السجل غير متاح. حاول التحديث أو
-      إعادة إضافة السجل لإصلاح هذه المشكلة.'
-    plugin-removed:
-      '[يوصى بإلغاء التثبيت] تمت إزالة هذا المكون الإضافي من السجل.
-      حاول تحديث السجل للتأكد.'
+    registry-unavailable: '[Recommend to uninstall] The registry is unavailable. Try refreshing or re-adding the registry to fix this issue.'
+    plugin-removed: '[Recommend to uninstall] This plugin was removed from the registry. Try refreshing the registry to confirm.'
   remove-registry:
-    title: إزالة السجل
-    tip-content: 'إزالة السجل:'
-    confirm-content: 'هناك {{ count }} مكونًا إضافيًا مثبتًا من هذا السجل:'
-    remove-success: تمت إزالة السجل.
-    remove-with-plugins-success: 'تمت إزالة السجل و{{ count }} مكونًا إضافيًا.'
+    title: Remove registry
+    tip-content: 'Remove registry:'
+    confirm-content: "There {{ count < 1 ? 'is' : 'are' }} {{ count }} installed {{ count < 1 ? 'plugin' : 'plugins' }} from this registry:"
+    remove-success: Registry removed.
+    remove-with-plugins-success: "Registry removed and {{ count }} {{ count < 1 ? 'plugin' : 'plugins' }} uninstalled."
     buttons:
-      remove-only: إزالة فقط
-      remove-and-uninstall: إزالة وإلغاء تثبيت المكونات الإضافية
-
+      remove-only: Remove only
+      remove-and-uninstall: Remove and uninstall plugins
 # PluginQuickMove
-Quick Move: نقل سريع
-Move from: النقل من
-Move to: النقل إلى
-Move talk page: نقل صفحة النقاش
-Move subpages (up to 100): نقل الصفحات الفرعية (حتى 100)
-Move without leaving a redirect: النقل دون ترك تحويلة
-Move: نقل
-
+Quick Move: Quick Move
+Move from: Move from
+Move to: Move to
+Move talk page: Move talk page
+Move subpages (up to 100): Move subpages (up to 100)
+Move without leaving a redirect: Move without leaving a redirect
+Move: Move
 # PluginQuickRedirect
-Quick Redirect: تحويل سريع
-Redirect from: التحويل من
-Redirect to: التحويل إلى
-Force create redirect even if the from page already exists: فرض إنشاء تحويلة حتى إذا كانت صفحة المصدر موجودة بالفعل
-Delete from page if it exists: حذف صفحة المصدر إذا كانت موجودة
-Create Redirect: إنشاء تحويلة
-
+Quick Redirect: Quick Redirect
+Redirect from: Redirect from
+Redirect to: Redirect to
+Force create redirect even if the from page already exists: Force create redirect even if the from page already exists
+Delete from page if it exists: Delete from page if it exists
+Create Redirect: Create Redirect
 # PluginQuickPreview
-Quick Preview: معاينة سريعة
-Preview: معاينة
-Preview - Loading...: معاينة - جاري التحميل...
-'Preview - {{ $1 }}': 'معاينة - {{ $1 }}'
-
+Quick Preview: Quick Preview
+Preview: Preview
+Preview - Loading...: Preview - Loading...
+'Preview - {{ $1 }}': 'Preview - {{ $1 }}'
 # PluginQuickDiff
-Quick Diff: مقارنة سريعة
-Diff: مقارنة
-No changes: لا توجد تغييرات
-Loading diff...: جاري تحميل المقارنة...
-Differences: الاختلافات
-Unsaved Changes: تغييرات غير محفوظة
-Original content: المحتوى الأصلي
-Your content: محتواك
+Quick Diff: Quick Diff
+Diff: Diff
+No changes: No changes
+Loading diff...: Loading diff...
+Differences: Differences
+Unsaved Changes: Unsaved Changes
+Original content: Original content
+Your content: Your content
 quick-diff:
-  previous: السابق
-  next: التالي
-  newest-version: أحدث نسخة
-  oldest-version: أقدم نسخة
-  original-compare-page: صفحة المقارنة الأصلية
-  failed-to-load-diff: فشل تحميل المقارنة
-  x-bytes: '{{ $1 }} بايت'
-
+  previous: Previous
+  next: Next
+  newest-version: Newest version
+  oldest-version: Oldest version
+  original-compare-page: Original Compare Page
+  failed-to-load-diff: Failed to load diff
+  x-bytes: "{{ $1 }} byte{{ $1 !== 1 ? 's' : '' }}"
 # PluginPreferencesSync
-Sync: مزامنة
-Backup your preferences via user page: نسخ احتياطي لتفضيلاتك عبر صفحة المستخدم
-Backup: نسخ احتياطي
-Restore: استعادة
-Import and export preferences: استيراد وتصدير التفضيلات
-Import from file: استيراد من ملف
-Import from URL: استيراد من URL
-'Enter the URL of the preferences JSON file:': 'أدخل عنوان URL لملف JSON التفضيلات:'
-Save as file: حفظ كملف
-
+Sync: Sync
+Backup your preferences via user page: Backup your preferences via user page
+Backup: Backup
+Restore: Restore
+Import and export preferences: Import and export preferences
+Import from file: Import from file
+Import from URL: Import from URL
+'Enter the URL of the preferences JSON file:': 'Enter the URL of the preferences JSON file:'
+Save as file: Save as file
 # AnalyticsService
 InPageEdit Analytics: InPageEdit Analytics
-InPageEdit Analytics is the companion analytics platform for the InPageEdit NEXT project. By collecting and displaying usage data from around the world, it helps developers and the community better understand how the tool is used, optimize feature design, and enhance user experience.:
-  InPageEdit Analytics هو منصة التحليلات المصاحبة لمشروع InPageEdit NEXT. من
-  خلال جمع وعرض بيانات الاستخدام من جميع أنحاء العالم، فهو يساعد المطورين
-  والمجتمع على فهم أفضل لكيفية استخدام الأداة، وتحسين تصميم الميزات، وتعزيز
-  تجربة المستخدم.
-What data will be collected?: ما هي البيانات التي سيتم جمعها؟
-Usage data: بيانات الاستخدام
-When and which features you use, what pages you edit, etc.: متى وأي الميزات تستخدمها، وأي الصفحات تقوم بتحريرها، إلخ.
-User information: معلومات المستخدم
-Your user name and user ID.: اسم المستخدم الخاص بك ومعرف المستخدم.
-Site information: معلومات الموقع
-"This wiki's url and site name.": 'رابط هذا الويكي واسم الموقع.'
-NO sensitive data will be collected.: لن يتم جمع أي بيانات حساسة.
-Analytics Platform: منصة التحليلات
-View My Data: عرض بياناتي
-Enable Analytics: تمكين التحليلات
-Help us improve InPageEdit by sharing your usage data with us.: ساعدنا في تحسين InPageEdit بمشاركة بيانات استخدامك معنا.
-
+InPageEdit Analytics is the companion analytics platform for the InPageEdit NEXT project. By collecting and displaying usage data from around the world, it helps developers and the community better understand how the tool is used, optimize feature design, and enhance user experience.: InPageEdit Analytics is the companion analytics platform for the InPageEdit NEXT project. By collecting and displaying usage data from around the world, it helps developers and the community better understand how the tool is used, optimize feature design, and enhance user experience.
+What data will be collected?: What data will be collected?
+Usage data: Usage data
+When and which features you use, what pages you edit, etc.: When and which features you use, what pages you edit, etc.
+User information: User information
+Your user name and user ID.: Your user name and user ID.
+Site information: Site information
+"This wiki's url and site name.": "This wiki's url and site name."
+NO sensitive data will be collected.: NO sensitive data will be collected.
+Analytics Platform: Analytics Platform
+View My Data: View My Data
+Enable Analytics: Enable Analytics
+Help us improve InPageEdit by sharing your usage data with us.: Help us improve InPageEdit by sharing your usage data with us.
 # WikiMetadataService
-Wiki Informations: معلومات الويكي
-Site: الموقع
-User: المستخدم
-Groups: المجموعات
-If the information shown above is incorrect (for example, the user is not you), click the button below.:
-  إذا كانت المعلومات المعروضة أعلاه غير صحيحة (على سبيل المثال، المستخدم ليس
-  أنت)، انقر على الزر أدناه.
-Clear caches & Reload: مسح الذاكرة المؤقتة وإعادة التحميل
+Wiki Informations: Wiki Informations
+Site: Site
+User: User
+Groups: Groups
+If the information shown above is incorrect (for example, the user is not you), click the button below.: If the information shown above is incorrect (for example, the user is not you), click the button below.
+Clear caches & Reload: Clear caches & Reload
