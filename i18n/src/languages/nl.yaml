@@ -1,0 +1,183 @@
+__meta__:
+  code: nl
+  name: Nederlands (nl)
+  timestamp: 2025-11-12T09:07:41.777Z
+  model: deepseek-v3.1
+
+# Preferences UI
+prefs:
+  about:
+    label: Over
+    description: Over InPageEdit
+    header: '✏️ InPageEdit NEXT'
+    intro: '🚀 Modulaire, uitbreidbare supercharged plugin voor MediaWiki.'
+    portals:
+      header: Portals
+      officialwebsite: Officiële website
+      updatelogs: Updatelogboeken
+    joinus:
+      header: Doe mee
+      github: GitHub
+      qqgroup: QQ-groep
+    copyright: 'InPageEdit-NEXT Copyright © 2025-{{ new Date().getFullYear() }}
+      dragon-fish'
+  inArticleLinks:
+    $: Voorkeuren voor artikelinterne links
+    label: Artikelinterne Links
+    enable: Artikelinterne links inschakelen
+    quickDiff:
+      enable: Artikelinterne links voor snel verschil inschakelen
+    quickEdit:
+      enable: Artikelinterne links voor snel bewerken inschakelen
+      redlinks: Snelbewerkknop tonen voor redlinks
+  quickPreview:
+    keyshortcut: Sneltoets om snel voorbeeld te openen in snelbewerkmodal
+  toolboxAlwaysShow:
+    $: Toolbox™-voorkeuren
+    description: Toolbox™ standaard geopend houden
+  quickEdit:
+    $: Snelbewerkopties
+    editSummary: Standaard bewerkingssamenvatting voor snelle bewerkingen
+    editMinor: Standaard "kleine bewerking" optie aanvinken
+    outSideClose: Bewerkermodal sluiten door buiten te klikken
+    watchList: Volglijstopties
+    keyshortcut:
+      save: sneltoets voor opslaanknop (leeg laten om uit te schakelen)
+    editFont: Te gebruiken lettertype in tekstgebied van snel bewerken
+  quickDiff:
+    keyshortcut: Sneltoets om snel verschil te openen in snelbewerkmodal
+  quickRedirect:
+    $: Sneldoorverwijzingsopties
+    reason: Standaard reden voor snelle doorverwijzing
+  quickMove:
+    $: Snelverplaatsopties
+    reason: Standaard reden voor snel verplaatsen
+  language:
+    $: Taalvoorkeuren
+    language: Taal
+  analytics:
+    $: InPageEdit Analytics
+    enabled: Mijn gebruiksgegevens delen met de gemeenschap.
+
+# Watchlist options
+watchlist:
+  preferences: Volg MW-voorkeuren
+  nochange: Houd huidige status
+  watch: Toevoegen aan volglijst
+  unwatch: Verwijderen van volglijst
+
+# Common buttons
+OK: OK
+Cancel: Annuleren
+Yes: Ja
+No: Nee
+Submit: Verzenden
+
+# Common form fields
+Summary: Samenvatting
+Reason: Reden
+Watchlist: Volglijst
+Minor edit: Kleine bewerking
+
+# PluginQuickEdit
+Quick Edit: Snel Bewerken
+Reload after save: Herladen na opslaan
+Preview: Voorbeeld
+Diff: Verschil
+All edit contents will be lost after closing the modal. Are you sure you want to close?:
+  >-
+  Alle bewerkingsinhoud gaat verloren na het sluiten van het modal. Weet u zeker
+  dat u wilt sluiten?
+Give Up: Opgeven
+Continue Editing: Doorgaan met Bewerken
+
+# PluginStore
+Plugin Store: Pluginwinkel
+Registry URLs: Register-URL's
+CDN to install packages from npm: CDN om pakketten van npm te installeren
+Installed plugins: Geïnstalleerde plugins
+Plugins: Plugins
+Registries: Registers
+Search plugins...: Zoek plugins...
+Install: Installeren
+Add: Toevoegen
+Remove: Verwijderen
+Remove registry: Register verwijderen
+"There {{ count < 1 ? 'is' : 'are' }} {{ count }} installed {{ count < 1 ? 'plugin' : 'plugins' }} from this registry":
+  "Er {{ count < 1 ? 'is' : 'zijn' }} {{ count }} geïnstalleerde {{ count < 1 ?
+  'plugin' : 'plugins' }} van dit register"
+Remove only: Alleen verwijderen
+Remove and uninstall plugins: Verwijderen en plugins deïnstalleren
+Registry added.: Register toegevoegd.
+Registry removed.: Register verwijderd.
+"Registry removed and {{ count }} {{ count < 1 ? 'plugin' : 'plugins' }} uninstalled.":
+  "Register verwijderd en {{ count }} {{ count < 1 ? 'plugin' : 'plugins' }}
+  gedeïnstalleerd."
+
+# PluginQuickMove
+Quick Move: Snel Verplaatsen
+Move from: Verplaatsen van
+Move to: Verplaatsen naar
+Move talk page: Overlegpagina verplaatsen
+Move subpages (up to 100): Subpagina's verplaatsen (tot 100)
+Move without leaving a redirect: Verplaatsen zonder doorverwijzing achter te laten
+Move: Verplaatsen
+
+# PluginQuickRedirect
+Quick Redirect: Snel Doorverwijzen
+Redirect from: Doorverwijzen van
+Redirect to: Doorverwijzen naar
+Force create redirect even if the from page already exists: Doorverwijzing forceren zelfs als de bronpagina al bestaat
+Delete from page if it exists: Bronpagina verwijderen als deze bestaat
+Create Redirect: Doorverwijzing Maken
+
+# PluginQuickPreview
+Quick Preview: Snel Voorbeeld
+Preview - Loading...: Voorbeeld - Laden...
+'Preview - {{ $1 }}': 'Voorbeeld - {{ $1 }}'
+
+# PluginQuickDiff
+Quick Diff: Snel Verschil
+No changes: Geen wijzigingen
+Loading diff...: Verschil laden...
+Differences: Verschillen
+Unsaved Changes: Niet-opgeslagen wijzigingen
+
+# PluginPreferencesSync
+Sync: Synchroniseren
+Backup your preferences via user page: Maak een back-up van uw voorkeuren via gebruikerspagina
+Backup: Back-up
+Restore: Herstellen
+Import and export preferences: Voorkeuren importeren en exporteren
+Import from file: Importeren vanaf bestand
+Import from URL: Importeren vanaf URL
+Save as file: Opslaan als bestand
+
+# AnalyticsService
+InPageEdit Analytics: InPageEdit Analytics
+InPageEdit Analytics is the companion analytics platform for the InPageEdit NEXT project. By collecting and displaying usage data from around the world, it helps developers and the community better understand how the tool is used, optimize feature design, and enhance user experience.:
+  InPageEdit Analytics is het begeleidende analyseplatform voor het InPageEdit
+  NEXT-project. Door gebruikersgegevens van over de hele wereld te verzamelen en
+  weer te geven, helpt het ontwikkelaars en de gemeenschap beter te begrijpen
+  hoe de tool wordt gebruikt, functieontwerp te optimaliseren en de
+  gebruikerservaring te verbeteren.
+What data will be collected?: Welke gegevens worden verzameld?
+Usage data: Gebruiksgegevens
+When and which features you use, what pages you edit, etc.: Wanneer en welke functies u gebruikt, welke pagina's u bewerkt, etc.
+User information: Gebruikersinformatie
+Your user name and user ID.: Uw gebruikersnaam en gebruikers-ID.
+Site information: Site-informatie
+"This wiki's url and site name.": 'De URL en sitenaam van deze wiki.'
+NO sensitive data will be collected.: GEEN gevoelige gegevens worden verzameld.
+Analytics Platform: Analyseplatform
+View My Data: Mijn gegevens bekijken
+
+# WikiMetadataService
+Wiki Informations: Wiki-informatie
+Site: Site
+User: Gebruiker
+Groups: Groepen
+If the information shown above is incorrect (for example, the user is not you), click the button below.:
+  Als de bovenstaande informatie onjuist is (bijvoorbeeld, de gebruiker bent u
+  niet), klik op de onderstaande knop.
+Clear caches & Reload: Caches wissen & Herladen

@@ -1,0 +1,186 @@
+__meta__:
+  code: fr
+  name: Français (fr)
+  timestamp: 2025-11-12T09:04:49.633Z
+  model: deepseek-v3.1
+
+# Preferences UI
+prefs:
+  about:
+    label: À propos
+    description: À propos d'InPageEdit
+    header: '✏️ InPageEdit NEXT'
+    intro: '🚀 Module extensible surpuissant pour MediaWiki.'
+    portals:
+      header: Portails
+      officialwebsite: Site officiel
+      updatelogs: Journal des mises à jour
+    joinus:
+      header: Rejoignez-nous
+      github: GitHub
+      qqgroup: Groupe QQ
+    copyright: 'InPageEdit-NEXT Copyright © 2025-{{ new Date().getFullYear() }}
+      dragon-fish'
+  inArticleLinks:
+    $: Préférences des liens intra-article
+    label: Liens intra-article
+    enable: Activer les liens intra-article
+    quickDiff:
+      enable: Activer les liens intra-article pour la diff rapide
+    quickEdit:
+      enable: Activer les liens intra-article pour l'édition rapide
+      redlinks: Afficher le bouton d'édition rapide pour les liens rouges
+  quickPreview:
+    keyshortcut: Raccourci clavier pour ouvrir l'aperçu rapide dans la modale
+      d'édition rapide
+  toolboxAlwaysShow:
+    $: Préférences de la Toolbox™
+    description: Ouvrir la Toolbox™ par défaut
+  quickEdit:
+    $: Options d'édition rapide
+    editSummary: Résumé d'édition par défaut pour les modifications rapides
+    editMinor: Cocher par défaut l'option "modification mineure"
+    outSideClose: Fermer la modale d'édition en cliquant à l'extérieur
+    watchList: Options de liste de suivi
+    keyshortcut:
+      save: raccourci clavier du bouton de sauvegarde (vide pour désactiver)
+    editFont: Police à utiliser dans la zone de texte de l'édition rapide
+  quickDiff:
+    keyshortcut: Raccourci clavier pour ouvrir la diff rapide dans la modale
+      d'édition rapide
+  quickRedirect:
+    $: Options de redirection rapide
+    reason: Motif par défaut pour la redirection rapide
+  quickMove:
+    $: Options de renommage rapide
+    reason: Motif par défaut pour le renommage rapide
+  language:
+    $: Préférences linguistiques
+    language: Langue
+  analytics:
+    $: InPageEdit Analytics
+    enabled: Partager mes données d'utilisation avec la communauté.
+
+# Watchlist options
+watchlist:
+  preferences: Suivre les préférences MW
+  nochange: Garder le statut actuel
+  watch: Ajouter à la liste de suivi
+  unwatch: Retirer de la liste de suivi
+
+# Common buttons
+OK: OK
+Cancel: Annuler
+Yes: Oui
+No: Non
+Submit: Soumettre
+
+# Common form fields
+Summary: Résumé
+Reason: Motif
+Watchlist: Liste de suivi
+Minor edit: Modification mineure
+
+# PluginQuickEdit
+Quick Edit: Édition rapide
+Reload after save: Recharger après sauvegarde
+Preview: Aperçu
+Diff: Diff
+All edit contents will be lost after closing the modal. Are you sure you want to close?:
+  >-
+  Tous les contenus modifiés seront perdus après la fermeture de la modale.
+  Êtes-vous sûr de vouloir fermer ?
+Give Up: Abandonner
+Continue Editing: Continuer l'édition
+
+# PluginStore
+Plugin Store: Magasin de plugins
+Registry URLs: URLs des registres
+CDN to install packages from npm: CDN pour installer les paquets depuis npm
+Installed plugins: Plugins installés
+Plugins: Plugins
+Registries: Registres
+Search plugins...: Rechercher des plugins...
+Install: Installer
+Add: Ajouter
+Remove: Supprimer
+Remove registry: Supprimer le registre
+"Il y a {{ count }} plugin{{ count !== 1 ? 's' : '' }} installé{{ count !== 1 ? 's' : '' }} depuis ce registre":
+  "Il y a {{ count }} plugin{{ count !== 1 ? 's' : '' }} installé{{ count !== 1
+  ? 's' : '' }} depuis ce registre"
+Remove only: Supprimer seulement
+Remove and uninstall plugins: Supprimer et désinstaller les plugins
+Registry added.: Registre ajouté.
+Registry removed.: Registre supprimé.
+"Registre supprimé et {{ count }} plugin{{ count !== 1 ? 's' : '' }} désinstallé{{ count !== 1 ? 's' : '' }}.":
+  "Registre supprimé et {{ count }} plugin{{ count !== 1 ? 's' : '' }}
+  désinstallé{{ count !== 1 ? 's' : '' }}."
+
+# PluginQuickMove
+Quick Move: Renommage rapide
+Move from: Renommer depuis
+Move to: Renommer vers
+Move talk page: Renommer la page de discussion
+Move subpages (up to 100): Renommer les sous-pages (jusqu'à 100)
+Move without leaving a redirect: Renommer sans laisser de redirection
+Move: Renommer
+
+# PluginQuickRedirect
+Quick Redirect: Redirection rapide
+Redirect from: Rediriger depuis
+Redirect to: Rediriger vers
+Force create redirect even if the from page already exists: Forcer la création de redirection même si la page source existe déjà
+Delete from page if it exists: Supprimer la page source si elle existe
+Create Redirect: Créer la redirection
+
+# PluginQuickPreview
+Quick Preview: Aperçu rapide
+Preview - Loading...: Aperçu - Chargement...
+'Preview - {{ $1 }}': 'Aperçu - {{ $1 }}'
+
+# PluginQuickDiff
+Quick Diff: Diff rapide
+No changes: Aucun changement
+Loading diff...: Chargement de la diff...
+Differences: Différences
+Unsaved Changes: Modifications non sauvegardées
+
+# PluginPreferencesSync
+Sync: Synchroniser
+Backup your preferences via user page: Sauvegarder vos préférences via la page utilisateur
+Backup: Sauvegarder
+Restore: Restaurer
+Import and export preferences: Importer et exporter les préférences
+Import from file: Importer depuis un fichier
+Import from URL: Importer depuis une URL
+Save as file: Enregistrer en tant que fichier
+
+# AnalyticsService
+InPageEdit Analytics: InPageEdit Analytics
+InPageEdit Analytics is the companion analytics platform for the InPageEdit NEXT project. By collecting and displaying usage data from around the world, it helps developers and the community better understand how the tool is used, optimize feature design, and enhance user experience.:
+  InPageEdit Analytics est la plateforme d'analyse accompagnant le projet
+  InPageEdit NEXT. En collectant et affichant les données d'utilisation du monde
+  entier, elle aide les développeurs et la communauté à mieux comprendre
+  l'utilisation de l'outil, optimiser la conception des fonctionnalités et
+  améliorer l'expérience utilisateur.
+What data will be collected?: Quelles données seront collectées ?
+Usage data: Données d'utilisation
+When and which features you use, what pages you edit, etc.: Quand et quelles
+  fonctionnalités vous utilisez, quelles pages vous modifiez, etc.
+User information: Informations utilisateur
+Your user name and user ID.: Votre nom d'utilisateur et ID utilisateur.
+Site information: Informations du site
+"This wiki's url and site name.": "L'URL de ce wiki et son nom."
+NO sensitive data will be collected.: AUCUNE donnée sensible ne sera collectée.
+Analytics Platform: Plateforme d'analyse
+View My Data: Voir mes données
+
+# WikiMetadataService
+Wiki Informations: Informations du wiki
+Site: Site
+User: Utilisateur
+Groups: Groupes
+If the information shown above is incorrect (for example, the user is not you), click the button below.:
+  Si les informations ci-dessus sont incorrectes (par exemple, l'utilisateur
+  n'est pas vous), cliquez sur le bouton ci-dessous.
+Clear caches & Reload: Vider les caches & Recharger

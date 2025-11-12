@@ -1,0 +1,164 @@
+# Preferences UI
+prefs:
+  about:
+    label: About
+    description: About InPageEdit
+    header: '✏️ InPageEdit NEXT'
+    intro: '🚀 Modular, Extensible Supercharged Plugin for MediaWiki.'
+    portals:
+      header: Portals
+      officialwebsite: Official Website
+      updatelogs: Update Logs
+    joinus:
+      header: Join us
+      github: GitHub
+      qqgroup: QQ Group
+    copyright: 'InPageEdit-NEXT Copyright © 2025-{{ new Date().getFullYear() }} dragon-fish'
+  inArticleLinks:
+    $: In-article links preferences
+    label: In-article Links
+    enable: Enable in-article links
+    quickDiff:
+      enable: Enable in-article links for quick diff
+    quickEdit:
+      enable: Enable in-article links for quick edit
+      redlinks: Show quick edit button for redlinks
+  quickPreview:
+    keyshortcut: Key shortcut to open quick preview in quick edit modal
+  toolboxAlwaysShow:
+    $: Toolbox™ preferences
+    description: Make the Toolbox™ opened by default
+  quickEdit:
+    $: Quick edit options
+    editSummary: Default edit summary for quick edits
+    editMinor: Default to checking "minor edit" option
+    outSideClose: Close editor modal by clicking outside
+    watchList: Watchlist options
+    keyshortcut:
+      save: save button key shortcut (blank to disable)
+    editFont: Font to use in quick edit's textarea
+  quickDiff:
+    keyshortcut: Key shortcut to open quick diff in quick edit modal
+  quickRedirect:
+    $: Quick redirect options
+    reason: Default reason for quick redirect
+  quickMove:
+    $: Quick move options
+    reason: Default reason for quick move
+  language:
+    $: Language preferences
+    language: Language
+  analytics:
+    $: InPageEdit Analytics
+    enabled: Share my usage data with the community.
+
+# Watchlist options
+watchlist:
+  preferences: Follow MW preferences
+  nochange: Keep current status
+  watch: Add to watchlist
+  unwatch: Remove from watchlist
+
+# Common buttons
+OK: OK
+Cancel: Cancel
+Yes: Yes
+No: No
+Submit: Submit
+
+# Common form fields
+Summary: Summary
+Reason: Reason
+Watchlist: Watchlist
+Minor edit: Minor edit
+
+# PluginQuickEdit
+Quick Edit: Quick Edit
+Reload after save: Reload after save
+Preview: Preview
+Diff: Diff
+All edit contents will be lost after closing the modal. Are you sure you want to close?:
+  >-
+  All edit contents will be lost after closing the modal. Are you sure you want to close?
+Give Up: Give Up
+Continue Editing: Continue Editing
+
+# PluginStore
+Plugin Store: Plugin Store
+Registry URLs: Registry URLs
+CDN to install packages from npm: CDN to install packages from npm
+Installed plugins: Installed plugins
+Plugins: Plugins
+Registries: Registries
+Search plugins...: Search plugins...
+Install: Install
+Add: Add
+Remove: Remove
+Remove registry: Remove registry
+"There {{ count < 1 ? 'is' : 'are' }} {{ count }} installed {{ count < 1 ? 'plugin' : 'plugins' }} from this registry": "There {{ count < 1 ? 'is' : 'are' }} {{ count }} installed {{ count < 1 ? 'plugin' : 'plugins' }} from this registry"
+Remove only: Remove only
+Remove and uninstall plugins: Remove and uninstall plugins
+Registry added.: Registry added.
+Registry removed.: Registry removed.
+"Registry removed and {{ count }} {{ count < 1 ? 'plugin' : 'plugins' }} uninstalled.": "Registry removed and {{ count }} {{ count < 1 ? 'plugin' : 'plugins' }} uninstalled."
+
+# PluginQuickMove
+Quick Move: Quick Move
+Move from: Move from
+Move to: Move to
+Move talk page: Move talk page
+Move subpages (up to 100): Move subpages (up to 100)
+Move without leaving a redirect: Move without leaving a redirect
+Move: Move
+
+# PluginQuickRedirect
+Quick Redirect: Quick Redirect
+Redirect from: Redirect from
+Redirect to: Redirect to
+Force create redirect even if the from page already exists: Force create redirect even if the from page already exists
+Delete from page if it exists: Delete from page if it exists
+Create Redirect: Create Redirect
+
+# PluginQuickPreview
+Quick Preview: Quick Preview
+Preview - Loading...: Preview - Loading...
+'Preview - {{ $1 }}': 'Preview - {{ $1 }}'
+
+# PluginQuickDiff
+Quick Diff: Quick Diff
+No changes: No changes
+Loading diff...: Loading diff...
+Differences: Differences
+Unsaved Changes: Unsaved Changes
+
+# PluginPreferencesSync
+Sync: Sync
+Backup your preferences via user page: Backup your preferences via user page
+Backup: Backup
+Restore: Restore
+Import and export preferences: Import and export preferences
+Import from file: Import from file
+Import from URL: Import from URL
+Save as file: Save as file
+
+# AnalyticsService
+InPageEdit Analytics: InPageEdit Analytics
+InPageEdit Analytics is the companion analytics platform for the InPageEdit NEXT project. By collecting and displaying usage data from around the world, it helps developers and the community better understand how the tool is used, optimize feature design, and enhance user experience.: InPageEdit Analytics is the companion analytics platform for the InPageEdit NEXT project. By collecting and displaying usage data from around the world, it helps developers and the community better understand how the tool is used, optimize feature design, and enhance user experience.
+What data will be collected?: What data will be collected?
+Usage data: Usage data
+When and which features you use, what pages you edit, etc.: When and which features you use, what pages you edit, etc.
+User information: User information
+Your user name and user ID.: Your user name and user ID.
+Site information: Site information
+"This wiki's url and site name.": "This wiki's url and site name."
+NO sensitive data will be collected.: NO sensitive data will be collected.
+Analytics Platform: Analytics Platform
+View My Data: View My Data
+
+# WikiMetadataService
+Wiki Informations: Wiki Informations
+Site: Site
+User: User
+Groups: Groups
+If the information shown above is incorrect (for example, the user is not you), click the button below.: If the information shown above is incorrect (for example, the user is not you), click the button below.
+Clear caches & Reload: Clear caches & Reload

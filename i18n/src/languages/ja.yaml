@@ -1,0 +1,173 @@
+__meta__:
+  code: ja
+  name: 日本語 (ja)
+  timestamp: 2025-11-12T09:06:58.942Z
+  model: deepseek-v3.1
+
+# Preferences UI
+prefs:
+  about:
+    label: について
+    description: InPageEditについて
+    header: '✏️ InPageEdit NEXT'
+    intro: '🚀 MediaWikiのためのモジュール式で拡張可能な強化プラグイン'
+    portals:
+      header: ポータル
+      officialwebsite: 公式ウェブサイト
+      updatelogs: 更新ログ
+    joinus:
+      header: 参加する
+      github: GitHub
+      qqgroup: QQグループ
+    copyright: 'InPageEdit-NEXT Copyright © 2025-{{ new Date().getFullYear() }}
+      dragon-fish'
+  inArticleLinks:
+    $: 記事内リンク設定
+    label: 記事内リンク
+    enable: 記事内リンクを有効にする
+    quickDiff:
+      enable: クイック差分用の記事内リンクを有効にする
+    quickEdit:
+      enable: クイック編集用の記事内リンクを有効にする
+      redlinks: 赤リンクにクイック編集ボタンを表示する
+  quickPreview:
+    keyshortcut: クイック編集モーダルでクイックプレビューを開くキーショートカット
+  toolboxAlwaysShow:
+    $: Toolbox™設定
+    description: Toolbox™をデフォルトで開いた状態にする
+  quickEdit:
+    $: クイック編集オプション
+    editSummary: クイック編集のデフォルト編集概要
+    editMinor: デフォルトで「細部編集」オプションをチェックする
+    outSideClose: 外部をクリックして編集モーダルを閉じる
+    watchList: ウォッチリストオプション
+    keyshortcut:
+      save: 保存ボタンのキーショートカット（無効にする場合は空白）
+    editFont: クイック編集のテキストエリアで使用するフォント
+  quickDiff:
+    keyshortcut: クイック編集モーダルでクイック差分を開くキーショートカット
+  quickRedirect:
+    $: クイックリダイレクトオプション
+    reason: クイックリダイレクトのデフォルト理由
+  quickMove:
+    $: クイック移動オプション
+    reason: クイック移動のデフォルト理由
+  language:
+    $: 言語設定
+    language: 言語
+  analytics:
+    $: InPageEdit Analytics
+    enabled: 利用データをコミュニティと共有する
+
+# Watchlist options
+watchlist:
+  preferences: MW設定に従う
+  nochange: 現在の状態を維持
+  watch: ウォッチリストに追加
+  unwatch: ウォッチリストから削除
+
+# Common buttons
+OK: OK
+Cancel: キャンセル
+Yes: はい
+No: いいえ
+Submit: 送信
+
+# Common form fields
+Summary: 概要
+Reason: 理由
+Watchlist: ウォッチリスト
+Minor edit: 細部編集
+
+# PluginQuickEdit
+Quick Edit: クイック編集
+Reload after save: 保存後再読み込み
+Preview: プレビュー
+Diff: 差分
+All edit contents will be lost after closing the modal. Are you sure you want to close?:
+  >-
+  モーダルを閉じるとすべての編集内容が失われます。閉じてもよろしいですか？
+Give Up: 諦める
+Continue Editing: 編集を続行
+
+# PluginStore
+Plugin Store: プラグインストア
+Registry URLs: レジストリURL
+CDN to install packages from npm: npmからパッケージをインストールするCDN
+Installed plugins: インストール済みプラグイン
+Plugins: プラグイン
+Registries: レジストリ
+Search plugins...: プラグインを検索...
+Install: インストール
+Add: 追加
+Remove: 削除
+Remove registry: レジストリを削除
+"There {{ count < 1 ? 'is' : 'are' }} {{ count }} installed {{ count < 1 ? 'plugin' : 'plugins' }} from this registry": 'このレジストリから{{ count }}個のプラグインがインストールされています'
+Remove only: 削除のみ
+Remove and uninstall plugins: 削除とプラグインのアンインストール
+Registry added.: レジストリを追加しました。
+Registry removed.: レジストリを削除しました。
+"Registry removed and {{ count }} {{ count < 1 ? 'plugin' : 'plugins' }} uninstalled.": 'レジストリを削除し、{{ count }}個のプラグインをアンインストールしました。'
+
+# PluginQuickMove
+Quick Move: クイック移動
+Move from: 移動元
+Move to: 移動先
+Move talk page: トークページも移動
+Move subpages (up to 100): サブページを移動（最大100）
+Move without leaving a redirect: リダイレクトを残さずに移動
+Move: 移動
+
+# PluginQuickRedirect
+Quick Redirect: クイックリダイレクト
+Redirect from: リダイレクト元
+Redirect to: リダイレクト先
+Force create redirect even if the from page already exists: リダイレクト元ページが既に存在する場合でも強制的にリダイレクトを作成
+Delete from page if it exists: リダイレクト元ページが存在する場合は削除
+Create Redirect: リダイレクトを作成
+
+# PluginQuickPreview
+Quick Preview: クイックプレビュー
+Preview - Loading...: プレビュー - 読み込み中...
+'Preview - {{ $1 }}': 'プレビュー - {{ $1 }}'
+
+# PluginQuickDiff
+Quick Diff: クイック差分
+No changes: 変更なし
+Loading diff...: 差分を読み込み中...
+Differences: 差分
+Unsaved Changes: 未保存の変更
+
+# PluginPreferencesSync
+Sync: 同期
+Backup your preferences via user page: ユーザーページ経由で設定をバックアップ
+Backup: バックアップ
+Restore: 復元
+Import and export preferences: 設定のインポートとエクスポート
+Import from file: ファイルからインポート
+Import from URL: URLからインポート
+Save as file: ファイルとして保存
+
+# AnalyticsService
+InPageEdit Analytics: InPageEdit Analytics
+InPageEdit Analytics is the companion analytics platform for the InPageEdit NEXT project. By collecting and displaying usage data from around the world, it helps developers and the community better understand how the tool is used, optimize feature design, and enhance user experience.:
+  InPageEdit Analyticsは、InPageEdit
+  NEXTプロジェクトの分析プラットフォームです。世界中から利用データを収集・表示することで、開発者とコミュニティがツールの使用方法をよりよく理解し、機能設計を最適化し、ユーザー体験を向上させるのに役立ちます。
+What data will be collected?: どのデータが収集されますか？
+Usage data: 利用データ
+When and which features you use, what pages you edit, etc.: いつどの機能を使用したか、どのページを編集したかなど
+User information: ユーザー情報
+Your user name and user ID.: ユーザー名とユーザーID。
+Site information: サイト情報
+"This wiki's url and site name.": 'このウィキのURLとサイト名。'
+NO sensitive data will be collected.: 機密データは収集されません。
+Analytics Platform: 分析プラットフォーム
+View My Data: 自分のデータを表示
+
+# WikiMetadataService
+Wiki Informations: ウィキ情報
+Site: サイト
+User: ユーザー
+Groups: グループ
+If the information shown above is incorrect (for example, the user is not you), click the button below.: 上記の情報が正しくない場合（例えば、ユーザーがあなたではない場合）、以下のボタンをクリックしてください。
+Clear caches & Reload: キャッシュをクリアして再読み込み
