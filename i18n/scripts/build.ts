@@ -14,6 +14,7 @@ import { readI18nJSON, resolveLanguageFallbacks } from './utils.ts'
 const SRC_DIR = resolve(import.meta.dirname, '../src')
 const DST_DIR = resolve(import.meta.dirname, '../dist')
 const LANGUAGES_SRC_DIR = resolve(SRC_DIR, 'languages')
+const LANGUAGES_MAP_FILE = resolve(SRC_DIR, 'languages_map.json')
 const BASE_LANGUAGE = 'en'
 const BASE_SRC_FILE = resolve(SRC_DIR, `${BASE_LANGUAGE}.yaml`)
 const FALLBACKS_FILE = resolve(SRC_DIR, 'fallbacks.json')
@@ -46,6 +47,18 @@ const fallbacks = (await readFile(FALLBACKS_FILE, 'utf-8').then(
   JSON.parse
 )) as Record<string, string>
 
+consola.info('Reading languages map...')
+const languagesMap = (await readFile(LANGUAGES_MAP_FILE, 'utf-8').then(
+  JSON.parse
+)) as Array<{ code: string; mw_code: string }>
+
+const normalizeCode = (raw: string) => {
+  const mapped = languagesMap.find((i) => i.code === raw)
+  if (mapped?.mw_code) return mapped.mw_code
+  // fallback: lower-case + replace underscores with hyphen
+  return raw.toLowerCase().replace(/_/g, '-')
+}
+
 try {
   await rm(DST_DIR, { recursive: true })
   consola.info('Removed existing dist directory')
@@ -66,9 +79,9 @@ const languageFiles = await readdir(LANGUAGES_SRC_DIR, {
     )
   )
   .then((files) => files.map((file) => file.name))
-const languages = languageFiles.map((file) =>
-  file.replace(/\.json|\.yaml|\.yml$/, '')
-)
+const languages = languageFiles
+  .map((file) => file.replace(/\.json|\.yaml|\.yml$/, ''))
+  .map((code) => normalizeCode(code))
 
 consola.info('Collecting all languages...')
 // Collect all languages: files in dist + all keys/values from fallbacks
@@ -101,7 +114,8 @@ index.languages = Object.fromEntries(
 
 consola.info('Writing languages files...')
 for (const file of languageFiles) {
-  const code = file.replace(/\.json|\.yaml|\.yml$/, '')
+  const rawCode = file.replace(/\.json|\.yaml|\.yml$/, '')
+  const code = normalizeCode(rawCode)
   const srcFile = resolve(LANGUAGES_SRC_DIR, file)
   const dstFile = resolve(DST_DIR, `${code}.json`)
   const data = await readI18nJSON(srcFile)
