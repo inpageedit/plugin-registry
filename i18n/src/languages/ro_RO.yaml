@@ -1,212 +1,212 @@
 # Preferences UI
-Configure Preferences: Configure Preferences
-InPageEdit Preferences: InPageEdit Preferences
-Preferences Saved: Preferences Saved
-Some settings may take effect after reloading the page.: Some settings may take effect after reloading the page.
+Configure Preferences: Configurare Preferințe
+InPageEdit Preferences: PageEditați Preferințe
+Preferences Saved: Preferințe salvate
+Some settings may take effect after reloading the page.: Unele setări pot intra în vigoare după reîncărcarea paginii.
 # SchemaForm for Preferences
 prefs:
   about:
-    label: About
-    description: About InPageEdit
-    header: '✏️ InPageEdit NEXT'
-    intro: '🚀 Modular, Extensible Supercharged Plugin for MediaWiki.'
+    label: Despre
+    description: Despre PaginăEditare
+    header: '✏️ InPageEditați NEXT'
+    intro: '🚀 Modul modular, Supertaxare extensivă pentru MediaWiki.'
     portals:
       header: Portals
-      officialwebsite: Official Website & Documentation
-      updatelogs: Update Logs
+      officialwebsite: Site-ul oficial și documentația
+      updatelogs: Jurnale de actualizare
     joinus:
-      header: Join us
+      header: Alătură-te nouă
       github: GitHub
-      qqgroup: QQ Group
-    copyright: 'InPageEdit-NEXT Copyright © 2025-{{ new Date().getFullYear() }} dragon-fish'
+      qqgroup: Grup QQ
+    copyright: 'InPageEdit-NEXT Copyright ©️ 2025-{{ new Date().getFullYear() }} dragon-fish'
   editor:
     label: Editor
   general:
-    label: General
+    label: Generalități
   inArticleLinks:
-    $: In-article links preferences
-    label: In-article Links
-    enable: Enable in-article links
+    $: Preferințe link-uri în articol
+    label: Link-uri în articol
+    enable: Activare link-uri în articol
     quickDiff:
-      enable: Enable in-article links for quick diff
+      enable: Activează link-uri în articol pentru diff rapid
     quickEdit:
-      enable: Enable in-article links for quick edit
-      redlinks: Show quick edit button for redlinks
+      enable: Activează link-uri în articol pentru editare rapidă
+      redlinks: Arată butonul de editare rapidă pentru redlink-uri
   quickPreview:
-    keyshortcut: Key shortcut to open quick preview in quick edit modal
+    keyshortcut: Comanda rapidă pentru a deschide previzualizarea rapidă în modul editare rapidă
   toolboxAlwaysShow:
-    $: Toolbox™ preferences
-    description: Make the Toolbox™ opened by default
+    $: Preferințe ToolboxTM
+    description: Face ToolboxTM deschis în mod implicit
   quickEdit:
-    $: Quick edit options
-    editSummary: Default edit summary for quick edits
-    editMinor: Default to checking "minor edit" option
-    outSideClose: Close editor modal by clicking outside
-    watchList: Watchlist options
+    $: Opțiuni editare rapidă
+    editSummary: Implicit editare rezumat pentru editare rapidă
+    editMinor: Implicit pentru a verifica opțiunea "editare minoră"
+    outSideClose: Închide modul editor prin click afară
+    watchList: Opțiuni listă
     keyshortcut:
-      save: save button key shortcut (blank to disable)
-    editFont: Font to use in quick edit's textarea
+      save: buton de salvare scurtătură (necompletat pentru dezactivare)
+    editFont: Font folosit în editarea rapidă a textului
   quickDiff:
-    keyshortcut: Key shortcut to open quick diff in quick edit modal (blank to disable)
+    keyshortcut: Comanda rapidă pentru a deschide diff rapid în modul editare rapidă (necompletat pentru dezactivare)
   quickRedirect:
-    $: Quick redirect options
-    reason: Default reason for quick redirect
+    $: Opțiuni de redirecționare rapidă
+    reason: Motivul implicit pentru redirecționare rapidă
   quickMove:
-    $: Quick move options
-    reason: Default reason for quick move
+    $: Opțiuni de mutare rapidă
+    reason: Motivul implicit pentru mutare rapidă
   language:
-    $: Language preferences
-    language: Language
+    $: Preferințe limbă
+    language: Limba
   analytics:
-    $: InPageEdit Analytics
-    enabled: Share my usage data with the community.
+    $: InPageEditați analiza
+    enabled: Partajează datele mele de utilizare cu comunitatea.
   sync:
-    label: Sync
+    label: Sincronizare
 # Watchlist options
 watchlist:
-  preferences: Follow MW preferences
-  nochange: Keep current status
-  watch: Add to watchlist
-  unwatch: Remove from watchlist
+  preferences: Urmărește preferințele MW
+  nochange: Păstrați starea curentă
+  watch: Adaugă în watchlist
+  unwatch: Elimină din watchlist
 # Common buttons
-OK: OK
+OK: Ok
 Yes: Yes
-Submit: Submit
-Save: Save
-Enable: Enable
+Submit: Trimiteți
+Save: Salvează
+Enable: Activare
 No: No
-Cancel: Cancel
-Close: Close
-Disable: Disable
+Cancel: Anulează
+Close: Inchide
+Disable: Dezactivează
 # Common form fields
 Summary: Summary
-Reason: Reason
-Watchlist: Watchlist
-Minor edit: Minor edit
+Reason: Motiv
+Watchlist: Listă
+Minor edit: Editare minoră
 # Common notifications
-Success: Success
-Warning: Warning
-Attention: Attention
+Success: Succes
+Warning: Avertizare
+Attention: Atenție
 Important: Important
-Failed: Failed
-Error: Error
+Failed: Eșuat
+Error: Eroare
 Info: Info
 # PluginQuickEdit
-Quick Edit: Quick Edit
-Quick Create: Quick Create
-New section: New section
-Not editable: Not editable
-Reload after save: Reload after save
+Quick Edit: Editare rapidă
+Quick Create: Creare rapidă
+New section: Secţiune nouă
+Not editable: Nu este editabil
+Reload after save: Reîncarcă după salvare
 All edit contents will be lost after closing the modal. Are you sure you want to close?: '>- All edit contents will be lost after closing the modal. Are you sure you want to close?'
-Give Up: Give Up
-Continue Editing: Continue Editing
-'You are editing a <em>historical version</em> version; the content is not the latest!': You are editing a <em>historical version</em> version; the content is not the latest!
-This page does not exist.: This page does not exist.
-Topic for new section, this will be the h2 heading: Topic for new section, this will be the h2 heading
-Submission Successful: Submission Successful
-Submission Error: Submission Error
-Your changes have been saved.: Your changes have been saved.
-Special page is not editable.: Special page is not editable.
+Give Up: Renunță sus
+Continue Editing: Continuă editarea
+'You are editing a <em>historical version</em> version; the content is not the latest!': Editați o versiune <em>istorică</em> . Conținutul nu este cel mai târziu!
+This page does not exist.: Această pagină nu există.
+Topic for new section, this will be the h2 heading: Subiectul pentru o nouă secţiune, acesta va fi titlul h2
+Submission Successful: Trimitere reusita
+Submission Error: Eroare de trimitere
+Your changes have been saved.: Modificările dvs. au fost salvate.
+Special page is not editable.: Pagina specială nu este editabilă.
 # PluginStore
-Plugin Store: Plugin Store
-Registry URLs: Registry URLs
-CDN to install packages from npm: CDN to install packages from npm
-Installed plugins: Installed plugins
-Plugins: Plugins
-Registries: Registries
-Search plugins...: Search plugins...
-Refreshing...: Refreshing...
-Refresh: Refresh
-No matching plugins found: No matching plugins found
-Install: Install
-Add: Add
-Remove: Remove
-Adding...: Adding...
-No registries configured: No registries configured
-Setup default registry: Setup default registry
-Add registry URL: Add registry URL
+Plugin Store: Magazin Plugin
+Registry URLs: URL-uri de înregistrare
+CDN to install packages from npm: CDN pentru a instala pachete de la npm
+Installed plugins: Plugin-uri instalate
+Plugins: Extensii
+Registries: Registre
+Search plugins...: Căutare plugin-uri...
+Refreshing...: Reîmprospătare...
+Refresh: Împrospătează
+No matching plugins found: Nu s-a găsit niciun plugin potrivit
+Install: Instalează
+Add: Adăugare
+Remove: Elimină
+Adding...: Adăugare...
+No registries configured: Nu există registre configurate
+Setup default registry: Configurare registru implicit
+Add registry URL: Adăugare URL registru
 plugin-store:
   tags:
-    broken: '⚠️ broken'
+    broken: '⚠️ stricat'
     installed: '✓'
   broken:
-    registry-unavailable: '[Recommend to uninstall] The registry is unavailable. Try refreshing or re-adding the registry to fix this issue.'
-    plugin-removed: '[Recommend to uninstall] This plugin was removed from the registry. Try refreshing the registry to confirm.'
+    registry-unavailable: 'Registrul nu este disponibil. Încercați să reîmprospătați sau readăugați registrul pentru a remedia această problemă.'
+    plugin-removed: 'Acest plugin a fost eliminat din registru. Încercați să reîmprospătați registrul pentru a confirma.'
   remove-registry:
-    title: Remove registry
-    tip-content: 'Remove registry:'
-    confirm-content: "There {{ count < 1 ? 'is' : 'are' }} {{ count }} installed {{ count < 1 ? 'plugin' : 'plugins' }} from this registry:"
-    remove-success: Registry removed.
-    remove-with-plugins-success: "Registry removed and {{ count }} {{ count < 1 ? 'plugin' : 'plugins' }} uninstalled."
+    title: Eliminare registru
+    tip-content: 'Eliminare registru:'
+    confirm-content: "{{ count < 1 ? 'is' : 'are' }} {{ count }} instalat {{ count < 1 ? 'plugin' : 'plugins' }} din acest registru:"
+    remove-success: Registrul eliminat.
+    remove-with-plugins-success: "Registrul a fost eliminat și {{ count }} {{ count < 1 ? 'plugin' : 'plugins' }} dezinstalat."
     buttons:
-      remove-only: Remove only
-      remove-and-uninstall: Remove and uninstall plugins
+      remove-only: Doar înlăturare
+      remove-and-uninstall: Elimină și dezinstalează plugin-uri
 # PluginQuickMove
-Quick Move: Quick Move
-Move from: Move from
-Move to: Move to
-Move talk page: Move talk page
-Move subpages (up to 100): Move subpages (up to 100)
-Move without leaving a redirect: Move without leaving a redirect
-Move: Move
+Quick Move: Mutare rapidă
+Move from: Mută din
+Move to: Mutare în
+Move talk page: Mută pagina de discuții
+Move subpages (up to 100): Mută subpaginile (până la 100)
+Move without leaving a redirect: Mută fără a părăsi o redirecţionare
+Move: Mutare
 # PluginQuickRedirect
-Quick Redirect: Quick Redirect
-Redirect from: Redirect from
-Redirect to: Redirect to
-Force create redirect even if the from page already exists: Force create redirect even if the from page already exists
-Delete from page if it exists: Delete from page if it exists
-Create Redirect: Create Redirect
+Quick Redirect: Redirecționare rapidă
+Redirect from: Redirecționare de la
+Redirect to: Redir. la
+Force create redirect even if the from page already exists: Forțează redirecționarea chiar dacă pagina există deja
+Delete from page if it exists: Ștergeți din pagină dacă există
+Create Redirect: Crează redirecționare
 # PluginQuickPreview
-Quick Preview: Quick Preview
-Preview: Preview
-Preview - Loading...: Preview - Loading...
-'Preview - {{ $1 }}': 'Preview - {{ $1 }}'
+Quick Preview: Previzualizare rapidă
+Preview: Previzualizare
+Preview - Loading...: Previzualizare - Încărcare...
+'Preview - {{ $1 }}': 'Previzualizare - {{ $1 }}'
 # PluginQuickDiff
-Quick Diff: Quick Diff
-Diff: Diff
-No changes: No changes
-Loading diff...: Loading diff...
-Differences: Differences
-Unsaved Changes: Unsaved Changes
-Original content: Original content
-Your content: Your content
+Quick Diff: Diff-ul rapid
+Diff: Dif
+No changes: Nicio modificare
+Loading diff...: Se încarcă difuza...
+Differences: Diferențe
+Unsaved Changes: Modificări nesalvate
+Original content: Conținutul inițial
+Your content: Conținutul tău
 quick-diff:
-  previous: Previous
-  next: Next
-  newest-version: Newest version
-  oldest-version: Oldest version
-  original-compare-page: Original Compare Page
-  failed-to-load-diff: Failed to load diff
+  previous: Anterior
+  next: Următoarea
+  newest-version: Cea mai nouă versiune
+  oldest-version: Cea mai veche versiune
+  original-compare-page: Pagina de comparare originală
+  failed-to-load-diff: Încărcarea diff a eșuat
   x-bytes: "{{ $1 }} byte{{ $1 !== 1 ? 's' : '' }}"
 # PluginPreferencesSync
-Sync: Sync
-Backup your preferences via user page: Backup your preferences via user page
+Sync: Sincronizare
+Backup your preferences via user page: Salvați preferințele dvs. prin intermediul paginii utilizatorului
 Backup: Backup
-Restore: Restore
-Import and export preferences: Import and export preferences
-Import from file: Import from file
-Import from URL: Import from URL
-'Enter the URL of the preferences JSON file:': 'Enter the URL of the preferences JSON file:'
-Save as file: Save as file
+Restore: Restaurează
+Import and export preferences: Importă și exportă preferințe
+Import from file: Importă din fișier
+Import from URL: Importă din URL
+'Enter the URL of the preferences JSON file:': 'Introduceți adresa URL a fișierului de preferințe JSON:'
+Save as file: Salvează ca fișier
 # AnalyticsService
-InPageEdit Analytics: InPageEdit Analytics
-InPageEdit Analytics is the companion analytics platform for the InPageEdit NEXT project. By collecting and displaying usage data from around the world, it helps developers and the community better understand how the tool is used, optimize feature design, and enhance user experience.: InPageEdit Analytics is the companion analytics platform for the InPageEdit NEXT project. By collecting and displaying usage data from around the world, it helps developers and the community better understand how the tool is used, optimize feature design, and enhance user experience.
-What data will be collected?: What data will be collected?
-Usage data: Usage data
-When and which features you use, what pages you edit, etc.: When and which features you use, what pages you edit, etc.
-User information: User information
-Your user name and user ID.: Your user name and user ID.
-Site information: Site information
-"This wiki's url and site name.": "This wiki's url and site name."
-NO sensitive data will be collected.: NO sensitive data will be collected.
-Analytics Platform: Analytics Platform
-View My Data: View My Data
-Enable Analytics: Enable Analytics
-Help us improve InPageEdit by sharing your usage data with us.: Help us improve InPageEdit by sharing your usage data with us.
+InPageEdit Analytics: InPageEditați analiza
+InPageEdit Analytics is the companion analytics platform for the InPageEdit NEXT project. By collecting and displaying usage data from around the world, it helps developers and the community better understand how the tool is used, optimize feature design, and enhance user experience.: InPageEditați Analytics este platforma de analiză companion pentru InPageEditați proiectul NEXT. Prin colectarea și afișarea datelor de utilizare din întreaga lume, ajută dezvoltatorii și comunitatea să înțeleagă mai bine cum este folosit instrumentul, să optimizeze design-ul caracteristicilor și să îmbunătățească experiența utilizatorului.
+What data will be collected?: Ce date vor fi colectate?
+Usage data: Date de utilizare
+When and which features you use, what pages you edit, etc.: Când și ce funcții folosiți, ce pagini editați, etc.
+User information: Informatii utilizator
+Your user name and user ID.: Numele tău de utilizator și ID-ul de utilizator.
+Site information: Informatii site
+"This wiki's url and site name.": "URL-ul şi numele site-ului acestei wiki."
+NO sensitive data will be collected.: Nu vor fi colectate date sensibile.
+Analytics Platform: Platforma de analiză
+View My Data: Vezi datele mele
+Enable Analytics: Activare Analize
+Help us improve InPageEdit by sharing your usage data with us.: Ajutați-ne să îmbunătățim InPageEditați prin partajarea datelor de utilizare cu noi.
 # WikiMetadataService
-Wiki Informations: Wiki Informations
+Wiki Informations: Informații Wiki
 Site: Site
-User: User
-Groups: Groups
-If the information shown above is incorrect (for example, the user is not you), click the button below.: If the information shown above is incorrect (for example, the user is not you), click the button below.
-Clear caches & Reload: Clear caches & Reload
+User: Utilizator
+Groups: Grupuri
+If the information shown above is incorrect (for example, the user is not you), click the button below.: Dacă informaţiile de mai sus sunt incorecte (de exemplu, utilizatorul nu este), faceţi clic pe butonul de mai jos.
+Clear caches & Reload: Curăță geocutiile și reîncarcă
