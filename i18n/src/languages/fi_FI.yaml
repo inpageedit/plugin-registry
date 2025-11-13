@@ -97,7 +97,7 @@ Quick Create: Nopea Luominen
 New section: Uusi osio
 Not editable: Ei muokattavissa
 Reload after save: Lataa tallennuksen jälkeen
-All edit contents will be lost after closing the modal. Are you sure you want to close?: '>- Kaikki muokatut sisällöt menetetään modaalin sulkemisen jälkeen. Oletko varma, että haluat sulkea?'
+All edit contents will be lost after closing the modal. Are you sure you want to close?: 'Kaikki muokkauksen sisältö menetetään modaalin sulkemisen jälkeen. Oletko varma, että haluat sulkea?'
 Give Up: Anna Ylös
 Continue Editing: Jatka Muokkaamista
 'You are editing a <em>historical version</em> version; the content is not the latest!': Olet muokkaamassa <em>historiallista versiota</em> , sisältö ei ole myöhäisin!
