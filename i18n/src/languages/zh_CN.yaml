@@ -9,10 +9,10 @@ prefs:
     label: 关于
     description: 关于 InPageEdit
     header: '✏️ InPageEdit NEXT'
-    intro: '🚀 专为 MediaWiki 设计的模块化、可扩展的超级插件。'
+    intro: '🚀 模块化、可扩展的 MediaWiki 超级增强插件。'
     portals:
       header: 门户网站
-      officialwebsite: 官方网站
+      officialwebsite: 官方网站 & 文档
       updatelogs: 更新日志
     joinus:
       header: 加入我们
@@ -45,15 +45,15 @@ prefs:
     watchList: 监视列表选项
     keyshortcut:
       save: 保存按钮快捷键（留空禁用）
-    editFont: 快速编辑文本区域使用的字体
+    editFont: 快速编辑框使用的字体
   quickDiff:
-    keyshortcut: 在快速编辑弹窗中打开快速差异的快捷键
+    keyshortcut: 在快速编辑弹窗中打开快速差异的快捷键（留空禁用）
   quickRedirect:
     $: 快速重定向选项
-    reason: 快速重定向的默认原因
+    reason: 快速重定向的默认理由
   quickMove:
     $: 快速移动选项
-    reason: 快速移动的默认原因
+    reason: 快速移动的默认理由
   language:
     $: 语言首选项
     language: 语言
@@ -80,7 +80,7 @@ Close: 关闭
 Disable: 禁用
 # Common form fields
 Summary: 摘要
-Reason: 原因
+Reason: 理由
 Watchlist: 监视列表
 Minor edit: 小编辑
 # Common notifications
@@ -96,7 +96,7 @@ Quick Edit: 快速编辑
 Quick Create: 快速创建
 New section: 新建章节
 Not editable: 不可编辑
-Reload after save: 保存后重新加载
+Reload after save: 保存后刷新页面
 All edit contents will be lost after closing the modal. Are you sure you want to close?: '>- 关闭弹窗后所有编辑内容将会丢失。确定要关闭吗？'
 Give Up: 放弃
 Continue Editing: 继续编辑
@@ -135,9 +135,9 @@ plugin-store:
   remove-registry:
     title: 移除注册表
     tip-content: '移除注册表：'
-    confirm-content: "此注册表有 {{ count }} 个已安装的{{ count < 1 ? '插件' : '插件' }}："
+    confirm-content: "此注册表有 {{ count }} 个已安装的插件："
     remove-success: 注册表已移除。
-    remove-with-plugins-success: "注册表已移除，并卸载了 {{ count }} 个{{ count < 1 ? '插件' : '插件' }}。"
+    remove-with-plugins-success: "注册表已移除，并卸载了 {{ count }} 个插件。"
     buttons:
       remove-only: 仅移除
       remove-and-uninstall: 移除并卸载插件
@@ -159,13 +159,13 @@ Create Redirect: 创建重定向
 # PluginQuickPreview
 Quick Preview: 快速预览
 Preview: 预览
-Preview - Loading...: 预览 - 加载中...
+Preview - Loading...: 预览 - 加载中……
 'Preview - {{ $1 }}': '预览 - {{ $1 }}'
 # PluginQuickDiff
 Quick Diff: 快速差异
 Diff: 差异
 No changes: 无更改
-Loading diff...: 加载差异中...
+Loading diff...: 加载差异中……
 Differences: 差异
 Unsaved Changes: 未保存的更改
 Original content: 原始内容
@@ -186,7 +186,7 @@ Restore: 恢复
 Import and export preferences: 导入和导出首选项
 Import from file: 从文件导入
 Import from URL: 从 URL 导入
-'Enter the URL of the preferences JSON file:': '输入首选项 JSON 文件的 URL:'
+'Enter the URL of the preferences JSON file:': '输入首选项 JSON 文件的 URL：'
 Save as file: 保存为文件
 # AnalyticsService
 InPageEdit Analytics: InPageEdit Analytics
