@@ -1,212 +1,212 @@
 # Preferences UI
-Configure Preferences: Configure Preferences
-InPageEdit Preferences: InPageEdit Preferences
-Preferences Saved: Preferences Saved
-Some settings may take effect after reloading the page.: Some settings may take effect after reloading the page.
+Configure Preferences: Konfigurer innstillinger
+InPageEdit Preferences: Inside redigere innstillinger
+Preferences Saved: Innstillinger lagret
+Some settings may take effect after reloading the page.: Noen innstillinger kan tre i kraft etter at du har lastet siden på nytt.
 # SchemaForm for Preferences
 prefs:
   about:
-    label: About
-    description: About InPageEdit
-    header: '✏️ InPageEdit NEXT'
-    intro: '🚀 Modular, Extensible Supercharged Plugin for MediaWiki.'
+    label: Om
+    description: Om InPageEdit
+    header: '✏️ InnboksRediger NEXT'
+    intro: '🚀 modulær, omfattende Supercharged Plugin for MediaWiki.'
     portals:
       header: Portals
-      officialwebsite: Official Website & Documentation
-      updatelogs: Update Logs
+      officialwebsite: Offisiell webside & dokumentasjon
+      updatelogs: Oppdater logger
     joinus:
-      header: Join us
+      header: Bli med
       github: GitHub
-      qqgroup: QQ Group
-    copyright: 'InPageEdit-NEXT Copyright © 2025-{{ new Date().getFullYear() }} dragon-fish'
+      qqgroup: QQ gruppe
+    copyright: 'InPageEdit-NEXT Copyright ©️ 2025-{{ new Date().getFullYear() }} dragon-fish'
   editor:
-    label: Editor
+    label: Redaktør
   general:
-    label: General
+    label: Generelt
   inArticleLinks:
-    $: In-article links preferences
-    label: In-article Links
-    enable: Enable in-article links
+    $: Innstillinger for artikkellenker
+    label: I-artikkel lenker
+    enable: Aktiver lenker i artikler
     quickDiff:
-      enable: Enable in-article links for quick diff
+      enable: Aktiver linker i artikler for rask diff
     quickEdit:
-      enable: Enable in-article links for quick edit
-      redlinks: Show quick edit button for redlinks
+      enable: Lenker i artikler for rask redigering
+      redlinks: Knapp for 'Vis av' for "Vis hurtigredigering"
   quickPreview:
-    keyshortcut: Key shortcut to open quick preview in quick edit modal
+    keyshortcut: Hurtigtast for å åpne rask forhåndsvisning i rask redigering av modal
   toolboxAlwaysShow:
-    $: Toolbox™ preferences
-    description: Make the Toolbox™ opened by default
+    $: Innstillinger for verktøy-TM
+    description: Gjør verktøykassen åpnet som standard
   quickEdit:
-    $: Quick edit options
-    editSummary: Default edit summary for quick edits
-    editMinor: Default to checking "minor edit" option
-    outSideClose: Close editor modal by clicking outside
-    watchList: Watchlist options
+    $: Alternativer for rask redigering
+    editSummary: Standard redigeringssammendrag for hurtigendringer
+    editMinor: Standard å sjekke "minor edit" alternativet
+    outSideClose: Lukk tekstbehandlermodal ved å klikke utenfor
+    watchList: Overvåkningsliste alternativer
     keyshortcut:
-      save: save button key shortcut (blank to disable)
-    editFont: Font to use in quick edit's textarea
+      save: lagre knappens snarvei (tom for å deaktivere)
+    editFont: Skrift som skal brukes i hurtig redigerte tekstområder
   quickDiff:
-    keyshortcut: Key shortcut to open quick diff in quick edit modal (blank to disable)
+    keyshortcut: Hurtigtaster for å åpne hurtig diff i rask redigering av modal (tom for å deaktivere)
   quickRedirect:
-    $: Quick redirect options
-    reason: Default reason for quick redirect
+    $: Rask omadressering alternativer
+    reason: Standardårsak for rask omadressering
   quickMove:
-    $: Quick move options
-    reason: Default reason for quick move
+    $: Alternativer for hurtig flytting
+    reason: Standardårsak for raskt trekk
   language:
-    $: Language preferences
-    language: Language
+    $: Innstillinger for språk
+    language: Språk
   analytics:
     $: InPageEdit Analytics
-    enabled: Share my usage data with the community.
+    enabled: Del bruks data med samfunnet.
   sync:
-    label: Sync
+    label: Synkronisering
 # Watchlist options
 watchlist:
-  preferences: Follow MW preferences
-  nochange: Keep current status
-  watch: Add to watchlist
-  unwatch: Remove from watchlist
+  preferences: Følg MW innstillinger
+  nochange: Behold nåværende status
+  watch: Legg til i overvåkningsliste
+  unwatch: Fjern fra overvåkningsliste
 # Common buttons
-OK: OK
+OK: Ok
 Yes: Yes
-Submit: Submit
-Save: Save
-Enable: Enable
+Submit: Send
+Save: Lagre
+Enable: Aktiver
 No: No
-Cancel: Cancel
-Close: Close
-Disable: Disable
+Cancel: Avbryt
+Close: Lukk
+Disable: Deaktiver
 # Common form fields
 Summary: Summary
-Reason: Reason
-Watchlist: Watchlist
-Minor edit: Minor edit
+Reason: Grunn
+Watchlist: Overvåkningsliste
+Minor edit: Mindre redigere
 # Common notifications
-Success: Success
-Warning: Warning
-Attention: Attention
-Important: Important
-Failed: Failed
-Error: Error
-Info: Info
+Success: Vellykket
+Warning: Advarsel
+Attention: Merk
+Important: Viktig
+Failed: Mislyktes
+Error: Feil
+Info: Informasjon
 # PluginQuickEdit
-Quick Edit: Quick Edit
-Quick Create: Quick Create
-New section: New section
-Not editable: Not editable
-Reload after save: Reload after save
-All edit contents will be lost after closing the modal. Are you sure you want to close?: '>- All edit contents will be lost after closing the modal. Are you sure you want to close?'
-Give Up: Give Up
-Continue Editing: Continue Editing
-'You are editing a <em>historical version</em> version; the content is not the latest!': You are editing a <em>historical version</em> version; the content is not the latest!
-This page does not exist.: This page does not exist.
-Topic for new section, this will be the h2 heading: Topic for new section, this will be the h2 heading
-Submission Successful: Submission Successful
-Submission Error: Submission Error
-Your changes have been saved.: Your changes have been saved.
-Special page is not editable.: Special page is not editable.
+Quick Edit: Rask redigering
+Quick Create: Rask oppretting
+New section: Ny seksjon
+Not editable: Ikke redigerbar
+Reload after save: Oppdater etter lagring
+All edit contents will be lost after closing the modal. Are you sure you want to close?: '>- Alt redigeringsinnhold vil gå tapt etter at du har lukket modulen. Er du sikker på at du vil avslutte?'
+Give Up: Gi opp
+Continue Editing: Fortsett redigeringen
+'You are editing a <em>historical version</em> version; the content is not the latest!': Du redigerer en <em>historisk versjon</em> ; innholdet er ikke den nyeste!
+This page does not exist.: Denne siden finnes ikke.
+Topic for new section, this will be the h2 heading: Emnet for ny del, dette vil være h2 overskriften
+Submission Successful: Innsending vellykket
+Submission Error: Feil ved innsending
+Your changes have been saved.: Dine endringer er lagret.
+Special page is not editable.: Spesialsiden er ikke redigerbar.
 # PluginStore
-Plugin Store: Plugin Store
-Registry URLs: Registry URLs
-CDN to install packages from npm: CDN to install packages from npm
-Installed plugins: Installed plugins
-Plugins: Plugins
-Registries: Registries
-Search plugins...: Search plugins...
-Refreshing...: Refreshing...
-Refresh: Refresh
-No matching plugins found: No matching plugins found
-Install: Install
-Add: Add
-Remove: Remove
-Adding...: Adding...
-No registries configured: No registries configured
-Setup default registry: Setup default registry
-Add registry URL: Add registry URL
+Plugin Store: Plugin butikk
+Registry URLs: Registerets URL-er
+CDN to install packages from npm: CDN for å installere pakker fra npm
+Installed plugins: Installerte utvidelser
+Plugins: Utvidelser
+Registries: Registreringer
+Search plugins...: Søk i programtillegg...
+Refreshing...: Oppdaterer...
+Refresh: Oppdater
+No matching plugins found: Ingen samsvarende plugins funnet
+Install: Installer
+Add: Legg til
+Remove: Fjern
+Adding...: Legge til...
+No registries configured: Ingen registre er konfigurert
+Setup default registry: Standard oppsett for register
+Add registry URL: Legg til register-URL
 plugin-store:
   tags:
-    broken: '⚠️ broken'
+    broken: '⚠️ ødelagt'
     installed: '✓'
   broken:
-    registry-unavailable: '[Recommend to uninstall] The registry is unavailable. Try refreshing or re-adding the registry to fix this issue.'
-    plugin-removed: '[Recommend to uninstall] This plugin was removed from the registry. Try refreshing the registry to confirm.'
+    registry-unavailable: 'Registeret er ikke tilgjengelig. Forsøk å oppdatere, eller legg til registeret for å fikse dette problemet.'
+    plugin-removed: 'Denne utvidelsen ble fjernet fra registeret. Prøv å oppdatere registeret for å bekrefte.'
   remove-registry:
-    title: Remove registry
-    tip-content: 'Remove registry:'
-    confirm-content: "There {{ count < 1 ? 'is' : 'are' }} {{ count }} installed {{ count < 1 ? 'plugin' : 'plugins' }} from this registry:"
-    remove-success: Registry removed.
-    remove-with-plugins-success: "Registry removed and {{ count }} {{ count < 1 ? 'plugin' : 'plugins' }} uninstalled."
+    title: Fjern register
+    tip-content: 'Fjern register:'
+    confirm-content: "{count < 1 ? 'er' : 'are' }} {{ count }} installert {{ count < 1 ? 'plugin' : 'plugins' }} fra denne registreringen:"
+    remove-success: Registrering fjernet.
+    remove-with-plugins-success: "Register fjernet og {{ count }} {count < 1 ? 'plugin' : 'plugins' }} er avinstallert."
     buttons:
-      remove-only: Remove only
-      remove-and-uninstall: Remove and uninstall plugins
+      remove-only: Fjern kun
+      remove-and-uninstall: Fjern og avinstaller plugins
 # PluginQuickMove
-Quick Move: Quick Move
-Move from: Move from
-Move to: Move to
-Move talk page: Move talk page
-Move subpages (up to 100): Move subpages (up to 100)
-Move without leaving a redirect: Move without leaving a redirect
-Move: Move
+Quick Move: Hurtigflytt
+Move from: Flytt fra
+Move to: Flytt til
+Move talk page: Flytt snakkside
+Move subpages (up to 100): Flytt undersider (opp til 100)
+Move without leaving a redirect: Flytt uten å forlate en viderekobling
+Move: Flytt
 # PluginQuickRedirect
-Quick Redirect: Quick Redirect
-Redirect from: Redirect from
-Redirect to: Redirect to
-Force create redirect even if the from page already exists: Force create redirect even if the from page already exists
-Delete from page if it exists: Delete from page if it exists
-Create Redirect: Create Redirect
+Quick Redirect: Hurtig omdirigering
+Redirect from: Omdiriger fra
+Redirect to: Omdiriger til
+Force create redirect even if the from page already exists: Krev opprett omdirigering, selv om den fra siden allerede eksisterer
+Delete from page if it exists: Slett fra side hvis det finnes
+Create Redirect: Opprett omadressering
 # PluginQuickPreview
-Quick Preview: Quick Preview
-Preview: Preview
-Preview - Loading...: Preview - Loading...
-'Preview - {{ $1 }}': 'Preview - {{ $1 }}'
+Quick Preview: Rask forhåndsvisning
+Preview: Forhåndsvisning
+Preview - Loading...: Forhåndsvisning - Laster...
+'Preview - {{ $1 }}': 'Forhåndsvisning - {{ $1 }}'
 # PluginQuickDiff
-Quick Diff: Quick Diff
-Diff: Diff
-No changes: No changes
-Loading diff...: Loading diff...
-Differences: Differences
-Unsaved Changes: Unsaved Changes
-Original content: Original content
-Your content: Your content
+Quick Diff: Rask differanse
+Diff: Forskjell
+No changes: Ingen endringer
+Loading diff...: Laster diff...
+Differences: Forskjeller
+Unsaved Changes: Ulagrede endringer
+Original content: Opprinnelig innhold
+Your content: Ditt innhold
 quick-diff:
-  previous: Previous
-  next: Next
-  newest-version: Newest version
-  oldest-version: Oldest version
-  original-compare-page: Original Compare Page
-  failed-to-load-diff: Failed to load diff
+  previous: Forrige
+  next: Neste
+  newest-version: Nyeste versjon
+  oldest-version: Eldste versjon
+  original-compare-page: Opprinnelig sammenligningsside
+  failed-to-load-diff: Kunne ikke laste inn diff
   x-bytes: "{{ $1 }} byte{{ $1 !== 1 ? 's' : '' }}"
 # PluginPreferencesSync
-Sync: Sync
-Backup your preferences via user page: Backup your preferences via user page
-Backup: Backup
-Restore: Restore
-Import and export preferences: Import and export preferences
-Import from file: Import from file
-Import from URL: Import from URL
-'Enter the URL of the preferences JSON file:': 'Enter the URL of the preferences JSON file:'
-Save as file: Save as file
+Sync: Synkronisering
+Backup your preferences via user page: Sikkerhetskopier innstillingene dine via brukersiden
+Backup: Sikkerhetskopi
+Restore: Gjenopprett
+Import and export preferences: Importer og eksporter innstillinger
+Import from file: Importer fra fil
+Import from URL: Importer fra URL
+'Enter the URL of the preferences JSON file:': 'Angi nettadressen til innstillingene for JSON-filen:'
+Save as file: Lagre som fil
 # AnalyticsService
 InPageEdit Analytics: InPageEdit Analytics
-InPageEdit Analytics is the companion analytics platform for the InPageEdit NEXT project. By collecting and displaying usage data from around the world, it helps developers and the community better understand how the tool is used, optimize feature design, and enhance user experience.: InPageEdit Analytics is the companion analytics platform for the InPageEdit NEXT project. By collecting and displaying usage data from around the world, it helps developers and the community better understand how the tool is used, optimize feature design, and enhance user experience.
-What data will be collected?: What data will be collected?
-Usage data: Usage data
-When and which features you use, what pages you edit, etc.: When and which features you use, what pages you edit, etc.
-User information: User information
-Your user name and user ID.: Your user name and user ID.
-Site information: Site information
-"This wiki's url and site name.": "This wiki's url and site name."
-NO sensitive data will be collected.: NO sensitive data will be collected.
+InPageEdit Analytics is the companion analytics platform for the InPageEdit NEXT project. By collecting and displaying usage data from around the world, it helps developers and the community better understand how the tool is used, optimize feature design, and enhance user experience.: InPageEdit Analytics er kompanjong-plattformen for InPageEdit NEXT-prosjektet. Ved å samle inn og vise bruksdata fra hele verden. det hjelper utviklere og samfunnet med å forstå bedre hvordan verktøyet brukes, optimalisere funksjonsutviklingen og forbedre brukeropplevelsen.
+What data will be collected?: Hvilke data vil bli samlet inn?
+Usage data: Bruk data
+When and which features you use, what pages you edit, etc.: Når og hvilke funksjoner du bruker, hvilke sider du redigerer osv.
+User information: Brukerinformasjon
+Your user name and user ID.: Ditt brukernavn og bruker-ID.
+Site information: Informasjon om nettstedet
+"This wiki's url and site name.": "Denne wikien url og nettstedsnavn."
+NO sensitive data will be collected.: Ingen sensitive data vil bli samlet inn.
 Analytics Platform: Analytics Platform
-View My Data: View My Data
-Enable Analytics: Enable Analytics
-Help us improve InPageEdit by sharing your usage data with us.: Help us improve InPageEdit by sharing your usage data with us.
+View My Data: Vis mine data
+Enable Analytics: Aktiver analyser
+Help us improve InPageEdit by sharing your usage data with us.: Hjelp oss med å forbedre InPageEdit ved å dele bruksdataene dine med oss.
 # WikiMetadataService
-Wiki Informations: Wiki Informations
-Site: Site
-User: User
-Groups: Groups
-If the information shown above is incorrect (for example, the user is not you), click the button below.: If the information shown above is incorrect (for example, the user is not you), click the button below.
-Clear caches & Reload: Clear caches & Reload
+Wiki Informations: Wiki informasjon
+Site: Nettsted
+User: Bruker
+Groups: Grupper
+If the information shown above is incorrect (for example, the user is not you), click the button below.: Hvis informasjonen ovenfor er feil (for eksempel så er ikke brukeren deg), klikk på knappen nedenfor.
+Clear caches & Reload: Tøm hurtiglager & Oppdater
