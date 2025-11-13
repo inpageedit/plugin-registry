@@ -1,212 +1,212 @@
 # Preferences UI
-Configure Preferences: Configure Preferences
-InPageEdit Preferences: InPageEdit Preferences
-Preferences Saved: Preferences Saved
-Some settings may take effect after reloading the page.: Some settings may take effect after reloading the page.
+Configure Preferences: Määritä Asetukset
+InPageEdit Preferences: InPageEdit Asetukset
+Preferences Saved: Asetukset Tallennettu
+Some settings may take effect after reloading the page.: Jotkin asetukset saattavat tulla voimaan sivun uudelleenlatauksen jälkeen.
 # SchemaForm for Preferences
 prefs:
   about:
-    label: About
-    description: About InPageEdit
-    header: '✏️ InPageEdit NEXT'
-    intro: '🚀 Modular, Extensible Supercharged Plugin for MediaWiki.'
+    label: Tietoja
+    description: Tietoja InPageEdit
+    header: ':penkki: SivuMuokkaa SEURAAVAA'
+    intro: '🚀 Modular, Extensible Supercharged Plugin MediaWikille.'
     portals:
       header: Portals
-      officialwebsite: Official Website & Documentation
-      updatelogs: Update Logs
+      officialwebsite: Virallinen Sivusto Ja Dokumentaatio
+      updatelogs: Päivitä Lokit
     joinus:
-      header: Join us
+      header: Liity meihin
       github: GitHub
-      qqgroup: QQ Group
-    copyright: 'InPageEdit-NEXT Copyright © 2025-{{ new Date().getFullYear() }} dragon-fish'
+      qqgroup: QQ- Ryhmä
+    copyright: 'InPageEdit-NEXT Copyright ©️ 2025-{{ new Date().getFullYear() }} lohikäärä'
   editor:
-    label: Editor
+    label: Muokkain
   general:
-    label: General
+    label: Yleiset
   inArticleLinks:
-    $: In-article links preferences
-    label: In-article Links
-    enable: Enable in-article links
+    $: Artikkelin sisäisten linkkien asetukset
+    label: Artikkelin Linkit
+    enable: Ota käyttöön artikkelissa olevat linkit
     quickDiff:
-      enable: Enable in-article links for quick diff
+      enable: Ota käyttöön artikkelissa olevat linkit nopealle diffille
     quickEdit:
-      enable: Enable in-article links for quick edit
-      redlinks: Show quick edit button for redlinks
+      enable: Ota käyttöön artikkelissa olevat linkit nopeaa muokkausta varten
+      redlinks: Näytä punaislinkkien pikamuokkauspainike
   quickPreview:
-    keyshortcut: Key shortcut to open quick preview in quick edit modal
+    keyshortcut: Pikakuvake avataksesi pikaesikatselun nopeassa muokkaustilassa
   toolboxAlwaysShow:
-    $: Toolbox™ preferences
-    description: Make the Toolbox™ opened by default
+    $: ToolboxTM-asetukset
+    description: Tee oletusarvoisesti avattu ToolboxTM
   quickEdit:
-    $: Quick edit options
-    editSummary: Default edit summary for quick edits
-    editMinor: Default to checking "minor edit" option
-    outSideClose: Close editor modal by clicking outside
-    watchList: Watchlist options
+    $: Pikamuokkauksen asetukset
+    editSummary: Oletus muokkausyhteenveto nopeita muokkauksia varten
+    editMinor: Oletus "vähäisen muokkauksen" tarkistamiseen
+    outSideClose: Sulje muokkaimen modaali klikkaamalla ulkopuolella
+    watchList: Seurantalistan asetukset
     keyshortcut:
-      save: save button key shortcut (blank to disable)
-    editFont: Font to use in quick edit's textarea
+      save: tallenna pikakuvake painikkeella (poista käytöstä painike)
+    editFont: Kirjasin, jota käytetään nopeassa muokkaustekstissä
   quickDiff:
-    keyshortcut: Key shortcut to open quick diff in quick edit modal (blank to disable)
+    keyshortcut: Pikanäppäin avataksesi nopean diffin pikamuokkausmodaalissa (paina pois käytöstä)
   quickRedirect:
-    $: Quick redirect options
-    reason: Default reason for quick redirect
+    $: Nopea uudelleenohjaus asetukset
+    reason: Oletus syy nopeaan uudelleenohjaukseen
   quickMove:
-    $: Quick move options
-    reason: Default reason for quick move
+    $: Nopean siirron asetukset
+    reason: Nopean siirron oletussyy
   language:
-    $: Language preferences
-    language: Language
+    $: Kielen asetukset
+    language: Kieli
   analytics:
     $: InPageEdit Analytics
-    enabled: Share my usage data with the community.
+    enabled: Jaa käyttötietoni yhteisön kanssa.
   sync:
-    label: Sync
+    label: Synkronointi
 # Watchlist options
 watchlist:
-  preferences: Follow MW preferences
-  nochange: Keep current status
-  watch: Add to watchlist
-  unwatch: Remove from watchlist
+  preferences: Seuraa MW:n asetuksia
+  nochange: Säilytä nykyinen tila
+  watch: Lisää seurantalistaan
+  unwatch: Poista seurantalistalta
 # Common buttons
-OK: OK
+OK: Ok
 Yes: Yes
-Submit: Submit
-Save: Save
-Enable: Enable
+Submit: Lähetä
+Save: Tallenna
+Enable: Aktivoi
 No: No
-Cancel: Cancel
-Close: Close
-Disable: Disable
+Cancel: Peruuta
+Close: Sulje
+Disable: Poista Käytöstä
 # Common form fields
 Summary: Summary
-Reason: Reason
-Watchlist: Watchlist
-Minor edit: Minor edit
+Reason: Syy
+Watchlist: Seurantalista
+Minor edit: Vähäinen muokkaus
 # Common notifications
-Success: Success
-Warning: Warning
-Attention: Attention
-Important: Important
-Failed: Failed
-Error: Error
-Info: Info
+Success: Onnistui
+Warning: Varoitus
+Attention: Huomio
+Important: Tärkeä
+Failed: Epäonnistui
+Error: Virhe
+Info: Tiedot
 # PluginQuickEdit
-Quick Edit: Quick Edit
-Quick Create: Quick Create
-New section: New section
-Not editable: Not editable
-Reload after save: Reload after save
-All edit contents will be lost after closing the modal. Are you sure you want to close?: '>- All edit contents will be lost after closing the modal. Are you sure you want to close?'
-Give Up: Give Up
-Continue Editing: Continue Editing
-'You are editing a <em>historical version</em> version; the content is not the latest!': You are editing a <em>historical version</em> version; the content is not the latest!
-This page does not exist.: This page does not exist.
-Topic for new section, this will be the h2 heading: Topic for new section, this will be the h2 heading
-Submission Successful: Submission Successful
-Submission Error: Submission Error
-Your changes have been saved.: Your changes have been saved.
-Special page is not editable.: Special page is not editable.
+Quick Edit: Nopea Muokkaus
+Quick Create: Nopea Luominen
+New section: Uusi osio
+Not editable: Ei muokattavissa
+Reload after save: Lataa tallennuksen jälkeen
+All edit contents will be lost after closing the modal. Are you sure you want to close?: '>- Kaikki muokatut sisällöt menetetään modaalin sulkemisen jälkeen. Oletko varma, että haluat sulkea?'
+Give Up: Anna Ylös
+Continue Editing: Jatka Muokkaamista
+'You are editing a <em>historical version</em> version; the content is not the latest!': Olet muokkaamassa <em>historiallista versiota</em> , sisältö ei ole myöhäisin!
+This page does not exist.: Sivua ei ole olemassa.
+Topic for new section, this will be the h2 heading: Uuden osan aihe, tämä on h2 otsikko
+Submission Successful: Lähetys Onnistui
+Submission Error: Lähetys Virhe
+Your changes have been saved.: Muutoksesi on tallennettu.
+Special page is not editable.: Erikoissivu ei ole muokattavissa.
 # PluginStore
-Plugin Store: Plugin Store
-Registry URLs: Registry URLs
-CDN to install packages from npm: CDN to install packages from npm
-Installed plugins: Installed plugins
-Plugins: Plugins
-Registries: Registries
-Search plugins...: Search plugins...
-Refreshing...: Refreshing...
-Refresh: Refresh
-No matching plugins found: No matching plugins found
-Install: Install
-Add: Add
-Remove: Remove
-Adding...: Adding...
-No registries configured: No registries configured
-Setup default registry: Setup default registry
-Add registry URL: Add registry URL
+Plugin Store: Liitännäisen Kauppa
+Registry URLs: Rekisterin URL-osoitteet
+CDN to install packages from npm: CDN asentaaksesi paketteja osoitteesta npm
+Installed plugins: Asennetut liitännäiset
+Plugins: Liitännäiset
+Registries: Rekisterit
+Search plugins...: Etsi lisäosia...
+Refreshing...: Päivitetään...
+Refresh: Päivitä
+No matching plugins found: Vastaavia liitännäisiä ei löytynyt
+Install: Asenna
+Add: Lisää
+Remove: Poista
+Adding...: Lisätään...
+No registries configured: Rekisteriä ei ole määritetty
+Setup default registry: Aseta oletusrekisteri
+Add registry URL: Lisää rekisteri URL
 plugin-store:
   tags:
-    broken: '⚠️ broken'
+    broken: '⚠️ rikki'
     installed: '✓'
   broken:
-    registry-unavailable: '[Recommend to uninstall] The registry is unavailable. Try refreshing or re-adding the registry to fix this issue.'
-    plugin-removed: '[Recommend to uninstall] This plugin was removed from the registry. Try refreshing the registry to confirm.'
+    registry-unavailable: '[Suosittele poistamaan] Rekisteri ei ole käytettävissä. Yritä päivittää tai lisätä rekisteri uudelleen korjataksesi tämän ongelman.'
+    plugin-removed: '[Suosittele poistamaan] Tämä liitännäinen on poistettu rekisteristä. Yritä päivittää rekisteriä vahvistaaksesi.'
   remove-registry:
-    title: Remove registry
-    tip-content: 'Remove registry:'
-    confirm-content: "There {{ count < 1 ? 'is' : 'are' }} {{ count }} installed {{ count < 1 ? 'plugin' : 'plugins' }} from this registry:"
-    remove-success: Registry removed.
-    remove-with-plugins-success: "Registry removed and {{ count }} {{ count < 1 ? 'plugin' : 'plugins' }} uninstalled."
+    title: Poista rekisteri
+    tip-content: 'Poista rekisteri:'
+    confirm-content: "There {{ count < 1 ? 'is' : 'are' }} {{ count }} asennettu {{ count < 1 ? 'plugin' : 'plugins' }} tästä rekisteristä:"
+    remove-success: Rekisteri poistettu
+    remove-with-plugins-success: "Rekisteri poistettu ja {{ count }} {{ count < 1 ? 'plugin' : 'plugins' }} poistettu."
     buttons:
-      remove-only: Remove only
-      remove-and-uninstall: Remove and uninstall plugins
+      remove-only: Poista vain
+      remove-and-uninstall: Poista ja poista liitännäiset
 # PluginQuickMove
-Quick Move: Quick Move
-Move from: Move from
-Move to: Move to
-Move talk page: Move talk page
-Move subpages (up to 100): Move subpages (up to 100)
-Move without leaving a redirect: Move without leaving a redirect
-Move: Move
+Quick Move: Nopea Siirto
+Move from: Siirrä paikasta
+Move to: Siirrä kohteeseen
+Move talk page: Siirrä puhua sivu
+Move subpages (up to 100): Siirrä alasivut (jopa 100)
+Move without leaving a redirect: Siirrä jättämättä uudelleenohjausta
+Move: Siirrä
 # PluginQuickRedirect
-Quick Redirect: Quick Redirect
-Redirect from: Redirect from
-Redirect to: Redirect to
-Force create redirect even if the from page already exists: Force create redirect even if the from page already exists
-Delete from page if it exists: Delete from page if it exists
-Create Redirect: Create Redirect
+Quick Redirect: Nopea Uudelleenohjaus
+Redirect from: Uudelleenohjaus alkaen
+Redirect to: Uudelleenohjaa kohteeseen
+Force create redirect even if the from page already exists: Pakota luoda uudelleenohjaus, vaikka sivulta on jo olemassa
+Delete from page if it exists: Poista sivulta, jos se on olemassa
+Create Redirect: Luo Uudelleenohjaus
 # PluginQuickPreview
-Quick Preview: Quick Preview
-Preview: Preview
-Preview - Loading...: Preview - Loading...
-'Preview - {{ $1 }}': 'Preview - {{ $1 }}'
+Quick Preview: Nopea Esikatselu
+Preview: Esikatselu
+Preview - Loading...: Esikatselu - Ladataan...
+'Preview - {{ $1 }}': 'Esikatselu - {{ $1 }}'
 # PluginQuickDiff
-Quick Diff: Quick Diff
-Diff: Diff
-No changes: No changes
-Loading diff...: Loading diff...
-Differences: Differences
-Unsaved Changes: Unsaved Changes
-Original content: Original content
-Your content: Your content
+Quick Diff: Nopea Erotus
+Diff: Erot
+No changes: Ei muutoksia
+Loading diff...: Ladataan eroa...
+Differences: Erot
+Unsaved Changes: Tallentamattomat Muutokset
+Original content: Alkuperäinen sisältö
+Your content: Sinun sisältö
 quick-diff:
-  previous: Previous
-  next: Next
-  newest-version: Newest version
-  oldest-version: Oldest version
-  original-compare-page: Original Compare Page
-  failed-to-load-diff: Failed to load diff
+  previous: Edellinen
+  next: Seuraava
+  newest-version: Uusin versio
+  oldest-version: Vanhin versio
+  original-compare-page: Alkuperäinen Vertailusivu
+  failed-to-load-diff: Diffin lataaminen epäonnistui
   x-bytes: "{{ $1 }} byte{{ $1 !== 1 ? 's' : '' }}"
 # PluginPreferencesSync
-Sync: Sync
-Backup your preferences via user page: Backup your preferences via user page
-Backup: Backup
-Restore: Restore
-Import and export preferences: Import and export preferences
-Import from file: Import from file
-Import from URL: Import from URL
-'Enter the URL of the preferences JSON file:': 'Enter the URL of the preferences JSON file:'
-Save as file: Save as file
+Sync: Synkronointi
+Backup your preferences via user page: Varmuuskopioi asetuksesi käyttäjäsivun kautta
+Backup: Varmuuskopio
+Restore: Palauta
+Import and export preferences: Tuonti- ja vientiasetukset
+Import from file: Tuo tiedostosta
+Import from URL: Tuo URL:sta
+'Enter the URL of the preferences JSON file:': 'Anna asetusten JSON tiedoston URL-osoite:'
+Save as file: Tallenna tiedostoksi
 # AnalyticsService
 InPageEdit Analytics: InPageEdit Analytics
-InPageEdit Analytics is the companion analytics platform for the InPageEdit NEXT project. By collecting and displaying usage data from around the world, it helps developers and the community better understand how the tool is used, optimize feature design, and enhance user experience.: InPageEdit Analytics is the companion analytics platform for the InPageEdit NEXT project. By collecting and displaying usage data from around the world, it helps developers and the community better understand how the tool is used, optimize feature design, and enhance user experience.
-What data will be collected?: What data will be collected?
-Usage data: Usage data
-When and which features you use, what pages you edit, etc.: When and which features you use, what pages you edit, etc.
-User information: User information
-Your user name and user ID.: Your user name and user ID.
-Site information: Site information
-"This wiki's url and site name.": "This wiki's url and site name."
-NO sensitive data will be collected.: NO sensitive data will be collected.
-Analytics Platform: Analytics Platform
-View My Data: View My Data
-Enable Analytics: Enable Analytics
-Help us improve InPageEdit by sharing your usage data with us.: Help us improve InPageEdit by sharing your usage data with us.
+InPageEdit Analytics is the companion analytics platform for the InPageEdit NEXT project. By collecting and displaying usage data from around the world, it helps developers and the community better understand how the tool is used, optimize feature design, and enhance user experience.: InPageEdit Analytics on InPageEdit NEXT -projektin kumppanianalytiikka-alusta. Keräämällä ja näyttämällä käyttötietoja ympäri maailmaa, se auttaa kehittäjiä ja yhteisöä ymmärtämään paremmin työkalun käytön, optimoimaan ominaisuuden suunnittelua ja parantamaan käyttäjäkokemusta.
+What data will be collected?: Mitä tietoja kerätään?
+Usage data: Käyttö tiedot
+When and which features you use, what pages you edit, etc.: Milloin ja mitä ominaisuuksia käytät, mitä sivuja muokaat, jne.
+User information: Käyttäjän tiedot
+Your user name and user ID.: Käyttäjätunnuksesi ja käyttäjätunnuksesi.
+Site information: Sivuston tiedot
+"This wiki's url and site name.": "Tämän wikin URL-osoite ja sivuston nimi."
+NO sensitive data will be collected.: Ei arkaluonteisia tietoja kerätään.
+Analytics Platform: Analytiikan Alusta
+View My Data: Näytä Omat Tiedot
+Enable Analytics: Ota Analytiikka Käyttöön
+Help us improve InPageEdit by sharing your usage data with us.: Auta meitä parantamaan InPageEdit jakamalla käyttötietosi kanssamme.
 # WikiMetadataService
 Wiki Informations: Wiki Informations
-Site: Site
-User: User
-Groups: Groups
-If the information shown above is incorrect (for example, the user is not you), click the button below.: If the information shown above is incorrect (for example, the user is not you), click the button below.
-Clear caches & Reload: Clear caches & Reload
+Site: Sivusto
+User: Käyttäjä
+Groups: Ryhmät
+If the information shown above is incorrect (for example, the user is not you), click the button below.: Jos yllä esitetyt tiedot ovat virheellisiä (esimerkiksi käyttäjä ei ole sinä), napsauta alla olevaa painiketta.
+Clear caches & Reload: Tyhjennä välimuistit ja lataa uudelleen

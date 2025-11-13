@@ -1,212 +1,212 @@
 # Preferences UI
-Configure Preferences: Configure Preferences
-InPageEdit Preferences: InPageEdit Preferences
-Preferences Saved: Preferences Saved
-Some settings may take effect after reloading the page.: Some settings may take effect after reloading the page.
+Configure Preferences: Настроить параметры
+InPageEdit Preferences: Настройки InPageEdit
+Preferences Saved: Параметры сохранены
+Some settings may take effect after reloading the page.: Некоторые настройки могут вступить в силу после перезагрузки страницы.
 # SchemaForm for Preferences
 prefs:
   about:
-    label: About
-    description: About InPageEdit
+    label: О программе
+    description: О InPageEdit
     header: '✏️ InPageEdit NEXT'
-    intro: '🚀 Modular, Extensible Supercharged Plugin for MediaWiki.'
+    intro: '🚀 Модульный, расширяемый, улучшенный плагин для MediaWiki.'
     portals:
-      header: Portals
-      officialwebsite: Official Website & Documentation
-      updatelogs: Update Logs
+      header: Порталы
+      officialwebsite: Официальный сайт и документация
+      updatelogs: Журнал обновлений
     joinus:
-      header: Join us
+      header: Присоединяйтесь к нам
       github: GitHub
       qqgroup: QQ Group
-    copyright: 'InPageEdit-NEXT Copyright © 2025-{{ new Date().getFullYear() }} dragon-fish'
+    copyright: 'InPageEdit-NEXT Авторские права © 2025-{{ new Date().getFullYear() }} dragon-fish'
   editor:
-    label: Editor
+    label: Редактор
   general:
-    label: General
+    label: Общие
   inArticleLinks:
-    $: In-article links preferences
+    $: Настройки In-article links
     label: In-article Links
-    enable: Enable in-article links
+    enable: Включить in-article links
     quickDiff:
-      enable: Enable in-article links for quick diff
+      enable: Включить in-article links для быстрого сравнения
     quickEdit:
-      enable: Enable in-article links for quick edit
-      redlinks: Show quick edit button for redlinks
+      enable: Включить in-article links для быстрого редактирования
+      redlinks: Показывать кнопку быстрого редактирования для красных ссылок
   quickPreview:
-    keyshortcut: Key shortcut to open quick preview in quick edit modal
+    keyshortcut: Горячая клавиша для открытия быстрого просмотра в окне быстрого редактирования
   toolboxAlwaysShow:
-    $: Toolbox™ preferences
-    description: Make the Toolbox™ opened by default
+    $: Настройки Toolbox™
+    description: Открывать Toolbox™ по умолчанию
   quickEdit:
-    $: Quick edit options
-    editSummary: Default edit summary for quick edits
-    editMinor: Default to checking "minor edit" option
-    outSideClose: Close editor modal by clicking outside
-    watchList: Watchlist options
+    $: Опции быстрого редактирования
+    editSummary: Сводка правки по умолчанию для быстрых правок
+    editMinor: По умолчанию отмечать опцию «малая правка»
+    outSideClose: Закрывать модальное окно редактора щелчком снаружи
+    watchList: Параметры списка наблюдения
     keyshortcut:
-      save: save button key shortcut (blank to disable)
-    editFont: Font to use in quick edit's textarea
+      save: Сочетание клавиш для кнопки сохранения (оставить пустым для отключения)
+    editFont: Шрифт для использования в текстовой области быстрого редактирования
   quickDiff:
-    keyshortcut: Key shortcut to open quick diff in quick edit modal (blank to disable)
+    keyshortcut: Сочетание клавиш для открытия быстрого сравнения версий в модальном окне быстрого редактирования (оставить пустым для отключения)
   quickRedirect:
-    $: Quick redirect options
-    reason: Default reason for quick redirect
+    $: Параметры быстрого перенаправления
+    reason: Причина по умолчанию для быстрого перенаправления
   quickMove:
-    $: Quick move options
-    reason: Default reason for quick move
+    $: Параметры быстрого перемещения
+    reason: Причина по умолчанию для быстрого перемещения
   language:
-    $: Language preferences
-    language: Language
+    $: Настройки языка
+    language: Язык
   analytics:
     $: InPageEdit Analytics
-    enabled: Share my usage data with the community.
+    enabled: Поделиться моими данными об использовании с сообществом.
   sync:
-    label: Sync
+    label: Синхронизация
 # Watchlist options
 watchlist:
-  preferences: Follow MW preferences
-  nochange: Keep current status
-  watch: Add to watchlist
-  unwatch: Remove from watchlist
+  preferences: Следовать настройкам MediaWiki
+  nochange: Сохранить текущий статус
+  watch: Добавить в список наблюдения
+  unwatch: Удалить из списка наблюдения
 # Common buttons
 OK: OK
 Yes: Yes
-Submit: Submit
-Save: Save
-Enable: Enable
+Submit: Отправить
+Save: Сохранить
+Enable: Включить
 No: No
-Cancel: Cancel
-Close: Close
-Disable: Disable
+Cancel: Отмена
+Close: Закрыть
+Disable: Отключить
 # Common form fields
-Summary: Summary
-Reason: Reason
-Watchlist: Watchlist
-Minor edit: Minor edit
+Summary: Описание
+Reason: Причина
+Watchlist: Список наблюдения
+Minor edit: Незначительное изменение
 # Common notifications
-Success: Success
-Warning: Warning
-Attention: Attention
-Important: Important
-Failed: Failed
-Error: Error
-Info: Info
+Success: Успешно
+Warning: Предупреждение
+Attention: Внимание
+Important: Важно
+Failed: Не удалось
+Error: Ошибка
+Info: Информация
 # PluginQuickEdit
-Quick Edit: Quick Edit
-Quick Create: Quick Create
-New section: New section
-Not editable: Not editable
-Reload after save: Reload after save
-All edit contents will be lost after closing the modal. Are you sure you want to close?: '>- All edit contents will be lost after closing the modal. Are you sure you want to close?'
-Give Up: Give Up
-Continue Editing: Continue Editing
-'You are editing a <em>historical version</em> version; the content is not the latest!': You are editing a <em>historical version</em> version; the content is not the latest!
-This page does not exist.: This page does not exist.
-Topic for new section, this will be the h2 heading: Topic for new section, this will be the h2 heading
-Submission Successful: Submission Successful
-Submission Error: Submission Error
-Your changes have been saved.: Your changes have been saved.
-Special page is not editable.: Special page is not editable.
+Quick Edit: Быстрое редактирование
+Quick Create: Быстрое создание
+New section: Новый раздел
+Not editable: Не редактируется
+Reload after save: Перезагрузить после сохранения
+All edit contents will be lost after closing the modal. Are you sure you want to close?: '>- После закрытия модальности все изменения будут потеряны. Вы уверены, что хотите закрыть?'
+Give Up: Отказаться
+Continue Editing: Продолжить редактирование
+'You are editing a <em>historical version</em> version; the content is not the latest!': Вы редактируете <em>историческую версию</em>; это не последняя версия содержимого!
+This page does not exist.: Эта страница не существует.
+Topic for new section, this will be the h2 heading: Тема для нового раздела, это будет заголовок h2
+Submission Successful: Отправка успешна
+Submission Error: Ошибка отправки
+Your changes have been saved.: Ваши изменения сохранены.
+Special page is not editable.: Специальная страница не редактируется.
 # PluginStore
-Plugin Store: Plugin Store
-Registry URLs: Registry URLs
-CDN to install packages from npm: CDN to install packages from npm
-Installed plugins: Installed plugins
-Plugins: Plugins
-Registries: Registries
-Search plugins...: Search plugins...
-Refreshing...: Refreshing...
-Refresh: Refresh
-No matching plugins found: No matching plugins found
-Install: Install
-Add: Add
-Remove: Remove
-Adding...: Adding...
-No registries configured: No registries configured
-Setup default registry: Setup default registry
-Add registry URL: Add registry URL
+Plugin Store: Магазин плагинов
+Registry URLs: URL реестров
+CDN to install packages from npm: CDN для установки пакетов из npm
+Installed plugins: Установленные плагины
+Plugins: Плагины
+Registries: Реестры
+Search plugins...: Поиск плагинов...
+Refreshing...: Обновление...
+Refresh: Обновить
+No matching plugins found: Соответствующие плагины не найдены
+Install: Установить
+Add: Добавить
+Remove: Удалить
+Adding...: Добавление...
+No registries configured: Нет настроенных реестров
+Setup default registry: Настроить реестр по умолчанию
+Add registry URL: Добавить URL реестра
 plugin-store:
   tags:
-    broken: '⚠️ broken'
+    broken: '⚠️ неработающий'
     installed: '✓'
   broken:
-    registry-unavailable: '[Recommend to uninstall] The registry is unavailable. Try refreshing or re-adding the registry to fix this issue.'
-    plugin-removed: '[Recommend to uninstall] This plugin was removed from the registry. Try refreshing the registry to confirm.'
+    registry-unavailable: '[Рекомендуется удалить] Реестр недоступен. Попробуйте обновить или повторно добавить реестр, чтобы устранить эту проблему.'
+    plugin-removed: '[Рекомендуется удалить] Этот плагин был удален из реестра. Попробуйте обновить реестр для подтверждения.'
   remove-registry:
-    title: Remove registry
-    tip-content: 'Remove registry:'
-    confirm-content: "There {{ count < 1 ? 'is' : 'are' }} {{ count }} installed {{ count < 1 ? 'plugin' : 'plugins' }} from this registry:"
-    remove-success: Registry removed.
-    remove-with-plugins-success: "Registry removed and {{ count }} {{ count < 1 ? 'plugin' : 'plugins' }} uninstalled."
+    title: Удалить реестр
+    tip-content: 'Удалить реестр:'
+    confirm-content: "С этого реестра {{ count == 1 ? 'установлен' : count % 10 >= 2 && count % 10 <= 4 && (count % 100 < 10 || count % 100 >= 20) ? 'установлено' : 'установлено' }} {{ count }} {{ count == 1 ? 'плагин' : count % 10 >= 2 && count % 10 <= 4 && (count % 100 < 10 || count % 100 >= 20) ? 'плагина' : 'плагинов' }}:"
+    remove-success: Реестр удалён.
+    remove-with-plugins-success: "Реестр удалён и {{ count }} {{ count % 10 == 1 && count % 100 != 11 ? 'плагин' : count % 10 >= 2 && count % 10 <= 4 && (count % 100 < 10 || count % 100 >= 20) ? 'плагина' : 'плагинов' }} удалено."
     buttons:
-      remove-only: Remove only
-      remove-and-uninstall: Remove and uninstall plugins
+      remove-only: Только удалить
+      remove-and-uninstall: Удалить и деинсталлировать плагины
 # PluginQuickMove
-Quick Move: Quick Move
-Move from: Move from
-Move to: Move to
-Move talk page: Move talk page
-Move subpages (up to 100): Move subpages (up to 100)
-Move without leaving a redirect: Move without leaving a redirect
-Move: Move
+Quick Move: Быстрое перемещение
+Move from: Переместить из
+Move to: Переместить в
+Move talk page: Переместить страницу обсуждения
+Move subpages (up to 100): Переместить подстраницы (до 100)
+Move without leaving a redirect: Переместить без создания перенаправления
+Move: Переместить
 # PluginQuickRedirect
-Quick Redirect: Quick Redirect
-Redirect from: Redirect from
-Redirect to: Redirect to
-Force create redirect even if the from page already exists: Force create redirect even if the from page already exists
-Delete from page if it exists: Delete from page if it exists
-Create Redirect: Create Redirect
+Quick Redirect: Быстрое перенаправление
+Redirect from: Перенаправить из
+Redirect to: Перенаправить в
+Force create redirect even if the from page already exists: Принудительно создать перенаправление, даже если исходная страница уже существует
+Delete from page if it exists: Удалить исходную страницу, если она существует
+Create Redirect: Создать перенаправление
 # PluginQuickPreview
-Quick Preview: Quick Preview
-Preview: Preview
-Preview - Loading...: Preview - Loading...
-'Preview - {{ $1 }}': 'Preview - {{ $1 }}'
+Quick Preview: Быстрый предпросмотр
+Preview: Предпросмотр
+Preview - Loading...: Предпросмотр - Загрузка...
+'Preview - {{ $1 }}': 'Предпросмотр - {{ $1 }}'
 # PluginQuickDiff
-Quick Diff: Quick Diff
-Diff: Diff
-No changes: No changes
-Loading diff...: Loading diff...
-Differences: Differences
-Unsaved Changes: Unsaved Changes
-Original content: Original content
-Your content: Your content
+Quick Diff: Быстрое сравнение
+Diff: Сравнить
+No changes: Нет изменений
+Loading diff...: Загрузка сравнения...
+Differences: Различия
+Unsaved Changes: Несохранённые изменения
+Original content: Исходное содержимое
+Your content: Ваше содержимое
 quick-diff:
-  previous: Previous
-  next: Next
-  newest-version: Newest version
-  oldest-version: Oldest version
-  original-compare-page: Original Compare Page
-  failed-to-load-diff: Failed to load diff
-  x-bytes: "{{ $1 }} byte{{ $1 !== 1 ? 's' : '' }}"
+  previous: Предыдущий
+  next: Далее
+  newest-version: Новейшая версия
+  oldest-version: Старейшая версия
+  original-compare-page: Оригинальная страница сравнения
+  failed-to-load-diff: Не удалось загрузить сравнение
+  x-bytes: "{{ $1 }} {{ $1 === 1 ? 'байт' : $1 % 10 >= 2 && $1 % 10 <= 4 && ($1 % 100 < 10 || $1 % 100 >= 20) ? 'байта' : 'байтов' }}"
 # PluginPreferencesSync
-Sync: Sync
-Backup your preferences via user page: Backup your preferences via user page
-Backup: Backup
-Restore: Restore
-Import and export preferences: Import and export preferences
-Import from file: Import from file
-Import from URL: Import from URL
-'Enter the URL of the preferences JSON file:': 'Enter the URL of the preferences JSON file:'
-Save as file: Save as file
+Sync: Синхронизация
+Backup your preferences via user page: Резервное копирование ваших настроек через страницу пользователя
+Backup: Резервная копия
+Restore: Восстановить
+Import and export preferences: Импорт и экспорт настроек
+Import from file: Импорт из файла
+Import from URL: Импорт из URL
+'Enter the URL of the preferences JSON file:': 'Введите URL файла настроек JSON:'
+Save as file: Сохранить как файл
 # AnalyticsService
 InPageEdit Analytics: InPageEdit Analytics
-InPageEdit Analytics is the companion analytics platform for the InPageEdit NEXT project. By collecting and displaying usage data from around the world, it helps developers and the community better understand how the tool is used, optimize feature design, and enhance user experience.: InPageEdit Analytics is the companion analytics platform for the InPageEdit NEXT project. By collecting and displaying usage data from around the world, it helps developers and the community better understand how the tool is used, optimize feature design, and enhance user experience.
-What data will be collected?: What data will be collected?
-Usage data: Usage data
-When and which features you use, what pages you edit, etc.: When and which features you use, what pages you edit, etc.
-User information: User information
-Your user name and user ID.: Your user name and user ID.
-Site information: Site information
-"This wiki's url and site name.": "This wiki's url and site name."
-NO sensitive data will be collected.: NO sensitive data will be collected.
+InPageEdit Analytics is the companion analytics platform for the InPageEdit NEXT project. By collecting and displaying usage data from around the world, it helps developers and the community better understand how the tool is used, optimize feature design, and enhance user experience.: InPageEdit Analytics — это сопутствующая аналитическая платформа для проекта InPageEdit NEXT. Собирая и отображая данные об использовании со всего мира, она помогает разработчикам и сообществу лучше понять, как используется инструмент, оптимизировать дизайн функций и улучшить пользовательский опыт.
+What data will be collected?: Какие данные будут собираться?
+Usage data: Данные об использовании
+When and which features you use, what pages you edit, etc.: Когда и какие функции вы используете, какие страницы редактируете и т.д.
+User information: Информация о пользователе
+Your user name and user ID.: Ваше имя пользователя и идентификатор пользователя.
+Site information: Информация о сайте
+"This wiki's url and site name.": "URL этой вики и название сайта."
+NO sensitive data will be collected.: НИКАКИЕ конфиденциальные данные собираться НЕ БУДУТ.
 Analytics Platform: Analytics Platform
-View My Data: View My Data
-Enable Analytics: Enable Analytics
-Help us improve InPageEdit by sharing your usage data with us.: Help us improve InPageEdit by sharing your usage data with us.
+View My Data: Просмотреть мои данные
+Enable Analytics: Включить аналитику
+Help us improve InPageEdit by sharing your usage data with us.: Помогите нам улучшить InPageEdit, предоставив нам данные о вашем использовании.
 # WikiMetadataService
-Wiki Informations: Wiki Informations
-Site: Site
-User: User
-Groups: Groups
-If the information shown above is incorrect (for example, the user is not you), click the button below.: If the information shown above is incorrect (for example, the user is not you), click the button below.
-Clear caches & Reload: Clear caches & Reload
+Wiki Informations: Информация о вики
+Site: Сайт
+User: Пользователь
+Groups: Группы
+If the information shown above is incorrect (for example, the user is not you), click the button below.: Если показанная выше информация неверна (например, пользователь — это не вы), нажмите кнопку ниже.
+Clear caches & Reload: Очистить кэш и перезагрузить

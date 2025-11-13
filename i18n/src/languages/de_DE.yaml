@@ -1,212 +1,212 @@
 # Preferences UI
-Configure Preferences: Configure Preferences
-InPageEdit Preferences: InPageEdit Preferences
-Preferences Saved: Preferences Saved
-Some settings may take effect after reloading the page.: Some settings may take effect after reloading the page.
+Configure Preferences: Einstellungen konfigurieren
+InPageEdit Preferences: InPageEdit Einstellungen
+Preferences Saved: Einstellungen gespeichert
+Some settings may take effect after reloading the page.: Einige Einstellungen können nach dem erneuten Laden der Seite wirksam werden.
 # SchemaForm for Preferences
 prefs:
   about:
-    label: About
-    description: About InPageEdit
-    header: '✏️ InPageEdit NEXT'
+    label: Über
+    description: Über InPageEdit
+    header: ':Bleistift: InPageEdit NEXT'
     intro: '🚀 Modular, Extensible Supercharged Plugin for MediaWiki.'
     portals:
       header: Portals
-      officialwebsite: Official Website & Documentation
-      updatelogs: Update Logs
+      officialwebsite: Offizielle Website & Dokumentation
+      updatelogs: Protokolle aktualisieren
     joinus:
-      header: Join us
+      header: Begleiten Sie uns
       github: GitHub
-      qqgroup: QQ Group
-    copyright: 'InPageEdit-NEXT Copyright © 2025-{{ new Date().getFullYear() }} dragon-fish'
+      qqgroup: QQ-Gruppe
+    copyright: 'InPageEdit-NEXT Copyright ©️ 2025-{{ new Date().getFullYear() }} Drachenfische'
   editor:
-    label: Editor
+    label: Redakteur
   general:
-    label: General
+    label: Allgemein
   inArticleLinks:
-    $: In-article links preferences
-    label: In-article Links
-    enable: Enable in-article links
+    $: Einstellungen für Artikel-Links
+    label: Artikel-Links
+    enable: In-Artikel-Links aktivieren
     quickDiff:
-      enable: Enable in-article links for quick diff
+      enable: Aktiviere In-Artikel-Links für Schnelldiff
     quickEdit:
-      enable: Enable in-article links for quick edit
-      redlinks: Show quick edit button for redlinks
+      enable: Aktiviere In-Artikel-Links für schnelle Bearbeitung
+      redlinks: Schnellbearbeitungs-Button für Redlinks anzeigen
   quickPreview:
-    keyshortcut: Key shortcut to open quick preview in quick edit modal
+    keyshortcut: Tastenkürzel zum Öffnen der Schnellvorschau im Schnellbearbeitungsmodus
   toolboxAlwaysShow:
-    $: Toolbox™ preferences
-    description: Make the Toolbox™ opened by default
+    $: ToolboxTM-Einstellungen
+    description: Standardmäßig das ToolboxTM öffnen lassen
   quickEdit:
-    $: Quick edit options
-    editSummary: Default edit summary for quick edits
-    editMinor: Default to checking "minor edit" option
-    outSideClose: Close editor modal by clicking outside
-    watchList: Watchlist options
+    $: Schnellbearbeitungsoptionen
+    editSummary: Standard-Bearbeitungszusammenfassung für Schnellbearbeitung
+    editMinor: Standardeinstellung um "kleine Bearbeitung" zu aktivieren
+    outSideClose: Editor-Modal durch Klicken außerhalb schließen
+    watchList: Watchlist Optionen
     keyshortcut:
-      save: save button key shortcut (blank to disable)
-    editFont: Font to use in quick edit's textarea
+      save: speichere Tastenkombination (leer zum Deaktivieren)
+    editFont: Schriftart für Schnellbearbeitung
   quickDiff:
-    keyshortcut: Key shortcut to open quick diff in quick edit modal (blank to disable)
+    keyshortcut: Tastenkürzel zum Öffnen von Schnelldiff im Modal bearbeiten (leer zum Deaktivieren)
   quickRedirect:
-    $: Quick redirect options
-    reason: Default reason for quick redirect
+    $: Schnellumleitungsoptionen
+    reason: Standard-Grund für schnelle Weiterleitung
   quickMove:
-    $: Quick move options
-    reason: Default reason for quick move
+    $: Schnellzug-Optionen
+    reason: Standard-Grund für Schnellzug
   language:
-    $: Language preferences
-    language: Language
+    $: Spracheinstellungen
+    language: Sprache
   analytics:
     $: InPageEdit Analytics
-    enabled: Share my usage data with the community.
+    enabled: Teilen Sie meine Nutzungsdaten mit der Community.
   sync:
     label: Sync
 # Watchlist options
 watchlist:
-  preferences: Follow MW preferences
-  nochange: Keep current status
-  watch: Add to watchlist
-  unwatch: Remove from watchlist
+  preferences: MW Einstellungen folgen
+  nochange: Aktuellen Status behalten
+  watch: Zur Watchlist hinzufügen
+  unwatch: Aus der Watchlist entfernen
 # Common buttons
-OK: OK
+OK: Ok
 Yes: Yes
-Submit: Submit
-Save: Save
-Enable: Enable
+Submit: Absenden
+Save: Speichern
+Enable: Aktivieren
 No: No
-Cancel: Cancel
-Close: Close
-Disable: Disable
+Cancel: Abbrechen
+Close: Schließen
+Disable: Deaktivieren
 # Common form fields
 Summary: Summary
-Reason: Reason
+Reason: Grund
 Watchlist: Watchlist
-Minor edit: Minor edit
+Minor edit: Kleinere Bearbeitung
 # Common notifications
-Success: Success
-Warning: Warning
-Attention: Attention
-Important: Important
-Failed: Failed
-Error: Error
+Success: Erfolg
+Warning: Warnung
+Attention: Aufmerksamkeit
+Important: Wichtig
+Failed: Fehler
+Error: Fehler
 Info: Info
 # PluginQuickEdit
-Quick Edit: Quick Edit
-Quick Create: Quick Create
-New section: New section
-Not editable: Not editable
-Reload after save: Reload after save
-All edit contents will be lost after closing the modal. Are you sure you want to close?: '>- All edit contents will be lost after closing the modal. Are you sure you want to close?'
-Give Up: Give Up
-Continue Editing: Continue Editing
-'You are editing a <em>historical version</em> version; the content is not the latest!': You are editing a <em>historical version</em> version; the content is not the latest!
-This page does not exist.: This page does not exist.
-Topic for new section, this will be the h2 heading: Topic for new section, this will be the h2 heading
-Submission Successful: Submission Successful
-Submission Error: Submission Error
-Your changes have been saved.: Your changes have been saved.
-Special page is not editable.: Special page is not editable.
+Quick Edit: Schnell bearbeiten
+Quick Create: Schnell erstellen
+New section: Neuer Abschnitt
+Not editable: Nicht editierbar
+Reload after save: Nach dem Speichern neu laden
+All edit contents will be lost after closing the modal. Are you sure you want to close?: '>- Alle Bearbeitungsinhalte gehen nach dem Schließen des Modals verloren. Sind Sie sicher, dass Sie schließen möchten?'
+Give Up: Aufgeben
+Continue Editing: Bearbeiten fortsetzen
+'You are editing a <em>historical version</em> version; the content is not the latest!': Sie bearbeiten eine <em>historische Version</em> Version; der Inhalt ist nicht der aktuellste!
+This page does not exist.: Diese Seite existiert nicht.
+Topic for new section, this will be the h2 heading: Thema für neuen Abschnitt, dies wird die h2-Überschrift sein
+Submission Successful: Einreichung erfolgreich
+Submission Error: Einreichungsfehler
+Your changes have been saved.: Ihre Änderungen wurden gespeichert.
+Special page is not editable.: Sonderseite ist nicht editierbar.
 # PluginStore
-Plugin Store: Plugin Store
+Plugin Store: Plugin-Store
 Registry URLs: Registry URLs
-CDN to install packages from npm: CDN to install packages from npm
-Installed plugins: Installed plugins
+CDN to install packages from npm: CDN zum Installieren von Paketen von npm
+Installed plugins: Installierte Plugins
 Plugins: Plugins
-Registries: Registries
-Search plugins...: Search plugins...
-Refreshing...: Refreshing...
-Refresh: Refresh
-No matching plugins found: No matching plugins found
-Install: Install
-Add: Add
-Remove: Remove
-Adding...: Adding...
-No registries configured: No registries configured
-Setup default registry: Setup default registry
-Add registry URL: Add registry URL
+Registries: Registrieren
+Search plugins...: Plugins suchen...
+Refreshing...: Aktualisieren...
+Refresh: Aktualisieren
+No matching plugins found: Keine passenden Plugins gefunden
+Install: Installieren
+Add: Neu
+Remove: Entfernen
+Adding...: Hinzufügen...
+No registries configured: Keine Registrierungen konfiguriert
+Setup default registry: Standardregistry einrichten
+Add registry URL: Registrierungs-URL hinzufügen
 plugin-store:
   tags:
-    broken: '⚠️ broken'
+    broken: ':Warnung: defekt'
     installed: '✓'
   broken:
-    registry-unavailable: '[Recommend to uninstall] The registry is unavailable. Try refreshing or re-adding the registry to fix this issue.'
-    plugin-removed: '[Recommend to uninstall] This plugin was removed from the registry. Try refreshing the registry to confirm.'
+    registry-unavailable: '[Empfohlen zum Deinstallieren] Die Registry ist nicht verfügbar. Versuchen Sie, die Registry zu aktualisieren oder erneut hinzuzufügen, um dieses Problem zu beheben.'
+    plugin-removed: '[Empfohlen zum Deinstallieren] Dieses Plugin wurde aus der Registry entfernt. Versuchen Sie, die Registry neu zu aktualisieren, um sie zu bestätigen.'
   remove-registry:
-    title: Remove registry
-    tip-content: 'Remove registry:'
-    confirm-content: "There {{ count < 1 ? 'is' : 'are' }} {{ count }} installed {{ count < 1 ? 'plugin' : 'plugins' }} from this registry:"
-    remove-success: Registry removed.
-    remove-with-plugins-success: "Registry removed and {{ count }} {{ count < 1 ? 'plugin' : 'plugins' }} uninstalled."
+    title: Registry entfernen
+    tip-content: 'Registry entfernen:'
+    confirm-content: "Es gibt {{ count < 1 ? 'is' : 'are' }} {{ count }} installiert {{ count < 1 ? 'plugin' : 'plugins' }} aus dieser Registrierung:"
+    remove-success: Registry entfernt.
+    remove-with-plugins-success: "Registry entfernt und {{ count }} {{ count < 1 ? 'plugin' : 'plugins' }} deinstalliert."
     buttons:
-      remove-only: Remove only
-      remove-and-uninstall: Remove and uninstall plugins
+      remove-only: Nur entfernen
+      remove-and-uninstall: Plugins entfernen und deinstallieren
 # PluginQuickMove
-Quick Move: Quick Move
-Move from: Move from
-Move to: Move to
-Move talk page: Move talk page
-Move subpages (up to 100): Move subpages (up to 100)
-Move without leaving a redirect: Move without leaving a redirect
-Move: Move
+Quick Move: Schnellzug
+Move from: Verschieben von
+Move to: Verschieben nach
+Move talk page: Talk-Seite verschieben
+Move subpages (up to 100): Unterseiten verschieben (bis zu 100)
+Move without leaving a redirect: Bewegen ohne Umleitung
+Move: Bewegen
 # PluginQuickRedirect
-Quick Redirect: Quick Redirect
-Redirect from: Redirect from
-Redirect to: Redirect to
-Force create redirect even if the from page already exists: Force create redirect even if the from page already exists
-Delete from page if it exists: Delete from page if it exists
-Create Redirect: Create Redirect
+Quick Redirect: Schnelle Weiterleitung
+Redirect from: Weiterleitung von
+Redirect to: Weiterleitung zu
+Force create redirect even if the from page already exists: Erzwinge Umleitung auch wenn die Absenderseite bereits existiert
+Delete from page if it exists: Von der Seite löschen, wenn sie existiert
+Create Redirect: Weiterleitung erstellen
 # PluginQuickPreview
-Quick Preview: Quick Preview
-Preview: Preview
-Preview - Loading...: Preview - Loading...
-'Preview - {{ $1 }}': 'Preview - {{ $1 }}'
+Quick Preview: Schnellvorschau
+Preview: Vorschau
+Preview - Loading...: Vorschau - Laden...
+'Preview - {{ $1 }}': 'Vorschau - {{ $1 }}'
 # PluginQuickDiff
-Quick Diff: Quick Diff
+Quick Diff: Schneller Diff
 Diff: Diff
-No changes: No changes
-Loading diff...: Loading diff...
-Differences: Differences
-Unsaved Changes: Unsaved Changes
-Original content: Original content
-Your content: Your content
+No changes: Keine Änderungen
+Loading diff...: Diff wird geladen...
+Differences: Unterschiede
+Unsaved Changes: Ungespeicherte Änderungen
+Original content: Originalinhalt
+Your content: Ihr Inhalt
 quick-diff:
-  previous: Previous
-  next: Next
-  newest-version: Newest version
-  oldest-version: Oldest version
-  original-compare-page: Original Compare Page
-  failed-to-load-diff: Failed to load diff
+  previous: Vorherige
+  next: Nächste
+  newest-version: Neueste Version
+  oldest-version: Älteste Version
+  original-compare-page: Originalseite vergleichen
+  failed-to-load-diff: Fehler beim Laden von Diff
   x-bytes: "{{ $1 }} byte{{ $1 !== 1 ? 's' : '' }}"
 # PluginPreferencesSync
 Sync: Sync
-Backup your preferences via user page: Backup your preferences via user page
-Backup: Backup
-Restore: Restore
-Import and export preferences: Import and export preferences
-Import from file: Import from file
-Import from URL: Import from URL
-'Enter the URL of the preferences JSON file:': 'Enter the URL of the preferences JSON file:'
-Save as file: Save as file
+Backup your preferences via user page: Sichern Sie Ihre Einstellungen über die Benutzerseite
+Backup: Sichern
+Restore: Wiederherstellen
+Import and export preferences: Einstellungen importieren und exportieren
+Import from file: Aus Datei importieren
+Import from URL: Von URL importieren
+'Enter the URL of the preferences JSON file:': 'Geben Sie die URL der JSON-Einstellungen ein:'
+Save as file: Als Datei speichern
 # AnalyticsService
 InPageEdit Analytics: InPageEdit Analytics
-InPageEdit Analytics is the companion analytics platform for the InPageEdit NEXT project. By collecting and displaying usage data from around the world, it helps developers and the community better understand how the tool is used, optimize feature design, and enhance user experience.: InPageEdit Analytics is the companion analytics platform for the InPageEdit NEXT project. By collecting and displaying usage data from around the world, it helps developers and the community better understand how the tool is used, optimize feature design, and enhance user experience.
-What data will be collected?: What data will be collected?
-Usage data: Usage data
-When and which features you use, what pages you edit, etc.: When and which features you use, what pages you edit, etc.
-User information: User information
-Your user name and user ID.: Your user name and user ID.
-Site information: Site information
-"This wiki's url and site name.": "This wiki's url and site name."
-NO sensitive data will be collected.: NO sensitive data will be collected.
-Analytics Platform: Analytics Platform
-View My Data: View My Data
-Enable Analytics: Enable Analytics
-Help us improve InPageEdit by sharing your usage data with us.: Help us improve InPageEdit by sharing your usage data with us.
+InPageEdit Analytics is the companion analytics platform for the InPageEdit NEXT project. By collecting and displaying usage data from around the world, it helps developers and the community better understand how the tool is used, optimize feature design, and enhance user experience.: InPageEdit Analytics ist die Begleitanalyseplattform für das InPageEdit NEXT Projekt. Durch das Sammeln und Anzeigen von Nutzungsdaten aus der ganzen Welt Es hilft Entwicklern und der Community besser zu verstehen, wie das Tool verwendet wird, das Feature-Design zu optimieren und das Benutzererlebnis zu verbessern.
+What data will be collected?: Welche Daten werden gesammelt?
+Usage data: Nutzungsdaten
+When and which features you use, what pages you edit, etc.: Wann und welche Funktionen Sie verwenden, welche Seiten Sie bearbeiten, etc.
+User information: Benutzerinformationen
+Your user name and user ID.: Ihr Benutzername und Ihre Benutzer-ID.
+Site information: Site-Informationen
+"This wiki's url and site name.": "Dieser Wikis url und Site-Name."
+NO sensitive data will be collected.: Es werden keine sensiblen Daten gesammelt.
+Analytics Platform: Analyseplattform
+View My Data: Meine Daten anzeigen
+Enable Analytics: Analytik aktivieren
+Help us improve InPageEdit by sharing your usage data with us.: Helfen Sie uns, InPageEdit zu verbessern, indem Sie Ihre Nutzungsdaten mit uns teilen.
 # WikiMetadataService
-Wiki Informations: Wiki Informations
+Wiki Informations: Wiki-Informationen
 Site: Site
-User: User
-Groups: Groups
-If the information shown above is incorrect (for example, the user is not you), click the button below.: If the information shown above is incorrect (for example, the user is not you), click the button below.
-Clear caches & Reload: Clear caches & Reload
+User: Benutzer
+Groups: Gruppen
+If the information shown above is incorrect (for example, the user is not you), click the button below.: Wenn die oben angezeigten Informationen falsch sind (zum Beispiel ist der Benutzer nicht Sie), klicken Sie auf die Schaltfläche unten.
+Clear caches & Reload: Caches leeren & neu laden
