@@ -12,7 +12,7 @@ prefs:
     intro: '🚀 Modular, Extensible Supercharged Plugin for MediaWiki.'
     portals:
       header: Portals
-      officialwebsite: Official Website
+      officialwebsite: Official Website & Documentation
       updatelogs: Update Logs
     joinus:
       header: Join us
@@ -47,7 +47,7 @@ prefs:
       save: save button key shortcut (blank to disable)
     editFont: Font to use in quick edit's textarea
   quickDiff:
-    keyshortcut: Key shortcut to open quick diff in quick edit modal
+    keyshortcut: Key shortcut to open quick diff in quick edit modal (blank to disable)
   quickRedirect:
     $: Quick redirect options
     reason: Default reason for quick redirect
