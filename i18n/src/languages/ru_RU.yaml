@@ -97,7 +97,7 @@ Quick Create: Быстрое создание
 New section: Новый раздел
 Not editable: Не редактируется
 Reload after save: Перезагрузить после сохранения
-All edit contents will be lost after closing the modal. Are you sure you want to close?: '>- После закрытия модальности все изменения будут потеряны. Вы уверены, что хотите закрыть?'
+All edit contents will be lost after closing the modal. Are you sure you want to close?: 'Все содержимое редактирования будет потеряно после закрытия модального режима. Вы уверены, что хотите закрыть?'
 Give Up: Отказаться
 Continue Editing: Продолжить редактирование
 'You are editing a <em>historical version</em> version; the content is not the latest!': Вы редактируете <em>историческую версию</em>; это не последняя версия содержимого!

@@ -97,7 +97,7 @@ Quick Create: Швидко створити
 New section: Нова секція
 Not editable: Доступно для редагування
 Reload after save: Перезавантажити після збереження
-All edit contents will be lost after closing the modal. Are you sure you want to close?: '>- Після закриття моду буде втрачено весь вміст редагування. Ви впевнені, що хочете закрити?'
+All edit contents will be lost after closing the modal. Are you sure you want to close?: 'Весь вміст редагування буде втрачено після закриття моду. Ви впевнені, що хочете закрити?'
 Give Up: Відмовитися
 Continue Editing: Продовжити редагування
 'You are editing a <em>historical version</em> version; the content is not the latest!': You are editing a <em>historical version</em> version; the content is not the latest!

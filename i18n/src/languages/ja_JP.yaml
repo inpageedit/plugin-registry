@@ -97,7 +97,7 @@ Quick Create: クイック作成
 New section: 新しい節
 Not editable: 編集不可
 Reload after save: 保存後に再読み込み
-All edit contents will be lost after closing the modal. Are you sure you want to close?: '>- モーダルを閉じると、すべての編集内容が失われます。本当に閉じますか？'
+All edit contents will be lost after closing the modal. Are you sure you want to close?: 'モーダルを閉じると、すべての編集内容が失われます。本当に閉じますか？'
 Give Up: 諦める
 Continue Editing: 編集を続ける
 'You are editing a <em>historical version</em> version; the content is not the latest!': <em>過去の版</em>を編集中です。内容は最新版ではありません！

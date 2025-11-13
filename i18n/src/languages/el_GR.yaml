@@ -97,7 +97,7 @@ Quick Create: Γρήγορη Δημιουργία
 New section: Νέα ενότητα
 Not editable: Μη επεξεργάσιμο
 Reload after save: Επαναφόρτωση μετά την αποθήκευση
-All edit contents will be lost after closing the modal. Are you sure you want to close?: '>- Όλα τα περιεχόμενα επεξεργασίας θα χαθούν μετά το κλείσιμο του modal. Είστε σίγουροι ότι θέλετε να κλείσετε?'
+All edit contents will be lost after closing the modal. Are you sure you want to close?: 'Όλα τα περιεχόμενα επεξεργασίας θα χαθούν μετά το κλείσιμο του μοντέλου. Είστε σίγουροι ότι θέλετε να κλείσετε?'
 Give Up: Δώστε Επάνω
 Continue Editing: Συνεχίστε Την Επεξεργασία
 'You are editing a <em>historical version</em> version; the content is not the latest!': Επεξεργάζεστε μια έκδοση <em>ιστορικής έκδοσης</em> . Το περιεχόμενο δεν είναι το τελευταίο!

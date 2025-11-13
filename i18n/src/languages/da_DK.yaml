@@ -97,7 +97,7 @@ Quick Create: Hurtig Oprettelse
 New section: Ny sektion
 Not editable: Kan ikke redigeres
 Reload after save: Genindlæs efter gemning
-All edit contents will be lost after closing the modal. Are you sure you want to close?: '>- Alt redigeringsindhold vil gå tabt efter du har lukket modalen. Er du sikker på, at du vil lukke?'
+All edit contents will be lost after closing the modal. Are you sure you want to close?: 'Alt redigeringsindhold vil gå tabt efter at du har lukket modalen. Er du sikker på, at du vil lukke?'
 Give Up: Giv Op
 Continue Editing: Fortsæt Redigering
 'You are editing a <em>historical version</em> version; the content is not the latest!': Du redigerer en <em>historisk version</em> -version; indholdet er ikke det seneste!

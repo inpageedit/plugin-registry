@@ -97,7 +97,7 @@ Quick Create: 快速创建
 New section: 新建章节
 Not editable: 不可编辑
 Reload after save: 保存后刷新页面
-All edit contents will be lost after closing the modal. Are you sure you want to close?: '>-所有编辑内容将在关闭版面后丢失。您确定要关闭吗？'
+All edit contents will be lost after closing the modal. Are you sure you want to close?: '所有编辑内容在关闭后将丢失。您确定要关闭吗？'
 Give Up: 放弃
 Continue Editing: 继续编辑
 'You are editing a <em>historical version</em> version; the content is not the latest!': 您正在编辑一个<em>历史版本</em>；内容不是最新的！
