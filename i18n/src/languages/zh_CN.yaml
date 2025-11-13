@@ -97,16 +97,16 @@ Quick Create: 快速创建
 New section: 新建章节
 Not editable: 不可编辑
 Reload after save: 保存后刷新页面
-All edit contents will be lost after closing the modal. Are you sure you want to close?: '>- 关闭弹窗后所有编辑内容将会丢失。确定要关闭吗？'
+All edit contents will be lost after closing the modal. Are you sure you want to close?: '>-所有编辑内容将在关闭版面后丢失。您确定要关闭吗？'
 Give Up: 放弃
 Continue Editing: 继续编辑
 'You are editing a <em>historical version</em> version; the content is not the latest!': 您正在编辑一个<em>历史版本</em>；内容不是最新的！
 This page does not exist.: 此页面不存在。
 Topic for new section, this will be the h2 heading: 新章节的主题，这将作为二级标题
 Submission Successful: 提交成功
-Submission Error: 提交错误
+Submission Error: 提交失败
 Your changes have been saved.: 您的更改已保存。
-Special page is not editable.: 特殊页面不可编辑。
+Special page is not editable.: 不能编辑特殊页面。
 # PluginStore
 Plugin Store: 插件商店
 Registry URLs: 注册表 URL
@@ -114,17 +114,17 @@ CDN to install packages from npm: 从 npm 安装包的 CDN
 Installed plugins: 已安装插件
 Plugins: 插件
 Registries: 注册表
-Search plugins...: 搜索插件...
-Refreshing...: 刷新中...
+Search plugins...: 搜索插件……
+Refreshing...: 刷新中……
 Refresh: 刷新
-No matching plugins found: 未找到匹配的插件
+No matching plugins found: 未找到相关插件
 Install: 安装
 Add: 添加
 Remove: 移除
-Adding...: 添加中...
+Adding...: 添加中……
 No registries configured: 未配置注册表
-Setup default registry: 设置默认注册表
-Add registry URL: 添加注册表 URL
+Setup default registry: 使用默认注册表
+Add registry URL: 通过 URL 添加注册表
 plugin-store:
   tags:
     broken: '⚠️ 已损坏'
@@ -190,7 +190,7 @@ Import from URL: 从 URL 导入
 Save as file: 保存为文件
 # AnalyticsService
 InPageEdit Analytics: InPageEdit Analytics
-InPageEdit Analytics is the companion analytics platform for the InPageEdit NEXT project. By collecting and displaying usage data from around the world, it helps developers and the community better understand how the tool is used, optimize feature design, and enhance user experience.: InPageEdit Analytics 是 InPageEdit NEXT 项目的配套分析平台。通过收集和展示来自全球的使用数据，它帮助开发者和社区更好地了解该工具的使用情况、优化功能设计并提升用户体验。
+InPageEdit Analytics is the companion analytics platform for the InPageEdit NEXT project. By collecting and displaying usage data from around the world, it helps developers and the community better understand how the tool is used, optimize feature design, and enhance user experience.: InPageEdit Analytics 是 InPageEdit NEXT 项目的配套分析平台。它通过收集和展示来自全球的使用数据，帮助开发者和社区更好地了解该工具的使用情况、优化功能设计并提升用户体验。
 What data will be collected?: 会收集哪些数据？
 Usage data: 使用数据
 When and which features you use, what pages you edit, etc.: 您何时使用哪些功能、编辑哪些页面等。
@@ -199,14 +199,14 @@ Your user name and user ID.: 您的用户名和用户 ID。
 Site information: 站点信息
 "This wiki's url and site name.": "此 wiki 的 URL 和站点名称。"
 NO sensitive data will be collected.: 不会收集任何敏感数据。
-Analytics Platform: 分析平台
+Analytics Platform: Analytics Platform
 View My Data: 查看我的数据
-Enable Analytics: 启用分析
+Enable Analytics: 启用 Analytics
 Help us improve InPageEdit by sharing your usage data with us.: 通过与我们分享您的使用数据，帮助我们改进 InPageEdit。
 # WikiMetadataService
 Wiki Informations: Wiki 信息
 Site: 站点
 User: 用户
 Groups: 用户组
-If the information shown above is incorrect (for example, the user is not you), click the button below.: 如果上方显示的信息不正确（例如，用户不是您），请点击下方按钮。
+If the information shown above is incorrect (for example, the user is not you), click the button below.: 如果上方显示的信息不正确（例如显示的不是您的用户名），请点击下方按钮。
 Clear caches & Reload: 清除缓存并重新加载
