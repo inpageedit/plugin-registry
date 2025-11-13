@@ -1,212 +1,212 @@
 # Preferences UI
-Configure Preferences: Configure Preferences
-InPageEdit Preferences: InPageEdit Preferences
-Preferences Saved: Preferences Saved
-Some settings may take effect after reloading the page.: Some settings may take effect after reloading the page.
+Configure Preferences: Ρύθμιση Προτιμήσεων
+InPageEdit Preferences: Προτιμήσεις InpageEdit
+Preferences Saved: Οι Προτιμήσεις Αποθηκεύτηκαν
+Some settings may take effect after reloading the page.: Μερικές ρυθμίσεις μπορεί να τεθούν σε ισχύ μετά την επαναφόρτωση της σελίδας.
 # SchemaForm for Preferences
 prefs:
   about:
-    label: About
-    description: About InPageEdit
+    label: Σχετικά
+    description: Σχετικά Με InpageEdit
     header: '✏️ InPageEdit NEXT'
-    intro: '🚀 Modular, Extensible Supercharged Plugin for MediaWiki.'
+    intro: '🚀 Modular, Extensible Supercharged Plugin για το MediaWiki.'
     portals:
       header: Portals
-      officialwebsite: Official Website & Documentation
-      updatelogs: Update Logs
+      officialwebsite: Επίσημη Ιστοσελίδα & Τεκμηρίωση
+      updatelogs: Αρχεία Καταγραφής Ενημέρωσης
     joinus:
-      header: Join us
+      header: Ελάτε μαζί μας
       github: GitHub
-      qqgroup: QQ Group
-    copyright: 'InPageEdit-NEXT Copyright © 2025-{{ new Date().getFullYear() }} dragon-fish'
+      qqgroup: Ομάδα QQ
+    copyright: 'Πνευματικά δικαιώματα ©️ 2025 -{{ new Date().getFullYear() }} dragon-fish'
   editor:
-    label: Editor
+    label: Επεξεργαστής
   general:
-    label: General
+    label: Γενικά
   inArticleLinks:
-    $: In-article links preferences
-    label: In-article Links
-    enable: Enable in-article links
+    $: Προτιμήσεις συνδέσμων στο άρθρο
+    label: Σύνδεσμοι Στο Άρθρο
+    enable: Ενεργοποίηση συνδέσμων εντός άρθρου
     quickDiff:
-      enable: Enable in-article links for quick diff
+      enable: Ενεργοποίηση συνδέσμων εντός άρθρου για γρήγορο diff
     quickEdit:
-      enable: Enable in-article links for quick edit
-      redlinks: Show quick edit button for redlinks
+      enable: Ενεργοποίηση συνδέσμων εντός άρθρου για γρήγορη επεξεργασία
+      redlinks: Εμφάνιση κουμπιού γρήγορης επεξεργασίας για redlinks
   quickPreview:
-    keyshortcut: Key shortcut to open quick preview in quick edit modal
+    keyshortcut: Συντόμευση πλήκτρων για άνοιγμα γρήγορης προεπισκόπησης στο modal γρήγορης επεξεργασίας
   toolboxAlwaysShow:
-    $: Toolbox™ preferences
-    description: Make the Toolbox™ opened by default
+    $: Προτιμήσεις ToolboxTM
+    description: Κάντε το ToolboxTM ανοιχτό από προεπιλογή
   quickEdit:
-    $: Quick edit options
-    editSummary: Default edit summary for quick edits
-    editMinor: Default to checking "minor edit" option
-    outSideClose: Close editor modal by clicking outside
-    watchList: Watchlist options
+    $: Γρήγορες επιλογές επεξεργασίας
+    editSummary: Προεπιλεγμένη περίληψη επεξεργασίας για γρήγορες αλλαγές
+    editMinor: Προεπιλογή ελέγχου της επιλογής "δευτερεύουσα επεξεργασία"
+    outSideClose: Κλείσιμο modal επεξεργαστή κάνοντας κλικ έξω
+    watchList: Επιλογές λίστας παρακολούθησης
     keyshortcut:
-      save: save button key shortcut (blank to disable)
-    editFont: Font to use in quick edit's textarea
+      save: αποθήκευση συντόμευσης πλήκτρου (κενό για απενεργοποίηση)
+    editFont: Γραμματοσειρά για χρήση σε textarea γρήγορης επεξεργασίας
   quickDiff:
-    keyshortcut: Key shortcut to open quick diff in quick edit modal (blank to disable)
+    keyshortcut: Συντόμευση πλήκτρων για να ανοίξετε το γρήγορο diff στη λειτουργία γρήγορης επεξεργασίας (κενό για απενεργοποίηση)
   quickRedirect:
-    $: Quick redirect options
-    reason: Default reason for quick redirect
+    $: Γρήγορες επιλογές ανακατεύθυνσης
+    reason: Προεπιλεγμένος λόγος για γρήγορη ανακατεύθυνση
   quickMove:
-    $: Quick move options
-    reason: Default reason for quick move
+    $: Επιλογές γρήγορης κίνησης
+    reason: Προεπιλεγμένος λόγος γρήγορης κίνησης
   language:
-    $: Language preferences
-    language: Language
+    $: Προτιμήσεις γλώσσας
+    language: Γλώσσα
   analytics:
-    $: InPageEdit Analytics
-    enabled: Share my usage data with the community.
+    $: Αναλύσεις InpageEdit
+    enabled: Μοιραστείτε τα δεδομένα χρήσης μου με την κοινότητα.
   sync:
-    label: Sync
+    label: Συγχρονισμός
 # Watchlist options
 watchlist:
-  preferences: Follow MW preferences
-  nochange: Keep current status
-  watch: Add to watchlist
-  unwatch: Remove from watchlist
+  preferences: Ακολουθήστε τις προτιμήσεις MW
+  nochange: Διατήρηση τρέχουσας κατάστασης
+  watch: Προσθήκη στη λίστα παρακολούθησης
+  unwatch: Αφαίρεση από τη λίστα παρακολούθησης
 # Common buttons
-OK: OK
+OK: Εντάξει
 Yes: Yes
-Submit: Submit
-Save: Save
-Enable: Enable
+Submit: Υποβολή
+Save: Αποθήκευση
+Enable: Ενεργοποίηση
 No: No
-Cancel: Cancel
-Close: Close
-Disable: Disable
+Cancel: Ακύρωση
+Close: Κλείσιμο
+Disable: Απενεργοποίηση
 # Common form fields
 Summary: Summary
-Reason: Reason
-Watchlist: Watchlist
-Minor edit: Minor edit
+Reason: Λόγος
+Watchlist: Λίστα Παρακολούθησης
+Minor edit: Δευτερεύουσα επεξεργασία
 # Common notifications
-Success: Success
-Warning: Warning
-Attention: Attention
-Important: Important
-Failed: Failed
-Error: Error
-Info: Info
+Success: Επιτυχία
+Warning: Προειδοποίηση
+Attention: Προσοχή
+Important: Σημαντικό
+Failed: Απέτυχε
+Error: Σφάλμα
+Info: Πληροφορίες
 # PluginQuickEdit
-Quick Edit: Quick Edit
-Quick Create: Quick Create
-New section: New section
-Not editable: Not editable
-Reload after save: Reload after save
-All edit contents will be lost after closing the modal. Are you sure you want to close?: '>- All edit contents will be lost after closing the modal. Are you sure you want to close?'
-Give Up: Give Up
-Continue Editing: Continue Editing
-'You are editing a <em>historical version</em> version; the content is not the latest!': You are editing a <em>historical version</em> version; the content is not the latest!
-This page does not exist.: This page does not exist.
-Topic for new section, this will be the h2 heading: Topic for new section, this will be the h2 heading
-Submission Successful: Submission Successful
-Submission Error: Submission Error
-Your changes have been saved.: Your changes have been saved.
-Special page is not editable.: Special page is not editable.
+Quick Edit: Γρήγορη Επεξεργασία
+Quick Create: Γρήγορη Δημιουργία
+New section: Νέα ενότητα
+Not editable: Μη επεξεργάσιμο
+Reload after save: Επαναφόρτωση μετά την αποθήκευση
+All edit contents will be lost after closing the modal. Are you sure you want to close?: '>- Όλα τα περιεχόμενα επεξεργασίας θα χαθούν μετά το κλείσιμο του modal. Είστε σίγουροι ότι θέλετε να κλείσετε?'
+Give Up: Δώστε Επάνω
+Continue Editing: Συνεχίστε Την Επεξεργασία
+'You are editing a <em>historical version</em> version; the content is not the latest!': Επεξεργάζεστε μια έκδοση <em>ιστορικής έκδοσης</em> . Το περιεχόμενο δεν είναι το τελευταίο!
+This page does not exist.: Αυτή η σελίδα δεν υπάρχει.
+Topic for new section, this will be the h2 heading: Θέμα για νέα ενότητα, αυτή θα είναι η κεφαλίδα h2
+Submission Successful: Επιτυχής Υποβολή
+Submission Error: Σφάλμα Υποβολής
+Your changes have been saved.: Οι αλλαγές σας αποθηκεύτηκαν.
+Special page is not editable.: Η ειδική σελίδα δεν είναι επεξεργάσιμη.
 # PluginStore
-Plugin Store: Plugin Store
-Registry URLs: Registry URLs
-CDN to install packages from npm: CDN to install packages from npm
-Installed plugins: Installed plugins
-Plugins: Plugins
-Registries: Registries
-Search plugins...: Search plugins...
-Refreshing...: Refreshing...
-Refresh: Refresh
-No matching plugins found: No matching plugins found
-Install: Install
-Add: Add
-Remove: Remove
-Adding...: Adding...
-No registries configured: No registries configured
-Setup default registry: Setup default registry
-Add registry URL: Add registry URL
+Plugin Store: Κατάστημα Πρόσθετων Λειτουργιών
+Registry URLs: Url Μητρώου
+CDN to install packages from npm: CDN για εγκατάσταση πακέτων από npm
+Installed plugins: Εγκατεστημένες πρόσθετες λειτουργίες
+Plugins: Πρόσθετα
+Registries: Μητρώα
+Search plugins...: Αναζήτηση προσθέτων...
+Refreshing...: Ανανέωση...
+Refresh: Ανανέωση
+No matching plugins found: Δεν βρέθηκαν αντίστοιχες πρόσθετες λειτουργίες
+Install: Εγκατάσταση
+Add: Προσθήκη
+Remove: Αφαίρεση
+Adding...: Προσθήκη...
+No registries configured: Δεν έχουν ρυθμιστεί μητρώα
+Setup default registry: Ρύθμιση προεπιλεγμένου μητρώου
+Add registry URL: Προσθήκη URL μητρώου
 plugin-store:
   tags:
-    broken: '⚠️ broken'
+    broken: '⚠️ σπασμένο'
     installed: '✓'
   broken:
-    registry-unavailable: '[Recommend to uninstall] The registry is unavailable. Try refreshing or re-adding the registry to fix this issue.'
-    plugin-removed: '[Recommend to uninstall] This plugin was removed from the registry. Try refreshing the registry to confirm.'
+    registry-unavailable: '[Προτείνετε να απεγκαταστήσετε] Το μητρώο δεν είναι διαθέσιμο. Δοκιμάστε να ανανεώσετε ή να επαναπροσδιορίσετε το μητρώο για να διορθώσετε αυτό το ζήτημα.'
+    plugin-removed: '[Προτείνετε την απεγκατάσταση] Αυτό το πρόσθετο αφαιρέθηκε από το μητρώο. Δοκιμάστε να ανανεώσετε το μητρώο για να επιβεβαιώσετε.'
   remove-registry:
-    title: Remove registry
-    tip-content: 'Remove registry:'
+    title: Κατάργηση μητρώου
+    tip-content: 'Αφαίρεση μητρώου:'
     confirm-content: "There {{ count < 1 ? 'is' : 'are' }} {{ count }} installed {{ count < 1 ? 'plugin' : 'plugins' }} from this registry:"
-    remove-success: Registry removed.
-    remove-with-plugins-success: "Registry removed and {{ count }} {{ count < 1 ? 'plugin' : 'plugins' }} uninstalled."
+    remove-success: Μητρώο αφαιρέθηκε.
+    remove-with-plugins-success: "Το μητρώο αφαιρέθηκε και το {{ count }} {mptomcount < 1 ? 'plugin' : 'plugins' }} απεγκαταστάθηκε."
     buttons:
-      remove-only: Remove only
-      remove-and-uninstall: Remove and uninstall plugins
+      remove-only: Αφαίρεση μόνο
+      remove-and-uninstall: Αφαίρεση και απεγκατάσταση προσθέτων
 # PluginQuickMove
-Quick Move: Quick Move
-Move from: Move from
-Move to: Move to
-Move talk page: Move talk page
-Move subpages (up to 100): Move subpages (up to 100)
-Move without leaving a redirect: Move without leaving a redirect
-Move: Move
+Quick Move: Γρήγορη Κίνηση
+Move from: Μετακίνηση από
+Move to: Μετακίνηση σε
+Move talk page: Μετακίνηση σελίδας ομιλίας
+Move subpages (up to 100): Μετακίνηση υποσελίδων (μέχρι το 100)
+Move without leaving a redirect: Μετακίνηση χωρίς να αφήσετε μια ανακατεύθυνση
+Move: Μετακίνηση
 # PluginQuickRedirect
-Quick Redirect: Quick Redirect
-Redirect from: Redirect from
-Redirect to: Redirect to
-Force create redirect even if the from page already exists: Force create redirect even if the from page already exists
-Delete from page if it exists: Delete from page if it exists
-Create Redirect: Create Redirect
+Quick Redirect: Γρήγορη Ανακατεύθυνση
+Redirect from: Ανακατεύθυνση από
+Redirect to: Ανακατεύθυνση σε
+Force create redirect even if the from page already exists: Εξαναγκασμός δημιουργίας ανακατεύθυνσης ακόμη και αν η σελίδα υπάρχει ήδη
+Delete from page if it exists: Διαγράψτε από τη σελίδα εάν υπάρχει
+Create Redirect: Δημιουργία Ανακατεύθυνσης
 # PluginQuickPreview
-Quick Preview: Quick Preview
-Preview: Preview
-Preview - Loading...: Preview - Loading...
+Quick Preview: Γρήγορη Προεπισκόπηση
+Preview: Προεπισκόπηση
+Preview - Loading...: Προεπισκόπηση - Φόρτωση...
 'Preview - {{ $1 }}': 'Preview - {{ $1 }}'
 # PluginQuickDiff
-Quick Diff: Quick Diff
+Quick Diff: Γρήγορο Diff
 Diff: Diff
-No changes: No changes
-Loading diff...: Loading diff...
-Differences: Differences
-Unsaved Changes: Unsaved Changes
-Original content: Original content
-Your content: Your content
+No changes: Δεν υπάρχουν αλλαγές
+Loading diff...: Φόρτωση diff...
+Differences: Διαφορές
+Unsaved Changes: Μη Αποθηκευμένες Αλλαγές
+Original content: Αρχικό περιεχόμενο
+Your content: Το περιεχόμενό σας
 quick-diff:
-  previous: Previous
-  next: Next
-  newest-version: Newest version
-  oldest-version: Oldest version
-  original-compare-page: Original Compare Page
-  failed-to-load-diff: Failed to load diff
-  x-bytes: "{{ $1 }} byte{{ $1 !== 1 ? 's' : '' }}"
+  previous: Προηγούμενο
+  next: Επόμενο
+  newest-version: Νεότερη έκδοση
+  oldest-version: Παλαιότερη έκδοση
+  original-compare-page: Αρχική Σελίδα Σύγκριση
+  failed-to-load-diff: Αποτυχία φόρτωσης diff
+  x-bytes: "{{ $1 }} byte{mptom$1 !== 1 ? 's' : '' }}"
 # PluginPreferencesSync
-Sync: Sync
-Backup your preferences via user page: Backup your preferences via user page
-Backup: Backup
-Restore: Restore
-Import and export preferences: Import and export preferences
-Import from file: Import from file
-Import from URL: Import from URL
-'Enter the URL of the preferences JSON file:': 'Enter the URL of the preferences JSON file:'
-Save as file: Save as file
+Sync: Συγχρονισμός
+Backup your preferences via user page: Δημιουργία αντιγράφων ασφαλείας των προτιμήσεων σας μέσω της σελίδας χρήστη
+Backup: Αντίγραφα Ασφαλείας
+Restore: Επαναφορά
+Import and export preferences: Προτιμήσεις εισαγωγής και εξαγωγής
+Import from file: Εισαγωγή από αρχείο
+Import from URL: Εισαγωγή από URL
+'Enter the URL of the preferences JSON file:': 'Εισάγετε τη διεύθυνση URL του αρχείου JSON προτιμήσεων:'
+Save as file: Αποθήκευση ως αρχείο
 # AnalyticsService
-InPageEdit Analytics: InPageEdit Analytics
-InPageEdit Analytics is the companion analytics platform for the InPageEdit NEXT project. By collecting and displaying usage data from around the world, it helps developers and the community better understand how the tool is used, optimize feature design, and enhance user experience.: InPageEdit Analytics is the companion analytics platform for the InPageEdit NEXT project. By collecting and displaying usage data from around the world, it helps developers and the community better understand how the tool is used, optimize feature design, and enhance user experience.
-What data will be collected?: What data will be collected?
-Usage data: Usage data
-When and which features you use, what pages you edit, etc.: When and which features you use, what pages you edit, etc.
-User information: User information
-Your user name and user ID.: Your user name and user ID.
-Site information: Site information
-"This wiki's url and site name.": "This wiki's url and site name."
-NO sensitive data will be collected.: NO sensitive data will be collected.
-Analytics Platform: Analytics Platform
-View My Data: View My Data
-Enable Analytics: Enable Analytics
-Help us improve InPageEdit by sharing your usage data with us.: Help us improve InPageEdit by sharing your usage data with us.
+InPageEdit Analytics: Αναλύσεις InpageEdit
+InPageEdit Analytics is the companion analytics platform for the InPageEdit NEXT project. By collecting and displaying usage data from around the world, it helps developers and the community better understand how the tool is used, optimize feature design, and enhance user experience.: Το InPageEdit Analytics είναι η συνοδευτική πλατφόρμα ανάλυσης για το έργο InPageEdit NEXT. Με τη συλλογή και την εμφάνιση δεδομένων χρήσης από όλο τον κόσμο, βοηθά τους προγραμματιστές και η κοινότητα να κατανοήσουν καλύτερα πώς χρησιμοποιείται το εργαλείο, να βελτιστοποιήσουν το σχεδιασμό χαρακτηριστικών και να βελτιώσουν την εμπειρία του χρήστη.
+What data will be collected?: Ποια δεδομένα θα συλλεχθούν?
+Usage data: Δεδομένα χρήσης
+When and which features you use, what pages you edit, etc.: Πότε και ποια χαρακτηριστικά χρησιμοποιείτε, ποιες σελίδες επεξεργάζεστε, κλπ.
+User information: Πληροφορίες χρήστη
+Your user name and user ID.: Το όνομα χρήστη και το ID χρήστη.
+Site information: Πληροφορίες ιστοσελίδας
+"This wiki's url and site name.": "Το όνομα url και site αυτού του wiki."
+NO sensitive data will be collected.: ΟΧΙ ευαίσθητα δεδομένα θα συλλεχθούν.
+Analytics Platform: Πλατφόρμα Αναλύσεων
+View My Data: Προβολή Των Δεδομένων Μου
+Enable Analytics: Ενεργοποίηση Analytics
+Help us improve InPageEdit by sharing your usage data with us.: Βοηθήστε μας να βελτιώσουμε την InPageEdit κοινοποιώντας τα δεδομένα χρήσης σας μαζί μας.
 # WikiMetadataService
-Wiki Informations: Wiki Informations
-Site: Site
-User: User
-Groups: Groups
-If the information shown above is incorrect (for example, the user is not you), click the button below.: If the information shown above is incorrect (for example, the user is not you), click the button below.
-Clear caches & Reload: Clear caches & Reload
+Wiki Informations: Πληροφορίες Wiki
+Site: Ιστοσελίδα
+User: Χρήστης
+Groups: Ομάδες
+If the information shown above is incorrect (for example, the user is not you), click the button below.: Εάν οι πληροφορίες που εμφανίζονται παραπάνω είναι εσφαλμένες (για παράδειγμα, ο χρήστης δεν είναι εσείς), κάντε κλικ στο παρακάτω κουμπί.
+Clear caches & Reload: Εκκαθάριση κρυπτών & Επαναφόρτωση
