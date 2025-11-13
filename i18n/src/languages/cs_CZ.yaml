@@ -97,7 +97,7 @@ Quick Create: Rychlé vytvoření
 New section: Nová sekce
 Not editable: Neupravitelné
 Reload after save: Znovu načíst po uložení
-All edit contents will be lost after closing the modal. Are you sure you want to close?: '>- Veškerý obsah úprav bude po zavření modálu ztracen. Opravdu chcete zavřít?'
+All edit contents will be lost after closing the modal. Are you sure you want to close?: 'Veškerý obsah úprav bude po zavření modálu ztracen. Opravdu chcete zavřít?'
 Give Up: Dát nahoru
 Continue Editing: Pokračovat v úpravách
 'You are editing a <em>historical version</em> version; the content is not the latest!': Upravujete <em>historickou verzi</em> verzi; obsah není poslední!
