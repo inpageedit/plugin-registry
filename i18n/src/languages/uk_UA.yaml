@@ -1,212 +1,212 @@
 # Preferences UI
-Configure Preferences: Configure Preferences
-InPageEdit Preferences: InPageEdit Preferences
-Preferences Saved: Preferences Saved
-Some settings may take effect after reloading the page.: Some settings may take effect after reloading the page.
+Configure Preferences: Налаштування параметрів
+InPageEdit Preferences: Встановлення InPageEdit параметрів
+Preferences Saved: Налаштування збережено
+Some settings may take effect after reloading the page.: Деякі налаштування можуть набути чинності після перезавантаження сторінки.
 # SchemaForm for Preferences
 prefs:
   about:
-    label: About
-    description: About InPageEdit
+    label: Про програму
+    description: Про InPageEdit
     header: '✏️ InPageEdit NEXT'
-    intro: '🚀 Modular, Extensible Supercharged Plugin for MediaWiki.'
+    intro: '🚀 Модельний, Розширюваний Плагін для MediaWiki.'
     portals:
       header: Portals
-      officialwebsite: Official Website & Documentation
-      updatelogs: Update Logs
+      officialwebsite: Офіційний сайт і документація
+      updatelogs: Журнал оновлень
     joinus:
-      header: Join us
+      header: Приєднуйтесь до нас
       github: GitHub
-      qqgroup: QQ Group
-    copyright: 'InPageEdit-NEXT Copyright © 2025-{{ new Date().getFullYear() }} dragon-fish'
+      qqgroup: QQ група
+    copyright: 'InPageEdit-NEXT авторське право ©️ 2025-{{ new Date().getFullYear() }} дракона риба'
   editor:
-    label: Editor
+    label: Редактор
   general:
-    label: General
+    label: Загальні налаштування
   inArticleLinks:
-    $: In-article links preferences
-    label: In-article Links
-    enable: Enable in-article links
+    $: Поєднання посилань в статті
+    label: Посилання в статті
+    enable: Увімкнути посилання в статті
     quickDiff:
-      enable: Enable in-article links for quick diff
+      enable: Увімкнути посилання для швидкого порівняння
     quickEdit:
-      enable: Enable in-article links for quick edit
-      redlinks: Show quick edit button for redlinks
+      enable: Увімкнути посилання для швидкого редагування
+      redlinks: Показувати кнопку швидкого редагування для червоних посилань
   quickPreview:
-    keyshortcut: Key shortcut to open quick preview in quick edit modal
+    keyshortcut: Ключові ярлики, щоб відкрити швидкий попередній перегляд в швидкому редагуванні
   toolboxAlwaysShow:
-    $: Toolbox™ preferences
-    description: Make the Toolbox™ opened by default
+    $: Налаштування панелі інструментів ПП
+    description: Зробити ToolboxTM відкрита за замовчуванням
   quickEdit:
-    $: Quick edit options
-    editSummary: Default edit summary for quick edits
-    editMinor: Default to checking "minor edit" option
-    outSideClose: Close editor modal by clicking outside
-    watchList: Watchlist options
+    $: Параметри швидкого редагування
+    editSummary: Редагувати резюме для швидкого редагування
+    editMinor: Пошук опції "невелике редагування" за замовчуванням
+    outSideClose: Закрити режим модуля, натиснувши поза межею
+    watchList: Параметри списку спостереження
     keyshortcut:
-      save: save button key shortcut (blank to disable)
-    editFont: Font to use in quick edit's textarea
+      save: збережіть ярлик кнопки (порожнім для вимкнення)
+    editFont: Шрифт для швидкого зміни текстової області
   quickDiff:
-    keyshortcut: Key shortcut to open quick diff in quick edit modal (blank to disable)
+    keyshortcut: Поєднання клавіш для швидкого порівняння в швидкому редагуванні модального (порожнє, щоб вимкнути)
   quickRedirect:
-    $: Quick redirect options
-    reason: Default reason for quick redirect
+    $: Швидкі параметри перенаправлення
+    reason: Причина за замовчуванням для швидкого перенаправлення
   quickMove:
-    $: Quick move options
-    reason: Default reason for quick move
+    $: Швидке переміщення опцій
+    reason: Причина за замовчуванням для швидкого переміщення
   language:
-    $: Language preferences
-    language: Language
+    $: Налаштування мови
+    language: 'Мова:'
   analytics:
-    $: InPageEdit Analytics
-    enabled: Share my usage data with the community.
+    $: InPageEdit аналітика
+    enabled: Надіслати мої дані про використання спільноти.
   sync:
-    label: Sync
+    label: Синхр
 # Watchlist options
 watchlist:
-  preferences: Follow MW preferences
-  nochange: Keep current status
-  watch: Add to watchlist
-  unwatch: Remove from watchlist
+  preferences: Слідкуйте за настройками MW
+  nochange: Зберегти поточний статус
+  watch: Додати до списку перегляду
+  unwatch: Видалити зі списку перегляду
 # Common buttons
-OK: OK
+OK: Гаразд
 Yes: Yes
-Submit: Submit
-Save: Save
-Enable: Enable
+Submit: Ввести
+Save: Зберегти
+Enable: Увімкнено
 No: No
-Cancel: Cancel
-Close: Close
-Disable: Disable
+Cancel: Скасувати
+Close: Закрити
+Disable: Вимкнено
 # Common form fields
 Summary: Summary
-Reason: Reason
-Watchlist: Watchlist
-Minor edit: Minor edit
+Reason: Підстава
+Watchlist: Список перегляду
+Minor edit: Незначне редагування
 # Common notifications
-Success: Success
-Warning: Warning
-Attention: Attention
-Important: Important
-Failed: Failed
-Error: Error
-Info: Info
+Success: Успіх
+Warning: Застереження
+Attention: Увага
+Important: Важливе
+Failed: Не вдалося
+Error: Помилка
+Info: Інформація
 # PluginQuickEdit
-Quick Edit: Quick Edit
-Quick Create: Quick Create
-New section: New section
-Not editable: Not editable
-Reload after save: Reload after save
-All edit contents will be lost after closing the modal. Are you sure you want to close?: '>- All edit contents will be lost after closing the modal. Are you sure you want to close?'
-Give Up: Give Up
-Continue Editing: Continue Editing
+Quick Edit: Швидке редагування
+Quick Create: Швидко створити
+New section: Нова секція
+Not editable: Доступно для редагування
+Reload after save: Перезавантажити після збереження
+All edit contents will be lost after closing the modal. Are you sure you want to close?: '>- Після закриття моду буде втрачено весь вміст редагування. Ви впевнені, що хочете закрити?'
+Give Up: Відмовитися
+Continue Editing: Продовжити редагування
 'You are editing a <em>historical version</em> version; the content is not the latest!': You are editing a <em>historical version</em> version; the content is not the latest!
-This page does not exist.: This page does not exist.
-Topic for new section, this will be the h2 heading: Topic for new section, this will be the h2 heading
-Submission Successful: Submission Successful
-Submission Error: Submission Error
-Your changes have been saved.: Your changes have been saved.
-Special page is not editable.: Special page is not editable.
+This page does not exist.: Ця сторінка не існує.
+Topic for new section, this will be the h2 heading: Тема нової секції, це буде заголовок H2
+Submission Successful: Запропоноване посилання успішно
+Submission Error: Помилка сабміту
+Your changes have been saved.: Ваші зміни було збережено.
+Special page is not editable.: Спеціальна сторінка не редагується.
 # PluginStore
-Plugin Store: Plugin Store
-Registry URLs: Registry URLs
-CDN to install packages from npm: CDN to install packages from npm
-Installed plugins: Installed plugins
-Plugins: Plugins
-Registries: Registries
-Search plugins...: Search plugins...
-Refreshing...: Refreshing...
-Refresh: Refresh
-No matching plugins found: No matching plugins found
-Install: Install
-Add: Add
-Remove: Remove
-Adding...: Adding...
-No registries configured: No registries configured
-Setup default registry: Setup default registry
-Add registry URL: Add registry URL
+Plugin Store: Магазин плагінів
+Registry URLs: URL реєстру
+CDN to install packages from npm: CDN для встановлення пакетів npm
+Installed plugins: Встановлені плагіни
+Plugins: Плагіни
+Registries: Реєстри
+Search plugins...: Пошук плагінів...
+Refreshing...: Оновлення...
+Refresh: Оновити
+No matching plugins found: Відповідних плагінів не знайдено
+Install: Інсталювати
+Add: Додати
+Remove: Видалити
+Adding...: Додаємо...
+No registries configured: Реєстрація не налаштована
+Setup default registry: Інсталяційний реєстр за замовчуванням
+Add registry URL: Додати URL-адресу реєстру
 plugin-store:
   tags:
-    broken: '⚠️ broken'
+    broken: '⚠️ зламаний'
     installed: '✓'
   broken:
-    registry-unavailable: '[Recommend to uninstall] The registry is unavailable. Try refreshing or re-adding the registry to fix this issue.'
-    plugin-removed: '[Recommend to uninstall] This plugin was removed from the registry. Try refreshing the registry to confirm.'
+    registry-unavailable: '[Рекомендуємо видалити] Реєстр недоступний. Спробуйте оновити або повторно додати реєстр для виправлення цієї проблеми.'
+    plugin-removed: '[Рекомендуємо видалити] Цей плагін був видалений з реєстру. Спробуйте оновити реєстр для підтвердження.'
   remove-registry:
-    title: Remove registry
-    tip-content: 'Remove registry:'
+    title: Видалити реєстр
+    tip-content: 'Видалити реєстр:'
     confirm-content: "There {{ count < 1 ? 'is' : 'are' }} {{ count }} installed {{ count < 1 ? 'plugin' : 'plugins' }} from this registry:"
-    remove-success: Registry removed.
-    remove-with-plugins-success: "Registry removed and {{ count }} {{ count < 1 ? 'plugin' : 'plugins' }} uninstalled."
+    remove-success: Реєстр видалено.
+    remove-with-plugins-success: "Реєстр видалений і {{ count }} {count < 1 ? 'plugin' : 'plugins' }} видалено."
     buttons:
-      remove-only: Remove only
-      remove-and-uninstall: Remove and uninstall plugins
+      remove-only: Лише видалити
+      remove-and-uninstall: Видаляти й видаляти плагіни
 # PluginQuickMove
-Quick Move: Quick Move
-Move from: Move from
-Move to: Move to
-Move talk page: Move talk page
-Move subpages (up to 100): Move subpages (up to 100)
-Move without leaving a redirect: Move without leaving a redirect
-Move: Move
+Quick Move: Швидкий рух
+Move from: Перемістити з
+Move to: Перейти до
+Move talk page: Перемістити ток-сторінку
+Move subpages (up to 100): Перемістити підсторінки (до 100)
+Move without leaving a redirect: Рухатися не залишаючи перенаправлення
+Move: Пересунути
 # PluginQuickRedirect
-Quick Redirect: Quick Redirect
-Redirect from: Redirect from
-Redirect to: Redirect to
-Force create redirect even if the from page already exists: Force create redirect even if the from page already exists
-Delete from page if it exists: Delete from page if it exists
-Create Redirect: Create Redirect
+Quick Redirect: Швидка переадресація
+Redirect from: Перенаправлення з
+Redirect to: Перенаправити на
+Force create redirect even if the from page already exists: Примусово створювати перенаправлення, навіть якщо з цієї сторінки вже існує
+Delete from page if it exists: Видалити з сторінки, якщо вона існує
+Create Redirect: Створити перенаправлення
 # PluginQuickPreview
-Quick Preview: Quick Preview
-Preview: Preview
-Preview - Loading...: Preview - Loading...
-'Preview - {{ $1 }}': 'Preview - {{ $1 }}'
+Quick Preview: Швидкий перегляд
+Preview: Прев'ю
+Preview - Loading...: Перегляд - завантаження ...
+'Preview - {{ $1 }}': 'Перегляд - {{ $1 }}'
 # PluginQuickDiff
-Quick Diff: Quick Diff
-Diff: Diff
-No changes: No changes
-Loading diff...: Loading diff...
-Differences: Differences
-Unsaved Changes: Unsaved Changes
-Original content: Original content
-Your content: Your content
+Quick Diff: Швидкий перехід
+Diff: Різниця
+No changes: Без змін
+Loading diff...: Завантаження diff...
+Differences: Відмінності
+Unsaved Changes: Незбережені зміни
+Original content: Оригінальний вміст
+Your content: Ваш контент
 quick-diff:
-  previous: Previous
-  next: Next
-  newest-version: Newest version
-  oldest-version: Oldest version
-  original-compare-page: Original Compare Page
-  failed-to-load-diff: Failed to load diff
+  previous: Попереднє
+  next: Уперед
+  newest-version: Нова версія
+  oldest-version: Найстаріша версія
+  original-compare-page: Оригінальна сторінка
+  failed-to-load-diff: Не вдалося завантажити відмінність
   x-bytes: "{{ $1 }} byte{{ $1 !== 1 ? 's' : '' }}"
 # PluginPreferencesSync
-Sync: Sync
-Backup your preferences via user page: Backup your preferences via user page
-Backup: Backup
-Restore: Restore
-Import and export preferences: Import and export preferences
-Import from file: Import from file
-Import from URL: Import from URL
-'Enter the URL of the preferences JSON file:': 'Enter the URL of the preferences JSON file:'
-Save as file: Save as file
+Sync: Синхр
+Backup your preferences via user page: Зробити резервну копію ваших налаштувань через сторінку користувача
+Backup: Резервне копіювання
+Restore: Відновити
+Import and export preferences: Імпорт та експорт налаштувань
+Import from file: Імпортувати з файлу
+Import from URL: Імпорт з URL
+'Enter the URL of the preferences JSON file:': 'Введіть URL-адресу файла налаштувань:'
+Save as file: Зберегти як файл
 # AnalyticsService
-InPageEdit Analytics: InPageEdit Analytics
-InPageEdit Analytics is the companion analytics platform for the InPageEdit NEXT project. By collecting and displaying usage data from around the world, it helps developers and the community better understand how the tool is used, optimize feature design, and enhance user experience.: InPageEdit Analytics is the companion analytics platform for the InPageEdit NEXT project. By collecting and displaying usage data from around the world, it helps developers and the community better understand how the tool is used, optimize feature design, and enhance user experience.
-What data will be collected?: What data will be collected?
-Usage data: Usage data
-When and which features you use, what pages you edit, etc.: When and which features you use, what pages you edit, etc.
-User information: User information
-Your user name and user ID.: Your user name and user ID.
-Site information: Site information
-"This wiki's url and site name.": "This wiki's url and site name."
-NO sensitive data will be collected.: NO sensitive data will be collected.
-Analytics Platform: Analytics Platform
-View My Data: View My Data
-Enable Analytics: Enable Analytics
-Help us improve InPageEdit by sharing your usage data with us.: Help us improve InPageEdit by sharing your usage data with us.
+InPageEdit Analytics: InPageEdit аналітика
+InPageEdit Analytics is the companion analytics platform for the InPageEdit NEXT project. By collecting and displaying usage data from around the world, it helps developers and the community better understand how the tool is used, optimize feature design, and enhance user experience.: InPageEdit Analytics є платформою компаньйонна аналітика для проекту InPageEdit NEXT проекту. Збираючи та показуючи дані про використання з усього світу, це допоможе розробникам та спільноті краще зрозуміти як використовується інструмент, оптимізувати дизайн функцій та покращити досвід користувача.
+What data will be collected?: Які дані буде зібрано?
+Usage data: Використання даних
+When and which features you use, what pages you edit, etc.: Коли і який функціонал ви використовуєте, які сторінки ви редагуєте, і т.д.
+User information: Відомості про користувача
+Your user name and user ID.: Ім'я користувача та ID користувача.
+Site information: Інформація про сайт
+"This wiki's url and site name.": "Це посилання і назва сайту."
+NO sensitive data will be collected.: Нечутливі дані будуть зібрані.
+Analytics Platform: Аналітична платформа
+View My Data: Переглянути мої дані
+Enable Analytics: Увімкнути аналітику
+Help us improve InPageEdit by sharing your usage data with us.: Допоможіть нам покращити InPageEdit шляхом обміну даними про використання з нами.
 # WikiMetadataService
-Wiki Informations: Wiki Informations
-Site: Site
-User: User
-Groups: Groups
-If the information shown above is incorrect (for example, the user is not you), click the button below.: If the information shown above is incorrect (for example, the user is not you), click the button below.
-Clear caches & Reload: Clear caches & Reload
+Wiki Informations: Інформація Вікі
+Site: Сайт
+User: Користувач
+Groups: Групи
+If the information shown above is incorrect (for example, the user is not you), click the button below.: Якщо наведена вище інформація неправильна (наприклад, користувач не Ви), натисніть кнопку нижче.
+Clear caches & Reload: Очистити кеш і перезавантажити
