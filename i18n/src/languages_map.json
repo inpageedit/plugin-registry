@@ -1,110 +1,116 @@
 [
   {
+    "code": "af_ZA",
+    "iso_name": "Afrikaans",
+    "endonym": "Afrikaans",
+    "mw_code": "af"
+  },
+  {
     "code": "ar_SA",
-    "iso_name": "Arabic (Saudi Arabia)",
-    "endonym": "العربية (السعودية)",
+    "iso_name": "Arabic",
+    "endonym": "العربية",
     "mw_code": "ar"
   },
   {
-    "code": "bn_BD",
-    "iso_name": "Bengali (Bangladesh)",
-    "endonym": "বাংলা (বাংলাদেশ)",
-    "mw_code": "bn"
+    "code": "ca_ES",
+    "iso_name": "Catalan",
+    "endonym": "Català",
+    "mw_code": "ca"
+  },
+  {
+    "code": "cs_CZ",
+    "iso_name": "Czech",
+    "endonym": "Čeština",
+    "mw_code": "cs"
+  },
+  {
+    "code": "da_DK",
+    "iso_name": "Danish",
+    "endonym": "Dansk",
+    "mw_code": "da"
   },
   {
     "code": "de_DE",
-    "iso_name": "German (Germany)",
-    "endonym": "Deutsch (Deutschland)",
+    "iso_name": "German",
+    "endonym": "Deutsch",
     "mw_code": "de"
   },
   {
     "code": "el_GR",
-    "iso_name": "Greek (Greece)",
-    "endonym": "Ελληνικά (Ελλάδα)",
+    "iso_name": "Greek",
+    "endonym": "Ελληνικά",
     "mw_code": "el"
   },
   {
     "code": "en_US",
-    "iso_name": "English (United States)",
-    "endonym": "English (United States)",
+    "iso_name": "English (US)",
+    "endonym": "English",
     "mw_code": "en"
   },
   {
     "code": "es_ES",
     "iso_name": "Spanish (Spain)",
-    "endonym": "Español (España)",
+    "endonym": "Español",
     "mw_code": "es"
   },
   {
-    "code": "es_MX",
-    "iso_name": "Spanish (Mexico)",
-    "endonym": "Español (México)",
-    "mw_code": "es-mx"
-  },
-  {
-    "code": "fa_IR",
-    "iso_name": "Persian (Iran)",
-    "endonym": "فارسی (ایران)",
-    "mw_code": "fa"
+    "code": "fi_FI",
+    "iso_name": "Finnish",
+    "endonym": "Suomi",
+    "mw_code": "fi"
   },
   {
     "code": "fr_FR",
-    "iso_name": "French (France)",
-    "endonym": "Français (France)",
+    "iso_name": "French",
+    "endonym": "Français",
     "mw_code": "fr"
   },
   {
     "code": "he_IL",
-    "iso_name": "Hebrew (Israel)",
-    "endonym": "עברית (ישראל)",
+    "iso_name": "Hebrew",
+    "endonym": "עברית",
     "mw_code": "he"
   },
   {
-    "code": "hi_IN",
-    "iso_name": "Hindi (India)",
-    "endonym": "हिन्दी (भारत)",
-    "mw_code": "hi"
-  },
-  {
-    "code": "id_ID",
-    "iso_name": "Indonesian (Indonesia)",
-    "endonym": "Bahasa Indonesia",
-    "mw_code": "id"
+    "code": "hu_HU",
+    "iso_name": "Hungarian",
+    "endonym": "Magyar",
+    "mw_code": "hu"
   },
   {
     "code": "it_IT",
-    "iso_name": "Italian (Italy)",
-    "endonym": "Italiano (Italia)",
+    "iso_name": "Italian",
+    "endonym": "Italiano",
     "mw_code": "it"
   },
   {
     "code": "ja_JP",
-    "iso_name": "Japanese (Japan)",
-    "endonym": "日本語（日本）",
+    "iso_name": "Japanese",
+    "endonym": "日本語",
     "mw_code": "ja"
   },
   {
     "code": "ko_KR",
-    "iso_name": "Korean (South Korea)",
-    "endonym": "한국어 (대한민국)",
+    "iso_name": "Korean",
+    "endonym": "한국어",
     "mw_code": "ko"
   },
   {
-    "code": "ms_MY",
-    "iso_name": "Malay (Malaysia)",
-    "endonym": "Bahasa Melayu (Malaysia)",
-    "mw_code": "ms"
-  },
-  {
     "code": "nl_NL",
-    "iso_name": "Dutch (Netherlands)",
-    "endonym": "Nederlands (Nederland)",
+    "iso_name": "Dutch",
+    "endonym": "Nederlands",
     "mw_code": "nl"
   },
   {
+    "code": "no_NO",
+    "iso_name": "Norwegian",
+    "endonym": "Norsk",
+    "mw_code": "no"
+  },
+  {
     "code": "pl_PL",
-    "iso_name": "Polish (Poland)",
-    "endonym": "Polski (Polska)",
+    "iso_name": "Polish",
+    "endonym": "Polski",
     "mw_code": "pl"
   },
   {
@@ -121,50 +127,44 @@
   },
   {
     "code": "ro_RO",
-    "iso_name": "Romanian (Romania)",
-    "endonym": "Română (România)",
+    "iso_name": "Romanian",
+    "endonym": "Română",
     "mw_code": "ro"
   },
   {
     "code": "ru_RU",
-    "iso_name": "Russian (Russia)",
-    "endonym": "Русский (Россия)",
+    "iso_name": "Russian",
+    "endonym": "Русский",
     "mw_code": "ru"
   },
   {
-    "code": "sw_KE",
-    "iso_name": "Swahili (Kenya)",
-    "endonym": "Kiswahili (Kenya)",
-    "mw_code": "sw"
+    "code": "sr_SP",
+    "iso_name": "Serbian",
+    "endonym": "Српски",
+    "mw_code": "sr"
   },
   {
-    "code": "ta_IN",
-    "iso_name": "Tamil (India)",
-    "endonym": "தமிழ் (இந்தியா)",
-    "mw_code": "ta"
-  },
-  {
-    "code": "th_TH",
-    "iso_name": "Thai (Thailand)",
-    "endonym": "ไทย (ประเทศไทย)",
-    "mw_code": "th"
+    "code": "sv_SE",
+    "iso_name": "Swedish",
+    "endonym": "Svenska",
+    "mw_code": "sv"
   },
   {
     "code": "tr_TR",
-    "iso_name": "Turkish (Turkey)",
-    "endonym": "Türkçe (Türkiye)",
+    "iso_name": "Turkish",
+    "endonym": "Türkçe",
     "mw_code": "tr"
   },
   {
     "code": "uk_UA",
-    "iso_name": "Ukrainian (Ukraine)",
-    "endonym": "Українська (Україна)",
+    "iso_name": "Ukrainian",
+    "endonym": "Українська",
     "mw_code": "uk"
   },
   {
     "code": "vi_VN",
-    "iso_name": "Vietnamese (Vietnam)",
-    "endonym": "Tiếng Việt (Việt Nam)",
+    "iso_name": "Vietnamese",
+    "endonym": "Tiếng Việt",
     "mw_code": "vi"
   },
   {
