@@ -1,212 +1,212 @@
 # Preferences UI
-Configure Preferences: Configure Preferences
-InPageEdit Preferences: InPageEdit Preferences
-Preferences Saved: Preferences Saved
-Some settings may take effect after reloading the page.: Some settings may take effect after reloading the page.
+Configure Preferences: Konfigurera inställningar
+InPageEdit Preferences: InPageEdit-inställningar
+Preferences Saved: Inställningar sparade
+Some settings may take effect after reloading the page.: Vissa inställningar kan träda i kraft efter omladdning av sidan.
 # SchemaForm for Preferences
 prefs:
   about:
-    label: About
-    description: About InPageEdit
-    header: '✏️ InPageEdit NEXT'
-    intro: '🚀 Modular, Extensible Supercharged Plugin for MediaWiki.'
+    label: Om
+    description: Om InPageEdit
+    header: '✏️ InPageEdit NÄSTA'
+    intro: '🚀 Modulär, Extensible Supercharged Plugin för MediaWiki.'
     portals:
       header: Portals
-      officialwebsite: Official Website & Documentation
-      updatelogs: Update Logs
+      officialwebsite: Officiell webbplats och dokumentation
+      updatelogs: Uppdatera loggar
     joinus:
-      header: Join us
+      header: Gå med oss
       github: GitHub
-      qqgroup: QQ Group
-    copyright: 'InPageEdit-NEXT Copyright © 2025-{{ new Date().getFullYear() }} dragon-fish'
+      qqgroup: QQ Grupp
+    copyright: 'InPageEdit-NEXT Copyright ©️ 2025-{{ new Date().getFullYear() }} drakfiskar'
   editor:
-    label: Editor
+    label: Redigerare
   general:
-    label: General
+    label: Allmänt
   inArticleLinks:
-    $: In-article links preferences
-    label: In-article Links
-    enable: Enable in-article links
+    $: Inställningar för länkar i artikeln
+    label: I artikeln länkar
+    enable: Aktivera länkar i artikeln
     quickDiff:
-      enable: Enable in-article links for quick diff
+      enable: Aktivera länkar i artikeln för snabbdiff
     quickEdit:
-      enable: Enable in-article links for quick edit
-      redlinks: Show quick edit button for redlinks
+      enable: Aktivera länkar i artikeln för snabbredigering
+      redlinks: Visa snabbredigeringsknapp för redlinks
   quickPreview:
-    keyshortcut: Key shortcut to open quick preview in quick edit modal
+    keyshortcut: Nyckelgenväg för att öppna snabbförhandsgranskning i modal för snabbredigering
   toolboxAlwaysShow:
-    $: Toolbox™ preferences
-    description: Make the Toolbox™ opened by default
+    $: Inställningar för ToolboxTM
+    description: Gör ToolboxTM öppnad som standard
   quickEdit:
-    $: Quick edit options
-    editSummary: Default edit summary for quick edits
-    editMinor: Default to checking "minor edit" option
-    outSideClose: Close editor modal by clicking outside
-    watchList: Watchlist options
+    $: Snabbredigeringsalternativ
+    editSummary: Standard redigera sammanfattning för snabba redigeringar
+    editMinor: Standard för att kontrollera alternativet "mindre redigering"
+    outSideClose: Stäng redigerarmodalen genom att klicka utanför
+    watchList: Alternativ för bevakningslista
     keyshortcut:
-      save: save button key shortcut (blank to disable)
-    editFont: Font to use in quick edit's textarea
+      save: genväg för att spara knapptangenten (tomt för att inaktivera)
+    editFont: Typsnitt att använda i quick edits textarea
   quickDiff:
-    keyshortcut: Key shortcut to open quick diff in quick edit modal (blank to disable)
+    keyshortcut: Nyckelgenväg för att öppna snabbdiff i quick edit modal (tomt för att inaktivera)
   quickRedirect:
-    $: Quick redirect options
-    reason: Default reason for quick redirect
+    $: Snabb omdirigering alternativ
+    reason: Förvald anledning för snabb omdirigering
   quickMove:
-    $: Quick move options
-    reason: Default reason for quick move
+    $: Snabbflyttsalternativ
+    reason: Förvald anledning för snabbflyttning
   language:
-    $: Language preferences
-    language: Language
+    $: Språkinställningar
+    language: Språk
   analytics:
     $: InPageEdit Analytics
-    enabled: Share my usage data with the community.
+    enabled: Dela mina användningsdata med gemenskapen.
   sync:
-    label: Sync
+    label: Synk
 # Watchlist options
 watchlist:
-  preferences: Follow MW preferences
-  nochange: Keep current status
-  watch: Add to watchlist
-  unwatch: Remove from watchlist
+  preferences: Följ MW-inställningar
+  nochange: Behåll aktuell status
+  watch: Lägg till i bevakningslistan
+  unwatch: Ta bort från bevakningslistan
 # Common buttons
-OK: OK
+OK: Ok
 Yes: Yes
-Submit: Submit
-Save: Save
-Enable: Enable
+Submit: Skicka
+Save: Spara
+Enable: Aktivera
 No: No
-Cancel: Cancel
-Close: Close
-Disable: Disable
+Cancel: Avbryt
+Close: Stäng
+Disable: Inaktivera
 # Common form fields
 Summary: Summary
-Reason: Reason
-Watchlist: Watchlist
-Minor edit: Minor edit
+Reason: Anledning
+Watchlist: Vaktlista
+Minor edit: Mindre redigering
 # Common notifications
-Success: Success
-Warning: Warning
-Attention: Attention
-Important: Important
-Failed: Failed
-Error: Error
-Info: Info
+Success: Klart
+Warning: Varning
+Attention: Uppmärksamhet
+Important: Viktigt
+Failed: Misslyckades
+Error: Fel
+Info: Information
 # PluginQuickEdit
-Quick Edit: Quick Edit
-Quick Create: Quick Create
-New section: New section
-Not editable: Not editable
-Reload after save: Reload after save
-All edit contents will be lost after closing the modal. Are you sure you want to close?: '>- All edit contents will be lost after closing the modal. Are you sure you want to close?'
-Give Up: Give Up
-Continue Editing: Continue Editing
-'You are editing a <em>historical version</em> version; the content is not the latest!': You are editing a <em>historical version</em> version; the content is not the latest!
-This page does not exist.: This page does not exist.
-Topic for new section, this will be the h2 heading: Topic for new section, this will be the h2 heading
-Submission Successful: Submission Successful
-Submission Error: Submission Error
-Your changes have been saved.: Your changes have been saved.
-Special page is not editable.: Special page is not editable.
+Quick Edit: Snabb redigera
+Quick Create: Skapa snabbt
+New section: Ny avdelning
+Not editable: Inte redigerbar
+Reload after save: Ladda om efter spara
+All edit contents will be lost after closing the modal. Are you sure you want to close?: '>- Allt redigeringsinnehåll försvinner efter stängning av modalen. Är du säker på att du vill stänga?'
+Give Up: Ge upp
+Continue Editing: Fortsätt redigera
+'You are editing a <em>historical version</em> version; the content is not the latest!': Du redigerar en <em>historisk version</em> version; innehållet är inte det senaste!
+This page does not exist.: Denna sida finns inte.
+Topic for new section, this will be the h2 heading: Ämne för nya avsnitt, detta kommer att vara h2 rubriken
+Submission Successful: Inlämning lyckades
+Submission Error: Fel vid inlämning
+Your changes have been saved.: Dina ändringar har sparats.
+Special page is not editable.: Specialsidan är inte redigerbar.
 # PluginStore
-Plugin Store: Plugin Store
-Registry URLs: Registry URLs
-CDN to install packages from npm: CDN to install packages from npm
-Installed plugins: Installed plugins
-Plugins: Plugins
-Registries: Registries
-Search plugins...: Search plugins...
-Refreshing...: Refreshing...
-Refresh: Refresh
-No matching plugins found: No matching plugins found
-Install: Install
-Add: Add
-Remove: Remove
-Adding...: Adding...
-No registries configured: No registries configured
-Setup default registry: Setup default registry
-Add registry URL: Add registry URL
+Plugin Store: Plugin Butik
+Registry URLs: Registrets webbadresser
+CDN to install packages from npm: CDN för att installera paket från npm
+Installed plugins: Installerade plugins
+Plugins: Tillägg
+Registries: Register
+Search plugins...: Sök plugins...
+Refreshing...: Uppdaterar...
+Refresh: Uppdatera
+No matching plugins found: Inga matchande plugins hittades
+Install: Installera
+Add: Lägg till
+Remove: Radera
+Adding...: Lägger till...
+No registries configured: Inga register konfigurerade
+Setup default registry: Ställ in standardregistret
+Add registry URL: Lägg till register-URL
 plugin-store:
   tags:
-    broken: '⚠️ broken'
+    broken: '⚠️ trasig'
     installed: '✓'
   broken:
-    registry-unavailable: '[Recommend to uninstall] The registry is unavailable. Try refreshing or re-adding the registry to fix this issue.'
-    plugin-removed: '[Recommend to uninstall] This plugin was removed from the registry. Try refreshing the registry to confirm.'
+    registry-unavailable: '[Rekommendera att avinstallera] Registret är inte tillgängligt. Uppdatera eller lägg till registret igen för att åtgärda problemet.'
+    plugin-removed: '[Rekommendera att avinstallera] Denna plugin har tagits bort från registret. Prova att uppdatera registret för att bekräfta.'
   remove-registry:
-    title: Remove registry
-    tip-content: 'Remove registry:'
-    confirm-content: "There {{ count < 1 ? 'is' : 'are' }} {{ count }} installed {{ count < 1 ? 'plugin' : 'plugins' }} from this registry:"
-    remove-success: Registry removed.
-    remove-with-plugins-success: "Registry removed and {{ count }} {{ count < 1 ? 'plugin' : 'plugins' }} uninstalled."
+    title: Ta bort registret
+    tip-content: 'Ta bort registret:'
+    confirm-content: "Det {{ count < 1 ? 'is' : 'are' }} {{ count }} installerad {{ count < 1 ? 'plugin' : 'plugins' }} från detta register:"
+    remove-success: Registret borttaget.
+    remove-with-plugins-success: "Registret har tagits bort och {{ count }} {{ count < 1 ? 'plugin' : 'plugins' }} avinstallerat."
     buttons:
-      remove-only: Remove only
-      remove-and-uninstall: Remove and uninstall plugins
+      remove-only: Ta bort endast
+      remove-and-uninstall: Ta bort och avinstallera plugins
 # PluginQuickMove
-Quick Move: Quick Move
-Move from: Move from
-Move to: Move to
-Move talk page: Move talk page
-Move subpages (up to 100): Move subpages (up to 100)
-Move without leaving a redirect: Move without leaving a redirect
-Move: Move
+Quick Move: Snabb väg
+Move from: Flytta från
+Move to: Flytta till
+Move talk page: Flytta samtalssidan
+Move subpages (up to 100): Flytta undersidor (upp till 100)
+Move without leaving a redirect: Flytta utan att lämna en omdirigering
+Move: Flytta
 # PluginQuickRedirect
-Quick Redirect: Quick Redirect
-Redirect from: Redirect from
-Redirect to: Redirect to
-Force create redirect even if the from page already exists: Force create redirect even if the from page already exists
-Delete from page if it exists: Delete from page if it exists
-Create Redirect: Create Redirect
+Quick Redirect: Snabb omdirigering
+Redirect from: Omdirigera från
+Redirect to: Omdirigera till
+Force create redirect even if the from page already exists: Tvinga att skapa omdirigering även om sidan redan finns
+Delete from page if it exists: Ta bort från sidan om den finns
+Create Redirect: Skapa omdirigering
 # PluginQuickPreview
-Quick Preview: Quick Preview
-Preview: Preview
-Preview - Loading...: Preview - Loading...
-'Preview - {{ $1 }}': 'Preview - {{ $1 }}'
+Quick Preview: Snabb förhandsgranskning
+Preview: Förhandsgranska
+Preview - Loading...: Förhandsgranska - Laddar...
+'Preview - {{ $1 }}': 'Förhandsgranskning - {{ $1 }}'
 # PluginQuickDiff
-Quick Diff: Quick Diff
-Diff: Diff
-No changes: No changes
-Loading diff...: Loading diff...
-Differences: Differences
-Unsaved Changes: Unsaved Changes
-Original content: Original content
-Your content: Your content
+Quick Diff: Snabb skillnad
+Diff: Skillnad
+No changes: Inga ändringar
+Loading diff...: Laddar diff...
+Differences: Skillnader
+Unsaved Changes: Osparade ändringar
+Original content: Ursprungligt innehåll
+Your content: Ditt innehåll
 quick-diff:
-  previous: Previous
-  next: Next
-  newest-version: Newest version
-  oldest-version: Oldest version
-  original-compare-page: Original Compare Page
-  failed-to-load-diff: Failed to load diff
+  previous: Föregående
+  next: Nästa
+  newest-version: Nyaste versionen
+  oldest-version: Äldsta versionen
+  original-compare-page: Ursprunglig jämförelsesida
+  failed-to-load-diff: Misslyckades att ladda diff
   x-bytes: "{{ $1 }} byte{{ $1 !== 1 ? 's' : '' }}"
 # PluginPreferencesSync
-Sync: Sync
-Backup your preferences via user page: Backup your preferences via user page
-Backup: Backup
-Restore: Restore
-Import and export preferences: Import and export preferences
-Import from file: Import from file
-Import from URL: Import from URL
-'Enter the URL of the preferences JSON file:': 'Enter the URL of the preferences JSON file:'
-Save as file: Save as file
+Sync: Synk
+Backup your preferences via user page: Säkerhetskopiera dina inställningar via användarsidan
+Backup: Säkerhetskopiera
+Restore: Återställ
+Import and export preferences: Importera och exportera inställningar
+Import from file: Importera från fil
+Import from URL: Importera från URL
+'Enter the URL of the preferences JSON file:': 'Ange URL för inställningar JSON-fil:'
+Save as file: Spara som fil
 # AnalyticsService
 InPageEdit Analytics: InPageEdit Analytics
-InPageEdit Analytics is the companion analytics platform for the InPageEdit NEXT project. By collecting and displaying usage data from around the world, it helps developers and the community better understand how the tool is used, optimize feature design, and enhance user experience.: InPageEdit Analytics is the companion analytics platform for the InPageEdit NEXT project. By collecting and displaying usage data from around the world, it helps developers and the community better understand how the tool is used, optimize feature design, and enhance user experience.
-What data will be collected?: What data will be collected?
-Usage data: Usage data
-When and which features you use, what pages you edit, etc.: When and which features you use, what pages you edit, etc.
-User information: User information
-Your user name and user ID.: Your user name and user ID.
-Site information: Site information
-"This wiki's url and site name.": "This wiki's url and site name."
-NO sensitive data will be collected.: NO sensitive data will be collected.
-Analytics Platform: Analytics Platform
-View My Data: View My Data
-Enable Analytics: Enable Analytics
-Help us improve InPageEdit by sharing your usage data with us.: Help us improve InPageEdit by sharing your usage data with us.
+InPageEdit Analytics is the companion analytics platform for the InPageEdit NEXT project. By collecting and displaying usage data from around the world, it helps developers and the community better understand how the tool is used, optimize feature design, and enhance user experience.: InPageEdit Analytics är den medföljande analysplattformen för InPageEdit NEXT-projektet. Genom att samla in och visa användningsdata från hela världen, det hjälper utvecklare och gemenskapen bättre förstå hur verktyget används, optimera funktionen design och förbättra användarupplevelsen.
+What data will be collected?: Vilka uppgifter kommer att samlas in?
+Usage data: Användningsdata
+When and which features you use, what pages you edit, etc.: När och vilka funktioner du använder, vilka sidor du redigerar, etc.
+User information: Användarinformation
+Your user name and user ID.: Ditt användarnamn och användarnamn.
+Site information: Information om webbplatsen
+"This wiki's url and site name.": "Denna wikis webbadress och webbplatsnamn."
+NO sensitive data will be collected.: INGA känsliga data kommer att samlas in.
+Analytics Platform: Analys Plattform
+View My Data: Visa mina data
+Enable Analytics: Aktivera Analytics
+Help us improve InPageEdit by sharing your usage data with us.: Hjälp oss att förbättra InPageEdit genom att dela dina användningsdata med oss.
 # WikiMetadataService
-Wiki Informations: Wiki Informations
-Site: Site
-User: User
-Groups: Groups
-If the information shown above is incorrect (for example, the user is not you), click the button below.: If the information shown above is incorrect (for example, the user is not you), click the button below.
-Clear caches & Reload: Clear caches & Reload
+Wiki Informations: Wiki-information
+Site: Webbplats
+User: Användare
+Groups: Grupper
+If the information shown above is incorrect (for example, the user is not you), click the button below.: Om informationen som visas ovan är felaktig (till exempel är användaren inte du), klicka på knappen nedan.
+Clear caches & Reload: Rensa cacher & ladda om
