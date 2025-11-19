@@ -107,6 +107,7 @@ Submission Successful: 送信成功
 Submission Error: 送信エラー
 Your changes have been saved.: 変更を保存しました。
 Special page is not editable.: 特別ページは編集できません。
+You can try to submit again to dismiss the warnings.: 警告を却下するには、再度送信することができます。
 # PluginStore
 Plugin Store: プラグインストア
 Registry URLs: レジストリURL
