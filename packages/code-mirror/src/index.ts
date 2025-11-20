@@ -21,11 +21,16 @@ export default defineIPEPlugin({
     ctx.on(
       'quick-edit/wiki-page',
       async ({ modal, wikiPage: { contentmodel, ns, title } }) => {
-        const pkg = await import(
-          // @ts-ignore
-          /* @vite-ignore */ 'https://cdn.jsdelivr.net/npm/@bhsd/codemirror-mediawiki/dist/mw.min.js'
-        )
-        const { CodeMirror } = pkg
+        let CodeMirror
+        if (typeof CodeMirror6 === 'function') {
+          CodeMirror = CodeMirror6
+        } else {
+          const pkg = await import(
+            // @ts-ignore
+            /* @vite-ignore */ 'https://cdn.jsdelivr.net/npm/@bhsd/codemirror-mediawiki/dist/mw.min.js'
+          );
+          ({ CodeMirror } = pkg)
+        }
         CodeMirror.fromTextArea(
           modal
             .get$content()
