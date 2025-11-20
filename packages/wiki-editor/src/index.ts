@@ -27,9 +27,10 @@ export default defineIPEPlugin({
       if (!textarea || !registered) {
         return
       }
-      await mw.loader.using(['ext.wikiEditor'])
       if (typeof window.mw?.addWikiEditor === 'function') {
         window.mw.addWikiEditor($(textarea))
+      } else {
+        await mw.loader.using(['ext.wikiEditor'])
       }
     })
   },
