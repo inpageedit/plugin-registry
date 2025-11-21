@@ -15,7 +15,7 @@ export default defineIPEPlugin({
     // Helper to create edit button
     const createEditBtn = (title: string, isRedLink: boolean = false) => {
       const $btn = $('<a>')
-        .attr('href', 'javascript:;')
+        .attr('href', '#ipe://quick-edit/') // Keep consistent with quick-edit
         .addClass('ipe-quick-edit')
         .addClass(isRedLink ? 'ipe-quick-edit--create-only' : '')
         .css({
