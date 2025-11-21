@@ -1,0 +1,38 @@
+{
+  "name": "inpageedit-plugin-in-cat-edit",
+  "description": "Add IPE edit button for category items and their main/talk page.",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "module": "./dist/index.mjs",
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs"
+    }
+  },
+  "scripts": {
+    "dev": "vite build --watch",
+    "build": "vite build"
+  },
+  "$ipe": {
+    "name": "InCatEdit",
+    "categories": [],
+    "loader": {
+      "kind": "module",
+      "entry": "dist/index.mjs",
+      "styles": [
+        "dist/style.css"
+      ],
+      "main_export": "default"
+    },
+    "dev_loader": {
+      "entry": "src/index.ts",
+      "styles": [
+        "src/style.scss"
+      ]
+    }
+  }
+}
