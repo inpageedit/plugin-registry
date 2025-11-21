@@ -76,6 +76,12 @@ importers:
 
   packages/edit-any-page: {}
 
+  packages/in-cat-edit:
+    dependencies:
+      jsx-dom:
+        specifier: ^8.1.6
+        version: 8.1.6
+
   packages/quick-delete:
     dependencies:
       jsx-dom:

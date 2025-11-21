@@ -2,6 +2,69 @@ import './style.scss'
 
 import { defineIPEPlugin } from '~~/defineIPEPlugin.js'
 
+// JSX Components
+const EditButton = ({ title, isRedLink, onClick }: {
+  title: string
+  isRedLink: boolean
+  onClick: (e: MouseEvent) => void
+}) => (
+  <a
+    href="#ipe://quick-edit/"
+    class={`ipe-quick-edit ${isRedLink ? 'ipe-quick-edit--create-only' : ''}`}
+    style="user-select: none; margin-left: 0.2em;"
+    onClick={onClick}
+  >
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-pencil-bolt ipe-icon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M19 16l-2 3h4l-2 3" />
+    </svg>
+  </a>
+) as HTMLAnchorElement
+
+const CounterpartLinks = ({
+  counterpartTitle,
+  isTalk,
+  isMissing,
+  onCounterpartEditClick
+}: {
+  counterpartTitle: mw.Title
+  isTalk: boolean
+  isMissing: boolean
+  onCounterpartEditClick: (e: MouseEvent) => void
+}) => {
+  const counterpartText = isTalk ? 'Main' : 'Talk'
+  const counterpartPrefixed = counterpartTitle.getPrefixedText()
+  let href = counterpartTitle.getUrl()
+
+  if (isMissing) {
+    const url = new URL(href, window.location.origin)
+    url.searchParams.set('action', 'edit')
+    url.searchParams.set('redlink', '1')
+    href = url.pathname + url.search
+  }
+
+  return (
+    <span class="ipe-in-cat-edit-counterpart">
+      {' ('}
+      <a
+        href={href}
+        title={counterpartPrefixed}
+        class={isMissing ? 'new' : ''}
+      >
+        {counterpartText}
+      </a>
+      <EditButton
+        title={counterpartPrefixed}
+        isRedLink={isMissing}
+        onClick={onCounterpartEditClick}
+      />
+      {')'}
+    </span>
+  ) as HTMLSpanElement
+}
+
 export default defineIPEPlugin({
   name: 'in-cat-edit',
   inject: ['quickEdit', 'inArticleLinks', 'api', 'wiki'],
@@ -10,26 +73,6 @@ export default defineIPEPlugin({
     const ns = ctx.wiki.mwConfig.get('wgNamespaceNumber')
     if (ns !== 14) {
       return
-    }
-
-    // Helper to create edit button
-    const createEditBtn = (title: string, isRedLink: boolean = false) => {
-      const $btn = $('<a>')
-        .attr('href', '#ipe://quick-edit/') // Keep consistent with quick-edit
-        .addClass('ipe-quick-edit')
-        .addClass(isRedLink ? 'ipe-quick-edit--create-only' : '')
-        .css({
-          userSelect: 'none',
-          marginLeft: '0.2em',
-        })
-        .html(
-          `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-pencil-bolt ipe-icon"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" /><path d="M13.5 6.5l4 4" /><path d="M19 16l-2 3h4l-2 3" /></svg>`
-        )
-        .on('click', (e) => {
-          e.preventDefault()
-          ctx.quickEdit.showModal({ title, createOnly: isRedLink })
-        })
-      return $btn
     }
 
     mw.hook('wikipage.content').add(async ($content) => {
@@ -65,45 +108,43 @@ export default defineIPEPlugin({
         if ($el.dataset.ipeInCatEditProcessed) return
         $el.dataset.ipeInCatEditProcessed = '1'
 
-        const $link = $($el)
         const prefixed = mwTitle.getPrefixedText()
 
         // 1. Edit button for current page
-        const $currentEditBtn = createEditBtn(prefixed)
+        const currentEditBtn = (
+          <EditButton
+            title={prefixed}
+            isRedLink={false}
+            onClick={(e) => {
+              e.preventDefault()
+              ctx.quickEdit.showModal({ title: prefixed, createOnly: false })
+            }}
+          />
+        )
 
         // 2. Counterpart link and its edit button
-        const $counterpartWrapper = $('<span>').addClass('ipe-in-cat-edit-counterpart')
+        let counterpartWrapper: HTMLSpanElement | null = null
 
         if (counterpartTitle) {
           const isTalk = mw.Title.isTalkNamespace(mwTitle.getNamespaceId())
-          const counterpartText = isTalk ? 'Main' : 'Talk'
           const counterpartPrefixed = counterpartTitle.getPrefixedText()
           const isMissing = missingTitles.has(counterpartPrefixed)
 
-          const $counterpartLink = $('<a>')
-            .attr('href', counterpartTitle.getUrl())
-            .attr('title', counterpartPrefixed)
-            .text(counterpartText)
-
-          if (isMissing) {
-            $counterpartLink.addClass('new')
-            // Add redlink=1 to href if missing
-            const url = new URL($counterpartLink.attr('href')!, window.location.origin)
-            url.searchParams.set('action', 'edit')
-            url.searchParams.set('redlink', '1')
-            $counterpartLink.attr('href', url.pathname + url.search)
-          }
-
-          const $counterpartEditBtn = createEditBtn(counterpartPrefixed, isMissing)
-
-          $counterpartWrapper
-            .append(' (')
-            .append($counterpartLink)
-            .append($counterpartEditBtn)
-            .append(')')
+          counterpartWrapper = (
+            <CounterpartLinks
+              counterpartTitle={counterpartTitle}
+              isTalk={isTalk}
+              isMissing={isMissing}
+              onCounterpartEditClick={(e) => {
+                e.preventDefault()
+                ctx.quickEdit.showModal({ title: counterpartPrefixed, createOnly: isMissing })
+              }}
+            />
+          )
         }
 
-        $link.after($counterpartWrapper).after($currentEditBtn)
+        $el.insertAdjacentElement('afterend', counterpartWrapper || document.createElement('span'))
+        $el.insertAdjacentElement('afterend', currentEditBtn)
       })
     })
   },
