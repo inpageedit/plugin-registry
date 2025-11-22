@@ -1,33 +1,48 @@
 import './style.scss'
-
 import { defineIPEPlugin } from '~~/defineIPEPlugin.js'
 
 // JSX Components
-const EditButton = ({ title, isRedLink, onClick }: {
+const EditButton = ({
+  title,
+  isRedLink,
+  onClick,
+}: {
   title: string
   isRedLink: boolean
   onClick: (e: MouseEvent) => void
-}) => (
-  <a
-    href="#ipe://quick-edit/"
-    class={`ipe-quick-edit ${isRedLink ? 'ipe-quick-edit--create-only' : ''}`}
-    style="user-select: none; margin-left: 0.2em;"
-    onClick={onClick}
-  >
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-pencil-bolt ipe-icon">
-      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
-      <path d="M13.5 6.5l4 4" />
-      <path d="M19 16l-2 3h4l-2 3" />
-    </svg>
-  </a>
-) as HTMLAnchorElement
+}) =>
+  (
+    <a
+      href="#ipe://quick-edit/"
+      class={`ipe-quick-edit ${isRedLink ? 'ipe-quick-edit--create-only' : ''}`}
+      style="user-select: none; margin-left: 0.2em;"
+      onClick={onClick}
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="icon icon-tabler icons-tabler-outline icon-tabler-pencil-bolt ipe-icon"
+      >
+        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+        <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+        <path d="M13.5 6.5l4 4" />
+        <path d="M19 16l-2 3h4l-2 3" />
+      </svg>
+    </a>
+  ) as HTMLAnchorElement
 
 const CounterpartLinks = ({
   counterpartTitle,
   isTalk,
   isMissing,
-  onCounterpartEditClick
+  onCounterpartEditClick,
 }: {
   counterpartTitle: mw.Title
   isTalk: boolean
@@ -48,11 +63,7 @@ const CounterpartLinks = ({
   return (
     <span class="ipe-in-cat-edit-counterpart">
       {' ('}
-      <a
-        href={href}
-        title={counterpartPrefixed}
-        class={isMissing ? 'new' : ''}
-      >
+      <a href={href} title={counterpartPrefixed} class={isMissing ? 'new' : ''}>
         {counterpartText}
       </a>
       <EditButton
@@ -71,9 +82,7 @@ export default defineIPEPlugin({
   apply: (ctx) => {
     // Only run in Category namespace
     const ns = ctx.wiki.mwConfig.get('wgNamespaceNumber')
-    if (ns !== 14) {
-      return
-    }
+    if (ns !== 14) return
 
     mw.hook('wikipage.content').add(async ($content) => {
       const $categoryContent = $content.find('.mw-category, #mw-pages')
@@ -101,7 +110,9 @@ export default defineIPEPlugin({
 
       // Fetch missing titles
       const missingTitles =
-        titlesToCheck.length > 0 ? await getMissingTitles(titlesToCheck, ctx.api) : new Set<string>()
+        titlesToCheck.length > 0
+          ? await getMissingTitles(titlesToCheck, ctx.api)
+          : new Set<string>()
 
       // Render
       models.forEach(({ $el, mwTitle, counterpartTitle }) => {
@@ -137,7 +148,10 @@ export default defineIPEPlugin({
               isMissing={isMissing}
               onCounterpartEditClick={(e) => {
                 e.preventDefault()
-                ctx.quickEdit.showModal({ title: counterpartPrefixed, createOnly: isMissing })
+                ctx.quickEdit.showModal({
+                  title: counterpartPrefixed,
+                  createOnly: isMissing,
+                })
               }}
             />
           )
@@ -183,12 +197,12 @@ const getMissingTitles = async (
   for (let i = 0; i < titles.length; i += chunkSize) {
     const chunk = titles.slice(i, i + chunkSize)
     try {
-      const response = await api.post({
+      const response = (await api.post({
         action: 'query',
         titles: chunk.join('|'),
         format: 'json',
         formatversion: 2,
-      }) as any
+      })) as any
 
       const query = response.data?.query || response.query
 

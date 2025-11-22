@@ -2,6 +2,8 @@
   "name": "inpageedit-plugin-in-cat-edit",
   "description": "Add IPE edit button for category items and their main/talk page.",
   "version": "1.0.0",
+  "author": "PexEric",
+  "license": "MIT",
   "private": true,
   "type": "module",
   "module": "./dist/index.mjs",
