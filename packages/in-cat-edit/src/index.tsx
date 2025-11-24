@@ -1,13 +1,12 @@
 import './style.scss'
 import { defineIPEPlugin } from '~~/defineIPEPlugin.js'
+import type { IWikiTitle } from '@inpageedit/core'
 
 // JSX Components
 const EditButton = ({
-  title,
   isRedLink,
   onClick,
 }: {
-  title: string
   isRedLink: boolean
   onClick: (e: MouseEvent) => void
 }) =>
@@ -40,19 +39,18 @@ const EditButton = ({
 
 const CounterpartLinks = ({
   counterpartTitle,
-  isTalk,
   isMissing,
   onCounterpartEditClick,
 }: {
-  counterpartTitle: mw.Title
-  isTalk: boolean
+  counterpartTitle: IWikiTitle
   isMissing: boolean
   onCounterpartEditClick: (e: MouseEvent) => void
 }) => {
-  const counterpartText = isTalk ? 'Main' : 'Talk'
+  const isCounterpartSubject = counterpartTitle.equals(counterpartTitle.getSubjectPage())
+  const counterpartText = isCounterpartSubject ? 'Main' : 'Talk'
   const counterpartPrefixed = counterpartTitle.getPrefixedText()
-  let href = counterpartTitle.getUrl()
 
+  let href = counterpartTitle.getURL().toString()
   if (isMissing) {
     const url = new URL(href, window.location.origin)
     url.searchParams.set('action', 'edit')
@@ -66,14 +64,19 @@ const CounterpartLinks = ({
       <a href={href} title={counterpartPrefixed} class={isMissing ? 'new' : ''}>
         {counterpartText}
       </a>
-      <EditButton
-        title={counterpartPrefixed}
-        isRedLink={isMissing}
-        onClick={onCounterpartEditClick}
-      />
+      <EditButton isRedLink={isMissing} onClick={onCounterpartEditClick} />
       {')'}
     </span>
   ) as HTMLSpanElement
+}
+
+type AnchorModel = {
+  $el: HTMLAnchorElement
+  titlePrefixed: string
+  counterpart?: {
+    title: IWikiTitle
+    prefixed: string
+  }
 }
 
 export default defineIPEPlugin({
@@ -84,67 +87,70 @@ export default defineIPEPlugin({
     const ns = ctx.wiki.mwConfig.get('wgNamespaceNumber')
     if (ns !== 14) return
 
-    mw.hook('wikipage.content').add(async ($content) => {
-      const $categoryContent = $content.find('.mw-category, #mw-pages')
-      if (!$categoryContent.length) return
+    mw.hook('wikipage.content').add(async ($content: any) => {
+      const content = $content[0]
+      if (!content) return
 
-      const anchors = ctx.inArticleLinks.scanAnchors($categoryContent[0])
-      const formattedNamespaces = ctx.wiki.mwConfig.get('wgFormattedNamespaces')
+      const categoryContent = content.querySelector('.mw-category, #mw-pages')
+      if (!categoryContent) return
 
-      // Build models
+      const anchors = ctx.inArticleLinks.scanAnchors(categoryContent as HTMLElement)
+
       const models: AnchorModel[] = []
       const titlesToCheck: string[] = []
 
-      anchors.forEach(({ $el, title }) => {
-        if (!title) return
+      // Build models
+      for (const { $el, title } of anchors) {
+        if (!title) continue
 
-        const mwTitle = new mw.Title(title.getPrefixedDBKey())
-        const counterpartTitle = getCounterpartTitle(mwTitle, formattedNamespaces)
+        const titlePrefixed = title.getPrefixedText()
+        const counterpartTitle = getCounterpartTitle(title)
 
-        models.push({ $el, mwTitle, counterpartTitle })
+        const model: AnchorModel = { $el, titlePrefixed }
 
         if (counterpartTitle) {
-          titlesToCheck.push(counterpartTitle.getPrefixedText())
+          const counterpartPrefixed = counterpartTitle.getPrefixedText()
+          model.counterpart = {
+            title: counterpartTitle,
+            prefixed: counterpartPrefixed,
+          }
+          titlesToCheck.push(counterpartPrefixed)
         }
-      })
 
-      // Fetch missing titles
-      const missingTitles =
-        titlesToCheck.length > 0
-          ? await getMissingTitles(titlesToCheck, ctx.api)
-          : new Set<string>()
+        models.push(model)
+      }
+
+      const missingTitles = await getMissingTitles(titlesToCheck, ctx.api)
 
       // Render
-      models.forEach(({ $el, mwTitle, counterpartTitle }) => {
-        if ($el.dataset.ipeInCatEditProcessed) return
+      for (const { $el, titlePrefixed, counterpart } of models) {
+        if ($el.dataset.ipeInCatEditProcessed) continue
         $el.dataset.ipeInCatEditProcessed = '1'
 
-        const prefixed = mwTitle.getPrefixedText()
+        const fragment = document.createDocumentFragment()
 
         // 1. Edit button for current page
-        const currentEditBtn = (
+        fragment.appendChild(
           <EditButton
-            title={prefixed}
             isRedLink={false}
             onClick={(e) => {
               e.preventDefault()
-              ctx.quickEdit.showModal({ title: prefixed, createOnly: false })
+              ctx.quickEdit.showModal({
+                title: titlePrefixed,
+                createOnly: false,
+              })
             }}
           />
         )
 
         // 2. Counterpart link and its edit button
-        let counterpartWrapper: HTMLSpanElement | null = null
-
-        if (counterpartTitle) {
-          const isTalk = mw.Title.isTalkNamespace(mwTitle.getNamespaceId())
-          const counterpartPrefixed = counterpartTitle.getPrefixedText()
+        if (counterpart) {
+          const { title: counterpartTitle, prefixed: counterpartPrefixed } = counterpart
           const isMissing = missingTitles.has(counterpartPrefixed)
 
-          counterpartWrapper = (
+          fragment.appendChild(
             <CounterpartLinks
               counterpartTitle={counterpartTitle}
-              isTalk={isTalk}
               isMissing={isMissing}
               onCounterpartEditClick={(e) => {
                 e.preventDefault()
@@ -157,64 +163,56 @@ export default defineIPEPlugin({
           )
         }
 
-        $el.insertAdjacentElement('afterend', counterpartWrapper || document.createElement('span'))
-        $el.insertAdjacentElement('afterend', currentEditBtn)
-      })
+        const parent = $el.parentNode
+        if (parent) {
+          parent.insertBefore(fragment, $el.nextSibling)
+        }
+      }
     })
   },
 })
 
-type AnchorModel = {
-  $el: HTMLAnchorElement
-  mwTitle: mw.Title
-  counterpartTitle: mw.Title | null
-}
-
-const getCounterpartTitle = (
-  mwTitle: mw.Title,
-  formattedNamespaces: Record<number, string>
-): mw.Title | null => {
-  const namespaceId = mwTitle.getNamespaceId()
-  // Should not happen for category members usually, but good to check
-  if (namespaceId < 0) return null
-
-  const isTalk = mw.Title.isTalkNamespace(namespaceId)
-  const counterpartNs = isTalk ? namespaceId - 1 : namespaceId + 1
-
-  // Check if counterpart namespace exists
-  if (formattedNamespaces[counterpartNs] === undefined) return null
-
-  return mw.Title.makeTitle(counterpartNs, mwTitle.getMainText())
+const getCounterpartTitle = (title: IWikiTitle): IWikiTitle | null => {
+  const subject = title.getSubjectPage()
+  if (title.equals(subject)) {
+    return title.getTalkPage()
+  }
+  return subject
 }
 
 const getMissingTitles = async (
   titles: string[],
-  api: typeof window.ipe.api,
+  api: any,
   chunkSize = 50
 ): Promise<Set<string>> => {
   const missing = new Set<string>()
+  const requests: Promise<void>[] = []
 
   for (let i = 0; i < titles.length; i += chunkSize) {
     const chunk = titles.slice(i, i + chunkSize)
-    try {
-      const response = (await api.post({
-        action: 'query',
-        titles: chunk.join('|'),
-        format: 'json',
-        formatversion: 2,
-      })) as any
 
-      const query = response.data?.query || response.query
-
-      query?.pages?.forEach((page: any) => {
-        if (page.missing) {
-          missing.add(page.title)
-        }
-      })
-    } catch (e) {
-      console.error('[in-cat-edit] Failed to check page existence', e)
-    }
+    requests.push(
+      api
+        .post({
+          action: 'query',
+          titles: chunk.join('|'),
+          format: 'json',
+          formatversion: 2,
+        })
+        .then((response: any) => {
+          const query = response.data?.query || response.query
+          query?.pages?.forEach((page: any) => {
+            if (page.missing) {
+              missing.add(page.title)
+            }
+          })
+        })
+        .catch((e: unknown) => {
+          console.error('[in-cat-edit] Failed to check page existence', e)
+        })
+    )
   }
 
+  await Promise.all(requests)
   return missing
 }
