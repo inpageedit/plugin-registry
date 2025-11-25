@@ -91,10 +91,23 @@ export default defineIPEPlugin({
       const content = $content[0]
       if (!content) return
 
-      const categoryContent = content.querySelector('.mw-category, #mw-pages')
-      if (!categoryContent) return
+      const allContainers = Array.from(
+        content.querySelectorAll(
+          '.mw-category, #mw-subcategories, #mw-pages, #mw-category-media'
+        )
+      ) as HTMLElement[]
 
-      const anchors = ctx.inArticleLinks.scanAnchors(categoryContent as HTMLElement)
+      // Filter out containers that are inside other containers to avoid double processing
+      const uniqueContainers = allContainers.filter((container, _, self) => {
+        return !self.some((other) => other !== container && other.contains(container))
+      })
+
+      if (!uniqueContainers.length) return
+
+      const anchors: any[] = []
+      uniqueContainers.forEach((container) => {
+        anchors.push(...ctx.inArticleLinks.scanAnchors(container))
+      })
 
       const models: AnchorModel[] = []
       const titlesToCheck: string[] = []
