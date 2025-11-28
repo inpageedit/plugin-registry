@@ -19,7 +19,7 @@ export default defineIPEPlugin({
   name: 'wiki-editor',
   apply(ctx) {
     ctx.set('plugin:wiki-editor', ctx.scope)
-    ctx.on('quick-edit/wiki-page', async (payload) => {
+    ctx.on('quick-edit/wiki-page', (payload) => {
       const textarea = payload.modal
         .get$content()
         .querySelector<HTMLTextAreaElement>('textarea[name="text"]')!
@@ -27,9 +27,10 @@ export default defineIPEPlugin({
       if (!textarea || !registered) {
         return
       }
-      await mw.loader.using(['ext.wikiEditor'])
       if (typeof window.mw?.addWikiEditor === 'function') {
         window.mw.addWikiEditor($(textarea))
+      } else {
+        mw.loader.load(['ext.wikiEditor'])
       }
     })
   },
