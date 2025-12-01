@@ -12,10 +12,9 @@ export default defineIPEPlugin({
   apply: (ctx) => {
     ctx.set('plugin:code-mirror-v6', ctx.scope)
 
-    const preferWikiEditor: string[] = []
+    let pluginWikiEditor: ForkScope | undefined
     ctx.inject(['plugin:wiki-editor'], (ctx) => {
-      preferWikiEditor.push('wikiEditor')
-      ctx.get('plugin:wiki-editor')?.dispose()
+      pluginWikiEditor = ctx.get('plugin:wiki-editor')
     })
 
     const CodeMirrorPromise =
@@ -40,7 +39,7 @@ export default defineIPEPlugin({
           contentmodel,
           ns,
           title,
-          preferWikiEditor
+          pluginWikiEditor?.isActive ? ['wikiEditor'] : []
         )
       }
     )
