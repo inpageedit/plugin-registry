@@ -17,24 +17,23 @@ export default defineIPEPlugin({
       preferWikiEditor.push('wikiEditor')
       ctx.get('plugin:wiki-editor')?.dispose()
     })
-    
-    let CodeMirror
-    if (typeof CodeMirror6 === 'function') {
-      CodeMirror = CodeMirror6
-    } else {
-      CodeMirror = (async () => {
-        const pkg = await import(
-          // @ts-ignore
-          /* @vite-ignore */ 'https://cdn.jsdelivr.net/npm/@bhsd/codemirror-mediawiki/dist/mw.min.js'
-        );
-        return pkg.CodeMirror
-      })()
-    }
+
+    const CodeMirrorPromise =
+      typeof CodeMirror6 === 'function'
+        ? Promise.resolve(CodeMirror6)
+        : (async () => {
+          const pkg = await import(
+            // @ts-ignore
+            /* @vite-ignore */ 'https://cdn.jsdelivr.net/npm/@bhsd/codemirror-mediawiki/dist/mw.min.js'
+          )
+          return pkg.CodeMirror
+        })()
 
     ctx.on(
       'quick-edit/wiki-page',
       async ({ modal, wikiPage: { contentmodel, ns, title } }) => {
-        (await CodeMirror).fromTextArea(
+        const CodeMirror = await CodeMirrorPromise
+        CodeMirror.fromTextArea(
           modal
             .get$content()
             .querySelector<HTMLTextAreaElement>('textarea[name="text"]')!,
