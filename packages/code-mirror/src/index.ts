@@ -12,20 +12,26 @@ export default defineIPEPlugin({
   apply: (ctx) => {
     ctx.set('plugin:code-mirror-v6', ctx.scope)
 
-    const preferWikiEditor: string[] = []
+    let pluginWikiEditor: ForkScope | undefined
     ctx.inject(['plugin:wiki-editor'], (ctx) => {
-      preferWikiEditor.push('wikiEditor')
-      ctx.get('plugin:wiki-editor')?.dispose()
+      pluginWikiEditor = ctx.get('plugin:wiki-editor')
     })
+
+    const CodeMirrorPromise =
+      typeof CodeMirror6 === 'function'
+        ? Promise.resolve(CodeMirror6)
+        : (async () => {
+          const pkg = await import(
+            // @ts-ignore
+            /* @vite-ignore */ 'https://cdn.jsdelivr.net/npm/@bhsd/codemirror-mediawiki/dist/mw.min.js'
+          )
+          return pkg.CodeMirror
+        })()
 
     ctx.on(
       'quick-edit/wiki-page',
       async ({ modal, wikiPage: { contentmodel, ns, title } }) => {
-        const pkg = await import(
-          // @ts-ignore
-          /* @vite-ignore */ 'https://cdn.jsdelivr.net/npm/@bhsd/codemirror-mediawiki/dist/mw.min.js'
-        )
-        const { CodeMirror } = pkg
+        const CodeMirror = await CodeMirrorPromise
         CodeMirror.fromTextArea(
           modal
             .get$content()
@@ -33,7 +39,7 @@ export default defineIPEPlugin({
           contentmodel,
           ns,
           title,
-          preferWikiEditor
+          pluginWikiEditor?.isActive ? ['wikiEditor'] : []
         )
       }
     )
