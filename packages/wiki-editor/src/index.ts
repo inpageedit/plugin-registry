@@ -19,7 +19,16 @@ export default defineIPEPlugin({
   name: 'wiki-editor',
   apply(ctx) {
     ctx.set('plugin:wiki-editor', ctx.scope)
+
+    let pluginCodeMirror: ForkScope | undefined
+    ctx.inject(['plugin:code-mirror-v6'], (ctx) => {
+      pluginCodeMirror = ctx.get('plugin:code-mirror-v6')
+    })
+
     ctx.on('quick-edit/wiki-page', (payload) => {
+      if (pluginCodeMirror?.isActive) {
+        return
+      }
       const textarea = payload.modal
         .get$content()
         .querySelector<HTMLTextAreaElement>('textarea[name="text"]')!
