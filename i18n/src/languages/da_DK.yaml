@@ -220,11 +220,11 @@ Ignore warnings and upload anyway: Ignorer advarsler og upload alligevel
 Upload: Upload
 Drag & drop a file here: Træk og slip en fil her
 File already exists: Filen findes allerede
-There is a file with the same name already exists.: There is a file with the same name already exists.
-File duplicated: File duplicated
-'This file is duplicated of:': 'This file is duplicated of:'
-Upload successful: Upload successful
-File has been uploaded successfully.: File has been uploaded successfully.
+There is a file with the same name already exists.: Der findes allerede en fil med samme navn.
+File duplicated: Fil duplikeret
+Upload successful: Upload gennemført
+File has been uploaded successfully.: Filen er blevet uploadet.
 # PluginQuickUsage
-Images Used: Images Used
-Templates Used: Templates Used
+Images Used: Brugte Billeder
+Templates Used: Brugte Skabeloner
+"This file is a duplicate of the following file:": 'Denne fil er en kopi af følgende fil:'
