@@ -222,9 +222,9 @@ Drag & drop a file here: Drag & drop a file here
 File already exists: File already exists
 There is a file with the same name already exists.: There is a file with the same name already exists.
 File duplicated: File duplicated
+"This file is a duplicate of the following file:": 'This file is a duplicate of the following file:'
 Upload successful: Upload successful
 File has been uploaded successfully.: File has been uploaded successfully.
 # PluginQuickUsage
 Images Used: Images Used
 Templates Used: Templates Used
-"This file is a duplicate of the following file:": 'This file is a duplicate of the following file:'
