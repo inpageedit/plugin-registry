@@ -211,3 +211,20 @@ User: Användare
 Groups: Grupper
 If the information shown above is incorrect (for example, the user is not you), click the button below.: Om informationen som visas ovan är felaktig (till exempel är användaren inte du), klicka på knappen nedan.
 Clear caches & Reload: Rensa cacher & ladda om
+# PluginQuickUpload
+Quick Upload: Snabb uppladdning
+File name: Filnamn
+File: Fil
+File description: Beskrivning av fil
+Ignore warnings and upload anyway: Ignorera varningar och ladda upp ändå
+Upload: Ladda upp
+Drag & drop a file here: Dra & släpp en fil hit
+File already exists: Filen finns redan
+There is a file with the same name already exists.: Det finns redan en fil med samma namn.
+File duplicated: Fil duplicerad
+'This file is duplicated of:': 'Denna fil dupliceras av:'
+Upload successful: Uppladdningen lyckades
+File has been uploaded successfully.: Filen har laddats upp.
+# PluginQuickUsage
+Images Used: Bilder som används
+Templates Used: Använda mallar
