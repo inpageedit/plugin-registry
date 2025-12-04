@@ -222,9 +222,9 @@ Drag & drop a file here: ここにファイルをドラッグ＆ドロップ
 File already exists: ファイルは既に存在します
 There is a file with the same name already exists.: 同じ名前のファイルが既に存在します。
 File duplicated: ファイルが複製されました
+"This file is a duplicate of the following file:": 'このファイルは以下のファイルと重複しています:'
 Upload successful: アップロードに成功しました
 File has been uploaded successfully.: ファイルが正常にアップロードされました。
 # PluginQuickUsage
 Images Used: 使用された画像
 Templates Used: 使用されているテンプレート
-"This file is a duplicate of the following file:": 'このファイルは以下のファイルと重複しています:'
