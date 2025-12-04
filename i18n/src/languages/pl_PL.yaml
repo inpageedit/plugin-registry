@@ -222,9 +222,9 @@ Drag & drop a file here: Przeciągnij i upuść plik tutaj
 File already exists: Plik już istnieje
 There is a file with the same name already exists.: Istnieje już plik o tej samej nazwie.
 File duplicated: Plik zduplikowany
-'This file is duplicated of:': 'Ten plik jest zduplikowany:'
 Upload successful: Przesyłanie zakończone powodzeniem
 File has been uploaded successfully.: Plik został pomyślnie przesłany.
 # PluginQuickUsage
 Images Used: Używane obrazy
 Templates Used: Używane szablony
+"This file is a duplicate of the following file:": 'Ten plik jest duplikatem następującego pliku:'
