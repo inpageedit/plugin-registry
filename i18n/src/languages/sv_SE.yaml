@@ -222,9 +222,9 @@ Drag & drop a file here: Dra & släpp en fil hit
 File already exists: Filen finns redan
 There is a file with the same name already exists.: Det finns redan en fil med samma namn.
 File duplicated: Fil duplicerad
-'This file is duplicated of:': 'Denna fil dupliceras av:'
 Upload successful: Uppladdningen lyckades
 File has been uploaded successfully.: Filen har laddats upp.
 # PluginQuickUsage
 Images Used: Bilder som används
 Templates Used: Använda mallar
+"This file is a duplicate of the following file:": 'Denna fil är en dubblett av följande fil:'
