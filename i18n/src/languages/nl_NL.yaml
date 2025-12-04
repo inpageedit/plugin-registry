@@ -222,9 +222,9 @@ Drag & drop a file here: Sleep een bestand hierheen
 File already exists: Bestand bestaat al
 There is a file with the same name already exists.: Er bestaat al een bestand met dezelfde naam.
 File duplicated: Bestand gedupliceerd
-'This file is duplicated of:': 'Dit bestand wordt gedupliceerd van:'
 Upload successful: Uploaden geslaagd
 File has been uploaded successfully.: Bestand is met succes geüpload.
 # PluginQuickUsage
-Images Used: Images Used
-Templates Used: Templates Used
+Images Used: Gebruikte afbeeldingen
+Templates Used: Sjablonen gebruikt
+"This file is a duplicate of the following file:": 'Dit bestand is een duplicaat van het volgende bestand:'
