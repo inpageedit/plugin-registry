@@ -220,11 +220,11 @@ Ignore warnings and upload anyway: Přesto ignorovat varování a nahrát
 Upload: Nahrát
 Drag & drop a file here: Sem přetáhněte soubor
 File already exists: Soubor již existuje
-There is a file with the same name already exists.: There is a file with the same name already exists.
-File duplicated: File duplicated
-'This file is duplicated of:': 'This file is duplicated of:'
-Upload successful: Upload successful
-File has been uploaded successfully.: File has been uploaded successfully.
+There is a file with the same name already exists.: Soubor se stejným názvem již existuje.
+File duplicated: Soubor duplikován
+Upload successful: Odeslání úspěšné
+File has been uploaded successfully.: Soubor byl úspěšně nahrán.
 # PluginQuickUsage
-Images Used: Images Used
-Templates Used: Templates Used
+Images Used: Použité obrázky
+Templates Used: Použité šablony
+"This file is a duplicate of the following file:": 'Tento soubor je duplicitní soubor:'
