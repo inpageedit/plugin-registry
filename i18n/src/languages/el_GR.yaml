@@ -220,11 +220,11 @@ Ignore warnings and upload anyway: Παράβλεψη προειδοποιήσε
 Upload: Ανέβασμα
 Drag & drop a file here: Σύρετε & αποθέστε ένα αρχείο εδώ
 File already exists: Το αρχείο υπάρχει ήδη
-There is a file with the same name already exists.: There is a file with the same name already exists.
-File duplicated: File duplicated
-'This file is duplicated of:': 'This file is duplicated of:'
-Upload successful: Upload successful
-File has been uploaded successfully.: File has been uploaded successfully.
+There is a file with the same name already exists.: Υπάρχει ένα αρχείο με το ίδιο όνομα υπάρχει ήδη.
+File duplicated: Το αρχείο διπλασιάστηκε
+Upload successful: Επιτυχής μεταφόρτωση
+File has been uploaded successfully.: Το αρχείο έχει μεταφορτωθεί με επιτυχία.
 # PluginQuickUsage
-Images Used: Images Used
-Templates Used: Templates Used
+Images Used: Εικόνες Που Χρησιμοποιούνται
+Templates Used: Χρησιμοποιούνται Πρότυπα
+"This file is a duplicate of the following file:": 'Αυτό το αρχείο είναι ένα αντίγραφο του ακόλουθου αρχείου:'
