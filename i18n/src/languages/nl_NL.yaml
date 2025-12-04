@@ -211,3 +211,20 @@ User: Gebruiker
 Groups: Groepen
 If the information shown above is incorrect (for example, the user is not you), click the button below.: Als de bovenstaande informatie onjuist is (bijvoorbeeld, de gebruiker bent u niet), klik dan op de onderstaande knop.
 Clear caches & Reload: Caches wissen & Herladen
+# PluginQuickUpload
+Quick Upload: Snel uploaden
+File name: Bestandsnaam is vereist
+File: Bestand
+File description: Beschrijving van bestand
+Ignore warnings and upload anyway: Waarschuwingen en uploaden toch negeren
+Upload: Uploaden
+Drag & drop a file here: Sleep een bestand hierheen
+File already exists: Bestand bestaat al
+There is a file with the same name already exists.: Er bestaat al een bestand met dezelfde naam.
+File duplicated: Bestand gedupliceerd
+'This file is duplicated of:': 'Dit bestand wordt gedupliceerd van:'
+Upload successful: Uploaden geslaagd
+File has been uploaded successfully.: Bestand is met succes geüpload.
+# PluginQuickUsage
+Images Used: Images Used
+Templates Used: Templates Used
