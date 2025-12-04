@@ -220,11 +220,11 @@ Ignore warnings and upload anyway: Ignoră avertismentele și încarcă oricum
 Upload: Incarca
 Drag & drop a file here: Trage și plasează un fișier aici
 File already exists: Fişierul există deja
-There is a file with the same name already exists.: There is a file with the same name already exists.
-File duplicated: File duplicated
-'This file is duplicated of:': 'This file is duplicated of:'
-Upload successful: Upload successful
-File has been uploaded successfully.: File has been uploaded successfully.
+There is a file with the same name already exists.: Există deja un fișier cu același nume.
+File duplicated: Fișier duplicat
+Upload successful: Încărcare reușită
+File has been uploaded successfully.: Fișierul a fost încărcat cu succes.
 # PluginQuickUsage
-Images Used: Images Used
-Templates Used: Templates Used
+Images Used: Imagini folosite
+Templates Used: Șabloane utilizate
+"This file is a duplicate of the following file:": 'Acest fișier este un duplicat al următorului fișier:'
