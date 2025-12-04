@@ -220,11 +220,11 @@ Ignore warnings and upload anyway: تجاهل التحذيرات وتحميله�
 Upload: تحميل
 Drag & drop a file here: سحب وإسقاط ملف هنا
 File already exists: الملف موجود بالفعل
-There is a file with the same name already exists.: There is a file with the same name already exists.
-File duplicated: File duplicated
-'This file is duplicated of:': 'This file is duplicated of:'
-Upload successful: Upload successful
-File has been uploaded successfully.: File has been uploaded successfully.
+There is a file with the same name already exists.: يوجد بالفعل ملف بنفس الاسم.
+File duplicated: تم تكرار الملف
+Upload successful: تم الرفع بنجاح
+File has been uploaded successfully.: تم تحميل الملف بنجاح.
 # PluginQuickUsage
-Images Used: Images Used
-Templates Used: Templates Used
+Images Used: الصور المستخدمة
+Templates Used: القوالب المستخدمة
+"This file is a duplicate of the following file:": 'هذا الملف نسخة مكررة من الملف التالي:'
