@@ -211,3 +211,20 @@ User: Utilizator
 Groups: Grupuri
 If the information shown above is incorrect (for example, the user is not you), click the button below.: Dacă informaţiile de mai sus sunt incorecte (de exemplu, utilizatorul nu este), faceţi clic pe butonul de mai jos.
 Clear caches & Reload: Curăță geocutiile și reîncarcă
+# PluginQuickUpload
+Quick Upload: Încărcare rapidă
+File name: Nume fișier
+File: Fişier
+File description: Descrierea fișierului
+Ignore warnings and upload anyway: Ignoră avertismentele și încarcă oricum
+Upload: Incarca
+Drag & drop a file here: Trage și plasează un fișier aici
+File already exists: Fişierul există deja
+There is a file with the same name already exists.: There is a file with the same name already exists.
+File duplicated: File duplicated
+'This file is duplicated of:': 'This file is duplicated of:'
+Upload successful: Upload successful
+File has been uploaded successfully.: File has been uploaded successfully.
+# PluginQuickUsage
+Images Used: Images Used
+Templates Used: Templates Used
