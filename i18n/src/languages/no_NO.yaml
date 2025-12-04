@@ -211,3 +211,20 @@ User: Bruker
 Groups: Grupper
 If the information shown above is incorrect (for example, the user is not you), click the button below.: Hvis informasjonen ovenfor er feil (for eksempel så er ikke brukeren deg), klikk på knappen nedenfor.
 Clear caches & Reload: Tøm hurtiglager & Oppdater
+# PluginQuickUpload
+Quick Upload: Rask opplasting
+File name: Fil navn
+File: Fil
+File description: Beskrivelse av filen
+Ignore warnings and upload anyway: Ignorer advarsler og last opp likevel
+Upload: Last opp
+Drag & drop a file here: Dra og slipp en fil hit
+File already exists: Filen finnes allerede
+There is a file with the same name already exists.: Det finnes allerede en fil med samme navn.
+File duplicated: Fil duplisert
+Upload successful: Opplastingen var vellykket
+File has been uploaded successfully.: Filen er lastet opp.
+# PluginQuickUsage
+Images Used: Bilder brukt
+Templates Used: Maler som brukes
+"This file is a duplicate of the following file:": 'Denne filen er en duplikat av følgende fil:'

@@ -211,3 +211,20 @@ User: Користувач
 Groups: Групи
 If the information shown above is incorrect (for example, the user is not you), click the button below.: Якщо наведена вище інформація неправильна (наприклад, користувач не Ви), натисніть кнопку нижче.
 Clear caches & Reload: Очистити кеш і перезавантажити
+# PluginQuickUpload
+Quick Upload: Швидке завантаження
+File name: Ім'я файлу
+File: Файл
+File description: Опис файлу
+Ignore warnings and upload anyway: Ігнорувати попередження та завантажити все одно
+Upload: Вивантажити
+Drag & drop a file here: Перетягніть файл сюди
+File already exists: Файл вже існує
+There is a file with the same name already exists.: Файл з такою назвою вже існує.
+File duplicated: Файл дубльовано
+Upload successful: Успішно завантажено
+File has been uploaded successfully.: Файл успішно завантажено.
+# PluginQuickUsage
+Images Used: Використовувані зображення
+Templates Used: Використано шаблонів
+"This file is a duplicate of the following file:": 'Цей файл є дублікатом наступного файлу:'

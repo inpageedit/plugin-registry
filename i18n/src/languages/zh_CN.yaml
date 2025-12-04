@@ -211,3 +211,20 @@ User: 用户
 Groups: 用户组
 If the information shown above is incorrect (for example, the user is not you), click the button below.: 如果上方显示的信息不正确（例如显示的不是您的用户名），请点击下方按钮。
 Clear caches & Reload: 清除缓存并重新加载
+# PluginQuickUpload
+Quick Upload: 快速上传
+File name: 文件名称
+File: 文件
+File description: 文件描述
+Ignore warnings and upload anyway: 忽略警告并上传
+Upload: 上传
+Drag & drop a file here: 拖放文件到这里
+File already exists: 文件已存在
+There is a file with the same name already exists.: 已存在具有相同名称的文件。
+File duplicated: 重复文件
+Upload successful: 上传成功
+File has been uploaded successfully.: 文件上传成功。
+# PluginQuickUsage
+Images Used: 使用的图片
+Templates Used: 使用的模板
+"This file is a duplicate of the following file:": '此文件是以下文件的副本：'

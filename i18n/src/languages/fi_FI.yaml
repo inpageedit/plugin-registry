@@ -211,3 +211,20 @@ User: Käyttäjä
 Groups: Ryhmät
 If the information shown above is incorrect (for example, the user is not you), click the button below.: Jos yllä esitetyt tiedot ovat virheellisiä (esimerkiksi käyttäjä ei ole sinä), napsauta alla olevaa painiketta.
 Clear caches & Reload: Tyhjennä välimuistit ja lataa uudelleen
+# PluginQuickUpload
+Quick Upload: Nopea Lähetys
+File name: Tiedoston nimi
+File: Tiedosto
+File description: Tiedoston kuvaus
+Ignore warnings and upload anyway: Ohita varoitukset ja lataa silti
+Upload: Lähetä
+Drag & drop a file here: Vedä ja pudota tiedosto tähän
+File already exists: Tiedosto on jo olemassa
+There is a file with the same name already exists.: Samanniminen tiedosto on jo olemassa.
+File duplicated: Tiedosto kopioitu
+Upload successful: Lataus onnistui
+File has been uploaded successfully.: Tiedosto on lähetetty onnistuneesti.
+# PluginQuickUsage
+Images Used: Käytetyt Kuvat
+Templates Used: Käytetyt Mallit
+"This file is a duplicate of the following file:": 'Tämä tiedosto on kaksoiskappale seuraavasta tiedostosta:'

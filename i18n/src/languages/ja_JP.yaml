@@ -211,3 +211,20 @@ User: ユーザー
 Groups: グループ
 If the information shown above is incorrect (for example, the user is not you), click the button below.: 上記の情報が正しくない場合（例えば、表示されているユーザーがあなたではない場合）、下のボタンをクリックしてください。
 Clear caches & Reload: キャッシュをクリアして再読み込み
+# PluginQuickUpload
+Quick Upload: クイックアップロード
+File name: ファイル名
+File: ファイル
+File description: ファイルの説明
+Ignore warnings and upload anyway: 警告を無視してとにかくアップロードする
+Upload: アップロード
+Drag & drop a file here: ここにファイルをドラッグ＆ドロップ
+File already exists: ファイルは既に存在します
+There is a file with the same name already exists.: 同じ名前のファイルが既に存在します。
+File duplicated: ファイルが複製されました
+Upload successful: アップロードに成功しました
+File has been uploaded successfully.: ファイルが正常にアップロードされました。
+# PluginQuickUsage
+Images Used: 使用された画像
+Templates Used: 使用されているテンプレート
+"This file is a duplicate of the following file:": 'このファイルは以下のファイルと重複しています:'

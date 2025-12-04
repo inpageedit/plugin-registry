@@ -97,7 +97,7 @@ Quick Create: 快速建立
 New section: 新章節
 Not editable: 不可編輯
 Reload after save: 儲存後重新載入
-All edit contents will be lost after closing the modal. Are you sure you want to close?: '所有编辑内容在关闭后将丢失。您确定要关闭吗？'
+All edit contents will be lost after closing the modal. Are you sure you want to close?: '所有編輯內容在關閉後將遺失。您確定要關閉嗎？'
 Give Up: 放棄
 Continue Editing: 繼續編輯
 'You are editing a <em>historical version</em> version; the content is not the latest!': 您正在編輯<em>歷史版本</em>；內容並非最新！
@@ -107,7 +107,7 @@ Submission Successful: 提交成功
 Submission Error: 提交錯誤
 Your changes have been saved.: 您的變更已儲存。
 Special page is not editable.: 特殊頁面不可編輯。
-You can try to submit again to dismiss the warnings.: 您可以尝试再次提交以忽略警告。
+You can try to submit again to dismiss the warnings.: 您可以嘗試再次提交以忽略警告。
 # PluginStore
 Plugin Store: 外掛商店
 Registry URLs: 註冊表網址
@@ -211,3 +211,20 @@ User: 使用者
 Groups: 群組
 If the information shown above is incorrect (for example, the user is not you), click the button below.: 如果上方顯示的資訊不正確（例如，使用者並非您本人），請點選下方的按鈕。
 Clear caches & Reload: 清除快取並重新載入
+# PluginQuickUpload
+Quick Upload: 快速上傳
+File name: 檔案名稱
+File: 檔案
+File description: 檔案描述
+Ignore warnings and upload anyway: 忽略警告並上傳
+Upload: 上傳
+Drag & drop a file here: 拖放檔案到這裡
+File already exists: 檔案已存在
+There is a file with the same name already exists.: 已存在具有相同名稱的檔案。
+File duplicated: 重複檔案
+Upload successful: 上傳成功
+File has been uploaded successfully.: 檔案已成功上傳。
+# PluginQuickUsage
+Images Used: 使用的檔案
+Templates Used: 使用的模板
+"This file is a duplicate of the following file:": '此檔案是以下檔案的副本：'

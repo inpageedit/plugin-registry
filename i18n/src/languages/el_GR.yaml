@@ -211,3 +211,20 @@ User: Χρήστης
 Groups: Ομάδες
 If the information shown above is incorrect (for example, the user is not you), click the button below.: Εάν οι πληροφορίες που εμφανίζονται παραπάνω είναι εσφαλμένες (για παράδειγμα, ο χρήστης δεν είναι εσείς), κάντε κλικ στο παρακάτω κουμπί.
 Clear caches & Reload: Εκκαθάριση κρυπτών & Επαναφόρτωση
+# PluginQuickUpload
+Quick Upload: Γρήγορη Αποστολή
+File name: Όνομα αρχείου
+File: Αρχείο
+File description: Περιγραφή αρχείου
+Ignore warnings and upload anyway: Παράβλεψη προειδοποιήσεων και ανέβασμα ούτως ή άλλως
+Upload: Ανέβασμα
+Drag & drop a file here: Σύρετε & αποθέστε ένα αρχείο εδώ
+File already exists: Το αρχείο υπάρχει ήδη
+There is a file with the same name already exists.: Υπάρχει ένα αρχείο με το ίδιο όνομα υπάρχει ήδη.
+File duplicated: Το αρχείο διπλασιάστηκε
+Upload successful: Επιτυχής μεταφόρτωση
+File has been uploaded successfully.: Το αρχείο έχει μεταφορτωθεί με επιτυχία.
+# PluginQuickUsage
+Images Used: Εικόνες Που Χρησιμοποιούνται
+Templates Used: Χρησιμοποιούνται Πρότυπα
+"This file is a duplicate of the following file:": 'Αυτό το αρχείο είναι ένα αντίγραφο του ακόλουθου αρχείου:'
