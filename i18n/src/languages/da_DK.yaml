@@ -211,3 +211,20 @@ User: Bruger
 Groups: Grupper
 If the information shown above is incorrect (for example, the user is not you), click the button below.: Hvis oplysningerne vist ovenfor er forkerte (for eksempel brugeren ikke er dig), skal du klikke på knappen nedenfor.
 Clear caches & Reload: Ryd caches & Genindlæs
+# PluginQuickUpload
+Quick Upload: Hurtig Upload
+File name: Fil navn
+File: Fil
+File description: Fil beskrivelse
+Ignore warnings and upload anyway: Ignorer advarsler og upload alligevel
+Upload: Upload
+Drag & drop a file here: Træk og slip en fil her
+File already exists: Filen findes allerede
+There is a file with the same name already exists.: There is a file with the same name already exists.
+File duplicated: File duplicated
+'This file is duplicated of:': 'This file is duplicated of:'
+Upload successful: Upload successful
+File has been uploaded successfully.: File has been uploaded successfully.
+# PluginQuickUsage
+Images Used: Images Used
+Templates Used: Templates Used
