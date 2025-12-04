@@ -220,11 +220,11 @@ Ignore warnings and upload anyway: Ignora avvisi e carica comunque
 Upload: Carica
 Drag & drop a file here: Trascina qui un file
 File already exists: Il file esiste già
-There is a file with the same name already exists.: There is a file with the same name already exists.
-File duplicated: File duplicated
-'This file is duplicated of:': 'This file is duplicated of:'
-Upload successful: Upload successful
-File has been uploaded successfully.: File has been uploaded successfully.
+There is a file with the same name already exists.: Esiste già un file con lo stesso nome.
+File duplicated: File duplicato
+Upload successful: Caricamento riuscito
+File has been uploaded successfully.: File caricato con successo.
 # PluginQuickUsage
-Images Used: Images Used
-Templates Used: Templates Used
+Images Used: Immagini Usate
+Templates Used: Modelli Usati
+"This file is a duplicate of the following file:": 'Questo file è un duplicato del seguente file:'
