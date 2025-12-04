@@ -222,9 +222,9 @@ Drag & drop a file here: Trage și plasează un fișier aici
 File already exists: Fişierul există deja
 There is a file with the same name already exists.: Există deja un fișier cu același nume.
 File duplicated: Fișier duplicat
+"This file is a duplicate of the following file:": 'Acest fișier este un duplicat al următorului fișier:'
 Upload successful: Încărcare reușită
 File has been uploaded successfully.: Fișierul a fost încărcat cu succes.
 # PluginQuickUsage
 Images Used: Imagini folosite
 Templates Used: Șabloane utilizate
-"This file is a duplicate of the following file:": 'Acest fișier este un duplicat al următorului fișier:'
