@@ -211,3 +211,20 @@ User: المستخدم
 Groups: المجموعات
 If the information shown above is incorrect (for example, the user is not you), click the button below.: إذا كانت المعلومات المعروضة أعلاه غير صحيحة (على سبيل المثال، المستخدم ليس أنت)، انقر على الزر أدناه.
 Clear caches & Reload: مسح الذاكرة المؤقتة وإعادة التحميل
+# PluginQuickUpload
+Quick Upload: تحميل سريع
+File name: اسم الملف
+File: ملف
+File description: وصف الملف
+Ignore warnings and upload anyway: تجاهل التحذيرات وتحميلها على أي حال
+Upload: تحميل
+Drag & drop a file here: سحب وإسقاط ملف هنا
+File already exists: الملف موجود بالفعل
+There is a file with the same name already exists.: There is a file with the same name already exists.
+File duplicated: File duplicated
+'This file is duplicated of:': 'This file is duplicated of:'
+Upload successful: Upload successful
+File has been uploaded successfully.: File has been uploaded successfully.
+# PluginQuickUsage
+Images Used: Images Used
+Templates Used: Templates Used
