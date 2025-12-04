@@ -220,11 +220,11 @@ Ignore warnings and upload anyway: Warnungen ignorieren und trotzdem hochladen
 Upload: Hochladen
 Drag & drop a file here: Drag & Drop eine Datei hier
 File already exists: Datei existiert bereits
-There is a file with the same name already exists.: There is a file with the same name already exists.
-File duplicated: File duplicated
-'This file is duplicated of:': 'This file is duplicated of:'
-Upload successful: Upload successful
-File has been uploaded successfully.: File has been uploaded successfully.
+There is a file with the same name already exists.: Es existiert bereits eine Datei mit dem gleichen Namen.
+File duplicated: Datei dupliziert
+Upload successful: Upload erfolgreich
+File has been uploaded successfully.: Datei wurde erfolgreich hochgeladen.
 # PluginQuickUsage
-Images Used: Images Used
-Templates Used: Templates Used
+Images Used: Verwendete Bilder
+Templates Used: Vorlagen verwendet
+"This file is a duplicate of the following file:": 'Diese Datei ist ein Duplikat der folgenden Datei:'
