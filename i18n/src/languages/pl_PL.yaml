@@ -211,3 +211,20 @@ User: Użytkownik
 Groups: Grupy
 If the information shown above is incorrect (for example, the user is not you), click the button below.: Jeśli wyświetlane powyżej informacje są nieprawidłowe (na przykład użytkownik to nie ty), kliknij przycisk poniżej.
 Clear caches & Reload: Wyczyść pamięć podręczną i przeładuj
+# PluginQuickUpload
+Quick Upload: Szybkie wysyłanie
+File name: Nazwa pliku
+File: Plik
+File description: Opis pliku
+Ignore warnings and upload anyway: Ignoruj ostrzeżenia i wgraj mimo to
+Upload: Prześlij
+Drag & drop a file here: Przeciągnij i upuść plik tutaj
+File already exists: Plik już istnieje
+There is a file with the same name already exists.: Istnieje już plik o tej samej nazwie.
+File duplicated: Plik zduplikowany
+'This file is duplicated of:': 'Ten plik jest zduplikowany:'
+Upload successful: Przesyłanie zakończone powodzeniem
+File has been uploaded successfully.: Plik został pomyślnie przesłany.
+# PluginQuickUsage
+Images Used: Używane obrazy
+Templates Used: Używane szablony
