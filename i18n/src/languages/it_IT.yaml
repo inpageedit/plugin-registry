@@ -211,3 +211,20 @@ User: Utente
 Groups: Gruppi
 If the information shown above is incorrect (for example, the user is not you), click the button below.: Se le informazioni sopra mostrate non sono corrette (ad esempio, l'utente non è tu), fare clic sul pulsante qui sotto.
 Clear caches & Reload: Cancella cache e ricarica
+# PluginQuickUpload
+Quick Upload: Caricamento Rapido
+File name: Nome file
+File: File
+File description: Descrizione del file
+Ignore warnings and upload anyway: Ignora avvisi e carica comunque
+Upload: Carica
+Drag & drop a file here: Trascina qui un file
+File already exists: Il file esiste già
+There is a file with the same name already exists.: There is a file with the same name already exists.
+File duplicated: File duplicated
+'This file is duplicated of:': 'This file is duplicated of:'
+Upload successful: Upload successful
+File has been uploaded successfully.: File has been uploaded successfully.
+# PluginQuickUsage
+Images Used: Images Used
+Templates Used: Templates Used
