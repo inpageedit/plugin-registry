@@ -222,9 +222,9 @@ Drag & drop a file here: Перетащите файл сюда
 File already exists: Файл уже существует
 There is a file with the same name already exists.: Файл с таким именем уже существует.
 File duplicated: Файл дублирован
-'This file is duplicated of:': 'Этот файл дублируется:'
 Upload successful: Успешная загрузка
 File has been uploaded successfully.: Файл успешно загружен.
 # PluginQuickUsage
 Images Used: Использовано изображений
 Templates Used: Использованы шаблоны
+"This file is a duplicate of the following file:": 'Этот файл является дубликатом следующего файла:'
