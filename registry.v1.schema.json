@@ -1,0 +1,191 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "InPageEdit Plugin Central Schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "manifest_version",
+    "name",
+    "base_url",
+    "packages"
+  ],
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "JSON Schema reference"
+    },
+    "manifest_version": {
+      "type": "integer",
+      "enum": [
+        1
+      ],
+      "description": "Manifest version"
+    },
+    "last_modified": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp of the last update (replaces updated_at)"
+    },
+    "name": {
+      "type": "string",
+      "description": "Registry/package set display name"
+    },
+    "base_url": {
+      "type": "string",
+      "format": "string",
+      "description": "Base URL of the plugin registry (can be relative)"
+    },
+    "homepage": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "uri",
+      "description": "Optional homepage URL"
+    },
+    "maintainers": {
+      "type": "array",
+      "description": "List of maintainers",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string",
+            "format": "email"
+          },
+          "url": {
+            "type": "string",
+            "format": "uri",
+            "description": "Maintainer URL (blog/github/etc.)"
+          }
+        }
+      }
+    },
+    "repository": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "url"
+      ],
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Repository type, e.g. git"
+        },
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "description": "Repository URL"
+        }
+      }
+    },
+    "packages": {
+      "type": "array",
+      "description": "Array of plugin package descriptors",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "name",
+          "version",
+          "loader"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier for the plugin"
+          },
+          "name": {
+            "type": "string"
+          },
+          "version": {
+            "type": "string",
+            "pattern": "^\\d+\\.\\d+\\.\\d+(?:[-+].*)?$",
+            "description": "Simple semver-like pattern (major.minor.patch)"
+          },
+          "description": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "author": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "license": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "categories": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "loader": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "kind"
+            ],
+            "properties": {
+              "kind": {
+                "type": "string",
+                "enum": [
+                  "autoload",
+                  "module",
+                  "umd",
+                  "styles"
+                ],
+                "description": "Loader kind; allowed values: autoload | module | umd | styles"
+              },
+              "entry": {
+                "description": "Entry script path relative to base, or null for style-only packages",
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "styles": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Array of stylesheet paths relative to base"
+              },
+              "main_export": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "description": "Name of the exported symbol for module/UMD loaders or null"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
