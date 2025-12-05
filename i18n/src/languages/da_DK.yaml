@@ -222,9 +222,9 @@ Drag & drop a file here: Træk og slip en fil her
 File already exists: Filen findes allerede
 There is a file with the same name already exists.: Der findes allerede en fil med samme navn.
 File duplicated: Fil duplikeret
+"This file is a duplicate of the following file:": 'Denne fil er en kopi af følgende fil:'
 Upload successful: Upload gennemført
 File has been uploaded successfully.: Filen er blevet uploadet.
 # PluginQuickUsage
 Images Used: Brugte Billeder
 Templates Used: Brugte Skabeloner
-"This file is a duplicate of the following file:": 'Denne fil er en kopi af følgende fil:'

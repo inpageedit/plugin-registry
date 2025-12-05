@@ -222,9 +222,9 @@ Drag & drop a file here: Vedä ja pudota tiedosto tähän
 File already exists: Tiedosto on jo olemassa
 There is a file with the same name already exists.: Samanniminen tiedosto on jo olemassa.
 File duplicated: Tiedosto kopioitu
+"This file is a duplicate of the following file:": 'Tämä tiedosto on kaksoiskappale seuraavasta tiedostosta:'
 Upload successful: Lataus onnistui
 File has been uploaded successfully.: Tiedosto on lähetetty onnistuneesti.
 # PluginQuickUsage
 Images Used: Käytetyt Kuvat
 Templates Used: Käytetyt Mallit
-"This file is a duplicate of the following file:": 'Tämä tiedosto on kaksoiskappale seuraavasta tiedostosta:'

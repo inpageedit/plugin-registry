@@ -222,9 +222,9 @@ Drag & drop a file here: Sem přetáhněte soubor
 File already exists: Soubor již existuje
 There is a file with the same name already exists.: Soubor se stejným názvem již existuje.
 File duplicated: Soubor duplikován
+"This file is a duplicate of the following file:": 'Tento soubor je duplicitní soubor:'
 Upload successful: Odeslání úspěšné
 File has been uploaded successfully.: Soubor byl úspěšně nahrán.
 # PluginQuickUsage
 Images Used: Použité obrázky
 Templates Used: Použité šablony
-"This file is a duplicate of the following file:": 'Tento soubor je duplicitní soubor:'
