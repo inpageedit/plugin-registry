@@ -10,19 +10,19 @@
   },
   "devDependencies": {
     "@cordisjs/core": "^3.18.1",
-    "@inpageedit/core": "^0.13.1",
-    "@types/node": "^24.8.1",
+    "@inpageedit/core": "^0.15.0",
+    "@types/node": "^24.10.4",
     "consola": "^3.4.2",
-    "rimraf": "^6.0.1",
-    "schemastery": "^3.17.1",
-    "tsx": "^4.20.6",
+    "rimraf": "^6.1.2",
+    "schemastery": "^3.17.2",
+    "tsx": "^4.21.0",
     "types-mediawiki": "^2.0.0",
     "typescript": "^5.9.3",
     "unbuild": "^3.6.1"
   },
   "dependencies": {
-    "sass-embedded": "^1.93.3",
-    "vite": "^7.2.2"
+    "sass-embedded": "^1.97.1",
+    "vite": "^7.3.0"
   },
   "peerDependencies": {
     "@cordisjs/core": "^3.18.1"
