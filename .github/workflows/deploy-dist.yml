@@ -35,3 +35,4 @@ jobs:
           publish_dir: ./dist
           publish_branch: dist
           force_orphan: true
+          cname: registry.ipe.wiki
