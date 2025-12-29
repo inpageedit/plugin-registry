@@ -40,7 +40,31 @@ export interface QuickDeleteSubmitPayload {
   deletetalk?: boolean
 }
 
+const createAbortError = () => {
+  // In browsers this is usually DOMException('AbortError'); use Error as a fallback for unified handling.
+  const err = new Error('Aborted')
+  ;(err as any).name = 'AbortError'
+  return err
+}
+
 const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms))
+
+const sleepWithAbort = (ms: number, signal?: AbortSignal) => {
+  if (!signal) return sleep(ms)
+  if (signal.aborted) return Promise.reject(createAbortError())
+  return new Promise<void>((resolve, reject) => {
+    const timer = setTimeout(() => {
+      signal.removeEventListener('abort', onAbort)
+      resolve()
+    }, ms)
+    const onAbort = () => {
+      clearTimeout(timer)
+      signal.removeEventListener('abort', onAbort)
+      reject(createAbortError())
+    }
+    signal.addEventListener('abort', onAbort, { once: true })
+  })
+}
 
 export class PluginQuickDelete extends BasePlugin {
   static using = [
@@ -195,10 +219,9 @@ export class PluginQuickDelete extends BasePlugin {
           modal.setLoadingState(true)
 
           const abortController = new AbortController()
-          const errors: {
-            title: string
-            error: Error
-          }[] = []
+          const succeeded: string[] = []
+          const failed: { title: string; error: unknown }[] = []
+          let abortRequested = false
 
           const overlay = this.ctx.modal.show({
             title: 'Deleting...',
@@ -211,77 +234,208 @@ export class PluginQuickDelete extends BasePlugin {
                 label: 'Cancel',
                 className: 'is-danger is-text',
                 method: () => {
+                  abortRequested = true
                   abortController.abort()
                 },
               },
             ],
           })
           const [progressText, setProgressText] = useText('0')
+          const [currentTitleText, setCurrentTitleText] = useText('-')
+          const [successText, setSuccessText] = useText('0')
+          const [failedText, setFailedText] = useText('0')
+          const [pendingText, setPendingText] = useText(total.toString())
+          const [hintText, setHintText] = useText(
+            'Cancel will stop subsequent deletions (effective after the current request finishes).'
+          )
+
+          const logsUl = (
+            <ul style={{ margin: '0.25rem 0 0 1.25rem' }} />
+          ) as HTMLUListElement
+          const appendLog = (
+            kind: 'success' | 'fail' | 'info',
+            title: string,
+            msg?: string
+          ) => {
+            const color =
+              kind === 'success'
+                ? 'var(--ipe-modal-success)'
+                : kind === 'fail'
+                ? 'var(--ipe-modal-danger)'
+                : 'var(--ipe-modal-text-secondary)'
+            const li = (
+              <li>
+                <span style={{ color }}>
+                  {kind === 'success' ? '✔ ' : kind === 'fail' ? '✖ ' : '• '}
+                </span>
+                <strong>{title}</strong>
+                {msg ? <span> — {msg}</span> : null}
+              </li>
+            ) as HTMLLIElement
+            logsUl.appendChild(li)
+          }
+
           overlay.setContent(
             <div
-              style={{
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                height: '4rem',
-              }}
+              className="theme-ipe-prose"
+              style={{ display: 'grid', gap: '0.75rem' }}
             >
-              <span>
-                Deleting {progressText} of {titles.length} pages...
-              </span>
+              <div>
+                <div>
+                  Progress <strong>{progressText}</strong> /{' '}
+                  <strong>{total}</strong> (remaining <strong>{pendingText}</strong>)
+                </div>
+                <div style="margin-top: 0.25rem;">
+                  Current: <code>{currentTitleText}</code>
+                </div>
+                <div style="margin-top: 0.25rem; color: var(--ipe-modal-text-secondary);">
+                  {hintText}
+                </div>
+              </div>
+              <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                <div>
+                   Success:{' '}
+                  <strong style="color: var(--ipe-modal-success);">
+                    {successText}
+                  </strong>
+                </div>
+                <div>
+                   Failed:{' '}
+                  <strong style="color: var(--ipe-modal-danger);">
+                    {failedText}
+                  </strong>
+                </div>
+              </div>
+              <div>
+                <div style="color: var(--ipe-modal-text-secondary);">
+                   Log (appended in time order):
+                </div>
+                {logsUl}
+              </div>
             </div>
           )
 
-          for (const title of titles) {
+          const pending = titles.slice()
+          setPendingText(pending.length.toString())
+
+          while (pending.length) {
+            const title = pending[0]!
+            setCurrentTitleText(title)
+
             if (abortController.signal.aborted) {
               break
             }
+
             try {
               await this.deleteOne(title, reason, deleteTalk)
+              succeeded.push(title)
+              setSuccessText(succeeded.length.toString())
+              appendLog('success', title)
             } catch (error) {
-              errors.push({ title, error: error as Error })
+              failed.push({ title, error })
+              setFailedText(failed.length.toString())
+              appendLog('fail', title, (error as any)?.message || String(error))
+            } finally {
+              pending.shift()
+              setProgressText((total - pending.length).toString())
+              setPendingText(pending.length.toString())
             }
-            titles.shift()
-            setProgressText((total - titles.length).toString())
-            if (titles.length) {
-              await sleep(1000)
+
+            if (pending.length) {
+              try {
+                await sleepWithAbort(1000, abortController.signal)
+              } catch (e) {
+                // Allow immediate cancel during the delay between requests
+                appendLog('info', 'Cancelled', 'Delay interrupted; stopping subsequent deletions.')
+                break
+              }
             }
           }
 
+          const unprocessed = pending.slice()
+
+          // Auto-refill "failed + unprocessed" titles back into the input for quick retry
+          const refill = Array.from(
+            new Set([...failed.map((x) => x.title), ...unprocessed])
+          )
+          textarea.value = refill.join('\n') + (refill.length ? '\n' : '')
+
           modal.setLoadingState(false)
-          textarea.value = titles.join('\n') + '\n'
 
           overlay.setTitle('Deletion Result')
           overlay.removeButton('abort-delete-button')
+
+          if (abortRequested) {
+            setHintText(
+              'Cancelled: subsequent deletions stopped (effective after the current request finishes).'
+            )
+          }
+
           overlay.setContent(
-            <div className="theme-ipe-prose">
-              <p style="color: var(--ipe-modal-success);">
-                Deleted {total - errors.length} pages.
-              </p>
-              {titles.length && (
-                <p style="color: var(--ipe-modal-warning);">
-                  Skipped {titles.length} pages.
-                </p>
-              )}
-              {errors.length && (
+            <div
+              className="theme-ipe-prose"
+              style={{ display: 'grid', gap: '0.75rem' }}
+            >
+              <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
                 <div>
-                  <p style="color: var(--ipe-modal-danger);">
-                    Failed to delete {errors.length} pages:
-                  </p>
-                  <ul>
-                    {errors.map(({ title, error }) => (
+                   Deleted:{' '}
+                  <strong style="color: var(--ipe-modal-success);">
+                    {succeeded.length}
+                  </strong>
+                </div>
+                <div>
+                   Failed:{' '}
+                  <strong style="color: var(--ipe-modal-danger);">
+                    {failed.length}
+                  </strong>
+                </div>
+                <div>
+                   Unprocessed:{' '}
+                  <strong style="color: var(--ipe-modal-warning);">
+                    {unprocessed.length}
+                  </strong>
+                </div>
+              </div>
+
+              {(failed.length || unprocessed.length) && (
+                <div style="color: var(--ipe-modal-text-secondary);">
+                   Titles for <strong>failed + unprocessed</strong> items have been refilled into the input. Click Delete to retry.
+                </div>
+              )}
+
+              {failed.length ? (
+                <div>
+                  <div style="color: var(--ipe-modal-danger);">Failure details:</div>
+                  <ul style={{ margin: '0.25rem 0 0 1.25rem' }}>
+                    {failed.map(({ title, error }) => (
                       <li key={title}>
-                        <div>
-                          <strong>{title}</strong>
+                        <strong>{title}</strong>
+                        <div style="color: var(--ipe-modal-text-secondary);">
+                          {(error as any)?.message || String(error)}
                         </div>
-                        <div>{error.message}</div>
                       </li>
                     ))}
                   </ul>
                 </div>
-              )}
+              ) : null}
+
+              {unprocessed.length ? (
+                <div>
+                  <div style="color: var(--ipe-modal-warning);">
+                    Unprocessed (usually due to cancellation):
+                  </div>
+                  <ul style={{ margin: '0.25rem 0 0 1.25rem' }}>
+                    {unprocessed.map((t) => (
+                      <li key={t}>
+                        <strong>{t}</strong>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ) : null}
             </div>
           )
+
           overlay.setButtons([
             {
               label: 'OK',
