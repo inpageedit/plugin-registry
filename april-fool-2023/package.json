@@ -1,0 +1,39 @@
+{
+  "name": "inpageedit-plugin-april-fool-2023",
+  "description": "My Little IPE",
+  "version": "2.0.0",
+  "private": true,
+  "type": "module",
+  "module": "./dist/index.mjs",
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs"
+    }
+  },
+  "scripts": {
+    "dev": "vite build --watch",
+    "build": "vite build"
+  },
+  "$ipe": {
+    "name": "My Little IPE",
+    "description": "IPE Chan - Your powerful MediaWiki AI assistant (April Fool's Day 2023)",
+    "categories": [
+      "fun",
+      "april-fool",
+      "easter-egg"
+    ],
+    "loader": {
+      "kind": "module",
+      "entry": "dist/index.mjs",
+      "styles": [],
+      "main_export": "default"
+    },
+    "dev_loader": {
+      "entry": "src/index.ts",
+      "styles": []
+    }
+  }
+}

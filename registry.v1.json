@@ -1,0 +1,125 @@
+{
+  "$schema": "./registry.v1.schema.json",
+  "manifest_version": 1,
+  "name": "InPageEdit Official Plugins",
+  "homepage": "https://registry.ipe.wiki",
+  "base_url": "./",
+  "last_modified": "2025-12-30T03:58:22.250Z",
+  "maintainers": [
+    {
+      "name": "Dragon Fish",
+      "url": "https://blog.epb.wiki"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/inpageedit/plugin-registry.git"
+  },
+  "packages": [
+    {
+      "id": "april-fool-2023",
+      "name": "My Little IPE",
+      "version": "2.0.0",
+      "description": "IPE Chan - Your powerful MediaWiki AI assistant (April Fool's Day 2023)",
+      "author": null,
+      "license": null,
+      "categories": [
+        "fun",
+        "april-fool",
+        "easter-egg"
+      ],
+      "loader": {
+        "kind": "module",
+        "entry": "april-fool-2023/dist/index.mjs",
+        "styles": [],
+        "main_export": "default"
+      }
+    },
+    {
+      "id": "code-mirror",
+      "name": "CodeMirror6",
+      "version": "1.0.0",
+      "description": "CodeMirror6 for InPageEdit",
+      "author": "bhsd-harry",
+      "license": null,
+      "categories": [
+        "editor"
+      ],
+      "loader": {
+        "kind": "module",
+        "entry": "code-mirror/dist/index.mjs",
+        "styles": [],
+        "main_export": "default"
+      }
+    },
+    {
+      "id": "edit-any-page",
+      "name": "Edit Any Page",
+      "version": "1.0.0",
+      "description": "Add \"edit any page\" button to toolbox",
+      "author": "dragon-fish",
+      "license": "MIT",
+      "categories": [
+        "toolbox"
+      ],
+      "loader": {
+        "kind": "module",
+        "entry": "edit-any-page/dist/index.mjs",
+        "styles": [],
+        "main_export": "default"
+      }
+    },
+    {
+      "id": "in-cat-edit",
+      "name": "InCatEdit",
+      "version": "1.0.0",
+      "description": "Add IPE edit button for category items and their main/talk page.",
+      "author": "PexEric",
+      "license": "MIT",
+      "categories": [],
+      "loader": {
+        "kind": "module",
+        "entry": "in-cat-edit/dist/index.mjs",
+        "styles": [
+          "in-cat-edit/dist/style.css"
+        ],
+        "main_export": "default"
+      }
+    },
+    {
+      "id": "quick-delete",
+      "name": "Quick Delete",
+      "version": "2.0.0",
+      "description": "Advanced quick delete plugin",
+      "author": null,
+      "license": null,
+      "categories": [
+        "editor",
+        "administration"
+      ],
+      "loader": {
+        "kind": "module",
+        "entry": "quick-delete/dist/index.mjs",
+        "styles": [],
+        "main_export": "PluginQuickDelete"
+      }
+    },
+    {
+      "id": "wiki-editor",
+      "name": "WikiEditor",
+      "version": "1.0.0",
+      "description": "WikiEditor for InPageEdit",
+      "author": "dragon-fish",
+      "license": "MIT",
+      "categories": [
+        "editor"
+      ],
+      "loader": {
+        "kind": "module",
+        "entry": "wiki-editor/dist/index.mjs",
+        "styles": [],
+        "main_export": "default"
+      }
+    }
+  ]
+}
