@@ -22,7 +22,7 @@ prefs:
   editor:
     label: Editor
   general:
-    label: General
+    label: 일반
   inArticleLinks:
     $: In-article links preferences
     label: In-article Links
@@ -38,7 +38,7 @@ prefs:
     $: Toolbox™ preferences
     description: Make the Toolbox™ opened by default
   quickEdit:
-    $: Quick edit options
+    $: 빠른 편집 옵션
     editSummary: Default edit summary for quick edits
     editMinor: Default to checking "minor edit" option
     outSideClose: Close editor modal by clicking outside
@@ -49,14 +49,14 @@ prefs:
   quickDiff:
     keyshortcut: Key shortcut to open quick diff in quick edit modal (blank to disable)
   quickRedirect:
-    $: Quick redirect options
+    $: 빠른 넘겨주기 옵션
     reason: Default reason for quick redirect
   quickMove:
-    $: Quick move options
+    $: 빠른 이동 옵션
     reason: Default reason for quick move
   language:
     $: Language preferences
-    language: Language
+    language: 언어
   analytics:
     $: InPageEdit Analytics
     enabled: Share my usage data with the community.
@@ -66,7 +66,7 @@ prefs:
 watchlist:
   preferences: Follow MW preferences
   nochange: Keep current status
-  watch: Add to watchlist
+  watch: 이 문서 주시하기
   unwatch: Remove from watchlist
 # Common buttons
 OK: OK
@@ -76,24 +76,24 @@ Save: Save
 Enable: Enable
 No: No
 Cancel: Cancel
-Close: Close
-Disable: Disable
+Close: 닫기
+Disable: 비활성화
 # Common form fields
-Summary: Summary
-Reason: Reason
-Watchlist: Watchlist
-Minor edit: Minor edit
+Summary: 요약
+Reason: 이유
+Watchlist: 주시문서 목록
+Minor edit: 사소한 편집
 # Common notifications
-Success: Success
-Warning: Warning
-Attention: Attention
-Important: Important
-Failed: Failed
-Error: Error
-Info: Info
+Success: 성공
+Warning: 경고
+Attention: 참고
+Important: 중요
+Failed: 실패
+Error: 오류
+Info: 정보
 # PluginQuickEdit
-Quick Edit: Quick Edit
-Quick Create: Quick Create
+Quick Edit: 빠른 편집
+Quick Create: 빠른 생성
 New section: New section
 Not editable: Not editable
 Reload after save: Reload after save
@@ -113,7 +113,7 @@ Plugin Store: Plugin Store
 Registry URLs: Registry URLs
 CDN to install packages from npm: CDN to install packages from npm
 Installed plugins: Installed plugins
-Plugins: Plugins
+Plugins: 플러그인
 Registries: Registries
 Search plugins...: Search plugins...
 Refreshing...: Refreshing...
@@ -143,15 +143,15 @@ plugin-store:
       remove-only: Remove only
       remove-and-uninstall: Remove and uninstall plugins
 # PluginQuickMove
-Quick Move: Quick Move
+Quick Move: 빠른 이동
 Move from: Move from
 Move to: Move to
 Move talk page: Move talk page
 Move subpages (up to 100): Move subpages (up to 100)
 Move without leaving a redirect: Move without leaving a redirect
-Move: Move
+Move: 이동
 # PluginQuickRedirect
-Quick Redirect: Quick Redirect
+Quick Redirect: 빠른 넘겨주기
 Redirect from: Redirect from
 Redirect to: Redirect to
 Force create redirect even if the from page already exists: Force create redirect even if the from page already exists
@@ -163,8 +163,8 @@ Preview: Preview
 Preview - Loading...: Preview - Loading...
 'Preview - {{ $1 }}': 'Preview - {{ $1 }}'
 # PluginQuickDiff
-Quick Diff: Quick Diff
-Diff: Diff
+Quick Diff: 빠른 차이
+Diff: 차이
 No changes: No changes
 Loading diff...: Loading diff...
 Differences: Differences
@@ -205,17 +205,17 @@ View My Data: View My Data
 Enable Analytics: Enable Analytics
 Help us improve InPageEdit by sharing your usage data with us.: Help us improve InPageEdit by sharing your usage data with us.
 # WikiMetadataService
-Wiki Informations: Wiki Informations
-Site: Site
-User: User
+Wiki Informations: 위키 정보
+Site: 사이트
+User: 사용자
 Groups: Groups
 If the information shown above is incorrect (for example, the user is not you), click the button below.: If the information shown above is incorrect (for example, the user is not you), click the button below.
 Clear caches & Reload: Clear caches & Reload
 # PluginQuickUpload
 Quick Upload: Quick Upload
-File name: File name
-File: File
-File description: File description
+File name: 파일 이름
+File: 파일
+File description: 파일 설명
 Ignore warnings and upload anyway: Ignore warnings and upload anyway
 Upload: Upload
 Drag & drop a file here: Drag & drop a file here
@@ -226,5 +226,5 @@ File duplicated: File duplicated
 Upload successful: Upload successful
 File has been uploaded successfully.: File has been uploaded successfully.
 # PluginQuickUsage
-Images Used: Images Used
-Templates Used: Templates Used
+Images Used: 사용된 이미지
+Templates Used: 사용된 틀
