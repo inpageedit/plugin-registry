@@ -5,9 +5,16 @@ Preferences Saved: Preferences Saved
 Some settings may take effect after reloading the page.: Some settings may take effect after reloading the page.
 # SchemaForm for Preferences
 prefs:
+  # Category tab labels
+  $category:
+    general: General
+    editor: Editor
+    about: About
+    in-article-links: In-article Links
+    plugin-store: Plugin Store
+    pref-sync: Sync
+  # About page (custom renderer, not schema-driven)
   about:
-    label: About
-    description: About InPageEdit
     header: '✏️ InPageEdit NEXT'
     intro: '🚀 Modular, Extensible Supercharged Plugin for MediaWiki.'
     portals:
@@ -19,55 +26,71 @@ prefs:
       github: GitHub
       qqgroup: QQ Group
     copyright: 'InPageEdit-NEXT Copyright © 2025-{{ new Date().getFullYear() }} dragon-fish'
-  editor:
-    label: Editor
-  general:
-    label: General
+  # General category
+  i18n:
+    $title: I18nService settings
+    index_url: I18n index URL (DO NOT CHANGE THIS)
+  theme:
+    $title: Theme settings
+    auto: Follow system
+    light: Light mode
+    dark: Dark mode
+    site: Follow site theme
+  toolboxAlwaysShow:
+    $title: Toolbox™ preferences
+    $label: Make the Toolbox™ opened by default
+  language:
+    $title: Language preferences
+    $label: Language
+    '@site': Same as the site language
+    '@user': Same as your personal language
+  analytics:
+    $title: InPageEdit Analytics
+    enabled: Share my usage data with the community.
+  # Editor category
+  quickEdit:
+    $title: Quick edit options
+    editSummary: Default edit summary for quick edits
+    editMinor: Default to checking "minor edit" option
+    outSideClose: Close editor modal by clicking outside
+    watchList:
+      $label: Watchlist options
+      nochange: Keep current status
+      preferences: Follow MW preferences
+      watch: Add to watchlist
+      unwatch: Remove from watchlist
+    keyshortcut:
+      save: save button key shortcut (blank to disable)
+    editFont:
+      $label: "Font to use in quick edit's textarea"
+      monospace: Monospace
+      preferences: Follow MW preferences
+      sans-serif: Sans-serif
+      serif: Serif
+  quickPreview:
+    $title: Quick preview options
+    keyshortcut: Key shortcut to open quick preview in quick edit modal
+  quickDiff:
+    $title: Quick diff options
+    keyshortcut: Key shortcut to open quick diff in quick edit modal (blank to disable)
+  quickRedirect:
+    $title: Quick redirect options
+    reason: Default reason for quick redirect
+  quickMove:
+    $title: Quick move options
+    reason: Default reason for quick move
+  quickUpload:
+    $title: Quick upload options
+    summary: Default summary of the quick upload
+  # In-article links category
   inArticleLinks:
-    $: In-article links preferences
-    label: In-article Links
+    $title: In-article links preferences
     enable: Enable in-article links
     quickDiff:
       enable: Enable in-article links for quick diff
     quickEdit:
       enable: Enable in-article links for quick edit
       redlinks: Show quick edit button for redlinks
-  quickPreview:
-    keyshortcut: Key shortcut to open quick preview in quick edit modal
-  toolboxAlwaysShow:
-    $: Toolbox™ preferences
-    description: Make the Toolbox™ opened by default
-  quickEdit:
-    $: Quick edit options
-    editSummary: Default edit summary for quick edits
-    editMinor: Default to checking "minor edit" option
-    outSideClose: Close editor modal by clicking outside
-    watchList: Watchlist options
-    keyshortcut:
-      save: save button key shortcut (blank to disable)
-    editFont: Font to use in quick edit's textarea
-  quickDiff:
-    keyshortcut: Key shortcut to open quick diff in quick edit modal (blank to disable)
-  quickRedirect:
-    $: Quick redirect options
-    reason: Default reason for quick redirect
-  quickMove:
-    $: Quick move options
-    reason: Default reason for quick move
-  language:
-    $: Language preferences
-    language: Language
-  analytics:
-    $: InPageEdit Analytics
-    enabled: Share my usage data with the community.
-  sync:
-    label: Sync
-# Watchlist options
-watchlist:
-  preferences: Follow MW preferences
-  nochange: Keep current status
-  watch: Add to watchlist
-  unwatch: Remove from watchlist
 # Common buttons
 OK: OK
 Yes: Yes
@@ -78,6 +101,8 @@ No: No
 Cancel: Cancel
 Close: Close
 Disable: Disable
+Reset: Reset
+Loading...: Loading...
 # Common form fields
 Summary: Summary
 Reason: Reason
@@ -219,10 +244,11 @@ File description: File description
 Ignore warnings and upload anyway: Ignore warnings and upload anyway
 Upload: Upload
 Drag & drop a file here: Drag & drop a file here
+You can drag & drop files to this modal: You can drag & drop files to this modal
 File already exists: File already exists
 There is a file with the same name already exists.: There is a file with the same name already exists.
 File duplicated: File duplicated
-"This file is a duplicate of the following file:": 'This file is a duplicate of the following file:'
+'This file is a duplicate of the following file:': 'This file is a duplicate of the following file:'
 Upload successful: Upload successful
 File has been uploaded successfully.: File has been uploaded successfully.
 # PluginQuickUsage
