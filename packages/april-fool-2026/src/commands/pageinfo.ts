@@ -23,7 +23,7 @@ export function createPageinfoCommand(terminal: Terminal): Command {
 
       const url = info.fullurl || info.canonicalurl
       if (url) {
-        terminal.print(`链接:     <a href="${url}" target="_blank">${url}</a>`)
+        terminal.printHTML(`链接:     <a href="${encodeURI(url)}" target="_blank">${url.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</a>`)
       }
     },
   }

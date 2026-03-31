@@ -47,7 +47,7 @@ export class Terminal {
   print(text: string, className?: string): void {
     const line = document.createElement('div')
     if (className) line.className = className
-    line.innerHTML = text
+    line.textContent = text
     this.outputEl.appendChild(line)
     this.outputEl.scrollTop = this.outputEl.scrollHeight
   }
@@ -165,11 +165,12 @@ export class Terminal {
 
     if (this.heredocMarker) {
       if (value.trim() === this.heredocMarker) {
-        const fullInput = this.heredocPrefix + this.heredocBuffer.join('\n')
+        const content = this.heredocBuffer.join('\n')
+        const fullInput = this.heredocPrefix + '"' + content.replace(/\\/g, '\\\\').replace(/"/g, '\\"') + '"'
         this.heredocMarker = null
         this.heredocBuffer = []
         this.heredocPrefix = ''
-        this.executeInput(fullInput)
+        this.executeInput(fullInput, true)
       } else {
         this.heredocBuffer.push(value)
         this.print(`> ${value}`, 'ipe-cli-muted')
@@ -189,11 +190,11 @@ export class Terminal {
     this.executeInput(value)
   }
 
-  private async executeInput(input: string): Promise<void> {
+  private async executeInput(input: string, skipEcho = false): Promise<void> {
     const trimmed = input.trim()
     if (!trimmed) return
 
-    if (!this.heredocPrefix) {
+    if (!skipEcho) {
       this.print(`> ${trimmed}`, 'ipe-cli-muted')
     }
 
