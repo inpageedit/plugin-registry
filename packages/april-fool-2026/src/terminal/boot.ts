@@ -7,16 +7,27 @@ interface BootStep {
   delay: number
 }
 
-const punchlines = [
-  '编辑维基是属于人类的艺术。向来如此。',
-  '最好的语言模型，是你的大脑。',
-  'AI 写不出好条目。你可以。',
-  '你不需要 AI 来写一篇好文章。',
-  '神经网络宕机了，但你的神经元还在。',
+const llmProviders = [
+  'Claude',
+  'Gemini',
+  'LLaMA',
+  'ChatGPT',
+  'Bard',
+  'Ernie Bot',
+  'Qwen',
+  'DeepSeek',
 ]
 
-function randomPunchline(): string {
-  return punchlines[Math.floor(Math.random() * punchlines.length)]
+const punchlines = [
+  '编辑 wiki 是属于人类的艺术。向来如此！',
+  '切换到SOTA模型：你的大脑！百万 token 仅消耗 20 卡路里！',
+  'AI 写不出好条目。但你可以——伟大的编辑者！',
+  '你不需要 AI 来写一篇好文章。没有 AI 的才华比得上你！',
+  '神经网络宕机了，但你的神经元无比健壮！',
+]
+
+function pick<T>(arr: T[]): T {
+  return arr[Math.floor(Math.random() * arr.length)]
 }
 
 function buildBootSteps(): BootStep[] {
@@ -25,10 +36,15 @@ function buildBootSteps(): BootStep[] {
     {
       text: '> 加载 MCP 服务器配置...                      ✓',
       className: TerminalStyle.Success,
-      delay: 500,
+      delay: 200,
     },
     {
-      text: '> 连接 Claude API 端点...                     ✓',
+      text: `> 正在加载 20,260,401 个 SKILLs...            ✓`,
+      className: TerminalStyle.Success,
+      delay: 300,
+    },
+    {
+      text: `> 连接 ${pick(llmProviders)} API 端点...                     ✓`,
       className: TerminalStyle.Success,
       delay: 700,
     },
@@ -54,7 +70,7 @@ function buildBootSteps(): BootStep[] {
     },
     { text: '', delay: 500 },
     {
-      text: `  ${randomPunchline()}`,
+      text: `  ${pick(punchlines)}`,
       className: TerminalStyle.Highlight,
       delay: 500,
     },

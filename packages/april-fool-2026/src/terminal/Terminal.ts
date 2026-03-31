@@ -124,7 +124,7 @@ export class Terminal {
 
     const prompt = document.createElement('span')
     prompt.className = 'ipe-cli-prompt'
-    prompt.textContent = '> '
+    prompt.textContent = '✏️ '
 
     this.inputEl = document.createElement('textarea')
     this.inputEl.className = 'ipe-cli-input'
@@ -189,7 +189,7 @@ export class Terminal {
         this.execute(fullInput, true)
       } else {
         this.heredocBuffer.push(value)
-        this.print(`> ${value}`, TerminalStyle.Muted)
+        this.print(`✏️ ${value}`, TerminalStyle.Muted)
       }
       return
     }
@@ -199,7 +199,7 @@ export class Terminal {
       this.heredocMarker = heredocMatch[1]
       this.heredocPrefix = value.slice(0, heredocMatch.index!) + ''
       this.heredocBuffer = []
-      this.print(`> ${value}`, TerminalStyle.Muted)
+      this.print(`✏️ ${value}`, TerminalStyle.Muted)
       return
     }
 
@@ -211,7 +211,7 @@ export class Terminal {
     if (!trimmed) return
 
     if (!skipEcho) {
-      this.print(`> ${trimmed}`, TerminalStyle.Muted)
+      this.print(`✏️ ${trimmed}`, TerminalStyle.Muted)
     }
 
     this.pushHistory(trimmed)
