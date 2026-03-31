@@ -100,6 +100,10 @@
     transform: translateY(100%);
     pointer-events: none;
   }
+
+  &.ipe-cli-no-transition {
+    transition: none !important;
+  }
 }
 
 .ipe-cli-topbar {

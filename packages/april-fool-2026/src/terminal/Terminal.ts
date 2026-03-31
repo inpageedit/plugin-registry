@@ -95,7 +95,7 @@ export class Terminal {
 
   private createDOM(): void {
     this.drawer = document.createElement('div')
-    this.drawer.className = 'ipe-cli-drawer ipe-cli-hidden'
+    this.drawer.className = 'ipe-cli-drawer ipe-cli-hidden ipe-cli-no-transition'
 
     const savedHeight = localStorage.getItem(STORAGE_KEY_HEIGHT)
     if (savedHeight) this.drawer.style.height = savedHeight
@@ -162,6 +162,10 @@ export class Terminal {
     inputArea.append(prompt, this.inputEl)
     this.drawer.append(topbar, this.warningEl, this.outputEl, inputArea)
     document.body.appendChild(this.drawer)
+    // Enable transitions after first paint to prevent flash
+    requestAnimationFrame(() => {
+      this.drawer.classList.remove('ipe-cli-no-transition')
+    })
   }
 
   private setupInput(): void {
