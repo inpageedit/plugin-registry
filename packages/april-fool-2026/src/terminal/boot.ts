@@ -24,9 +24,9 @@ function buildBootSteps(): BootStep[] {
     { text: '> 加载 MCP 服务器配置...                      ✓', className: 'ipe-cli-success', delay: 500 },
     { text: '> 连接 Claude API 端点...                     ✓', className: 'ipe-cli-success', delay: 700 },
     { text: '> 验证 Agent 凭证...                          ✓', className: 'ipe-cli-success', delay: 600 },
-    { text: '> 下载神经语言模型 (7B)...   [█████░░░░░] 42%', className: 'ipe-cli-success', delay: 700 },
-    { text: '> ERROR: 连接被拒绝                            ✗', className: 'ipe-cli-error', delay: 1000 },
-    { text: '> ERROR: AI 模块初始化失败                      ✗', className: 'ipe-cli-error', delay: 500 },
+    { text: '> 下载神经语言模型 (7B)...     [█████░░░░░] 42%', className: 'ipe-cli-success', delay: 700 },
+    { text: '> ERROR: 连接被拒绝                           ✗', className: 'ipe-cli-error', delay: 1000 },
+    { text: '> ERROR: AI 模块初始化失败                    ✗', className: 'ipe-cli-error', delay: 500 },
     { text: '', delay: 500 },
     { text: `  ${randomPunchline()}`, className: 'ipe-cli-highlight', delay: 500 },
   ]
