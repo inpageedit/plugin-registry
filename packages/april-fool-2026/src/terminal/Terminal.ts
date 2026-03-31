@@ -256,6 +256,9 @@ export class Terminal {
     } else {
       this.inputEl.value = this.history[this.historyIndex]
     }
+
+    this.inputEl.style.height = 'auto'
+    this.inputEl.style.height = this.inputEl.scrollHeight + 'px'
   }
 
   private pushHistory(input: string): void {

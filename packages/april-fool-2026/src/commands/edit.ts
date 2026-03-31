@@ -42,10 +42,12 @@ export function createEditCommand(terminal: Terminal): Command {
 
       const data = result.data?.edit
       if (data) {
+        const safeTitle = String(data.title).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
         const url = page.pageInfo?.fullurl || page.pageInfo?.canonicalurl || ''
         if (url) {
+          const safeUrl = url.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
           terminal.printHTML(
-            `<span class="ipe-cli-success">Edit successful: ${data.title} (revid: ${data.newrevid}) <a href="${encodeURI(url)}" target="_blank">${url.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</a></span>`
+            `<span class="ipe-cli-success">Edit successful: ${safeTitle} (revid: ${data.newrevid}) <a href="${encodeURI(url)}" target="_blank">${safeUrl}</a></span>`
           )
         } else {
           terminal.print(`Edit successful: ${data.title} (revid: ${data.newrevid})`, 'ipe-cli-success')

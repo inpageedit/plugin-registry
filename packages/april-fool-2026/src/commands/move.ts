@@ -10,7 +10,7 @@ export function createMoveCommand(terminal: Terminal): Command {
       { name: 'from', type: 'string' as const, description: '源页面标题' },
       { name: 'to', type: 'string' as const, description: '目标页面标题' },
       { name: 'reason', type: 'string' as const, description: '移动原因' },
-      { name: 'redirect', type: 'boolean' as const, description: '是否留下重定向 (默认: 是)' },
+      { name: 'no-redirect', type: 'boolean' as const, description: '不留下重定向' },
       { name: 'ui', type: 'boolean' as const, description: '打开快速移动界面' },
     ],
     async action(ctx, argv) {
@@ -31,7 +31,7 @@ export function createMoveCommand(terminal: Terminal): Command {
       terminal.print(`正在移动 ${from} → ${to} ...`, 'ipe-cli-muted')
       const page = await ctx.wikiPage.newFromTitle(from)
       await page.moveTo(to, argv.reason, {
-        noredirect: argv.redirect === false,
+        noredirect: argv['no-redirect'] === true,
       })
       terminal.print(`Move successful: ${from} → ${to}`, 'ipe-cli-success')
     },

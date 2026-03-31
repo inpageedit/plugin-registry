@@ -14,6 +14,11 @@ export function createPageinfoCommand(terminal: Terminal): Command {
       const page = await ctx.wikiPage.newFromTitle(title)
       const info = page.pageInfo
 
+      if (!info || !info.title) {
+        terminal.print(`页面 ${title} 不存在或无法获取信息。`, 'ipe-cli-error')
+        return
+      }
+
       terminal.print(`标题:     ${info.title}`)
       terminal.print(`页面ID:   ${info.pageid}`)
       terminal.print(`命名空间: ${info.ns}`)

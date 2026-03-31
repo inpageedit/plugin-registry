@@ -35,6 +35,7 @@ export class CommandRegistry {
 
   formatHelpList(): string {
     const cmds = this.getAll().filter((c) => !c.name.startsWith('.'))
+    if (!cmds.length) return ''
     const maxLen = Math.max(...cmds.map((c) => c.name.length))
     return cmds.map((c) => `  ${c.name.padEnd(maxLen + 2)}${c.description}`).join('\n')
   }
