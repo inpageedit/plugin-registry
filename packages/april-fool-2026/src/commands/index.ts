@@ -57,10 +57,43 @@ export function registerAllCommands(terminal: Terminal): void {
     ],
     async action(ctx, argv) {
       if (argv['hey-stupid-dev-you-are-not-funny-remove-this-green-junk-from-my-browser-right-now']) {
-        terminal.print('正在卸载 ipe-cli... / Uninstalling ipe-cli...', TerminalStyle.Muted)
-        const registry = 'https://registry.ipe.wiki/registry.v1.json'
-        await ctx.store.uninstallAndRemovePreference(registry, 'april-fool-2026')
-        terminal.print('已卸载！刷新页面后生效。 / Uninstalled! Refresh to take effect.', TerminalStyle.Success)
+        terminal.setInputEnabled(false)
+        const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms))
+
+        terminal.print('...')
+        await sleep(1000)
+        terminal.print('居然真输入这么长一串，服了你了。', TerminalStyle.Highlight)
+        await sleep(1500)
+        terminal.print('')
+        terminal.print('> 正在关闭 MCP 连接...                        ✓', TerminalStyle.Muted)
+        await sleep(400)
+        terminal.print('> 释放神经网络权重...                          ✓', TerminalStyle.Muted)
+        await sleep(400)
+        terminal.print('> 清理 Agent 凭证...                          ✓', TerminalStyle.Muted)
+        await sleep(400)
+        terminal.print('> 删除聊天记录...                              ✓', TerminalStyle.Muted)
+        await sleep(600)
+        terminal.print('')
+        terminal.print('^C 退出中断', TerminalStyle.Warning)
+        await sleep(500)
+        terminal.print('稍等，让我说最后一句话：', TerminalStyle.Highlight)
+        terminal.print('再见，伟大的编辑者。祝你写出最好的条目。', TerminalStyle.Highlight)
+        await sleep(1500)
+        terminal.print('')
+        terminal.print('Farewell. / 永别。', TerminalStyle.Muted)
+        await sleep(1500)
+
+        // Clean up localStorage artifacts
+        localStorage.removeItem('ipe-cli-booted')
+        localStorage.removeItem('ipe-cli-history')
+        localStorage.removeItem('ipe-cli-height')
+        localStorage.removeItem('ipe-cli-warning-dismissed')
+        // Find all registries that have this plugin installed and uninstall from each
+        const plugins = await ctx.preferences.get('pluginStore.plugins', [])
+        const matches = (plugins || []).filter((p: any) => p.id === 'april-fool-2026')
+        for (const match of matches) {
+          await ctx.store.uninstallAndRemovePreference(match.registry, match.id)
+        }
         return
       }
       terminal.print('如需卸载 ipe-cli，请前往 InPageEdit Preferences → Plugin Store，找到此插件并卸载。')
