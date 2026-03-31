@@ -1,0 +1,59 @@
+{
+  "name": "inpageedit-plugin-april-fool-2026",
+  "description": "Command-line interface for InPageEdit (April Fool's Day 2026)",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "module": "./dist/index.mjs",
+  "files": [
+    "dist"
+  ],
+  "license": "MIT",
+  "author": "dragon-fish <dragon-fish@qq.com>",
+  "contributors": [
+    {
+      "name": "dragon-fish",
+      "email": "dragon-fish@qq.com"
+    },
+    {
+      "name": "Claude Code",
+      "email": "noreply@anthropic.com"
+    }
+  ],
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs"
+    }
+  },
+  "scripts": {
+    "dev": "vite build --watch",
+    "build": "vite build"
+  },
+  "$ipe": {
+    "name": "ipe-cli",
+    "categories": [
+      "fun",
+      "april-fool"
+    ],
+    "loader": {
+      "kind": "module",
+      "entry": "dist/index.mjs",
+      "styles": [
+        "dist/style.css"
+      ],
+      "main_export": "default"
+    },
+    "dev_loader": {
+      "entry": "src/index.ts",
+      "styles": [
+        "src/style.scss"
+      ]
+    }
+  },
+  "dependencies": {
+    "minimist": "^1.2.8"
+  },
+  "devDependencies": {
+    "@types/minimist": "^1.2.5"
+  }
+}

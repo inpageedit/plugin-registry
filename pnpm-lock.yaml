@@ -72,6 +72,16 @@ importers:
 
   packages/april-fool-2023: {}
 
+  packages/april-fool-2026:
+    dependencies:
+      minimist:
+        specifier: ^1.2.8
+        version: 1.2.8
+    devDependencies:
+      '@types/minimist':
+        specifier: ^1.2.5
+        version: 1.2.5
+
   packages/code-mirror: {}
 
   packages/edit-any-page: {}
@@ -703,6 +713,9 @@ packages:
   '@types/jquery@3.5.33':
     resolution: {integrity: sha512-SeyVJXlCZpEki5F0ghuYe+L+PprQta6nRZqhONt9F13dWBtR/ftoaIbdRQ7cis7womE+X2LKhsDdDtkkDhJS6g==}
 
+  '@types/minimist@1.2.5':
+    resolution: {integrity: sha512-hov8bUuiLiyFPGyFPE1lwWhmzYbirOXQNNo40+y3zow8aFVTeyn3VWL0VFFfdNddA8S4Vf0Tc062rzyNr7Paag==}
+
   '@types/node@24.10.0':
     resolution: {integrity: sha512-qzQZRBqkFsYyaSWXuEHc2WR9c0a0CXwiE5FWUvn7ZM+vdy1uZLfCunD38UzhuB7YN/J11ndbDBcTmOdxJo9Q7A==}
 
@@ -1125,6 +1138,9 @@ packages:
   minimatch@10.1.1:
     resolution: {integrity: sha512-enIvLvRAFZYXJzkCYG5RKmPfrFArdLv+R+lbQ53BmIMLIry74bjKzX6iHAm8WYamJkhSSEabrWN5D97XnKObjQ==}
     engines: {node: 20 || >=22}
+
+  minimist@1.2.8:
+    resolution: {integrity: sha512-2yyAR8qBkN3YuheJanUpWC5U3bb5osDywNB8RzDVlDwDHbocAJveqqj1u8+SVD7jkWT4yvsHCpWqqWqAxb0zCA==}
 
   minipass@7.1.2:
     resolution: {integrity: sha512-qOOzS1cBTWYF4BH8fVePDBOO9iptMnGUEZwNc/cMWnTV2nVLZ7VoNWEPHkYczZA0pdoA7dl6e7FL659nX9S2aw==}
@@ -2107,6 +2123,8 @@ snapshots:
     dependencies:
       '@types/sizzle': 2.3.10
 
+  '@types/minimist@1.2.5': {}
+
   '@types/node@24.10.0':
     dependencies:
       undici-types: 7.16.0
@@ -2574,6 +2592,8 @@ snapshots:
   minimatch@10.1.1:
     dependencies:
       '@isaacs/brace-expansion': 5.0.0
+
+  minimist@1.2.8: {}
 
   minipass@7.1.2: {}
 
