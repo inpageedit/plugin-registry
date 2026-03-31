@@ -29,7 +29,6 @@ export class Terminal {
   private currentInput = ''
 
   private heredocMarker: string | null = null
-  private heredocBuffer: string[] = []
   private heredocPrefix = ''
 
   private isVisible = false
@@ -150,10 +149,22 @@ export class Terminal {
   private setupInput(): void {
     this.inputEl.addEventListener('keydown', (e: KeyboardEvent) => {
       if (e.key === 'Enter' && e.shiftKey) {
-        return
+        return // default textarea newline
       }
 
       if (e.key === 'Enter' && !e.shiftKey) {
+        // In heredoc mode, Enter inserts newline unless last line is the marker
+        if (this.heredocMarker) {
+          const lines = this.inputEl.value.split('\n')
+          const lastLine = lines[lines.length - 1].trim()
+          if (lastLine === this.heredocMarker) {
+            e.preventDefault()
+            this.handleHeredocSubmit(lines)
+          }
+          // Otherwise, let Enter insert a newline (default textarea behavior)
+          return
+        }
+
         e.preventDefault()
         this.handleSubmit()
         return
@@ -178,36 +189,33 @@ export class Terminal {
     })
   }
 
+  private handleHeredocSubmit(lines: string[]): void {
+    // Remove the marker line, join the rest as content
+    const content = lines.slice(0, -1).join('\n')
+    const escaped = content.replace(/\\/g, '\\\\').replace(/"/g, '\\"')
+    const fullInput = this.heredocPrefix + '"' + escaped + '"'
+
+    this.print(`✏️ ${this.inputEl.value}`, TerminalStyle.Muted)
+    this.inputEl.value = ''
+    this.inputEl.style.height = 'auto'
+    this.heredocMarker = null
+    this.heredocPrefix = ''
+    this.inputEl.placeholder = '输入命令...'
+
+    this.execute(fullInput, true)
+  }
+
   private handleSubmit(): void {
     const value = this.inputEl.value
     this.inputEl.value = ''
     this.inputEl.style.height = 'auto'
 
-    if (this.heredocMarker) {
-      if (value.trim() === this.heredocMarker) {
-        const content = this.heredocBuffer.join('\n')
-        const fullInput =
-          this.heredocPrefix +
-          '"' +
-          content.replace(/\\/g, '\\\\').replace(/"/g, '\\"') +
-          '"'
-        this.heredocMarker = null
-        this.heredocBuffer = []
-        this.heredocPrefix = ''
-        this.execute(fullInput, true)
-      } else {
-        this.heredocBuffer.push(value)
-        this.print(`✏️ ${value}`, TerminalStyle.Muted)
-      }
-      return
-    }
-
     const heredocMatch = value.match(/<<(\w+)\s*$/)
     if (heredocMatch) {
       this.heredocMarker = heredocMatch[1]
       this.heredocPrefix = value.slice(0, heredocMatch.index!) + ''
-      this.heredocBuffer = []
       this.print(`✏️ ${value}`, TerminalStyle.Muted)
+      this.inputEl.placeholder = `输入内容，以 ${this.heredocMarker} 结束 / Type content, end with ${this.heredocMarker}`
       return
     }
 
