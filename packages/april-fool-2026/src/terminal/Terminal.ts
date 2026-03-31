@@ -93,7 +93,7 @@ export class Terminal {
     const topbar = document.createElement('div')
     topbar.className = 'ipe-cli-topbar'
     topbar.innerHTML = `
-      <span class="ipe-cli-topbar-title">ipe-cli v1.0.0</span>
+      <span class="ipe-cli-topbar-title">ipe-cli v2026.04.01</span>
       <button class="ipe-cli-topbar-close">×</button>
     `
     const closeBtn = topbar.querySelector('.ipe-cli-topbar-close')!

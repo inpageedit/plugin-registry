@@ -1,4 +1,4 @@
-import type { Terminal } from '../terminal/Terminal.js'
+import { TerminalStyle, type Terminal } from '../terminal/Terminal.js'
 import { runBootSequence } from '../terminal/boot.js'
 
 import { createHelpCommand } from './help.js'
@@ -45,6 +45,18 @@ export function registerAllCommands(terminal: Terminal): void {
     usage: '.init',
     action() {
       return runBootSequence(terminal)
+    },
+  })
+
+  terminal.registry.register({
+    name: '.uninstall',
+    description: '卸载此插件 / Uninstall this plugin',
+    usage: '.uninstall',
+    action(ctx) {
+      terminal.print('如需卸载 ipe-cli，请前往 InPageEdit 设置 → 插件商店，找到此插件并卸载。')
+      terminal.print('To uninstall ipe-cli, go to InPageEdit Settings → Plugin Store, find this plugin and uninstall it.')
+      terminal.print('')
+      terminal.print('preferences --ui', TerminalStyle.Muted)
     },
   })
 }
