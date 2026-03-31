@@ -1,0 +1,178 @@
+.ipe-cli-drawer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 10000;
+  display: flex;
+  flex-direction: column;
+  height: 40vh;
+  min-height: 120px;
+  max-height: 80vh;
+  background: #0a0a0a;
+  border-top: 2px solid #00ff41;
+  font-family: 'Source Code Pro', 'Fira Code', 'Cascadia Code', 'JetBrains Mono', monospace;
+  font-size: 13px;
+  color: #00ff41;
+  transition: transform 0.3s ease;
+  transform: translateY(0);
+
+  &.ipe-cli-hidden {
+    transform: translateY(100%);
+    pointer-events: none;
+  }
+}
+
+.ipe-cli-resize-handle {
+  height: 4px;
+  cursor: ns-resize;
+  background: transparent;
+  flex-shrink: 0;
+
+  &:hover {
+    background: #00ff4133;
+  }
+}
+
+.ipe-cli-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4px 12px;
+  background: #111;
+  border-bottom: 1px solid #00ff4133;
+  flex-shrink: 0;
+  user-select: none;
+}
+
+.ipe-cli-topbar-title {
+  font-size: 12px;
+  opacity: 0.7;
+}
+
+.ipe-cli-topbar-close {
+  background: none;
+  border: none;
+  color: #00ff41;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 0 4px;
+  opacity: 0.7;
+
+  &:hover {
+    opacity: 1;
+  }
+}
+
+.ipe-cli-warning {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 12px;
+  background: #332b00;
+  color: #ffcc00;
+  font-size: 12px;
+  flex-shrink: 0;
+  border-bottom: 1px solid #ffcc0033;
+}
+
+.ipe-cli-warning-close {
+  background: none;
+  border: none;
+  color: #ffcc00;
+  cursor: pointer;
+  font-size: 14px;
+  padding: 0 4px;
+  margin-left: 8px;
+  opacity: 0.7;
+
+  &:hover {
+    opacity: 1;
+  }
+}
+
+.ipe-cli-output {
+  flex: 1;
+  overflow-y: auto;
+  padding: 8px 12px;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  word-break: break-all;
+
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: #00ff4133;
+    border-radius: 3px;
+  }
+
+  a {
+    color: #00ff41;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+
+    &:hover {
+      color: #33ff66;
+    }
+  }
+}
+
+.ipe-cli-input-area {
+  display: flex;
+  align-items: flex-start;
+  padding: 6px 12px;
+  border-top: 1px solid #00ff4133;
+  background: #0d0d0d;
+  flex-shrink: 0;
+}
+
+.ipe-cli-prompt {
+  color: #00ff41;
+  margin-right: 6px;
+  line-height: 1.6;
+  user-select: none;
+  flex-shrink: 0;
+}
+
+.ipe-cli-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: #00ff41;
+  font-family: inherit;
+  font-size: inherit;
+  outline: none;
+  caret-color: #00ff41;
+  line-height: 1.6;
+  resize: none;
+  overflow: hidden;
+  min-height: 1.6em;
+
+  &::placeholder {
+    color: #00ff4144;
+  }
+}
+
+.ipe-cli-success {
+  color: #00ff41;
+}
+.ipe-cli-error {
+  color: #ff3333;
+}
+.ipe-cli-warning-text {
+  color: #ffcc00;
+}
+.ipe-cli-info {
+  color: #00ccff;
+}
+.ipe-cli-muted {
+  color: #666;
+}
+.ipe-cli-highlight {
+  color: #ffffff;
+  font-style: italic;
+}
