@@ -1,4 +1,5 @@
 import type { Command } from '../terminal/Registry.js'
+import { TerminalStyle } from '../terminal/Terminal.js'
 import type { Terminal } from '../terminal/Terminal.js'
 
 export function createMoveCommand(terminal: Terminal): Command {
@@ -19,21 +20,21 @@ export function createMoveCommand(terminal: Terminal): Command {
 
       if (argv.ui) {
         ctx.quickMove.showModal({ from, to })
-        terminal.print('已打开移动界面', 'ipe-cli-muted')
+        terminal.print('已打开移动界面', TerminalStyle.Muted)
         return
       }
 
       if (!from || !to) {
-        terminal.print('用法: move <from> <to>', 'ipe-cli-error')
+        terminal.print('用法: move <from> <to>', TerminalStyle.Error)
         return
       }
 
-      terminal.print(`正在移动 ${from} → ${to} ...`, 'ipe-cli-muted')
+      terminal.print(`正在移动 ${from} → ${to} ...`, TerminalStyle.Muted)
       const page = await ctx.wikiPage.newFromTitle(from)
       await page.moveTo(to, argv.reason, {
         noredirect: argv['no-redirect'] === true,
       })
-      terminal.print(`Move successful: ${from} → ${to}`, 'ipe-cli-success')
+      terminal.print(`Move successful: ${from} → ${to}`, TerminalStyle.Success)
     },
   }
 }

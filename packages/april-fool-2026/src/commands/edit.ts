@@ -1,4 +1,5 @@
 import type { Command } from '../terminal/Registry.js'
+import { TerminalStyle } from '../terminal/Terminal.js'
 import type { Terminal } from '../terminal/Terminal.js'
 
 export function createEditCommand(terminal: Terminal): Command {
@@ -19,19 +20,19 @@ export function createEditCommand(terminal: Terminal): Command {
 
       if (argv.ui) {
         ctx.quickEdit({ title, section: argv.section })
-        terminal.print('已打开编辑界面', 'ipe-cli-muted')
+        terminal.print('已打开编辑界面', TerminalStyle.Muted)
         return
       }
 
       const content = argv.content
       if (!content) {
-        terminal.print('终端模式需要提供 --content 参数。', 'ipe-cli-error')
-        terminal.print('提示: 使用 Shift+Enter 换行，或使用 <<EOF 语法输入多行内容。', 'ipe-cli-muted')
-        terminal.print('示例: edit 页面名 --content <<EOF', 'ipe-cli-muted')
+        terminal.print('终端模式需要提供 --content 参数。', TerminalStyle.Error)
+        terminal.print('提示: 使用 Shift+Enter 换行，或使用 <<EOF 语法输入多行内容。', TerminalStyle.Muted)
+        terminal.print('示例: edit 页面名 --content <<EOF', TerminalStyle.Muted)
         return
       }
 
-      terminal.print(`正在编辑 ${title} ...`, 'ipe-cli-muted')
+      terminal.print(`正在编辑 ${title} ...`, TerminalStyle.Muted)
       const page = await ctx.wikiPage.newFromTitle(title)
       const result = await page.edit({
         text: content,
@@ -47,10 +48,10 @@ export function createEditCommand(terminal: Terminal): Command {
         if (url) {
           const safeUrl = url.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
           terminal.printHTML(
-            `<span class="ipe-cli-success">Edit successful: ${safeTitle} (revid: ${data.newrevid}) <a href="${encodeURI(url)}" target="_blank">${safeUrl}</a></span>`
+            `<span class="${TerminalStyle.Success}">Edit successful: ${safeTitle} (revid: ${data.newrevid}) <a href="${encodeURI(url)}" target="_blank">${safeUrl}</a></span>`
           )
         } else {
-          terminal.print(`Edit successful: ${data.title} (revid: ${data.newrevid})`, 'ipe-cli-success')
+          terminal.print(`Edit successful: ${data.title} (revid: ${data.newrevid})`, TerminalStyle.Success)
         }
       }
     },

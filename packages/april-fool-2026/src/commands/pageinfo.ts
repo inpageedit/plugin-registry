@@ -1,4 +1,5 @@
 import type { Command } from '../terminal/Registry.js'
+import { TerminalStyle } from '../terminal/Terminal.js'
 import type { Terminal } from '../terminal/Terminal.js'
 
 export function createPageinfoCommand(terminal: Terminal): Command {
@@ -15,7 +16,7 @@ export function createPageinfoCommand(terminal: Terminal): Command {
       const info = page.pageInfo
 
       if (!info || !info.title) {
-        terminal.print(`页面 ${title} 不存在或无法获取信息。`, 'ipe-cli-error')
+        terminal.print(`页面 ${title} 不存在或无法获取信息。`, TerminalStyle.Error)
         return
       }
 

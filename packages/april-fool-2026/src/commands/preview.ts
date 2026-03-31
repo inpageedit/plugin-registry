@@ -1,4 +1,5 @@
 import type { Command } from '../terminal/Registry.js'
+import { TerminalStyle } from '../terminal/Terminal.js'
 import type { Terminal } from '../terminal/Terminal.js'
 
 export function createPreviewCommand(terminal: Terminal): Command {
@@ -18,11 +19,11 @@ export function createPreviewCommand(terminal: Terminal): Command {
         const rev = page.revisions?.[0]
         const content = rev?.content ?? rev?.['*'] ?? ''
         ctx.quickPreview(content, undefined, page)
-        terminal.print('已打开预览界面', 'ipe-cli-muted')
+        terminal.print('已打开预览界面', TerminalStyle.Muted)
         return
       }
 
-      terminal.print(`正在预览 ${title} ...`, 'ipe-cli-muted')
+      terminal.print(`正在预览 ${title} ...`, TerminalStyle.Muted)
       const page = await ctx.wikiPage.newFromTitle(title)
       const rev = page.revisions?.[0]
       const content = rev?.content ?? rev?.['*'] ?? ''
@@ -49,7 +50,7 @@ export function createPreviewCommand(terminal: Terminal): Command {
         iframe.addEventListener('load', resizeIframe)
         resizeIframe()
       } else {
-        terminal.print('预览失败: 无法获取渲染结果', 'ipe-cli-error')
+        terminal.print('预览失败: 无法获取渲染结果', TerminalStyle.Error)
       }
     },
   }

@@ -1,6 +1,15 @@
 import { CommandRegistry } from './Registry.js'
 import { parseArgv } from './parser.js'
 
+export enum TerminalStyle {
+  Success = 'ipe-cli-success',
+  Error = 'ipe-cli-error',
+  Warning = 'ipe-cli-warning-text',
+  Info = 'ipe-cli-info',
+  Muted = 'ipe-cli-muted',
+  Highlight = 'ipe-cli-highlight',
+}
+
 const STORAGE_KEY_HISTORY = 'ipe-cli-history'
 const STORAGE_KEY_HEIGHT = 'ipe-cli-height'
 const STORAGE_KEY_WARNING = 'ipe-cli-warning-dismissed'
@@ -171,7 +180,7 @@ export class Terminal {
         this.executeInput(fullInput, true)
       } else {
         this.heredocBuffer.push(value)
-        this.print(`> ${value}`, 'ipe-cli-muted')
+        this.print(`> ${value}`, TerminalStyle.Muted)
       }
       return
     }
@@ -181,7 +190,7 @@ export class Terminal {
       this.heredocMarker = heredocMatch[1]
       this.heredocPrefix = value.slice(0, heredocMatch.index!) + ''
       this.heredocBuffer = []
-      this.print(`> ${value}`, 'ipe-cli-muted')
+      this.print(`> ${value}`, TerminalStyle.Muted)
       return
     }
 
@@ -193,7 +202,7 @@ export class Terminal {
     if (!trimmed) return
 
     if (!skipEcho) {
-      this.print(`> ${trimmed}`, 'ipe-cli-muted')
+      this.print(`> ${trimmed}`, TerminalStyle.Muted)
     }
 
     this.pushHistory(trimmed)
@@ -210,14 +219,14 @@ export class Terminal {
       if (helpText) {
         this.print(helpText)
       } else {
-        this.print(`未知命令: ${cmdName}`, 'ipe-cli-error')
+        this.print(`未知命令: ${cmdName}`, TerminalStyle.Error)
       }
       return
     }
 
     const cmd = this.registry.get(cmdName)
     if (!cmd) {
-      this.print(`未知命令: ${cmdName}。输入 "help" 查看可用命令。`, 'ipe-cli-error')
+      this.print(`未知命令: ${cmdName}。输入 "help" 查看可用命令。`, TerminalStyle.Error)
       return
     }
 
@@ -225,7 +234,7 @@ export class Terminal {
       this.setInputEnabled(false)
       await cmd.action(this.ctx, argv)
     } catch (err: any) {
-      this.print(`Error: ${err?.message || err}`, 'ipe-cli-error')
+      this.print(`Error: ${err?.message || err}`, TerminalStyle.Error)
     } finally {
       this.setInputEnabled(true)
       this.inputEl.focus()

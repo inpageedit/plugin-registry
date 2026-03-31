@@ -1,4 +1,5 @@
 import type { Command } from '../terminal/Registry.js'
+import { TerminalStyle } from '../terminal/Terminal.js'
 import type { Terminal } from '../terminal/Terminal.js'
 
 export function createHelpCommand(terminal: Terminal): Command {
@@ -16,15 +17,15 @@ export function createHelpCommand(terminal: Terminal): Command {
         if (text) {
           terminal.print(text)
         } else {
-          terminal.print(`未知命令: ${cmdName}`, 'ipe-cli-error')
+          terminal.print(`未知命令: ${cmdName}`, TerminalStyle.Error)
         }
       } else {
         terminal.print('可用命令:\n')
         terminal.print(terminal.registry.formatHelpList(argv.all))
         if (!argv.all) {
-          terminal.print('\n输入 "help --all" 查看隐藏命令。', 'ipe-cli-muted')
+          terminal.print('\n输入 "help --all" 查看隐藏命令。', TerminalStyle.Muted)
         }
-        terminal.print('\n输入 "help <command>" 查看详细用法。', 'ipe-cli-muted')
+        terminal.print('\n输入 "help <command>" 查看详细用法。', TerminalStyle.Muted)
       }
     },
   }

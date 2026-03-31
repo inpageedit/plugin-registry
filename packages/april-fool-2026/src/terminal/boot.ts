@@ -1,3 +1,4 @@
+import { TerminalStyle } from './Terminal.js'
 import type { Terminal } from './Terminal.js'
 
 interface BootStep {
@@ -23,38 +24,38 @@ function buildBootSteps(): BootStep[] {
     { text: '> 正在初始化 ipe-cli v1.0.0...', delay: 0 },
     {
       text: '> 加载 MCP 服务器配置...                      ✓',
-      className: 'ipe-cli-success',
+      className: TerminalStyle.Success,
       delay: 500,
     },
     {
       text: '> 连接 Claude API 端点...                     ✓',
-      className: 'ipe-cli-success',
+      className: TerminalStyle.Success,
       delay: 700,
     },
     {
       text: '> 验证 Agent 凭证...                          ✓',
-      className: 'ipe-cli-success',
+      className: TerminalStyle.Success,
       delay: 600,
     },
     {
       text: '> 下载神经语言模型 (7B)...     [█████░░░░░] 42%',
-      className: 'ipe-cli-success',
+      className: TerminalStyle.Success,
       delay: 700,
     },
     {
       text: '> ERROR: 连接被拒绝                           ✗',
-      className: 'ipe-cli-error',
+      className: TerminalStyle.Error,
       delay: 1000,
     },
     {
       text: '> ERROR: AI 模块初始化失败                    ✗',
-      className: 'ipe-cli-error',
+      className: TerminalStyle.Error,
       delay: 500,
     },
     { text: '', delay: 500 },
     {
       text: `  ${randomPunchline()}`,
-      className: 'ipe-cli-highlight',
+      className: TerminalStyle.Highlight,
       delay: 500,
     },
   ]
@@ -75,7 +76,7 @@ export async function runBootSequence(terminal: Terminal): Promise<void> {
 }
 
 export function showTipForHelp(terminal: Terminal): void {
-  terminal.print('输入 "help" 查看所有可用命令。', 'ipe-cli-muted')
+  terminal.print('输入 "help" 查看所有可用命令。', TerminalStyle.Muted)
 }
 
 function sleep(ms: number): Promise<void> {

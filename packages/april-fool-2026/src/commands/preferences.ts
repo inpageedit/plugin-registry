@@ -1,4 +1,5 @@
 import type { Command } from '../terminal/Registry.js'
+import { TerminalStyle } from '../terminal/Terminal.js'
 import type { Terminal } from '../terminal/Terminal.js'
 
 export function createPreferencesCommand(terminal: Terminal): Command {
@@ -12,7 +13,7 @@ export function createPreferencesCommand(terminal: Terminal): Command {
     async action(ctx, argv) {
       if (argv.ui) {
         ctx.preferencesUI.showModal()
-        terminal.print('已打开设置面板', 'ipe-cli-muted')
+        terminal.print('已打开设置面板', TerminalStyle.Muted)
         return
       }
 
@@ -32,7 +33,7 @@ export function createPreferencesCommand(terminal: Terminal): Command {
       if (subcommand === 'get') {
         const key = argv._[2]
         if (!key) {
-          terminal.print('用法: preferences get <key>', 'ipe-cli-error')
+          terminal.print('用法: preferences get <key>', TerminalStyle.Error)
           return
         }
         const value = await ctx.preferences.get(key)
@@ -44,7 +45,7 @@ export function createPreferencesCommand(terminal: Terminal): Command {
         const key = argv._[2]
         const rawValue = argv._[3]
         if (!key || rawValue === undefined) {
-          terminal.print('用法: preferences set <key> <value>', 'ipe-cli-error')
+          terminal.print('用法: preferences set <key> <value>', TerminalStyle.Error)
           return
         }
         let value: unknown = rawValue
@@ -52,11 +53,11 @@ export function createPreferencesCommand(terminal: Terminal): Command {
           value = JSON.parse(String(rawValue))
         } catch {}
         await ctx.preferences.set(key, value)
-        terminal.print(`${key} = ${JSON.stringify(value)}`, 'ipe-cli-success')
+        terminal.print(`${key} = ${JSON.stringify(value)}`, TerminalStyle.Success)
         return
       }
 
-      terminal.print(`未知子命令: ${subcommand}。可用: list, get, set`, 'ipe-cli-error')
+      terminal.print(`未知子命令: ${subcommand}。可用: list, get, set`, TerminalStyle.Error)
     },
   }
 }

@@ -1,4 +1,5 @@
 import type { Command } from '../terminal/Registry.js'
+import { TerminalStyle } from '../terminal/Terminal.js'
 import type { Terminal } from '../terminal/Terminal.js'
 
 export function createDeleteCommand(terminal: Terminal): Command {
@@ -13,14 +14,14 @@ export function createDeleteCommand(terminal: Terminal): Command {
     async action(ctx, argv) {
       const title = argv._[1] || argv.title
       if (!title) {
-        terminal.print('用法: delete <pagename>', 'ipe-cli-error')
+        terminal.print('用法: delete <pagename>', TerminalStyle.Error)
         return
       }
 
-      terminal.print(`正在删除 ${title} ...`, 'ipe-cli-muted')
+      terminal.print(`正在删除 ${title} ...`, TerminalStyle.Muted)
       const page = await ctx.wikiPage.newFromTitle(title)
       await page.delete(argv.reason)
-      terminal.print(`Delete successful: ${title}`, 'ipe-cli-success')
+      terminal.print(`Delete successful: ${title}`, TerminalStyle.Success)
     },
   }
 }

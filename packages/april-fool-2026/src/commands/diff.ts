@@ -1,4 +1,5 @@
 import type { Command } from '../terminal/Registry.js'
+import { TerminalStyle } from '../terminal/Terminal.js'
 import type { Terminal } from '../terminal/Terminal.js'
 
 export function createDiffCommand(terminal: Terminal): Command {
@@ -11,12 +12,12 @@ export function createDiffCommand(terminal: Terminal): Command {
       const torev = Number(argv._[2])
 
       if (!fromrev || !torev) {
-        terminal.print('用法: diff <revid1> <revid2>', 'ipe-cli-error')
+        terminal.print('用法: diff <revid1> <revid2>', TerminalStyle.Error)
         return
       }
 
       ctx.quickDiff.comparePages({ fromrev, torev })
-      terminal.print('已打开差异界面', 'ipe-cli-muted')
+      terminal.print('已打开差异界面', TerminalStyle.Muted)
     },
   }
 }
