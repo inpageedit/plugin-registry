@@ -40,18 +40,37 @@
   opacity: 0.7;
 }
 
+.ipe-cli-topbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.ipe-cli-topbar-help,
 .ipe-cli-topbar-close {
   background: none;
-  border: none;
+  border: 1px solid transparent;
   color: #00ff41;
   cursor: pointer;
-  font-size: 16px;
-  padding: 0 4px;
+  font-size: 12px;
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 3px;
   opacity: 0.7;
+  font-family: inherit;
 
   &:hover {
     opacity: 1;
+    border-color: #00ff4144;
+    background: #00ff4111;
   }
+}
+
+.ipe-cli-topbar-close {
+  font-size: 16px;
 }
 
 .ipe-cli-warning {

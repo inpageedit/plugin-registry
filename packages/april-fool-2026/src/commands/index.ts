@@ -51,12 +51,22 @@ export function registerAllCommands(terminal: Terminal): void {
   terminal.registry.register({
     name: '.uninstall',
     description: '卸载此插件 / Uninstall this plugin',
-    usage: '.uninstall',
-    action(ctx) {
-      terminal.print('如需卸载 ipe-cli，请前往 InPageEdit 设置 → 插件商店，找到此插件并卸载。')
-      terminal.print('To uninstall ipe-cli, go to InPageEdit Settings → Plugin Store, find this plugin and uninstall it.')
+    usage: '.uninstall [--hey-stupid-dev-you-are-not-funny-remove-this-green-junk-from-my-browser-right-now]',
+    options: [
+      { name: 'hey-stupid-dev-you-are-not-funny-remove-this-green-junk-from-my-browser-right-now', type: 'boolean' as const, description: '确认卸载 / Confirm uninstall' },
+    ],
+    async action(ctx, argv) {
+      if (argv['hey-stupid-dev-you-are-not-funny-remove-this-green-junk-from-my-browser-right-now']) {
+        terminal.print('正在卸载 ipe-cli... / Uninstalling ipe-cli...', TerminalStyle.Muted)
+        const registry = 'https://registry.ipe.wiki/registry.v1.json'
+        await ctx.store.uninstallAndRemovePreference(registry, 'april-fool-2026')
+        terminal.print('已卸载！刷新页面后生效。 / Uninstalled! Refresh to take effect.', TerminalStyle.Success)
+        return
+      }
+      terminal.print('如需卸载 ipe-cli，请前往 InPageEdit Preferences → Plugin Store，找到此插件并卸载。')
+      terminal.print('To uninstall ipe-cli, go to InPageEdit Preferences → Plugin Store, find this plugin and uninstall it.')
       terminal.print('')
-      terminal.print('preferences --ui', TerminalStyle.Muted)
+      terminal.print('或执行 / Or run: .uninstall --hey-stupid-dev-you-are-not-funny-remove-this-green-junk-from-my-browser-right-now', TerminalStyle.Muted)
     },
   })
 }

@@ -94,16 +94,24 @@ export class Terminal {
     topbar.className = 'ipe-cli-topbar'
     topbar.innerHTML = `
       <span class="ipe-cli-topbar-title">ipe-cli v2026.04.01</span>
-      <button class="ipe-cli-topbar-close">×</button>
+      <span class="ipe-cli-topbar-actions">
+        <button class="ipe-cli-topbar-help" title="What is this?">?</button>
+        <button class="ipe-cli-topbar-close">×</button>
+      </span>
     `
     const closeBtn = topbar.querySelector('.ipe-cli-topbar-close')!
     closeBtn.addEventListener('click', () => this.close())
-    this.setupResize(topbar, closeBtn as HTMLElement)
+    const helpBtn = topbar.querySelector('.ipe-cli-topbar-help')!
+    helpBtn.addEventListener('click', () => {
+      this.print('🎉 哈哈，骗到你啦！InPageEdit 向来有在每年愚人节整活的传统。如果不喜欢，输入 .uninstall 即可卸载哦！感谢你的使用~')
+      this.print('🎉 Gotcha! InPageEdit has a tradition of April Fools\' pranks every year. If you don\'t like it, type .uninstall to remove it. Thanks for using InPageEdit!')
+    })
+    this.setupResize(topbar, topbar.querySelector('.ipe-cli-topbar-actions')! as HTMLElement)
 
     this.warningEl = document.createElement('div')
     this.warningEl.className = 'ipe-cli-warning'
     this.warningEl.innerHTML = `
-      <span>⚠ 虽然这看上去很搞笑，但你在这里的操作（编辑、移动、删除等）都是真实的！</span>
+      <span>⚠ 虽然这看上去很搞笑，但你在这里的操作（编辑、移动、删除等）都是真实的！ / Actions here (edit, move, delete, etc.) are REAL!</span>
       <button class="ipe-cli-warning-close">×</button>
     `
     this.warningEl
