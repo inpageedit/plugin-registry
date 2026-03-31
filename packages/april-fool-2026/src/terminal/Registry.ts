@@ -1,3 +1,6 @@
+import { type InPageEdit } from '@inpageedit/core'
+import { type ParsedArgs } from 'minimist'
+
 export interface OptionDef {
   name: string
   alias?: string
@@ -11,7 +14,7 @@ export interface Command {
   description: string
   usage: string
   options?: OptionDef[]
-  action: (ctx: any, argv: any) => Promise<void> | void
+  action: (ctx: InPageEdit, argv: ParsedArgs) => Promise<void> | void
 }
 
 export class CommandRegistry {
@@ -34,10 +37,14 @@ export class CommandRegistry {
   }
 
   formatHelpList(showHidden = false): string {
-    const cmds = this.getAll().filter((c) => showHidden || !c.name.startsWith('.'))
+    const cmds = this.getAll().filter(
+      (c) => showHidden || !c.name.startsWith('.')
+    )
     if (!cmds.length) return ''
     const maxLen = Math.max(...cmds.map((c) => c.name.length))
-    return cmds.map((c) => `  ${c.name.padEnd(maxLen + 2)}${c.description}`).join('\n')
+    return cmds
+      .map((c) => `  ${c.name.padEnd(maxLen + 2)}${c.description}`)
+      .join('\n')
   }
 
   formatCommandHelp(name: string): string | null {
@@ -51,12 +58,16 @@ export class CommandRegistry {
       text += '\n选项:\n'
       const maxLen = Math.max(
         ...cmd.options.map((opt) => {
-          const flag = opt.alias ? `-${opt.alias}, --${opt.name}` : `    --${opt.name}`
+          const flag = opt.alias
+            ? `-${opt.alias}, --${opt.name}`
+            : `    --${opt.name}`
           return flag.length
         })
       )
       for (const opt of cmd.options) {
-        const flag = opt.alias ? `-${opt.alias}, --${opt.name}` : `    --${opt.name}`
+        const flag = opt.alias
+          ? `-${opt.alias}, --${opt.name}`
+          : `    --${opt.name}`
         text += `  ${flag.padEnd(maxLen + 2)}${opt.description}\n`
       }
     }
