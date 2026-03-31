@@ -176,3 +176,19 @@
   color: #ffffff;
   font-style: italic;
 }
+
+// Toolbox button Matrix style
+#ipe-edit-toolbox #ipe-toolbox__ipe-cli-toggle-btn {
+  background: #000;
+  color: #00ff41;
+  transition: background 0.2s, box-shadow 0.2s;
+
+  &:hover {
+    background: #222;
+    box-shadow: 0 0 8px #00ff4166;
+  }
+
+  svg {
+    stroke: #00ff41;
+  }
+}
