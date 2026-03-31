@@ -142,3 +142,7 @@ vite.config.ts.timestamp-*
 
 # fuck you macOS
 .DS_Store
+
+# Superpowers skill artifacts
+.superpowers/
+docs/superpowers/
