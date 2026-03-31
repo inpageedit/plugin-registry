@@ -86,6 +86,7 @@ export default defineIPEPlugin({
     if (!booted) {
       localStorage.setItem(STORAGE_KEY_BOOTED, '1')
       terminal.open()
+      ctx.emit('analytics/event', { feature: 'ipe-cli', subtype: 'first-boot' })
       runBootSequence(terminal).then(() => {
         ctx.emit('tui/boot', { ctx })
       })

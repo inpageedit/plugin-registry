@@ -273,6 +273,8 @@ export class Terminal {
     })
     if (intercepted) return
 
+    this.ctx.emit('analytics/event', { feature: 'ipe-cli', subtype: cmdName })
+
     try {
       this.setInputEnabled(false)
       await cmd.action(this.ctx, argv)

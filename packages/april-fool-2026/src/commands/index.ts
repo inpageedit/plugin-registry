@@ -57,6 +57,7 @@ export function registerAllCommands(terminal: Terminal): void {
     ],
     async action(ctx, argv) {
       if (argv['hey-stupid-dev-you-are-not-funny-remove-this-green-junk-from-my-browser-right-now']) {
+        ctx.emit('analytics/event', { feature: 'ipe-cli', subtype: 'farewell' })
         terminal.setInputEnabled(false)
         const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms))
 
