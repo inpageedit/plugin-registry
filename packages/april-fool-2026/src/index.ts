@@ -56,6 +56,13 @@ export default defineIPEPlugin({
   apply(ctx) {
     const terminal = new Terminal(ctx)
     registerAllCommands(terminal)
+    terminal.print(
+      `
+┳┏┓┏┓  ┏┓┓ ┳
+┃┃┃┣   ┃ ┃ ┃
+┻┣┛┗┛  ┗┛┗┛┻
+v${ctx.root.version}`.trim()
+    )
 
     // Expose ctx.tui API for third-party plugins
     const tui: IPETuiPluginContext = {
@@ -100,5 +107,9 @@ export default defineIPEPlugin({
       ctx.toolbox.removeButton('ipe-cli-toggle')
       terminal.dispose()
     })
+
+    if (import.meta.env.DEV) {
+      terminal.open()
+    }
   },
 })

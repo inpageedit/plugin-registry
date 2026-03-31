@@ -1,3 +1,5 @@
+import { pick } from '../utils/pick.js'
+import { sleep } from '../utils/sleep.js'
 import { TerminalStyle } from './Terminal.js'
 import type { Terminal } from './Terminal.js'
 
@@ -21,14 +23,10 @@ const llmProviders = [
 const punchlines = [
   '编辑 wiki 是属于人类的艺术。向来如此！\n  Wiki editing is a human art. Always has been!',
   '切换到SOTA模型：你的大脑！百万 token 仅消耗 20 卡路里！\n  Switching to SOTA model: your brain! 1M tokens for just 20 calories!',
-  'AI 写不出好条目。但你可以——伟大的编辑者！\n  AI can\'t write a good article. But you can — great editor!',
-  '你不需要 AI 来写一篇好文章。没有 AI 的才华比得上你！\n  You don\'t need AI to write a good article. No AI talent compares to yours!',
+  "AI 写不出好条目。但你可以——伟大的编辑者！\n  AI can't write a good article. But you can — great editor!",
+  "你不需要 AI 来写一篇好文章。没有 AI 的才华比得上你！\n  You don't need AI to write a good article. No AI talent compares to yours!",
   '神经网络宕机了，但你的神经元无比健壮！\n  Neural network crashed, but your neurons are rock solid!',
 ]
-
-function pick<T>(arr: T[]): T {
-  return arr[Math.floor(Math.random() * arr.length)]
-}
 
 function buildBootSteps(): BootStep[] {
   return [
@@ -92,9 +90,10 @@ export async function runBootSequence(terminal: Terminal): Promise<void> {
 }
 
 export function showTipForHelp(terminal: Terminal): void {
-  terminal.print('输入 "help" 查看所有可用命令。Type "help" to see all commands.', TerminalStyle.Muted)
+  terminal.print(
+    '输入 "help" 查看所有可用命令。Type "help" to see all commands.',
+    TerminalStyle.Muted
+  )
 }
 
-function sleep(ms: number): Promise<void> {
-  return new Promise((resolve) => setTimeout(resolve, ms))
-}
+

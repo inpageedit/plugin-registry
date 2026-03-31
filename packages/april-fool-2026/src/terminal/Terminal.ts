@@ -19,10 +19,10 @@ const MAX_HISTORY = 50
 export class Terminal {
   public registry = new CommandRegistry()
 
-  private drawer!: HTMLDivElement
-  private outputEl!: HTMLDivElement
-  private inputEl!: HTMLTextAreaElement
-  private warningEl!: HTMLDivElement
+  public drawer!: HTMLDivElement
+  public outputEl!: HTMLDivElement
+  public inputEl!: HTMLTextAreaElement
+  public warningEl!: HTMLDivElement
 
   private history: string[] = []
   private historyIndex = -1
@@ -55,19 +55,29 @@ export class Terminal {
     this.isVisible ? this.close() : this.open()
   }
 
-  print(text: string, className?: string): void {
+  print(text: string, className?: string): HTMLDivElement {
     const line = document.createElement('div')
     if (className) line.className = className
     line.textContent = text
     this.outputEl.appendChild(line)
     this.outputEl.scrollTop = this.outputEl.scrollHeight
+    return line
   }
 
-  printHTML(html: string): void {
+  printHTML(html: string): HTMLDivElement {
     const line = document.createElement('div')
     line.innerHTML = html
     this.outputEl.appendChild(line)
     this.outputEl.scrollTop = this.outputEl.scrollHeight
+    return line
+  }
+
+  printElement(element: HTMLElement): HTMLDivElement {
+    const line = document.createElement('div')
+    line.appendChild(element)
+    this.outputEl.appendChild(line)
+    this.outputEl.scrollTop = this.outputEl.scrollHeight
+    return line
   }
 
   clear(): void {
@@ -76,6 +86,7 @@ export class Terminal {
 
   setInputEnabled(enabled: boolean): void {
     this.inputEl.disabled = !enabled
+    this.inputEl.focus()
   }
 
   dispose(): void {
@@ -102,10 +113,17 @@ export class Terminal {
     closeBtn.addEventListener('click', () => this.close())
     const helpBtn = topbar.querySelector('.ipe-cli-topbar-help')!
     helpBtn.addEventListener('click', () => {
-      this.print('🎉 哈哈，骗到你啦！InPageEdit 向来有在每年愚人节整活的传统。如果不喜欢，输入 .uninstall 即可卸载哦！感谢你的使用~')
-      this.print('🎉 Gotcha! InPageEdit has a tradition of April Fools\' pranks every year. If you don\'t like it, type .uninstall to remove it. Thanks for using InPageEdit!')
+      this.print(
+        '🎉 哈哈，骗到你啦！InPageEdit 向来有在每年愚人节整活的传统。如果不喜欢，输入 .uninstall 即可卸载哦！感谢你的使用~'
+      )
+      this.print(
+        "🎉 Gotcha! InPageEdit has a tradition of April Fools' pranks every year. If you don't like it, type .uninstall to remove it. Thanks for using InPageEdit!"
+      )
     })
-    this.setupResize(topbar, topbar.querySelector('.ipe-cli-topbar-actions')! as HTMLElement)
+    this.setupResize(
+      topbar,
+      topbar.querySelector('.ipe-cli-topbar-actions')! as HTMLElement
+    )
 
     this.warningEl = document.createElement('div')
     this.warningEl.className = 'ipe-cli-warning'

@@ -32,7 +32,7 @@ export function createPreviewCommand(terminal: Terminal): Command {
       if (html) {
         const iframe = document.createElement('iframe')
         iframe.sandbox.add('allow-same-origin')
-        iframe.style.cssText = 'width:100%;border:1px solid #00ff4133;background:#fff;border-radius:2px;min-height:200px;max-height:60vh;'
+        iframe.className = 'ipe-cli-preview-iframe'
         // Write content after appending so the iframe document is available
         const wrapper = document.createElement('div')
         wrapper.appendChild(iframe)

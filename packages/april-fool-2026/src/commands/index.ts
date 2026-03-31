@@ -15,6 +15,7 @@ import { createPreviewCommand } from './preview.js'
 import { createDiffCommand } from './diff.js'
 import { createUploadCommand } from './upload.js'
 import { createPreferencesCommand } from './preferences.js'
+import { createSILICommand } from './sili.js'
 
 export function registerAllCommands(terminal: Terminal): void {
   const commands = [
@@ -32,6 +33,7 @@ export function registerAllCommands(terminal: Terminal): void {
     createSiteinfoCommand(terminal),
     createPageinfoCommand(terminal),
     createPreferencesCommand(terminal),
+    createSILICommand(terminal),
   ]
 
   for (const cmd of commands) {

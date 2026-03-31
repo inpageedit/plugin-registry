@@ -1,3 +1,75 @@
+// april-fool-2026 / ipe-cli theme tokens (Matrix-style terminal)
+:root {
+  --ipe-cli-bg: #0a0a0a;
+  --ipe-cli-bg-elevated: #0d0d0d;
+  --ipe-cli-bg-topbar: #111;
+  --ipe-cli-accent: #00ff41;
+  --ipe-cli-accent-faint: #00ff4133;
+  --ipe-cli-accent-soft: #00ff4144;
+  --ipe-cli-accent-glow: #00ff4111;
+  --ipe-cli-accent-hover: #33ff66;
+  --ipe-cli-accent-shadow: #00ff4166;
+  --ipe-cli-warning-bg: #332b00;
+  --ipe-cli-warning-fg: #ffcc00;
+  --ipe-cli-warning-border: #ffcc0033;
+  --ipe-cli-error: #ff3333;
+  --ipe-cli-info: #00ccff;
+  --ipe-cli-muted: #666666;
+  --ipe-cli-highlight: #ffffff;
+  --ipe-cli-toolbox-bg: #000000;
+  --ipe-cli-toolbox-hover-bg: #222222;
+  --ipe-cli-preview-surface: #ffffff;
+}
+
+// SILI mode — dreamy pink-purple palette
+.ipe-cli-drawer.sili-mode {
+  --ipe-cli-bg: #0d0a14;
+  --ipe-cli-bg-elevated: #110d1a;
+  --ipe-cli-bg-topbar: #161122;
+  --ipe-cli-accent: #ff6bb5;
+  --ipe-cli-accent-faint: #ff6bb533;
+  --ipe-cli-accent-soft: #ff6bb544;
+  --ipe-cli-accent-glow: #ff6bb511;
+  --ipe-cli-accent-hover: #ff8dc8;
+  --ipe-cli-accent-shadow: #8a6eff66;
+  --ipe-cli-warning-bg: #2b1d33;
+  --ipe-cli-warning-fg: #e4a0ff;
+  --ipe-cli-warning-border: #e4a0ff33;
+  --ipe-cli-error: #ff5577;
+  --ipe-cli-info: #8a6eff;
+  --ipe-cli-muted: #7b6892;
+  --ipe-cli-highlight: #f0e6ff;
+  --ipe-cli-toolbox-bg: #0a0714;
+  --ipe-cli-toolbox-hover-bg: #1e1530;
+  --ipe-cli-preview-surface: #ffffff;
+  --ipe-cli-sili-watermark-opacity: 0.15;
+
+  border-image: linear-gradient(90deg, #ff6bb5, #8a6eff) 1;
+
+  .ipe-cli-output {
+    position: relative;
+    // isolation: isolate;
+
+    &::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      background-image: url(https://r2.epb.wiki/cdn-cgi/image/format=auto,fit=contain,width=400,height=400,onerror=redirect/artworks/SILI/sili_202602_r01_alpha.png);
+      background-repeat: no-repeat;
+      background-position: right center;
+      background-size: contain;
+      opacity: var(--ipe-cli-sili-watermark-opacity);
+      pointer-events: none;
+    }
+
+    > * {
+      position: relative;
+      z-index: 1;
+    }
+  }
+}
+
 .ipe-cli-drawer {
   position: fixed;
   bottom: 0;
@@ -9,12 +81,19 @@
   height: 40vh;
   min-height: 120px;
   max-height: 80vh;
-  background: #0a0a0a;
-  border-top: 2px solid #00ff41;
-  font-family: 'Source Code Pro', 'Fira Code', 'Cascadia Code', 'JetBrains Mono', monospace;
+  background: var(--ipe-cli-bg);
+  border-top: 2px solid var(--ipe-cli-accent);
+  font-family:
+    'Maple Mono NF CN', 'Maple Mono NF', 'Maple Mono',
+    'JetBrainsMono Nerd Font', 'JetBrains Mono NF', 'JetBrains Mono', Consolas,
+    'Courier New', monospace;
   font-size: 13px;
-  color: #00ff41;
-  transition: transform 0.3s ease;
+  color: var(--ipe-cli-accent);
+  transition:
+    transform 0.3s ease,
+    background 0.4s ease,
+    color 0.4s ease,
+    border-color 0.4s ease;
   transform: translateY(0);
 
   &.ipe-cli-hidden {
@@ -28,8 +107,8 @@
   align-items: center;
   justify-content: space-between;
   padding: 6px 12px;
-  background: #111;
-  border-bottom: 1px solid #00ff4133;
+  background: var(--ipe-cli-bg-topbar);
+  border-bottom: 1px solid var(--ipe-cli-accent-faint);
   flex-shrink: 0;
   user-select: none;
   cursor: ns-resize;
@@ -50,7 +129,7 @@
 .ipe-cli-topbar-close {
   background: none;
   border: 1px solid transparent;
-  color: #00ff41;
+  color: var(--ipe-cli-accent);
   cursor: pointer;
   font-size: 12px;
   width: 22px;
@@ -64,8 +143,8 @@
 
   &:hover {
     opacity: 1;
-    border-color: #00ff4144;
-    background: #00ff4111;
+    border-color: var(--ipe-cli-accent-soft);
+    background: var(--ipe-cli-accent-glow);
   }
 }
 
@@ -78,17 +157,17 @@
   align-items: center;
   justify-content: space-between;
   padding: 6px 12px;
-  background: #332b00;
-  color: #ffcc00;
+  background: var(--ipe-cli-warning-bg);
+  color: var(--ipe-cli-warning-fg);
   font-size: 12px;
   flex-shrink: 0;
-  border-bottom: 1px solid #ffcc0033;
+  border-bottom: 1px solid var(--ipe-cli-warning-border);
 }
 
 .ipe-cli-warning-close {
   background: none;
   border: none;
-  color: #ffcc00;
+  color: var(--ipe-cli-warning-fg);
   cursor: pointer;
   font-size: 14px;
   padding: 0 4px;
@@ -115,32 +194,41 @@
     background: transparent;
   }
   &::-webkit-scrollbar-thumb {
-    background: #00ff4133;
+    background: var(--ipe-cli-accent-faint);
     border-radius: 3px;
   }
 
   a {
-    color: #00ff41;
+    color: var(--ipe-cli-accent);
     text-decoration: underline;
     text-underline-offset: 2px;
 
     &:hover {
-      color: #33ff66;
+      color: var(--ipe-cli-accent-hover);
     }
   }
+}
+
+.ipe-cli-preview-iframe {
+  width: 100%;
+  border: 1px solid var(--ipe-cli-accent-faint);
+  background: var(--ipe-cli-preview-surface);
+  border-radius: 2px;
+  min-height: 200px;
+  max-height: 60vh;
 }
 
 .ipe-cli-input-area {
   display: flex;
   align-items: flex-start;
   padding: 6px 12px;
-  border-top: 1px solid #00ff4133;
-  background: #0d0d0d;
+  border-top: 1px solid var(--ipe-cli-accent-faint);
+  background: var(--ipe-cli-bg-elevated);
   flex-shrink: 0;
 }
 
 .ipe-cli-prompt {
-  color: #00ff41;
+  color: var(--ipe-cli-accent);
   margin-right: 6px;
   line-height: 1.6;
   user-select: none;
@@ -151,53 +239,56 @@
   flex: 1;
   background: transparent;
   border: none;
-  color: #00ff41;
+  color: var(--ipe-cli-accent);
   font-family: inherit;
   font-size: inherit;
   outline: none;
-  caret-color: #00ff41;
+  caret-color: var(--ipe-cli-accent);
   line-height: 1.6;
   resize: none;
   overflow: hidden;
   min-height: 1.6em;
 
   &::placeholder {
-    color: #00ff4144;
+    color: var(--ipe-cli-accent-soft);
   }
 }
 
 .ipe-cli-success {
-  color: #00ff41;
+  color: var(--ipe-cli-accent);
 }
 .ipe-cli-error {
-  color: #ff3333;
+  color: var(--ipe-cli-error);
 }
 .ipe-cli-warning-text {
-  color: #ffcc00;
+  color: var(--ipe-cli-warning-fg);
 }
 .ipe-cli-info {
-  color: #00ccff;
+  color: var(--ipe-cli-info);
 }
 .ipe-cli-muted {
-  color: #666;
+  color: var(--ipe-cli-muted);
 }
 .ipe-cli-highlight {
-  color: #ffffff;
+  color: var(--ipe-cli-highlight);
   font-style: italic;
 }
 
 // Toolbox button Matrix style
 #ipe-edit-toolbox #ipe-toolbox__ipe-cli-toggle-btn {
-  background: #000;
-  color: #00ff41;
-  transition: background 0.2s, box-shadow 0.2s;
+  background: var(--ipe-cli-toolbox-bg);
+  color: var(--ipe-cli-accent);
+  border: 1px solid var(--ipe-cli-accent);
+  transition:
+    background 0.2s,
+    box-shadow 0.2s;
 
   &:hover {
-    background: #222;
-    box-shadow: 0 0 8px #00ff4166;
+    background: var(--ipe-cli-toolbox-hover-bg);
+    box-shadow: 0 0 8px var(--ipe-cli-accent-shadow);
   }
 
   svg {
-    stroke: #00ff41;
+    stroke: var(--ipe-cli-accent);
   }
 }
