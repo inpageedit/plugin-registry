@@ -7,11 +7,11 @@ export function createSiteinfoCommand(terminal: Terminal): Command {
     description: '显示站点信息',
     usage: 'siteinfo',
     async action(ctx) {
-      const site = ctx.wiki.siteInfo
-      terminal.print(`站点名: ${site.sitename}`)
-      terminal.print(`版本:   MediaWiki ${site.generator}`)
-      terminal.print(`语言:   ${site.lang}`)
-      terminal.print(`主页:   ${site.base}`)
+      const general = ctx.wiki.general
+      terminal.print(`站点名: ${general.sitename}`)
+      terminal.print(`版本:   ${general.generator}`)
+      terminal.print(`语言:   ${general.lang}`)
+      terminal.print(`主页:   ${general.base}`)
     },
   }
 }
