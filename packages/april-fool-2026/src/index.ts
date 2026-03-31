@@ -4,18 +4,47 @@ import { defineIPEPlugin } from '~~/defineIPEPlugin.js'
 import { Terminal } from './terminal/Terminal.js'
 import { runBootSequence, showTipForHelp } from './terminal/boot.js'
 import { registerAllCommands } from './commands/index.js'
+import type { InPageEdit } from '@inpageedit/core'
+import { CommandRegistry } from './terminal/Registry'
 
 export interface IPETuiPluginContext {
   terminal: Terminal
-  command: (name: string, def: any) => void
-  open: () => void
-  close: () => void
-  print: (text: string, style?: string) => void
+  command: CommandRegistry['register']
+  execute: Terminal['execute']
+  open: Terminal['open']
+  close: Terminal['close']
+  print: Terminal['print']
 }
 
 declare module '@inpageedit/core' {
   export interface IPEPluginContext {
     tui: IPETuiPluginContext
+  }
+  export interface Events {
+    'tui/open'(payload: { ctx: InPageEdit }): void
+    'tui/close'(payload: { ctx: InPageEdit }): void
+    'tui/before-execute'(payload: {
+      ctx: InPageEdit
+      input: string
+      command: string
+    }): string | void
+    'tui/after-execute'(payload: {
+      ctx: InPageEdit
+      input: string
+      command: string
+    }): void
+    'tui/command-not-found'(payload: {
+      ctx: InPageEdit
+      input: string
+      command: string
+    }): boolean | void
+    'tui/error'(payload: {
+      ctx: InPageEdit
+      message: string
+      cause: unknown
+      command: string
+    }): void
+    'tui/boot'(payload: { ctx: InPageEdit }): void
   }
 }
 
@@ -31,11 +60,11 @@ export default defineIPEPlugin({
     // Expose ctx.tui API for third-party plugins
     const tui: IPETuiPluginContext = {
       terminal,
-      command: (name: string, def: any) =>
-        terminal.registry.register({ name, ...def }),
+      command: (cmd) => terminal.registry.register(cmd),
+      execute: (input, skipEcho) => terminal.execute(input, skipEcho),
       open: () => terminal.open(),
       close: () => terminal.close(),
-      print: (text: string, style?: string) => terminal.print(text, style),
+      print: (text, style) => terminal.print(text, style),
     }
     ctx.set('tui', tui)
 
@@ -57,7 +86,9 @@ export default defineIPEPlugin({
     if (!booted) {
       localStorage.setItem(STORAGE_KEY_BOOTED, '1')
       terminal.open()
-      runBootSequence(terminal)
+      runBootSequence(terminal).then(() => {
+        ctx.emit('tui/boot', { ctx })
+      })
     } else {
       // 不是第一次，只打印 help 提示
       showTipForHelp(terminal)

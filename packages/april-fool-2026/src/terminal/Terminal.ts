@@ -1,3 +1,4 @@
+import { type InPageEdit } from '@inpageedit/core'
 import { CommandRegistry } from './Registry.js'
 import { parseArgv } from './parser.js'
 
@@ -33,7 +34,7 @@ export class Terminal {
 
   private isVisible = false
 
-  constructor(private ctx: any) {
+  constructor(private ctx: InPageEdit) {
     this.loadHistory()
     this.createDOM()
   }
@@ -42,11 +43,13 @@ export class Terminal {
     this.isVisible = true
     this.drawer.classList.remove('ipe-cli-hidden')
     this.inputEl.focus()
+    this.ctx.emit('tui/open', { ctx: this.ctx })
   }
 
   close(): void {
     this.isVisible = false
     this.drawer.classList.add('ipe-cli-hidden')
+    this.ctx.emit('tui/close', { ctx: this.ctx })
   }
 
   toggle(): void {
@@ -103,10 +106,12 @@ export class Terminal {
       <span>⚠ 虽然这看上去很搞笑，但你在这里的操作（编辑、移动、删除等）都是真实的！</span>
       <button class="ipe-cli-warning-close">×</button>
     `
-    this.warningEl.querySelector('.ipe-cli-warning-close')!.addEventListener('click', () => {
-      this.warningEl.style.display = 'none'
-      localStorage.setItem(STORAGE_KEY_WARNING, '1')
-    })
+    this.warningEl
+      .querySelector('.ipe-cli-warning-close')!
+      .addEventListener('click', () => {
+        this.warningEl.style.display = 'none'
+        localStorage.setItem(STORAGE_KEY_WARNING, '1')
+      })
     if (localStorage.getItem(STORAGE_KEY_WARNING) === '1') {
       this.warningEl.style.display = 'none'
     }
@@ -173,11 +178,15 @@ export class Terminal {
     if (this.heredocMarker) {
       if (value.trim() === this.heredocMarker) {
         const content = this.heredocBuffer.join('\n')
-        const fullInput = this.heredocPrefix + '"' + content.replace(/\\/g, '\\\\').replace(/"/g, '\\"') + '"'
+        const fullInput =
+          this.heredocPrefix +
+          '"' +
+          content.replace(/\\/g, '\\\\').replace(/"/g, '\\"') +
+          '"'
         this.heredocMarker = null
         this.heredocBuffer = []
         this.heredocPrefix = ''
-        this.executeInput(fullInput, true)
+        this.execute(fullInput, true)
       } else {
         this.heredocBuffer.push(value)
         this.print(`> ${value}`, TerminalStyle.Muted)
@@ -194,10 +203,10 @@ export class Terminal {
       return
     }
 
-    this.executeInput(value)
+    this.execute(value)
   }
 
-  private async executeInput(input: string, skipEcho = false): Promise<void> {
+  async execute(input: string, skipEcho = false): Promise<void> {
     const trimmed = input.trim()
     if (!trimmed) return
 
@@ -226,19 +235,50 @@ export class Terminal {
 
     const cmd = this.registry.get(cmdName)
     if (!cmd) {
-      this.print(`未知命令: ${cmdName}。输入 "help" 查看可用命令。`, TerminalStyle.Error)
+      const handled = this.ctx.bail('tui/command-not-found', {
+        ctx: this.ctx,
+        input: trimmed,
+        command: cmdName,
+      })
+      if (!handled) {
+        this.print(
+          `未知命令: ${cmdName}。输入 "help" 查看可用命令。`,
+          TerminalStyle.Error
+        )
+      }
       return
     }
+
+    // bail: listeners can return a truthy value to intercept execution
+    const intercepted = this.ctx.bail('tui/before-execute', {
+      ctx: this.ctx,
+      input: trimmed,
+      command: cmdName,
+    })
+    if (intercepted) return
 
     try {
       this.setInputEnabled(false)
       await cmd.action(this.ctx, argv)
     } catch (err: any) {
-      this.print(`Error: ${err?.message || err}`, TerminalStyle.Error)
+      const message = `Error: ${err?.message || err}`
+      this.print(message, TerminalStyle.Error)
+      this.ctx.emit('tui/error', {
+        ctx: this.ctx,
+        message,
+        cause: err,
+        command: cmdName,
+      })
     } finally {
       this.setInputEnabled(true)
       this.inputEl.focus()
     }
+
+    this.ctx.emit('tui/after-execute', {
+      ctx: this.ctx,
+      input: trimmed,
+      command: cmdName,
+    })
   }
 
   private navigateHistory(direction: number): void {
@@ -336,9 +376,13 @@ export class Terminal {
       startDrag(e.clientY)
     })
 
-    handle.addEventListener('touchstart', (e: TouchEvent) => {
-      if (excludeEl.contains(e.target as Node)) return
-      startDrag(e.touches[0].clientY)
-    }, { passive: true })
+    handle.addEventListener(
+      'touchstart',
+      (e: TouchEvent) => {
+        if (excludeEl.contains(e.target as Node)) return
+        startDrag(e.touches[0].clientY)
+      },
+      { passive: true }
+    )
   }
 }
