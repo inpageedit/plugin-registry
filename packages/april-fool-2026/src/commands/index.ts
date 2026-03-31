@@ -40,9 +40,9 @@ export function registerAllCommands(terminal: Terminal): void {
 
   // Internal commands (dot-prefixed, hidden from help list)
   terminal.registry.register({
-    name: '.first-init',
+    name: '.init',
     description: '重播首次加载动画',
-    usage: '.first-init',
+    usage: '.init',
     action() {
       return runBootSequence(terminal)
     },
