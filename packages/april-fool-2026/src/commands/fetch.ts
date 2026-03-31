@@ -12,7 +12,7 @@ export function createFetchCommand(terminal: Terminal): Command {
       { name: 'section', alias: 's', type: 'number' as const, description: '段落编号' },
     ],
     async action(ctx, argv) {
-      const title = argv._[1] || argv.title || ctx.currentPage.title
+      const title = argv._[1] || argv.title || ctx.currentPage.wikiTitle.toText()
       terminal.print(`正在获取 ${title} ...`, TerminalStyle.Muted)
 
       const page = await ctx.wikiPage.newFromTitle(title, false, argv.section)

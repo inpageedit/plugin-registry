@@ -11,7 +11,7 @@ export function createPageinfoCommand(terminal: Terminal): Command {
       { name: 'title', alias: 't', type: 'string' as const, description: '页面标题' },
     ],
     async action(ctx, argv) {
-      const title = argv._[1] || argv.title || ctx.currentPage.title
+      const title = argv._[1] || argv.title || ctx.currentPage.wikiTitle.toText()
       const page = await ctx.wikiPage.newFromTitle(title)
       const info = page.pageInfo
 

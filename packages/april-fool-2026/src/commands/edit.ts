@@ -16,7 +16,7 @@ export function createEditCommand(terminal: Terminal): Command {
       { name: 'minor', alias: 'm', type: 'boolean' as const, description: '标记为小编辑' },
     ],
     async action(ctx, argv) {
-      const title = argv._[1] || argv.title || ctx.currentPage.title
+      const title = argv._[1] || argv.title || ctx.currentPage.wikiTitle.toText()
 
       if (argv.ui) {
         ctx.quickEdit({ title, section: argv.section })

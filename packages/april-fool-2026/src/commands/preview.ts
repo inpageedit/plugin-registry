@@ -12,7 +12,7 @@ export function createPreviewCommand(terminal: Terminal): Command {
       { name: 'ui', type: 'boolean' as const, description: '打开预览界面' },
     ],
     async action(ctx, argv) {
-      const title = argv._[1] || argv.title || ctx.currentPage.title
+      const title = argv._[1] || argv.title || ctx.currentPage.wikiTitle.toText()
 
       if (argv.ui) {
         const page = await ctx.wikiPage.newFromTitle(title)
