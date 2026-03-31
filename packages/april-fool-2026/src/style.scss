@@ -23,26 +23,16 @@
   }
 }
 
-.ipe-cli-resize-handle {
-  height: 4px;
-  cursor: ns-resize;
-  background: transparent;
-  flex-shrink: 0;
-
-  &:hover {
-    background: #00ff4133;
-  }
-}
-
 .ipe-cli-topbar {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 4px 12px;
+  padding: 6px 12px;
   background: #111;
   border-bottom: 1px solid #00ff4133;
   flex-shrink: 0;
   user-select: none;
+  cursor: ns-resize;
 }
 
 .ipe-cli-topbar-title {

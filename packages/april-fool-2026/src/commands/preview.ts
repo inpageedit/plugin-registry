@@ -29,7 +29,25 @@ export function createPreviewCommand(terminal: Terminal): Command {
       const result = await page.preview(content)
       const html = result.data?.parse?.text?.['*'] || result.data?.parse?.text
       if (html) {
-        terminal.printHTML(html)
+        const iframe = document.createElement('iframe')
+        iframe.sandbox.add('allow-same-origin')
+        iframe.style.cssText = 'width:100%;border:1px solid #00ff4133;background:#fff;border-radius:2px;min-height:200px;'
+        // Write content after appending so the iframe document is available
+        const wrapper = document.createElement('div')
+        wrapper.appendChild(iframe)
+        terminal.printHTML('')  // append a container line
+        const lastLine = terminal['outputEl'].lastElementChild as HTMLElement
+        lastLine.appendChild(iframe)
+        const doc = iframe.contentDocument!
+        doc.open()
+        doc.write(`<!DOCTYPE html><html><head><style>body{font-family:sans-serif;padding:8px;margin:0;}</style></head><body>${html}</body></html>`)
+        doc.close()
+        // Auto-resize iframe to content height
+        const resizeIframe = () => {
+          iframe.style.height = doc.body.scrollHeight + 'px'
+        }
+        iframe.addEventListener('load', resizeIframe)
+        resizeIframe()
       } else {
         terminal.print('预览失败: 无法获取渲染结果', 'ipe-cli-error')
       }

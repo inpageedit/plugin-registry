@@ -78,17 +78,15 @@ export class Terminal {
     const savedHeight = localStorage.getItem(STORAGE_KEY_HEIGHT)
     if (savedHeight) this.drawer.style.height = savedHeight
 
-    const resizeHandle = document.createElement('div')
-    resizeHandle.className = 'ipe-cli-resize-handle'
-    this.setupResize(resizeHandle)
-
     const topbar = document.createElement('div')
     topbar.className = 'ipe-cli-topbar'
     topbar.innerHTML = `
       <span class="ipe-cli-topbar-title">ipe-cli v1.0.0</span>
       <button class="ipe-cli-topbar-close">×</button>
     `
-    topbar.querySelector('.ipe-cli-topbar-close')!.addEventListener('click', () => this.close())
+    const closeBtn = topbar.querySelector('.ipe-cli-topbar-close')!
+    closeBtn.addEventListener('click', () => this.close())
+    this.setupResize(topbar, closeBtn as HTMLElement)
 
     this.warningEl = document.createElement('div')
     this.warningEl.className = 'ipe-cli-warning'
@@ -123,7 +121,7 @@ export class Terminal {
     this.setupInput()
 
     inputArea.append(prompt, this.inputEl)
-    this.drawer.append(resizeHandle, topbar, this.warningEl, this.outputEl, inputArea)
+    this.drawer.append(topbar, this.warningEl, this.outputEl, inputArea)
     document.body.appendChild(this.drawer)
   }
 
@@ -280,11 +278,12 @@ export class Terminal {
     localStorage.setItem(STORAGE_KEY_HISTORY, JSON.stringify(this.history))
   }
 
-  private setupResize(handle: HTMLElement): void {
+  private setupResize(handle: HTMLElement, excludeEl: HTMLElement): void {
     let startY = 0
     let startHeight = 0
 
     const onMouseMove = (e: MouseEvent) => {
+      e.preventDefault()
       const delta = startY - e.clientY
       const newHeight = Math.min(
         Math.max(startHeight + delta, 120),
@@ -293,17 +292,44 @@ export class Terminal {
       this.drawer.style.height = newHeight + 'px'
     }
 
-    const onMouseUp = () => {
+    const onTouchMove = (e: TouchEvent) => {
+      e.preventDefault()
+      const delta = startY - e.touches[0].clientY
+      const newHeight = Math.min(
+        Math.max(startHeight + delta, 120),
+        window.innerHeight * 0.8
+      )
+      this.drawer.style.height = newHeight + 'px'
+    }
+
+    const onEnd = () => {
       document.removeEventListener('mousemove', onMouseMove)
-      document.removeEventListener('mouseup', onMouseUp)
+      document.removeEventListener('mouseup', onEnd)
+      document.removeEventListener('touchmove', onTouchMove)
+      document.removeEventListener('touchend', onEnd)
+      document.body.style.userSelect = ''
       localStorage.setItem(STORAGE_KEY_HEIGHT, this.drawer.style.height)
     }
 
-    handle.addEventListener('mousedown', (e: MouseEvent) => {
-      startY = e.clientY
+    const startDrag = (clientY: number) => {
+      startY = clientY
       startHeight = this.drawer.offsetHeight
+      document.body.style.userSelect = 'none'
       document.addEventListener('mousemove', onMouseMove)
-      document.addEventListener('mouseup', onMouseUp)
+      document.addEventListener('mouseup', onEnd)
+      document.addEventListener('touchmove', onTouchMove, { passive: false })
+      document.addEventListener('touchend', onEnd)
+    }
+
+    handle.addEventListener('mousedown', (e: MouseEvent) => {
+      if (excludeEl.contains(e.target as Node)) return
+      e.preventDefault()
+      startDrag(e.clientY)
     })
+
+    handle.addEventListener('touchstart', (e: TouchEvent) => {
+      if (excludeEl.contains(e.target as Node)) return
+      startDrag(e.touches[0].clientY)
+    }, { passive: true })
   }
 }
