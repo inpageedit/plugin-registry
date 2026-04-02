@@ -1,3 +1,5 @@
+import './style.scss'
+
 import { defineIPEPlugin } from '~~/defineIPEPlugin.js'
 import type { ForkScope } from '@cordisjs/core'
 
