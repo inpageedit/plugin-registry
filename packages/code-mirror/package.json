@@ -26,12 +26,16 @@
     "loader": {
       "kind": "module",
       "entry": "dist/index.mjs",
-      "styles": [],
+      "styles": [
+        "dist/style.css"
+      ],
       "main_export": "default"
     },
     "dev_loader": {
       "entry": "src/index.ts",
-      "styles": []
+      "styles": [
+        "src/style.scss"
+      ]
     }
   }
 }
