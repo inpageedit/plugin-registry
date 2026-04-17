@@ -15,8 +15,8 @@
     }
   },
   "scripts": {
-    "dev": "unbuild --watch",
-    "build": "unbuild"
+    "dev": "vite build --watch",
+    "build": "vite build"
   },
   "$ipe": {
     "name": "CodeMirror6",
