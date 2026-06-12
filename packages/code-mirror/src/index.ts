@@ -25,7 +25,7 @@ export default defineIPEPlugin({
         : (async () => {
           const pkg = await import(
             // @ts-ignore
-            /* @vite-ignore */ 'https://cdn.jsdelivr.net/npm/@bhsd/codemirror-mediawiki/dist/mw.min.js'
+            /* @vite-ignore */ 'https://cdn.jsdelivr.net/npm/@bhsd/codemirror-mediawiki@3/dist/mw.min.js'
           )
           return pkg.CodeMirror
         })()
