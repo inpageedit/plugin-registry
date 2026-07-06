@@ -160,7 +160,7 @@ Create Redirect: 建立重新導向
 # PluginQuickPreview
 Quick Preview: 快速預覽
 Preview: 預覽
-Preview - Loading...: 預覽 - 載入中...
+Preview - Loading...: 預覽 - 載入中……
 'Preview - {{ $1 }}': '預覽 - {{ $1 }}'
 # PluginQuickDiff
 Quick Diff: 快速差異比較
