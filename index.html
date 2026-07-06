@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>InPageEdit Plugin Registry</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+          'Helvetica Neue', Arial, sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        padding: 2rem;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .header {
+        text-align: center;
+        color: white;
+        margin-bottom: 2rem;
+      }
+
+      .header h1 {
+        font-size: 2.5rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .header p {
+        font-size: 1.1rem;
+        opacity: 0.9;
+      }
+
+      .loading {
+        text-align: center;
+        color: white;
+        font-size: 1.2rem;
+        padding: 3rem;
+      }
+
+      .error {
+        background: #ff4757;
+        color: white;
+        padding: 1rem;
+        border-radius: 8px;
+        margin: 1rem 0;
+      }
+
+      .registry-info {
+        background: white;
+        border-radius: 12px;
+        padding: 1.5rem;
+        margin-bottom: 2rem;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      .registry-info h2 {
+        color: #667eea;
+        margin-bottom: 1rem;
+      }
+
+      .registry-info .info-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1rem;
+      }
+
+      .info-item {
+        padding: 0.5rem;
+      }
+
+      .info-item strong {
+        display: block;
+        color: #666;
+        font-size: 0.875rem;
+        margin-bottom: 0.25rem;
+      }
+
+      .info-item span {
+        color: #333;
+        font-size: 1.1rem;
+      }
+
+      .plugins-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+        gap: 1.5rem;
+      }
+
+      .plugin-card {
+        background: white;
+        border-radius: 12px;
+        padding: 1.5rem;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: transform 0.2s, box-shadow 0.2s;
+      }
+
+      .plugin-card h3 {
+        color: #667eea;
+        margin-bottom: 0.5rem;
+        font-size: 1.3rem;
+      }
+
+      .plugin-card .version {
+        display: inline-block;
+        background: #667eea;
+        color: white;
+        padding: 0.25rem 0.75rem;
+        border-radius: 12px;
+        font-size: 0.875rem;
+        margin-bottom: 1rem;
+      }
+
+      .plugin-card .description {
+        color: #666;
+        margin-bottom: 1rem;
+        line-height: 1.5;
+      }
+
+      .plugin-card .meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        font-size: 0.875rem;
+        color: #888;
+        padding-top: 1rem;
+        border-top: 1px solid #eee;
+      }
+
+      .plugin-card .meta-item {
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+      }
+
+      .plugin-card .loader-info {
+        background: #f8f9fa;
+        padding: 1rem;
+        border-radius: 8px;
+        margin-top: 1rem;
+      }
+
+      .plugin-card .loader-info h4 {
+        color: #333;
+        font-size: 0.9rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .plugin-card .loader-info code {
+        background: #e9ecef;
+        padding: 0.2rem 0.4rem;
+        border-radius: 4px;
+        font-size: 0.875rem;
+        color: #d63384;
+      }
+
+      .plugin-card .styles-list {
+        margin-top: 0.5rem;
+      }
+
+      .plugin-card .styles-list li {
+        margin-left: 1.5rem;
+        color: #666;
+        font-size: 0.875rem;
+      }
+
+      @media (max-width: 768px) {
+        body {
+          padding: 1rem;
+        }
+
+        .header h1 {
+          font-size: 1.8rem;
+        }
+
+        .plugins-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>📦 InPageEdit Plugin Registry</h1>
+        <p>插件注册表浏览器</p>
+      </div>
+
+      <div id="app">
+        <div class="loading">正在加载...</div>
+      </div>
+    </div>
+
+    <script>
+      function getRegistryURL() {
+        return new URL('registry.v1.json', window.location.href).href
+      }
+
+      function renderRegistry(registry) {
+        const app = document.getElementById('app')
+
+        const lastUpdated = formatDate(registry.last_modified)
+
+        const registryInfoHTML = `
+        <div class="registry-info">
+          <h2>📋 注册表信息</h2>
+          <div class="info-item">
+            <strong>registry URL</strong>
+            <span>${getRegistryURL()}</span>
+          </div>
+          <div class="info-grid">
+            <div class="info-item">
+              <strong>manifest 版本</strong>
+              <span>${registry.manifest_version || 'N/A'}</span>
+            </div>
+            <div class="info-item">
+              <strong>插件数量</strong>
+              <span>${registry.packages?.length || 0}</span>
+            </div>
+            <div class="info-item">
+              <strong>最后更新时间</strong>
+              <span>${lastUpdated}</span>
+            </div>
+          </div>
+        </div>
+      `
+
+        const packagesHTML =
+          registry.packages?.length > 0
+            ? `<div class="plugins-grid">${registry.packages
+                .map((pkg) => renderPackage(pkg))
+                .join('')}</div>`
+            : '<p style="color: white; text-align: center;">暂无插件</p>'
+
+        app.innerHTML = registryInfoHTML + packagesHTML
+      }
+
+      function renderPackage(pkg) {
+        const loader = pkg.loader || {}
+        const stylesHTML =
+          loader.styles?.length > 0
+            ? `
+          <div style="margin-top: 0.5rem;">
+            <strong>样式文件：</strong>
+            <ul class="styles-list">
+              ${loader.styles
+                .map((style) => `<li><code>${style}</code></li>`)
+                .join('')}
+            </ul>
+          </div>
+        `
+            : ''
+
+        return `
+        <div class="plugin-card">
+          <h3>${pkg.name || 'Unknown'}</h3>
+          <span class="version">v${pkg.version || '0.0.0'}</span>
+
+          ${
+            pkg.description
+              ? `<p class="description">${pkg.description}</p>`
+              : ''
+          }
+
+          <div class="meta">
+            ${pkg.author ? `<div class="meta-item">👤 ${pkg.author}</div>` : ''}
+            ${
+              pkg.license
+                ? `<div class="meta-item">📄 ${pkg.license}</div>`
+                : ''
+            }
+          </div>
+
+          <div class="loader-info">
+            <h4>🔧 Loader 配置</h4>
+            <div><strong>类型：</strong> <code>${
+              loader.kind || 'N/A'
+            }</code></div>
+            ${
+              loader.entry
+                ? `<div style="margin-top: 0.5rem;"><strong>入口：</strong> <code>${loader.entry}</code></div>`
+                : ''
+            }
+            ${
+              loader.main_export
+                ? `<div style="margin-top: 0.5rem;"><strong>导出：</strong> <code>${loader.main_export}</code></div>`
+                : ''
+            }
+            ${stylesHTML}
+          </div>
+        </div>
+      `
+      }
+
+      // 页面加载时执行
+      async function loadRegistry() {
+        const app = document.getElementById('app')
+
+        try {
+          const response = await fetch(getRegistryURL())
+          if (!response.ok) {
+            throw new Error(`HTTP ${response.status}: ${response.statusText}`)
+          }
+
+          const registry = await response.json()
+          // 规范使用 last_modified 字段；若缺失则从响应头推断
+          registry.last_modified =
+            registry.last_modified ||
+            response.headers.get('Last-Modified') ||
+            response.headers.get('Date') ||
+            new Date().toISOString()
+          renderRegistry(registry)
+        } catch (error) {
+          app.innerHTML = `
+          <div class="error">
+            <h3>❌ 加载失败</h3>
+            <p>${error.message}</p>
+          </div>
+        `
+        }
+      }
+
+      function formatDate(input) {
+        if (!input) return 'N/A'
+        const d = new Date(input)
+        if (isNaN(d.getTime())) return String(input)
+        return d.toLocaleString('zh-CN', {
+          year: 'numeric',
+          month: '2-digit',
+          day: '2-digit',
+          hour: '2-digit',
+          minute: '2-digit',
+          second: '2-digit',
+          hour12: false,
+        })
+      }
+
+      loadRegistry()
+    </script>
+  </body>
+</html>
