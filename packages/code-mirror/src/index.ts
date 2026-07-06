@@ -25,7 +25,7 @@ export default defineIPEPlugin({
         : (async () => {
           const pkg = await import(
             // @ts-ignore
-            /* @vite-ignore */ 'https://cdn.jsdelivr.net/npm/@bhsd/codemirror-mediawiki@3/dist/mw.min.js'
+            /* @vite-ignore */ 'https://cdn.jsdelivr.net/npm/@bhsd/codemirror-mediawiki@4/dist/mw.min.js'
           )
           return pkg.CodeMirror
         })()
@@ -39,9 +39,11 @@ export default defineIPEPlugin({
             .get$content()
             .querySelector<HTMLTextAreaElement>('textarea[name="text"]')!,
           contentmodel,
-          ns,
-          title,
-          pluginWikiEditor?.isActive ? ['wikiEditor'] : []
+          {
+            ns,
+            page: title,
+            extensions: pluginWikiEditor?.isActive ? ['wikiEditor'] : []
+          }
         )
       }
     )
