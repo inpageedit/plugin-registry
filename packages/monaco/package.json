@@ -1,0 +1,41 @@
+{
+  "name": "inpageedit-plugin-monaco",
+  "description": "Monaco Editor for InPageEdit",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "module": "./dist/index.mjs",
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs"
+    }
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build"
+  },
+  "$ipe": {
+    "name": "Monaco Editor",
+    "categories": [],
+    "loader": {
+      "kind": "module",
+      "entry": "dist/index.mjs",
+      "styles": [],
+      "main_export": "default"
+    },
+    "dev_loader": {
+      "entry": "src/index.ts",
+      "styles": []
+    }
+  },
+  "dependencies": {
+    "modern-monaco": "^0.2.2"
+  },
+  "devDependencies": {
+    "rolldown": "1.0.0-beta.47",
+    "vite": "npm:rolldown-vite@latest"
+  }
+}
