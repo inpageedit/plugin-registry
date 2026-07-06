@@ -42,6 +42,12 @@ jobs:
       - name: Build Packages
         run: |
           pnpm build
+      - name: Upload dist artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist-files
+          path: ./dist
+          if-no-files-found: error
 
   # legacy dist branch deployment
   # This is kept for Miraheze users to load the files via jsdelivr,
@@ -50,6 +56,11 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
+      - name: Download dist artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: dist-files
+          path: ./dist
       - name: Setup dist branch
         uses: peaceiris/actions-gh-pages@v4
         with:
@@ -63,6 +74,11 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
+      - name: Download dist artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: dist-files
+          path: ./dist
       - name: Setup Pages
         uses: actions/configure-pages@v6
       - name: Upload artifact
