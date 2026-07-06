@@ -2,3 +2,6 @@ packages:
   - i18n
   - 'packages/*'
   - 'plugins/*'
+allowBuilds:
+  esbuild: true
+  rollup: true
