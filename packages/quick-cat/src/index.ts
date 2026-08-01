@@ -125,6 +125,7 @@ const OFFICIAL_KEYS: Record<string, string> = {
   reloadAfterSave: 'Reload after save',
   noChange: 'No changes',
   notEditable: 'Not editable',
+  tooltipNotEditable: 'Not editable',
   saved: 'Your changes have been saved.',
   summaryLabel: 'Summary',
   submissionError: 'Submission Error',
