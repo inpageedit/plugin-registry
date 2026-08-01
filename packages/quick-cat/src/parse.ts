@@ -25,17 +25,46 @@ export interface Parsed {
   defaultSort: string
 }
 
+export interface CategoryNsInfo {
+  alt: string
+  name: string
+}
+
 export function escapeRegExp(str: string): string {
   return String(str).replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
 }
 
-// Blank comments, nowiki-like tags and templates so their category links are ignored
+// Blank comments, nowiki-like tags and non-DEFAULTSORT templates so their
+// category links are ignored. Pure (no memo); callers may cache if needed.
 const RAW_TAGS = ['nowiki', 'pre', 'code', 'math', 'syntaxhighlight', 'source', 'timeline', 'poem', 'hiero']
-let _lastMaskedSource: string | null = null
-let _lastMasked: string | null = null
+
+// End offset after a balanced {{...}} starting at i ('{' of '{{'), or -1 if unclosed
+function skipTemplate(text: string, i: number): number {
+  let depth = 1
+  let j = i + 2
+  while (j < text.length && depth > 0) {
+    if (text.startsWith('{{', j)) {
+      depth++
+      j += 2
+    } else if (text.startsWith('}}', j)) {
+      depth--
+      j += 2
+    } else {
+      j++
+    }
+  }
+  return depth === 0 ? j : -1
+}
+
+// True when text[i] starts the DEFAULTSORT magic word (kept unmasked)
+function isDefaultSortStart(text: string, i: number): boolean {
+  let k = i + 2
+  while (k < text.length && /\s/.test(text[k])) k++
+  const rest = text.slice(k).toLowerCase()
+  return rest.startsWith('defaultsort:') || rest.startsWith('defaultsortkey:')
+}
+
 function maskIgnoredRegions(text: string): string {
-  // Single-entry memo
-  if (text === _lastMaskedSource) return _lastMasked!
   let masked = text.replace(/<!--[\s\S]*?-->/g, (m) => ' '.repeat(m.length))
   for (const tag of RAW_TAGS) {
     masked = masked.replace(
@@ -43,63 +72,27 @@ function maskIgnoredRegions(text: string): string {
       (m) => ' '.repeat(m.length)
     )
   }
-  // Nested templates, keeping the DEFAULTSORT magic word itself
   const chars = masked.split('')
   for (let i = 0; i < chars.length; i++) {
     if (!masked.startsWith('{{', i)) continue
-    let k = i + 2
-    while (k < masked.length && /\s/.test(masked[k])) k++
-    const rest = masked.slice(k).toLowerCase()
-    const isDefaultSort = rest.startsWith('defaultsort:') || rest.startsWith('defaultsortkey:')
-    if (isDefaultSort) {
-      let depth = 1
-      let j = i + 2
-      while (j < masked.length && depth > 0) {
-        if (masked.startsWith('{{', j)) {
-          depth++
-          j += 2
-        } else if (masked.startsWith('}}', j)) {
-          depth--
-          j += 2
-        } else {
-          j++
-        }
-      }
-      if (depth === 0) i = j - 1
+    const end = skipTemplate(masked, i)
+    if (end === -1) break // unclosed template: nothing after it is a real block
+    if (isDefaultSortStart(masked, i)) {
+      i = end - 1
       continue
     }
-    let depth = 1
-    let j = i + 2
-    while (j < masked.length && depth > 0) {
-      if (masked.startsWith('{{', j)) {
-        depth++
-        j += 2
-      } else if (masked.startsWith('}}', j)) {
-        depth--
-        j += 2
-      } else {
-        j++
-      }
-    }
-    if (depth === 0) {
-      for (let k2 = i; k2 < j; k2++) chars[k2] = ' '
-      i = j - 1
-    }
+    for (let k = i; k < end; k++) chars[k] = ' '
+    i = end - 1
   }
-  const maskedResult = chars.join('')
-  _lastMaskedSource = text
-  _lastMasked = maskedResult
-  return maskedResult
+  return chars.join('')
 }
 
-let _catNsAlt: string | null = null
-
-// Localized category namespace aliases (e.g. Category / 分类 / 分類)
-export function getCategoryNamespaceAlt(): string {
-  if (_catNsAlt) return _catNsAlt
+function readNamespaceInfo(): CategoryNsInfo {
   let nsIds: Record<string, number> = {}
+  let formatted: Record<string, string> = {}
   try {
     nsIds = (mw.config.get('wgNamespaceIds') as Record<string, number>) || {}
+    formatted = (mw.config.get('wgFormattedNamespaces') as Record<string, string>) || {}
   } catch {
     /* ignore */
   }
@@ -108,29 +101,30 @@ export function getCategoryNamespaceAlt(): string {
   for (const [name, id] of Object.entries(nsIds)) {
     if (Number(id) === canonicalId && name) prefixes.add(name)
   }
-  _catNsAlt = [...prefixes]
+  const alt = [...prefixes]
     .sort((a, b) => b.length - a.length)
     .map(escapeRegExp)
     .join('|')
-  return _catNsAlt
+  const name = String(formatted[String(canonicalId)]) || 'Category'
+  return { alt, name }
 }
 
-// Canonical namespace name for new links (matches HotCat)
+// Localized category namespace aliases + canonical name; callers create once
+// and pass it in (no hidden global state)
+export function initCategoryNsInfo(): CategoryNsInfo {
+  return readNamespaceInfo()
+}
+
+// Convenience accessors (read mw.config once per call)
+export function getCategoryNamespaceAlt(): string {
+  return readNamespaceInfo().alt
+}
 export function getCategoryNamespaceName(): string {
-  try {
-    const formatted = (mw.config.get('wgFormattedNamespaces') as Record<string, string>) || {}
-    const nsId = Number((mw.config.get('wgNamespaceIds') as Record<string, number>)?.category) || 14
-    const name = formatted[String(nsId)]
-    if (typeof name === 'string' && name) return name
-  } catch {
-    /* ignore */
-  }
-  return 'Category'
+  return readNamespaceInfo().name
 }
 
-export function stripCategoryPrefix(name: string): string {
-  const alt = getCategoryNamespaceAlt()
-  return String(name).replace(new RegExp(`^\\s*(?:${alt})\\s*:`, 'i'), '').trim()
+export function stripCategoryPrefix(name: string, nsInfo: CategoryNsInfo): string {
+  return String(name).replace(new RegExp(`^\\s*(?:${nsInfo.alt})\\s*:`, 'i'), '').trim()
 }
 
 export function findDefaultSortMatches(text: string): DefaultSortMatch[] {
@@ -139,33 +133,20 @@ export function findDefaultSortMatches(text: string): DefaultSortMatch[] {
   const re = /\{\{\s*(?:DEFAULTSORT|DEFAULTSORTKEY)\s*:\s*/gi
   let m: RegExpExecArray | null
   while ((m = re.exec(masked))) {
-    let i = re.lastIndex
-    let depth = 1
-    while (i < masked.length && depth > 0) {
-      if (masked.startsWith('{{', i)) {
-        depth++
-        i += 2
-      } else if (masked.startsWith('}}', i)) {
-        depth--
-        i += 2
-      } else {
-        i++
-      }
-    }
-    if (depth !== 0) continue // skip unclosed
-    const end = i - 2
+    const close = skipTemplate(masked, m.index)
+    if (close === -1) continue // skip unclosed
+    const end = close - 2
     matches.push({ start: m.index, end, value: text.slice(re.lastIndex, end).trim() })
   }
   return matches
 }
 
 // Exclude display links (e.g. [[:Category:...]]) and ignored regions
-export function parseCategories(wikitext: string): Parsed {
+export function parseCategories(wikitext: string, nsInfo: CategoryNsInfo): Parsed {
   const categories: CategoryRef[] = []
   const ds = findDefaultSortMatches(wikitext)
-  const alt = getCategoryNamespaceAlt()
   const re = new RegExp(
-    `\\[\\[\\s*(?<ns>${alt})\\s*:\\s*(?<name>[^\\[\\]|]*?)(?:\\s*\\|\\s*(?<sortkey>[^\\[\\]]*?))?\\s*\\]\\]`,
+    `\\[\\[\\s*(?<ns>${nsInfo.alt})\\s*:\\s*(?<name>[^\\[\\]|]*?)(?:\\s*\\|\\s*(?<sortkey>[^\\[\\]]*?))?\\s*\\]\\]`,
     'gi'
   )
   const masked = maskIgnoredRegions(wikitext)
@@ -208,9 +189,8 @@ export function stripDefaultSort(text: string): string {
   return out
 }
 
-export function stripCategoryLinks(text: string): string {
-  const alt = getCategoryNamespaceAlt()
-  const re = new RegExp(`\\[\\[\\s*(?:${alt})\\s*:[^\\]]*\\]\\]`, 'gi')
+export function stripCategoryLinks(text: string, nsInfo: CategoryNsInfo): string {
+  const re = new RegExp(`\\[\\[\\s*(?:${nsInfo.alt})\\s*:[^\\]]*\\]\\]`, 'gi')
   const masked = maskIgnoredRegions(text)
   const ranges: Array<[number, number]> = []
   let m: RegExpExecArray | null
@@ -238,22 +218,22 @@ export function stripCategoryLinks(text: string): string {
 export function renderLink(
   r: { name: string; sortkey?: string | null; ns?: string | null },
   defaultSort: string,
-  defaultNs: string
+  nsInfo: CategoryNsInfo
 ): string | null {
-  const name = stripCategoryPrefix(r.name)
+  const name = stripCategoryPrefix(r.name, nsInfo)
   if (!name) return null
   const sk = String(r.sortkey || '').trim()
   const useDefault = !!defaultSort && sk.toLowerCase() === defaultSort.toLowerCase()
-  const ns = String(r.ns || defaultNs).trim()
+  const ns = String(r.ns || nsInfo.name).trim()
   return sk && !useDefault ? `[[${ns}:${name}|${sk}]]` : `[[${ns}:${name}]]`
 }
 
 // Render category lines (DEFAULTSORT first, then rows)
-function renderCategoryLines(rows: CategoryRow[], defaultSort: string, defaultNs: string): string[] {
+function renderCategoryLines(rows: CategoryRow[], defaultSort: string, nsInfo: CategoryNsInfo): string[] {
   const lines: string[] = []
   if (defaultSort) lines.push(`{{DEFAULTSORT:${defaultSort}}}`)
   for (const r of rows) {
-    const link = renderLink(r, defaultSort, defaultNs)
+    const link = renderLink(r, defaultSort, nsInfo)
     if (link) lines.push(link)
   }
   return lines
@@ -307,10 +287,9 @@ function rebuildBlock(
 }
 
 // End offset of the last category link (HotCat-style insertion point); -1 if none
-function findLastCategoryEnd(text: string): number {
-  const alt = getCategoryNamespaceAlt()
+function findLastCategoryEnd(text: string, nsInfo: CategoryNsInfo): number {
   const re = new RegExp(
-    `\\[\\[\\s*(?:${alt})\\s*:\\s*[^\\[\\]|]*?(?:\\s*\\|\\s*[^\\[\\]]*?)?\\s*\\]\\]`,
+    `\\[\\[\\s*(?:${nsInfo.alt})\\s*:\\s*[^\\[\\]|]*?(?:\\s*\\|\\s*[^\\[\\]]*?)?\\s*\\]\\]`,
     'gi'
   )
   const masked = maskIgnoredRegions(text)
@@ -320,32 +299,34 @@ function findLastCategoryEnd(text: string): number {
   return end
 }
 
-// True when the user reordered existing categories via drag
+// True when the user reordered existing categories via drag, or placed an added
+// category before/among existing ones (HotCat in-place insertion can't do that)
 export function isReordered(rows: CategoryRow[], originalCats: CategoryRef[]): boolean {
   const orig = originalCats
     .filter((c) => rows.some((r) => r._id === c._id))
     .map((c) => c._id)
   const cur = rows.filter((r) => r._id != null).map((r) => r._id as number)
-  return orig.join(',') !== cur.join(',')
+  if (orig.join(',') !== cur.join(',')) return true
+  // An added (no _id) category before/among existing ones also counts as reorder
+  let seenNew = false
+  for (const r of rows) {
+    if (r._id == null) seenNew = true
+    else if (seenNew) return true
+  }
+  return false
 }
 
-// Single category-block rebuild path:
-// - Reordered (drag): rebuild the block in place when it is contiguous, so the
-//   categories keep their original position; otherwise fall back to stripping
-//   and appending at the end.
-// - Otherwise: replace each category and DEFAULTSORT in place (preserving any
-//   non-category content between them) and insert new categories right after
-//   the last category link (HotCat behavior). Unrelated blank lines are kept.
+// Reorder: rebuild a contiguous block in place, else strip and append at the end.
+// Otherwise: edit in place and insert new categories after the last link (HotCat).
 export function buildWikitext(
   original: string,
   rows: CategoryRow[],
   defaultSort: string,
-  originalCats: CategoryRef[] = []
+  originalCats: CategoryRef[],
+  nsInfo: CategoryNsInfo
 ): string {
-  const defaultNs = getCategoryNamespaceName()
-
   if (isReordered(rows, originalCats)) {
-    const lines = renderCategoryLines(rows, defaultSort, defaultNs)
+    const lines = renderCategoryLines(rows, defaultSort, nsInfo)
     const dsMatches = findDefaultSortMatches(original)
     const block = findCategoryBlock(originalCats, dsMatches)
     if (block && lines.length && isBlockContiguous(original, block, originalCats, dsMatches)) {
@@ -353,7 +334,7 @@ export function buildWikitext(
     }
     // Fallback: strip the old block and append at the end (keeps all body content)
     let text = stripDefaultSort(original)
-    text = stripCategoryLinks(text)
+    text = stripCategoryLinks(text, nsInfo)
     // Only clean the tail so unrelated blank lines in the body are preserved
     text = text.replace(/[ \t\r\n]+$/, '')
     if (lines.length === 0) return `${text}\n`
@@ -370,7 +351,7 @@ export function buildWikitext(
   const edits: Array<{ start: number; end: number; text: string }> = []
   for (const c of originalCats) {
     const row = rowById.get(c._id)
-    const link = row ? (renderLink(row, defaultSort, defaultNs) ?? '') : ''
+    const link = row ? (renderLink(row, defaultSort, nsInfo) ?? '') : ''
     let start = c.start
     let end = c.end
     if (!link) {
@@ -408,11 +389,11 @@ export function buildWikitext(
   const newLines: string[] = []
   if (defaultSort && !dsMatches.length) newLines.push(`{{DEFAULTSORT:${defaultSort}}}`)
   for (const r of additions) {
-    const link = renderLink(r, defaultSort, defaultNs)
+    const link = renderLink(r, defaultSort, nsInfo)
     if (link) newLines.push(link)
   }
   if (newLines.length === 0) return `${text}\n`
-  const insertAt = findLastCategoryEnd(text)
+  const insertAt = findLastCategoryEnd(text, nsInfo)
   if (insertAt >= 0) {
     const suffix = text.slice(insertAt)
     text = text.slice(0, insertAt) + '\n' + newLines.join('\n')
@@ -424,14 +405,17 @@ export function buildWikitext(
 }
 
 // Deterministic comparison of the generated text to detect changes
-export function isUnchanged(state: {
-  content: string
-  categories: CategoryRef[]
-  originalDefaultSort: string
-  rows: CategoryRow[]
-  defaultSort: string
-}): boolean {
-  const a = buildWikitext(state.content, state.categories, state.originalDefaultSort, state.categories)
-  const b = buildWikitext(state.content, state.rows, state.defaultSort, state.categories)
+export function isUnchanged(
+  state: {
+    content: string
+    categories: CategoryRef[]
+    originalDefaultSort: string
+    rows: CategoryRow[]
+    defaultSort: string
+  },
+  nsInfo: CategoryNsInfo
+): boolean {
+  const a = buildWikitext(state.content, state.categories, state.originalDefaultSort, state.categories, nsInfo)
+  const b = buildWikitext(state.content, state.rows, state.defaultSort, state.categories, nsInfo)
   return a === b
 }
