@@ -208,9 +208,9 @@ const TAG_ICON_SVG = `
   </svg>
 `
 function createSvgIcon(svg: string): HTMLElement {
-  const wrapper = document.createElement('div')
-  wrapper.innerHTML = svg.trim()
-  return wrapper.firstElementChild as HTMLElement
+  // Parse via DOMParser (not innerHTML) to build the SVG element from a static constant
+  const doc = new DOMParser().parseFromString(svg.trim(), 'image/svg+xml')
+  return doc.documentElement as unknown as HTMLElement
 }
 const createTagIcon = () => createSvgIcon(TAG_ICON_SVG)
 
