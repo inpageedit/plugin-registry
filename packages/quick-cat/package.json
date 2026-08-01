@@ -1,0 +1,41 @@
+{
+  "name": "inpageedit-plugin-quick-cat",
+  "description": "Edit page categories in a dialog similar to VisualEditor: add, remove and rename categories, edit sort keys, drag to reorder, and manage the default sort key, with autocomplete support.",
+  "version": "1.0.0",
+  "author": "Wecury",
+  "license": "MIT",
+  "private": true,
+  "type": "module",
+  "module": "./dist/index.mjs",
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs"
+    }
+  },
+  "scripts": {
+    "dev": "vite build --watch",
+    "build": "vite build"
+  },
+  "$ipe": {
+    "name": "Quick Cat",
+    "description": "Edit page categories in a dialog similar to VisualEditor, including sort keys and the default sort key, with autocomplete and drag-to-reorder.",
+    "categories": [
+      "editor",
+      "utility"
+    ],
+    "loader": {
+      "kind": "module",
+      "entry": "dist/index.mjs",
+      "styles": [
+        "dist/style.css"
+      ],
+      "main_export": "default"
+    },
+    "dev_loader": {
+      "entry": "src/index.ts"
+    }
+  }
+}
