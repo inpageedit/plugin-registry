@@ -29,13 +29,12 @@ export function escapeRegExp(str: string): string {
   return String(str).replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
 }
 
-// Blank out comments, nowiki-like tags and templates (same length) so category
-// links inside them are not treated as page categories (matches HotCat/VE)
+// Blank comments, nowiki-like tags and templates so their category links are ignored
 const RAW_TAGS = ['nowiki', 'pre', 'code', 'math', 'syntaxhighlight', 'source', 'timeline', 'poem', 'hiero']
 let _lastMaskedSource: string | null = null
 let _lastMasked: string | null = null
 function maskIgnoredRegions(text: string): string {
-  // Single-entry memo: parse/build steps frequently mask the same text
+  // Single-entry memo
   if (text === _lastMaskedSource) return _lastMasked!
   let masked = text.replace(/<!--[\s\S]*?-->/g, (m) => ' '.repeat(m.length))
   for (const tag of RAW_TAGS) {
@@ -44,7 +43,7 @@ function maskIgnoredRegions(text: string): string {
       (m) => ' '.repeat(m.length)
     )
   }
-  // Templates (nested {{ ... }}), but keep the DEFAULTSORT magic word itself
+  // Nested templates, keeping the DEFAULTSORT magic word itself
   const chars = masked.split('')
   for (let i = 0; i < chars.length; i++) {
     if (!masked.startsWith('{{', i)) continue
@@ -53,7 +52,6 @@ function maskIgnoredRegions(text: string): string {
     const rest = masked.slice(k).toLowerCase()
     const isDefaultSort = rest.startsWith('defaultsort:') || rest.startsWith('defaultsortkey:')
     if (isDefaultSort) {
-      // Skip past this magic word so its {{value}} stays intact
       let depth = 1
       let j = i + 2
       while (j < masked.length && depth > 0) {
@@ -161,8 +159,7 @@ export function findDefaultSortMatches(text: string): DefaultSortMatch[] {
   return matches
 }
 
-// Exclude display links such as [[:Category:...]] and ignored regions
-// (comments / nowiki / templates)
+// Exclude display links (e.g. [[:Category:...]]) and ignored regions
 export function parseCategories(wikitext: string): Parsed {
   const categories: CategoryRef[] = []
   const ds = findDefaultSortMatches(wikitext)
@@ -188,15 +185,14 @@ export function parseCategories(wikitext: string): Parsed {
 }
 
 export function stripDefaultSort(text: string): string {
-  // Reuse findDefaultSortMatches so DEFAULTSORT inside comments/templates/nowiki
-  // is ignored, consistent with parsing
+  // Reuse findDefaultSortMatches so masked DEFAULTSORT is ignored too
   const matches = findDefaultSortMatches(text)
   let out = text
   for (let i = matches.length - 1; i >= 0; i--) {
     const m = matches[i]
     let start = m.start
     let end = m.end + 2 // include the closing }}
-    // A DEFAULTSORT leading a line also drops its indentation and trailing newline
+    // Line-leading links also drop indentation and the trailing newline
     let lead = start
     while (lead > 0 && (out[lead - 1] === ' ' || out[lead - 1] === '\t')) lead--
     if (lead === 0 || out[lead - 1] === '\n') {
@@ -223,7 +219,7 @@ export function stripCategoryLinks(text: string): string {
   let out = text
   for (let i = ranges.length - 1; i >= 0; i--) {
     let [s, e] = ranges[i]
-    // A link leading a line also drops its indentation and trailing newline
+    // Line-leading links also drop indentation and the trailing newline
     let lead = s
     while (lead > 0 && (out[lead - 1] === ' ' || out[lead - 1] === '\t')) lead--
     if (lead === 0 || out[lead - 1] === '\n') {
@@ -252,22 +248,62 @@ export function renderLink(
   return sk && !useDefault ? `[[${ns}:${name}|${sk}]]` : `[[${ns}:${name}]]`
 }
 
-// Full rebuild: strip old categories and DEFAULTSORT, append everything in order (used after drag reorder)
-export function buildAppend(original: string, rows: CategoryRow[], defaultSort: string): string {
-  let text = stripDefaultSort(original)
-  text = stripCategoryLinks(text)
-  // Only clean the tail so unrelated blank lines in the body are preserved
-  text = text.replace(/[ \t\r\n]+$/, '')
-
-  const defaultNs = getCategoryNamespaceName()
+// Render category lines (DEFAULTSORT first, then rows)
+function renderCategoryLines(rows: CategoryRow[], defaultSort: string, defaultNs: string): string[] {
   const lines: string[] = []
   if (defaultSort) lines.push(`{{DEFAULTSORT:${defaultSort}}}`)
   for (const r of rows) {
     const link = renderLink(r, defaultSort, defaultNs)
     if (link) lines.push(link)
   }
-  if (lines.length === 0) return `${text}\n`
-  return `${text}\n${lines.join('\n')}\n`
+  return lines
+}
+
+// Span from the first to the last category / DEFAULTSORT occurrence
+function findCategoryBlock(
+  cats: CategoryRef[],
+  dsMatches: DefaultSortMatch[]
+): { start: number; end: number } | null {
+  if (!cats.length && !dsMatches.length) return null
+  const starts = [...cats.map((c) => c.start), ...dsMatches.map((m) => m.start)]
+  const ends = [...cats.map((c) => c.end), ...dsMatches.map((m) => m.end + 2)]
+  return { start: Math.min(...starts), end: Math.max(...ends) }
+}
+
+// True when the block is only categories/whitespace, so it can be rebuilt in place
+function isBlockContiguous(
+  text: string,
+  block: { start: number; end: number },
+  cats: CategoryRef[],
+  dsMatches: DefaultSortMatch[]
+): boolean {
+  const kept: Array<[number, number]> = [
+    ...cats.map((c) => [c.start, c.end] as [number, number]),
+    ...dsMatches.map((m) => [m.start, m.end + 2] as [number, number]),
+  ].sort((a, b) => a[0] - b[0])
+  let pos = block.start
+  for (const [s, e] of kept) {
+    if (s < pos) return false
+    if (text.slice(pos, s).trim() !== '') return false
+    pos = Math.max(pos, e)
+  }
+  return text.slice(pos, block.end).trim() === ''
+}
+
+// Rebuild the block in place, keeping the surrounding body intact
+function rebuildBlock(
+  original: string,
+  block: { start: number; end: number },
+  lines: string[]
+): string {
+  const before = original.slice(0, block.start)
+  const after = original.slice(block.end)
+  const beforeOk = before.length === 0 || before.endsWith('\n') ? before : before + '\n'
+  let out = beforeOk + lines.join('\n')
+  if (after.length === 0) out += '\n'
+  else if (!after.startsWith('\n')) out += '\n' + after
+  else out += after
+  return out
 }
 
 // End offset of the last category link (HotCat-style insertion point); -1 if none
@@ -284,21 +320,52 @@ function findLastCategoryEnd(text: string): number {
   return end
 }
 
-// In-place update (HotCat style): existing categories keep their positions,
-// DEFAULTSORT is replaced in place, new categories follow the last category link
-export function buildInPlace(
+// True when the user reordered existing categories via drag
+export function isReordered(rows: CategoryRow[], originalCats: CategoryRef[]): boolean {
+  const orig = originalCats
+    .filter((c) => rows.some((r) => r._id === c._id))
+    .map((c) => c._id)
+  const cur = rows.filter((r) => r._id != null).map((r) => r._id as number)
+  return orig.join(',') !== cur.join(',')
+}
+
+// Single category-block rebuild path:
+// - Reordered (drag): rebuild the block in place when it is contiguous, so the
+//   categories keep their original position; otherwise fall back to stripping
+//   and appending at the end.
+// - Otherwise: replace each category and DEFAULTSORT in place (preserving any
+//   non-category content between them) and insert new categories right after
+//   the last category link (HotCat behavior). Unrelated blank lines are kept.
+export function buildWikitext(
   original: string,
   rows: CategoryRow[],
   defaultSort: string,
-  originalCats: CategoryRef[]
+  originalCats: CategoryRef[] = []
 ): string {
   const defaultNs = getCategoryNamespaceName()
+
+  if (isReordered(rows, originalCats)) {
+    const lines = renderCategoryLines(rows, defaultSort, defaultNs)
+    const dsMatches = findDefaultSortMatches(original)
+    const block = findCategoryBlock(originalCats, dsMatches)
+    if (block && lines.length && isBlockContiguous(original, block, originalCats, dsMatches)) {
+      return rebuildBlock(original, block, lines)
+    }
+    // Fallback: strip the old block and append at the end (keeps all body content)
+    let text = stripDefaultSort(original)
+    text = stripCategoryLinks(text)
+    // Only clean the tail so unrelated blank lines in the body are preserved
+    text = text.replace(/[ \t\r\n]+$/, '')
+    if (lines.length === 0) return `${text}\n`
+    return `${text}\n${lines.join('\n')}\n`
+  }
+
   const rowById = new Map<number, CategoryRow>()
   for (const r of rows) if (r._id != null) rowById.set(r._id, r)
   const additions = rows.filter((r) => r._id == null)
 
-  // Collect all in-place replacements (categories + DEFAULTSORT) and apply them
-  // from the end so offsets stay valid even when edits change text length
+  // In-place replacements (categories + DEFAULTSORT), applied from the end so
+  // offsets stay valid even when edits change text length
   const dsMatches = findDefaultSortMatches(original)
   const edits: Array<{ start: number; end: number; text: string }> = []
   for (const c of originalCats) {
@@ -338,7 +405,6 @@ export function buildInPlace(
 
   // Insert new categories (and DEFAULTSORT if absent) right after the last
   // category link (HotCat behavior), so they stay with the existing categories
-  // instead of landing at the bottom of the page.
   const newLines: string[] = []
   if (defaultSort && !dsMatches.length) newLines.push(`{{DEFAULTSORT:${defaultSort}}}`)
   for (const r of additions) {
@@ -355,26 +421,6 @@ export function buildInPlace(
     return `${text}\n`
   }
   return `${text}\n${newLines.join('\n')}\n`
-}
-
-// True when the user reordered existing categories via drag
-// (a full rebuild is then used; otherwise update in place)
-export function isReordered(rows: CategoryRow[], originalCats: CategoryRef[]): boolean {
-  const orig = originalCats
-    .filter((c) => rows.some((r) => r._id === c._id))
-    .map((c) => c._id)
-  const cur = rows.filter((r) => r._id != null).map((r) => r._id as number)
-  return orig.join(',') !== cur.join(',')
-}
-
-export function buildWikitext(
-  original: string,
-  rows: CategoryRow[],
-  defaultSort: string,
-  originalCats: CategoryRef[] = []
-): string {
-  if (isReordered(rows, originalCats)) return buildAppend(original, rows, defaultSort)
-  return buildInPlace(original, rows, defaultSort, originalCats)
 }
 
 // Deterministic comparison of the generated text to detect changes
