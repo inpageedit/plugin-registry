@@ -92,6 +92,12 @@ importers:
         specifier: ^8.1.6
         version: 8.1.6
 
+  packages/quick-cat:
+    dependencies:
+      jsx-dom:
+        specifier: ^8.1.6
+        version: 8.1.6
+
   packages/quick-delete:
     dependencies:
       jsx-dom:

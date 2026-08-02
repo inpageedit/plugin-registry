@@ -1,36 +1,4 @@
-// DOM helpers: element factory + static SVG icons
-export function h(
-  tag: string,
-  props: Record<string, any> = {},
-  ...children: (Node | string | number | false | null | undefined)[]
-): HTMLElement {
-  const el = document.createElement(tag)
-  for (const [k, v] of Object.entries(props)) {
-    if (v == null || v === false) continue
-    if (k === 'class' || k === 'className') {
-      el.className = v
-      continue
-    }
-    if (k === 'style') {
-      Object.assign(el.style, v)
-      continue
-    }
-    if (k === 'value') {
-      ;(el as HTMLInputElement).value = v
-      continue
-    }
-    if (k.startsWith('on') && typeof v === 'function') {
-      el.addEventListener(k.slice(2).toLowerCase(), v as EventListener)
-      continue
-    }
-    el.setAttribute(k, v === true ? '' : String(v))
-  }
-  for (const c of children) {
-    if (c == null || c === false) continue
-    el.append(c instanceof Node ? c : document.createTextNode(String(c)))
-  }
-  return el
-}
+// DOM helpers: static SVG icons (elements are created via JSX / jsx-dom)
 
 const TAG_ICON_SVG = `
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"

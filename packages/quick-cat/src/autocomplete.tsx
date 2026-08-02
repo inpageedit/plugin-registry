@@ -1,5 +1,4 @@
 import { stripCategoryPrefix } from './parse.js'
-import { h } from './dom.js'
 import type { QuickCatContext } from './types.js'
 
 export interface CategorySuggestion {
@@ -156,30 +155,34 @@ export function attachAutocomplete(
     }
     for (const item of resultItems) {
       const isRedirect = !!item.redirect
-      const btn = h(
-        'button',
-        {
-          id: `ipe-quick-cat__opt-${++qc.optSeq}`,
-          class: isRedirect
-            ? 'ipe-quick-cat__suggest-item is-redirect'
-            : 'ipe-quick-cat__suggest-item',
-          type: 'button',
-          role: 'option',
-          'aria-selected': 'false',
-          title: isRedirect ? item.redirect : undefined,
-          onClick: () => {
+      const btn = (
+        <button
+          id={`ipe-quick-cat__opt-${++qc.optSeq}`}
+          className={
+            isRedirect
+              ? 'ipe-quick-cat__suggest-item is-redirect'
+              : 'ipe-quick-cat__suggest-item'
+          }
+          type="button"
+          role="option"
+          aria-selected="false"
+          title={isRedirect ? item.redirect || undefined : undefined}
+          onClick={() => {
             // Pick the redirect target so the real category is saved
             const value = isRedirect ? (item.redirect ?? item.name) : item.name
             if (handlers.onPick) handlers.onPick(value)
             else input.value = value
             hideSuggest()
             input.focus()
-          },
-        },
-        item.name
+          }}
+        >
+          {item.name}
+        </button>
       ) as HTMLButtonElement
       if (isRedirect) {
-        btn.append(h('span', { class: 'ipe-quick-cat__suggest-redirect' }, `→ ${item.redirect}`))
+        btn.append(
+          <span className="ipe-quick-cat__suggest-redirect">{`→ ${item.redirect}`}</span>
+        )
       }
       optionEls.push(btn)
       suggest.append(btn)

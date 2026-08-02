@@ -76,7 +76,7 @@ function maskIgnoredRegions(text: string): string {
   for (let i = 0; i < chars.length; i++) {
     if (!masked.startsWith('{{', i)) continue
     const end = skipTemplate(masked, i)
-    if (end === -1) break // unclosed template: nothing after it is a real block
+    if (end === -1) continue // skip unclosed template
     if (isDefaultSortStart(masked, i)) {
       i = end - 1
       continue
@@ -113,14 +113,6 @@ function readNamespaceInfo(): CategoryNsInfo {
 // and pass it in (no hidden global state)
 export function initCategoryNsInfo(): CategoryNsInfo {
   return readNamespaceInfo()
-}
-
-// Convenience accessors (read mw.config once per call)
-export function getCategoryNamespaceAlt(): string {
-  return readNamespaceInfo().alt
-}
-export function getCategoryNamespaceName(): string {
-  return readNamespaceInfo().name
 }
 
 export function stripCategoryPrefix(name: string, nsInfo: CategoryNsInfo): string {

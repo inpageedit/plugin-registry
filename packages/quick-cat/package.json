@@ -35,7 +35,10 @@
       "main_export": "default"
     },
     "dev_loader": {
-      "entry": "src/index.ts"
+      "entry": "src/index.tsx"
     }
+  },
+  "dependencies": {
+    "jsx-dom": "^8.1.6"
   }
 }

@@ -11,7 +11,7 @@ import {
   type CategoryRow,
 } from './parse.js'
 import { PLUGIN_NAME, createQuickCatContext } from './context.js'
-import { createInfoIcon, createTagIcon, h } from './dom.js'
+import { createInfoIcon, createTagIcon } from './dom.js'
 import { attachAutocomplete } from './autocomplete.js'
 import {
   deleteSelected,
@@ -27,12 +27,13 @@ import type { Ctx, QuickCatContext } from './types.js'
 
 const APPLIED_FLAG = Symbol.for('ipe-quick-cat.applied')
 
-let _defaultSortHelpCache: string | null = null
+const DEFAULT_SUMMARY = '[IPE-NEXT] Quick Cat'
+
+const _defaultSortHelpCache = new Map<string, string>()
 
 // Fetch the default-sort help: API (allmessages) first, then mw.msg, then built-in
 async function getDefaultSortHelp(qc: QuickCatContext): Promise<string> {
   const { ctx, logger } = qc
-  if (_defaultSortHelpCache) return _defaultSortHelpCache
   const key = 'visualeditor-dialog-meta-categories-defaultsort-help'
   let lang: string = 'zh'
   try {
@@ -43,6 +44,7 @@ async function getDefaultSortHelp(qc: QuickCatContext): Promise<string> {
   } catch {
     /* ignore */
   }
+  if (_defaultSortHelpCache.has(lang)) return _defaultSortHelpCache.get(lang)!
 
   try {
     const { data } = await ctx.api.get({
@@ -56,7 +58,7 @@ async function getDefaultSortHelp(qc: QuickCatContext): Promise<string> {
     // formatversion=2 exposes 'content'; legacy uses '*'
     const text: string | undefined = m && (m['*'] || m.content)
     if (m && !m.missing && text && text !== key) {
-      _defaultSortHelpCache = text
+      _defaultSortHelpCache.set(lang, text)
       logger.info('default sort help resolved via API (lang=' + lang + ')')
       return text
     }
@@ -70,7 +72,7 @@ async function getDefaultSortHelp(qc: QuickCatContext): Promise<string> {
       const msg = mw.msg(key)
       // mw.msg returns the key itself when the message is missing
       if (msg && msg !== key && !/^[⧼([<]/.test(msg)) {
-        _defaultSortHelpCache = msg
+        _defaultSortHelpCache.set(lang, msg)
         return msg
       }
     }
@@ -78,10 +80,12 @@ async function getDefaultSortHelp(qc: QuickCatContext): Promise<string> {
     /* ignore */
   }
 
-  _defaultSortHelpCache =
+  _defaultSortHelpCache.set(
+    lang,
     'You can override how this page is sorted when displayed within a category by setting a different index to sort with instead. This is often used to make pages about people show by last name, but be named with their first name shown first.'
+  )
   logger.warn('default sort help: fell back to built-in English')
-  return _defaultSortHelpCache
+  return _defaultSortHelpCache.get(lang)!
 }
 
 function createCategoryRow(
@@ -93,23 +97,25 @@ function createCategoryRow(
   refreshToolbar: () => void
 ): HTMLElement {
   const { t } = qc
-  const rowEl = h('div', { class: 'ipe-quick-cat__row' })
+  const rowEl = <div className="ipe-quick-cat__row" /> as HTMLDivElement
 
-  const check = h('input', {
-    class: 'ipe-quick-cat__check',
-    type: 'checkbox',
-    checked: state.selected.has(row),
-  }) as HTMLInputElement
+  const check = (
+    <input
+      className="ipe-quick-cat__check"
+      type="checkbox"
+      checked={state.selected.has(row)}
+    />
+  ) as HTMLInputElement
   check.addEventListener('change', () => {
     toggleSelection(state, row, check.checked)
     refreshToolbar()
   })
 
-  const grip = h(
-    'span',
-    { class: 'ipe-quick-cat__grip', title: t('drag'), 'aria-label': t('drag') },
-    '⠿'
-  )
+  const grip = (
+    <span className="ipe-quick-cat__grip" title={t('drag')} aria-label={t('drag')}>
+      ⠿
+    </span>
+  ) as HTMLSpanElement
   // Pointer events drive the drag on both mouse and touch (HTML5 DnD has no touch support)
   grip.addEventListener('pointerdown', (e) => {
     if (e.pointerType === 'mouse' && e.button !== 0) return
@@ -119,67 +125,87 @@ function createCategoryRow(
     rowEl.classList.add('is-dragging')
   })
 
-  const nameInput = h('input', {
-    class: 'ipe-quick-cat__name',
-    type: 'text',
-    value: row.name,
-    placeholder: t('namePh'),
-    spellcheck: 'false',
-    autocomplete: 'off',
-  }) as HTMLInputElement
+  const nameInput = (
+    <input
+      className="ipe-quick-cat__name"
+      type="text"
+      value={row.name}
+      placeholder={t('namePh')}
+      spellCheck={false}
+      autoComplete="off"
+    />
+  ) as HTMLInputElement
   nameInput.addEventListener('input', () => {
     row.name = nameInput.value.trim()
   })
-  const nameSuggest = h('div', { class: 'ipe-quick-cat__suggest' })
+  const nameSuggest = <div className="ipe-quick-cat__suggest" /> as HTMLDivElement
   attachAutocomplete(qc, m, nameInput, nameSuggest, {
     onPick: (cat) => {
       row.name = cat
       nameInput.value = cat
     },
   })
-  const nameWrap = h('span', { class: 'ipe-quick-cat__namewrap' }, nameInput, nameSuggest)
+  const nameWrap = (
+    <span className="ipe-quick-cat__namewrap">
+      {nameInput}
+      {nameSuggest}
+    </span>
+  ) as HTMLSpanElement
 
-  const sortInput = h('input', {
-    class: 'ipe-quick-cat__sortkey',
-    type: 'text',
-    value: row.sortkey,
-    placeholder: t('sortKeyPh'),
-  }) as HTMLInputElement
+  const sortInput = (
+    <input
+      className="ipe-quick-cat__sortkey"
+      type="text"
+      value={row.sortkey}
+      placeholder={t('sortKeyPh')}
+    />
+  ) as HTMLInputElement
   sortInput.addEventListener('input', () => {
     row.sortkey = sortInput.value.trim()
   })
 
-  const removeBtn = h(
-    'button',
-    {
-      class: 'ipe-quick-cat__remove',
-      type: 'button',
-      title: t('remove'),
-      'aria-label': t('remove'),
-      onClick: () => {
+  const removeBtn = (
+    <button
+      className="ipe-quick-cat__remove"
+      type="button"
+      title={t('remove')}
+      aria-label={t('remove')}
+      onClick={() => {
         removeRow(state, row)
         refreshList()
         refreshToolbar()
-      },
-    },
-    '✕'
-  )
+      }}
+    >
+      ✕
+    </button>
+  ) as HTMLButtonElement
 
   rowEl.append(check, grip, nameWrap, sortInput, removeBtn)
   return rowEl
 }
 
-function createAddBar(qc: QuickCatContext, m: any, state: CategoryState, refreshList: () => void): HTMLElement {
+function createAddBar(
+  qc: QuickCatContext,
+  m: any,
+  state: CategoryState,
+  refreshList: () => void
+): HTMLElement {
   const { t } = qc
-  const input = h('input', {
-    class: 'ipe-quick-cat__new',
-    type: 'text',
-    placeholder: t('addPh'),
-    autocomplete: 'off',
-    spellcheck: 'false',
-  }) as HTMLInputElement
-  const suggest = h('div', { class: 'ipe-quick-cat__suggest' })
-  const addBtn = h('button', { class: 'ipe-quick-cat__addbtn', type: 'button' }, t('add'))
+  const input = (
+    <input
+      className="ipe-quick-cat__new"
+      type="text"
+      placeholder={t('addPh')}
+      autoComplete="off"
+      spellCheck={false}
+    />
+  ) as HTMLInputElement
+  const suggest = <div className="ipe-quick-cat__suggest" /> as HTMLDivElement
+  const addBtn = (
+    <button className="ipe-quick-cat__addbtn" type="button">
+      {t('add')}
+    </button>
+  ) as HTMLButtonElement
 
   const doAdd = () => {
     const raw = stripCategoryPrefix(input.value, qc.nsInfo)
@@ -199,19 +225,29 @@ function createAddBar(qc: QuickCatContext, m: any, state: CategoryState, refresh
   attachAutocomplete(qc, m, input, suggest, { onEnter: doAdd })
   addBtn.addEventListener('click', doAdd)
 
-  return h('div', { class: 'ipe-quick-cat__add' }, input, addBtn, suggest)
+  return (
+    <div className="ipe-quick-cat__add">
+      {input}
+      {addBtn}
+      {suggest}
+    </div>
+  ) as HTMLElement
 }
 
 function renderDialog(qc: QuickCatContext, m: any, state: CategoryState): void {
   const { t } = qc
-  const root = h('div', { class: 'ipe-quick-cat' })
+  const root = <div className="ipe-quick-cat" /> as HTMLDivElement
 
-  const checkAll = h('input', { class: 'ipe-quick-cat__checkall', type: 'checkbox' }) as HTMLInputElement
-  const countEl = h('span', { class: 'ipe-quick-cat__selected-count' }, t('selectedCount', 0))
-  const deleteBtn = h(
-    'button',
-    { class: 'ipe-quick-cat__delete-selected', type: 'button', disabled: true },
-    t('deleteSelected')
+  const checkAll = (
+    <input className="ipe-quick-cat__checkall" type="checkbox" />
+  ) as HTMLInputElement
+  const countEl = (
+    <span className="ipe-quick-cat__selected-count">{t('selectedCount', 0)}</span>
+  ) as HTMLSpanElement
+  const deleteBtn = (
+    <button className="ipe-quick-cat__delete-selected" type="button" disabled>
+      {t('deleteSelected')}
+    </button>
   ) as HTMLButtonElement
 
   const refreshToolbar = () => {
@@ -223,7 +259,7 @@ function renderDialog(qc: QuickCatContext, m: any, state: CategoryState): void {
     deleteBtn.disabled = sel === 0
   }
 
-  const list = h('div', { class: 'ipe-quick-cat__list' })
+  const list = <div className="ipe-quick-cat__list" /> as HTMLDivElement
 
   // Drag sort: insertion index decided by each row's midpoint
   const computeInsertIndex = (clientY: number): number => {
@@ -278,23 +314,21 @@ function renderDialog(qc: QuickCatContext, m: any, state: CategoryState): void {
     refreshToolbar()
   })
 
-  const toolbar = h(
-    'div',
-    { class: 'ipe-quick-cat__toolbar' },
-    h(
-      'label',
-      { class: 'ipe-quick-cat__checkbox' },
-      checkAll,
-      h('span', {}, t('selectAll'))
-    ),
-    countEl,
-    deleteBtn
-  )
+  const toolbar = (
+    <div className="ipe-quick-cat__toolbar">
+      <label className="ipe-quick-cat__checkbox">
+        {checkAll}
+        <span>{t('selectAll')}</span>
+      </label>
+      {countEl}
+      {deleteBtn}
+    </div>
+  ) as HTMLElement
 
   const refreshList = () => {
     list.textContent = ''
     if (state.rows.length === 0) {
-      list.append(h('div', { class: 'ipe-quick-cat__empty' }, t('noCategories')))
+      list.append(<div className="ipe-quick-cat__empty">{t('noCategories')}</div>)
     } else {
       for (const row of state.rows) {
         list.append(createCategoryRow(qc, m, state, row, refreshList, refreshToolbar))
@@ -306,12 +340,14 @@ function renderDialog(qc: QuickCatContext, m: any, state: CategoryState): void {
 
   const addBar = createAddBar(qc, m, state, refreshList)
 
-  const dsInput = h('input', {
-    class: 'ipe-quick-cat__ds-input',
-    type: 'text',
-    value: state.defaultSort,
-    placeholder: state.pageName || '',
-  }) as HTMLInputElement
+  const dsInput = (
+    <input
+      className="ipe-quick-cat__ds-input"
+      type="text"
+      value={state.defaultSort}
+      placeholder={state.pageName || ''}
+    />
+  ) as HTMLInputElement
   dsInput.addEventListener('input', () => {
     const oldDs = state.defaultSort
     const newDs = dsInput.value.trim()
@@ -332,13 +368,12 @@ function renderDialog(qc: QuickCatContext, m: any, state: CategoryState): void {
       })
     }
   })
-  const infoBtn = h(
-    'button',
-    {
-      class: 'ipe-quick-cat__ds-info',
-      type: 'button',
-      'aria-label': t('defaultSort'),
-      onClick: () => {
+  const infoBtn = (
+    <button
+      className="ipe-quick-cat__ds-info"
+      type="button"
+      aria-label={t('defaultSort')}
+      onClick={() => {
         getDefaultSortHelp(qc).then((content) => {
           if (m.isDestroyed) return
           qc.ctx.modal.notify('info', {
@@ -347,53 +382,63 @@ function renderDialog(qc: QuickCatContext, m: any, state: CategoryState): void {
             closeAfter: 8000,
           })
         })
-      },
-    },
-    createInfoIcon()
-  )
-  const dsLabel = h(
-    'label',
-    { class: 'ipe-quick-cat__ds' },
-    h('span', { class: 'ipe-quick-cat__ds-text' }, t('defaultSort')),
-    infoBtn,
-    dsInput
-  )
+      }}
+    >
+      {createInfoIcon()}
+    </button>
+  ) as HTMLButtonElement
+  const dsLabel = (
+    <label className="ipe-quick-cat__ds">
+      <span className="ipe-quick-cat__ds-text">{t('defaultSort')}</span>
+      {infoBtn}
+      {dsInput}
+    </label>
+  ) as HTMLLabelElement
 
-  const summaryInput = h('input', {
-    id: 'ipe-quick-cat__summary',
-    class: 'ipe-quick-cat__summary-input',
-    type: 'text',
-    value: state.summary || '',
-    placeholder: t('summaryPh'),
-  }) as HTMLInputElement
+  const summaryInput = (
+    <input
+      id="ipe-quick-cat__summary"
+      className="ipe-quick-cat__summary-input"
+      type="text"
+      value={state.summary || ''}
+    />
+  ) as HTMLInputElement
   summaryInput.addEventListener('input', () => {
     state.summary = summaryInput.value.trim()
   })
-  const minorCheck = h('input', { type: 'checkbox', checked: state.minor }) as HTMLInputElement
+  const minorCheck = (
+    <input type="checkbox" checked={state.minor} />
+  ) as HTMLInputElement
   minorCheck.addEventListener('change', () => {
     state.minor = minorCheck.checked
   })
-  const reloadCheck = h('input', { type: 'checkbox', checked: state.reloadAfterSave }) as HTMLInputElement
+  const reloadCheck = (
+    <input type="checkbox" checked={state.reloadAfterSave} />
+  ) as HTMLInputElement
   reloadCheck.addEventListener('change', () => {
     state.reloadAfterSave = reloadCheck.checked
   })
 
-  const options = h(
-    'div',
-    { class: 'ipe-quick-cat__options' },
-    h(
-      'div',
-      { class: 'ipe-quick-cat__summary-wrap' },
-      h('label', { class: 'ipe-quick-cat__summary-label', for: 'ipe-quick-cat__summary' }, t('summaryLabel')),
-      summaryInput
-    ),
-    h(
-      'div',
-      { class: 'ipe-quick-cat__options-row' },
-      h('label', { class: 'ipe-quick-cat__checkbox' }, minorCheck, h('span', {}, t('minorEdit'))),
-      h('label', { class: 'ipe-quick-cat__checkbox' }, reloadCheck, h('span', {}, t('reloadAfterSave')))
-    )
-  )
+  const options = (
+    <div className="ipe-quick-cat__options">
+      <div className="ipe-quick-cat__summary-wrap">
+        <label className="ipe-quick-cat__summary-label" htmlFor="ipe-quick-cat__summary">
+          {t('summaryLabel')}
+        </label>
+        {summaryInput}
+      </div>
+      <div className="ipe-quick-cat__options-row">
+        <label className="ipe-quick-cat__checkbox">
+          {minorCheck}
+          <span>{t('minorEdit')}</span>
+        </label>
+        <label className="ipe-quick-cat__checkbox">
+          {reloadCheck}
+          <span>{t('reloadAfterSave')}</span>
+        </label>
+      </div>
+    </div>
+  ) as HTMLElement
 
   root.append(toolbar, list, addBar, dsLabel, options)
   m.setContent(root)
@@ -420,10 +465,10 @@ async function saveCategories(qc: QuickCatContext, m: any, state: CategoryState 
   try {
     await state.page.edit({
       text: newText,
-      summary: state.summary || t('summaryDefault'),
+      summary: state.summary || DEFAULT_SUMMARY,
       minor: state.minor,
-      // Precise conflict detection, but only for existing pages (lastrevid > 0);
-      // new/red-link pages would otherwise send baserevid: 0 and fail with nosuchrevid
+      // Detect conflicts (existing pages only). On conflict the page is
+      // refreshed below so a retry succeeds.
       ...(state.page.lastrevid > 0 ? { baserevid: state.page.lastrevid } : {}),
     })
     if (!m.isDestroyed) m.close()
@@ -445,13 +490,21 @@ async function saveCategories(qc: QuickCatContext, m: any, state: CategoryState 
     logger.error('save failed:', err)
     const code = (err as any)?.code || (err as any)?.data?.error?.code
     if (code === 'pagedeleted' || code === 'editconflict') {
+      // Refresh so a retry submits with the latest baserevid
+      try {
+        state.page = await qc.ctx.wikiPage.newFromTitle(state.title, undefined, undefined, true)
+      } catch {
+        /* keep the old page object */
+      }
       modal.notify('warning', {
         title: t('submissionError'),
-        content: h(
-          'div',
-          {},
-          h('p', {}, h('strong', {}, String((err as Error)?.message || err))),
-          h('p', {}, t('reopenToRetry'))
+        content: (
+          <div>
+            <p>
+              <strong>{String((err as Error)?.message || err)}</strong>
+            </p>
+            <p>{t('retry')}</p>
+          </div>
         ),
         closeAfter: 15000,
       })
@@ -486,7 +539,9 @@ async function showModal(qc: QuickCatContext): Promise<any> {
   const m = modal
     .createObject({
       title: `${t('modalTitle')}: ${title}`,
-      content: h('div', { class: 'ipe-quick-cat ipe-quick-cat--loading' }, t('loading')),
+      content: (
+        <div className="ipe-quick-cat ipe-quick-cat--loading">{t('loading')}</div>
+      ),
       // className lands on the modal window: keep only compact-buttons there;
       // plugin styles live on the content root (.ipe-quick-cat)
       className: 'compact-buttons',
@@ -499,7 +554,7 @@ async function showModal(qc: QuickCatContext): Promise<any> {
   {
     const titleFrag = document.createDocumentFragment()
     titleFrag.append(document.createTextNode(`${t('modalTitle')}: `))
-    titleFrag.append(h('u', {}, title))
+    titleFrag.append(<u>{title}</u>)
     m.setTitle(titleFrag)
   }
 
@@ -553,12 +608,10 @@ async function showModal(qc: QuickCatContext): Promise<any> {
   } catch (err) {
     logger.error('load failed:', err)
     m.setContent(
-      h(
-        'div',
-        { class: 'ipe-quick-cat ipe-quick-cat--error' },
-        h('p', {}, t('loadFailed')),
-        h('p', { class: 'ipe-quick-cat__errmsg' }, String((err as Error)?.message || err))
-      )
+      <div className="ipe-quick-cat ipe-quick-cat--error">
+        <p>{t('loadFailed')}</p>
+        <p className="ipe-quick-cat__errmsg">{String((err as Error)?.message || err)}</p>
+      </div>
     )
     modal.notify('error', { title: t('loadFailed'), content: String((err as Error)?.message || err) })
   } finally {
@@ -570,7 +623,7 @@ async function showModal(qc: QuickCatContext): Promise<any> {
 
 export default defineIPEPlugin({
   name: PLUGIN_NAME,
-  inject: ['toolbox', 'modal', 'wikiPage', 'api'],
+  inject: ['toolbox', 'modal', 'wikiPage', 'api', 'i18n'],
   apply(ctx: InPageEdit): void {
     const c = ctx as Ctx
     // Prevent duplicate registration (plugin store + userscript both load)
@@ -584,7 +637,7 @@ export default defineIPEPlugin({
       Schema.object({
         'quickCat.defaultSummary': Schema.string()
           .description('Default summary of the quick cat')
-          .default('[IPE-NEXT] Quick Cat'),
+          .default(DEFAULT_SUMMARY),
         'quickCat.defaultMinor': Schema.boolean()
           .description('Default to checking "minor edit" option')
           .default(false),
