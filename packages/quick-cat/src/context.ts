@@ -23,6 +23,7 @@ const ZH_SIMP: Record<string, string> = {
   invalidTitleDesc: '分类名不能为空，且不能包含 [ ] | # < > { } 等字符。',
   duplicate: '该分类已存在',
   savedDesc: '页面分类已成功更新。',
+  conflictReloaded: '页面已被他人修改，已重新加载最新内容，请确认后再次保存。',
 }
 // Traditional Chinese falls back to the Simplified set for now
 const ZH_TRAD = ZH_SIMP
@@ -44,6 +45,7 @@ const EN: Record<string, string> = {
   invalidTitleDesc: 'Category names cannot be empty or contain [ ] | # < > { }.',
   duplicate: 'Category already exists',
   savedDesc: 'Page categories have been updated.',
+  conflictReloaded: 'The page was modified by someone else. Reloaded the latest content, please review and save again.',
 }
 
 const MESSAGES: Record<string, Record<string, string>> = {

@@ -234,10 +234,13 @@ function createAddBar(
   ) as HTMLElement
 }
 
-function renderDialog(qc: QuickCatContext, m: any, state: CategoryState): void {
+function createToolbar(
+  qc: QuickCatContext,
+  state: CategoryState,
+  list: HTMLDivElement,
+  onDelete: () => void
+): { toolbar: HTMLElement; refreshToolbar: () => void } {
   const { t } = qc
-  const root = <div className="ipe-quick-cat" /> as HTMLDivElement
-
   const checkAll = (
     <input className="ipe-quick-cat__checkall" type="checkbox" />
   ) as HTMLInputElement
@@ -259,9 +262,39 @@ function renderDialog(qc: QuickCatContext, m: any, state: CategoryState): void {
     deleteBtn.disabled = sel === 0
   }
 
-  const list = <div className="ipe-quick-cat__list" /> as HTMLDivElement
+  checkAll.addEventListener('change', () => {
+    selectAll(state, checkAll.checked)
+    list.querySelectorAll('.ipe-quick-cat__row').forEach((el) => {
+      const cb = el.querySelector('.ipe-quick-cat__check') as HTMLInputElement | null
+      if (cb) cb.checked = checkAll.checked
+    })
+    refreshToolbar()
+  })
+  deleteBtn.addEventListener('click', () => {
+    deleteSelected(state)
+    onDelete()
+    refreshToolbar()
+  })
 
-  // Drag sort: insertion index decided by each row's midpoint
+  const toolbar = (
+    <div className="ipe-quick-cat__toolbar">
+      <label className="ipe-quick-cat__checkbox">
+        {checkAll}
+        <span>{t('selectAll')}</span>
+      </label>
+      {countEl}
+      {deleteBtn}
+    </div>
+  ) as HTMLElement
+  return { toolbar, refreshToolbar }
+}
+
+// Drag sort: insertion index decided by each row's midpoint
+function attachDragHandlers(
+  state: CategoryState,
+  list: HTMLDivElement,
+  refreshList: () => void
+): void {
   const computeInsertIndex = (clientY: number): number => {
     const rows = [...list.querySelectorAll('.ipe-quick-cat__row')]
     for (let i = 0; i < rows.length; i++) {
@@ -299,47 +332,15 @@ function renderDialog(qc: QuickCatContext, m: any, state: CategoryState): void {
       el.classList.remove('is-dragging', 'is-drop-before', 'is-drop-after')
     )
   })
+}
 
-  checkAll.addEventListener('change', () => {
-    selectAll(state, checkAll.checked)
-    list.querySelectorAll('.ipe-quick-cat__row').forEach((el) => {
-      const cb = el.querySelector('.ipe-quick-cat__check') as HTMLInputElement | null
-      if (cb) cb.checked = checkAll.checked
-    })
-    refreshToolbar()
-  })
-  deleteBtn.addEventListener('click', () => {
-    deleteSelected(state)
-    refreshList()
-    refreshToolbar()
-  })
-
-  const toolbar = (
-    <div className="ipe-quick-cat__toolbar">
-      <label className="ipe-quick-cat__checkbox">
-        {checkAll}
-        <span>{t('selectAll')}</span>
-      </label>
-      {countEl}
-      {deleteBtn}
-    </div>
-  ) as HTMLElement
-
-  const refreshList = () => {
-    list.textContent = ''
-    if (state.rows.length === 0) {
-      list.append(<div className="ipe-quick-cat__empty">{t('noCategories')}</div>)
-    } else {
-      for (const row of state.rows) {
-        list.append(createCategoryRow(qc, m, state, row, refreshList, refreshToolbar))
-      }
-    }
-    refreshToolbar()
-  }
-  refreshList()
-
-  const addBar = createAddBar(qc, m, state, refreshList)
-
+function createDefaultSortSection(
+  qc: QuickCatContext,
+  m: any,
+  state: CategoryState,
+  list: HTMLDivElement
+): HTMLLabelElement {
+  const { t } = qc
   const dsInput = (
     <input
       className="ipe-quick-cat__ds-input"
@@ -387,14 +388,17 @@ function renderDialog(qc: QuickCatContext, m: any, state: CategoryState): void {
       {createInfoIcon()}
     </button>
   ) as HTMLButtonElement
-  const dsLabel = (
+  return (
     <label className="ipe-quick-cat__ds">
       <span className="ipe-quick-cat__ds-text">{t('defaultSort')}</span>
       {infoBtn}
       {dsInput}
     </label>
   ) as HTMLLabelElement
+}
 
+function createOptionsSection(qc: QuickCatContext, state: CategoryState): HTMLElement {
+  const { t } = qc
   const summaryInput = (
     <input
       id="ipe-quick-cat__summary"
@@ -418,8 +422,7 @@ function renderDialog(qc: QuickCatContext, m: any, state: CategoryState): void {
   reloadCheck.addEventListener('change', () => {
     state.reloadAfterSave = reloadCheck.checked
   })
-
-  const options = (
+  return (
     <div className="ipe-quick-cat__options">
       <div className="ipe-quick-cat__summary-wrap">
         <label className="ipe-quick-cat__summary-label" htmlFor="ipe-quick-cat__summary">
@@ -439,6 +442,49 @@ function renderDialog(qc: QuickCatContext, m: any, state: CategoryState): void {
       </div>
     </div>
   ) as HTMLElement
+}
+
+function notifyConflictError(qc: QuickCatContext, err: unknown, reloaded: boolean): void {
+  const { ctx, t } = qc
+  const msg = String((err as Error)?.message || err)
+  ctx.modal.notify('warning', {
+    title: t('submissionError'),
+    content: (
+      <div>
+        <p>
+          <strong>{msg}</strong>
+        </p>
+        <p>{reloaded ? t('conflictReloaded') : t('retry')}</p>
+      </div>
+    ),
+    closeAfter: 15000,
+  })
+}
+
+function renderDialog(qc: QuickCatContext, m: any, state: CategoryState): void {
+  const { t } = qc
+  const root = <div className="ipe-quick-cat" /> as HTMLDivElement
+  const list = <div className="ipe-quick-cat__list" /> as HTMLDivElement
+
+  let refreshList: () => void = () => {}
+  const { toolbar, refreshToolbar } = createToolbar(qc, state, list, () => refreshList())
+  refreshList = () => {
+    list.textContent = ''
+    if (state.rows.length === 0) {
+      list.append(<div className="ipe-quick-cat__empty">{t('noCategories')}</div>)
+    } else {
+      for (const row of state.rows) {
+        list.append(createCategoryRow(qc, m, state, row, refreshList, refreshToolbar))
+      }
+    }
+    refreshToolbar()
+  }
+  attachDragHandlers(state, list, refreshList)
+  refreshList()
+
+  const addBar = createAddBar(qc, m, state, refreshList)
+  const dsLabel = createDefaultSortSection(qc, m, state, list)
+  const options = createOptionsSection(qc, state)
 
   root.append(toolbar, list, addBar, dsLabel, options)
   m.setContent(root)
@@ -490,24 +536,32 @@ async function saveCategories(qc: QuickCatContext, m: any, state: CategoryState 
     logger.error('save failed:', err)
     const code = (err as any)?.code || (err as any)?.data?.error?.code
     if (code === 'pagedeleted' || code === 'editconflict') {
-      // Refresh so a retry submits with the latest baserevid
+      // Reload the latest revision so a retry works on fresh data instead of
+      // overwriting the concurrent edit with stale content
+      let reloaded = false
       try {
-        state.page = await qc.ctx.wikiPage.newFromTitle(state.title, undefined, undefined, true)
+        const fresh = await qc.ctx.wikiPage.newFromTitle(state.title, undefined, undefined, true)
+        const content = fresh.revisions?.[0]?.content ?? state.content
+        const parsed = parseCategories(content, nsInfo)
+        state.page = fresh
+        state.content = content
+        state.categories = parsed.categories
+        state.originalDefaultSort = parsed.defaultSort
+        state.defaultSort = parsed.defaultSort
+        state.rows = parsed.categories.map((c) => ({
+          _id: c._id,
+          name: c.name,
+          sortkey: c.sortkey || parsed.defaultSort,
+          ns: c.ns || null,
+        }))
+        state.selected.clear()
+        state._dragIndex = null
+        renderDialog(qc, m, state)
+        reloaded = true
       } catch {
         /* keep the old page object */
       }
-      modal.notify('warning', {
-        title: t('submissionError'),
-        content: (
-          <div>
-            <p>
-              <strong>{String((err as Error)?.message || err)}</strong>
-            </p>
-            <p>{t('retry')}</p>
-          </div>
-        ),
-        closeAfter: 15000,
-      })
+      notifyConflictError(qc, err, reloaded)
       return
     }
     modal.notify('error', { title: t('submissionError'), content: String((err as Error)?.message || err) })

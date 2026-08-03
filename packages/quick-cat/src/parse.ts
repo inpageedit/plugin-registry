@@ -181,12 +181,18 @@ export function stripDefaultSort(text: string): string {
   return out
 }
 
-export function stripCategoryLinks(text: string, nsInfo: CategoryNsInfo): string {
-  const re = new RegExp(`\\[\\[\\s*(?:${nsInfo.alt})\\s*:[^\\]]*\\]\\]`, 'gi')
+// All matches of re in the masked text, as [start, end) offsets
+function findMaskedRanges(text: string, re: RegExp): Array<[number, number]> {
   const masked = maskIgnoredRegions(text)
   const ranges: Array<[number, number]> = []
   let m: RegExpExecArray | null
   while ((m = re.exec(masked))) ranges.push([m.index, m.index + m[0].length])
+  return ranges
+}
+
+export function stripCategoryLinks(text: string, nsInfo: CategoryNsInfo): string {
+  const re = new RegExp(`\\[\\[\\s*(?:${nsInfo.alt})\\s*:[^\\]]*\\]\\]`, 'gi')
+  const ranges = findMaskedRanges(text, re)
 
   let out = text
   for (let i = ranges.length - 1; i >= 0; i--) {
@@ -284,11 +290,8 @@ function findLastCategoryEnd(text: string, nsInfo: CategoryNsInfo): number {
     `\\[\\[\\s*(?:${nsInfo.alt})\\s*:\\s*[^\\[\\]|]*?(?:\\s*\\|\\s*[^\\[\\]]*?)?\\s*\\]\\]`,
     'gi'
   )
-  const masked = maskIgnoredRegions(text)
-  let end = -1
-  let m: RegExpExecArray | null
-  while ((m = re.exec(masked))) end = m.index + m[0].length
-  return end
+  const ranges = findMaskedRanges(text, re)
+  return ranges.length ? ranges[ranges.length - 1][1] : -1
 }
 
 // True when the user reordered existing categories via drag, or placed an added
@@ -309,38 +312,58 @@ export function isReordered(rows: CategoryRow[], originalCats: CategoryRef[]): b
 }
 
 // Reorder: rebuild a contiguous block in place, else strip and append at the end.
-// Otherwise: edit in place and insert new categories after the last link (HotCat).
-export function buildWikitext(
+function buildReorderedWikitext(
   original: string,
   rows: CategoryRow[],
   defaultSort: string,
   originalCats: CategoryRef[],
   nsInfo: CategoryNsInfo
 ): string {
-  if (isReordered(rows, originalCats)) {
-    const lines = renderCategoryLines(rows, defaultSort, nsInfo)
-    const dsMatches = findDefaultSortMatches(original)
-    const block = findCategoryBlock(originalCats, dsMatches)
-    if (block && lines.length && isBlockContiguous(original, block, originalCats, dsMatches)) {
-      return rebuildBlock(original, block, lines)
-    }
-    // Fallback: strip the old block and append at the end (keeps all body content)
-    let text = stripDefaultSort(original)
-    text = stripCategoryLinks(text, nsInfo)
-    // Only clean the tail so unrelated blank lines in the body are preserved
-    text = text.replace(/[ \t\r\n]+$/, '')
-    if (lines.length === 0) return `${text}\n`
-    return `${text}\n${lines.join('\n')}\n`
+  const lines = renderCategoryLines(rows, defaultSort, nsInfo)
+  const dsMatches = findDefaultSortMatches(original)
+  const block = findCategoryBlock(originalCats, dsMatches)
+  if (block && lines.length && isBlockContiguous(original, block, originalCats, dsMatches)) {
+    return rebuildBlock(original, block, lines)
   }
+  // Fallback: strip the old block and append at the end (keeps all body content)
+  let text = stripDefaultSort(original)
+  text = stripCategoryLinks(text, nsInfo)
+  // Only clean the tail so unrelated blank lines in the body are preserved
+  text = text.replace(/[ \t\r\n]+$/, '')
+  if (lines.length === 0) return `${text}\n`
+  return `${text}\n${lines.join('\n')}\n`
+}
 
+// Apply edits from the end so offsets stay valid even when text length changes
+interface TextEdit {
+  start: number
+  end: number
+  text: string
+}
+function applyTextEdits(original: string, edits: TextEdit[]): string {
+  const sorted = [...edits].sort((a, b) => b.start - a.start)
+  let text = original
+  for (const e of sorted) {
+    text = text.slice(0, e.start) + e.text + text.slice(e.end)
+  }
+  return text
+}
+
+// In-place: edit existing categories + DEFAULTSORT, then insert new categories
+// after the last link (HotCat behavior) so they stay with the existing ones
+function buildInPlaceWikitext(
+  original: string,
+  rows: CategoryRow[],
+  defaultSort: string,
+  originalCats: CategoryRef[],
+  nsInfo: CategoryNsInfo
+): string {
   const rowById = new Map<number, CategoryRow>()
   for (const r of rows) if (r._id != null) rowById.set(r._id, r)
   const additions = rows.filter((r) => r._id == null)
 
-  // In-place replacements (categories + DEFAULTSORT), applied from the end so
-  // offsets stay valid even when edits change text length
   const dsMatches = findDefaultSortMatches(original)
-  const edits: Array<{ start: number; end: number; text: string }> = []
+  const edits: TextEdit[] = []
   for (const c of originalCats) {
     const row = rowById.get(c._id)
     const link = row ? (renderLink(row, defaultSort, nsInfo) ?? '') : ''
@@ -368,16 +391,10 @@ export function buildWikitext(
       text: defaultSort ? `{{DEFAULTSORT:${defaultSort}}}` : '',
     })
   }
-  edits.sort((a, b) => b.start - a.start)
-  let text = original
-  for (const e of edits) {
-    text = text.slice(0, e.start) + e.text + text.slice(e.end)
-  }
+  let text = applyTextEdits(original, edits)
   // Only clean the tail so unrelated blank lines in the body are preserved
   text = text.replace(/[ \t\r\n]+$/, '')
 
-  // Insert new categories (and DEFAULTSORT if absent) right after the last
-  // category link (HotCat behavior), so they stay with the existing categories
   const newLines: string[] = []
   if (defaultSort && !dsMatches.length) newLines.push(`{{DEFAULTSORT:${defaultSort}}}`)
   for (const r of additions) {
@@ -394,6 +411,21 @@ export function buildWikitext(
     return `${text}\n`
   }
   return `${text}\n${newLines.join('\n')}\n`
+}
+
+// Reorder: rebuild a contiguous block in place, else strip and append at the end.
+// Otherwise: edit in place and insert new categories after the last link (HotCat).
+export function buildWikitext(
+  original: string,
+  rows: CategoryRow[],
+  defaultSort: string,
+  originalCats: CategoryRef[],
+  nsInfo: CategoryNsInfo
+): string {
+  if (isReordered(rows, originalCats)) {
+    return buildReorderedWikitext(original, rows, defaultSort, originalCats, nsInfo)
+  }
+  return buildInPlaceWikitext(original, rows, defaultSort, originalCats, nsInfo)
 }
 
 // Deterministic comparison of the generated text to detect changes
