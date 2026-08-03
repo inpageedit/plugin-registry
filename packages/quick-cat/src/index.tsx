@@ -444,7 +444,7 @@ function createOptionsSection(qc: QuickCatContext, state: CategoryState): HTMLEl
   ) as HTMLElement
 }
 
-function notifyConflictError(qc: QuickCatContext, err: unknown, reloaded: boolean): void {
+function notifyConflictError(qc: QuickCatContext, err: unknown): void {
   const { ctx, t } = qc
   const msg = String((err as Error)?.message || err)
   ctx.modal.notify('warning', {
@@ -454,7 +454,7 @@ function notifyConflictError(qc: QuickCatContext, err: unknown, reloaded: boolea
         <p>
           <strong>{msg}</strong>
         </p>
-        <p>{reloaded ? t('conflictReloaded') : t('retry')}</p>
+        <p>{t('retry')}</p>
       </div>
     ),
     closeAfter: 15000,
@@ -513,10 +513,10 @@ async function saveCategories(qc: QuickCatContext, m: any, state: CategoryState 
       text: newText,
       summary: state.summary || DEFAULT_SUMMARY,
       minor: state.minor,
-      // Detect conflicts (existing pages only). On conflict the page is
-      // refreshed below so a retry succeeds.
-      ...(state.page.lastrevid > 0 ? { baserevid: state.page.lastrevid } : {}),
+      // Detect conflicts; after a warning (forceSave) the next submit overwrites
+      ...(state.forceSave || state.page.lastrevid <= 0 ? {} : { baserevid: state.page.lastrevid }),
     })
+    qc.ctx.emit('analytics/event', { feature: 'quick-cat', subtype: 'save', page: state.title })
     if (!m.isDestroyed) m.close()
     if (state.reloadAfterSave) {
       modal.notify('success', {
@@ -536,32 +536,9 @@ async function saveCategories(qc: QuickCatContext, m: any, state: CategoryState 
     logger.error('save failed:', err)
     const code = (err as any)?.code || (err as any)?.data?.error?.code
     if (code === 'pagedeleted' || code === 'editconflict') {
-      // Reload the latest revision so a retry works on fresh data instead of
-      // overwriting the concurrent edit with stale content
-      let reloaded = false
-      try {
-        const fresh = await qc.ctx.wikiPage.newFromTitle(state.title, undefined, undefined, true)
-        const content = fresh.revisions?.[0]?.content ?? state.content
-        const parsed = parseCategories(content, nsInfo)
-        state.page = fresh
-        state.content = content
-        state.categories = parsed.categories
-        state.originalDefaultSort = parsed.defaultSort
-        state.defaultSort = parsed.defaultSort
-        state.rows = parsed.categories.map((c) => ({
-          _id: c._id,
-          name: c.name,
-          sortkey: c.sortkey || parsed.defaultSort,
-          ns: c.ns || null,
-        }))
-        state.selected.clear()
-        state._dragIndex = null
-        renderDialog(qc, m, state)
-        reloaded = true
-      } catch {
-        /* keep the old page object */
-      }
-      notifyConflictError(qc, err, reloaded)
+      // Keep edits; a second submit (forceSave) overwrites the concurrent change
+      state.forceSave = true
+      notifyConflictError(qc, err)
       return
     }
     modal.notify('error', { title: t('submissionError'), content: String((err as Error)?.message || err) })
@@ -649,6 +626,7 @@ async function showModal(qc: QuickCatContext): Promise<any> {
       summary: defaultSummary,
       minor: defaultMinor,
       reloadAfterSave: true,
+      forceSave: false,
       selected: new Set(),
       _dragIndex: null,
       rows: parsed.categories.map((c) => ({
@@ -659,6 +637,7 @@ async function showModal(qc: QuickCatContext): Promise<any> {
       })),
     }
     renderDialog(qc, m, state)
+    qc.ctx.emit('analytics/event', { feature: 'quick-cat', subtype: undefined, page: state.title })
   } catch (err) {
     logger.error('load failed:', err)
     m.setContent(
@@ -699,7 +678,7 @@ export default defineIPEPlugin({
           .description('Close editor modal by clicking outside')
           .default(false),
       }).description('Quick Cat options'),
-      'general'
+      'editor'
     )
 
     let action = 'view'

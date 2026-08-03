@@ -15,6 +15,7 @@ export interface CategoryState {
   selected: Set<CategoryRow>
   _dragIndex: number | null
   rows: CategoryRow[]
+  forceSave: boolean
 }
 
 // Pure state mutations; the dialog renderer calls these then refreshes the DOM
