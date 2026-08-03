@@ -67,7 +67,7 @@
 .ipe-quick-cat__suggest-item.is-redirect { font-style:italic; color:var(--ipe-modal-muted); }
 .ipe-quick-cat__suggest-item.is-redirect:hover { background:color-mix(in srgb, var(--ipe-modal-accent) 10%, transparent); }
 .ipe-quick-cat__suggest-redirect { margin-left:6px; font-size:.72rem; opacity:.85; font-style:normal; }
-.ipe-quick-cat__ds { display:flex; align-items:center; gap:10px; }
+.ipe-quick-cat__ds { display:flex; align-items:center; gap:5px; }
 .ipe-quick-cat__ds-text { flex:none; font-size:.85rem; color:var(--ipe-modal-muted); }
 .ipe-quick-cat__ds-info {
   flex:none; display:inline-flex; align-items:center; justify-content:center;
