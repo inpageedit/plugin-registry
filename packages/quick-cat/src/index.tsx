@@ -1,6 +1,6 @@
 import './style.scss'
 
-import { Schema, type InPageEdit } from '@inpageedit/core'
+import type { InPageEdit } from '@inpageedit/core'
 
 import { defineIPEPlugin } from '~~/defineIPEPlugin.js'
 import {
@@ -659,6 +659,7 @@ export default defineIPEPlugin({
   inject: ['toolbox', 'modal', 'wikiPage', 'api', 'i18n'],
   apply(ctx: InPageEdit): void {
     const c = ctx as Ctx
+    const Schema = c.schema
     // Prevent duplicate registration (plugin store + userscript both load)
     if ((c as any)[APPLIED_FLAG]) return
     ;(c as any)[APPLIED_FLAG] = true
