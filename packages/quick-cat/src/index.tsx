@@ -31,7 +31,7 @@ const DEFAULT_SUMMARY = '[IPE-NEXT] Quick Cat'
 
 const _defaultSortHelpCache = new Map<string, string>()
 
-// Fetch the default-sort help: API (allmessages) first, then mw.msg, then built-in
+// Default-sort help: API (allmessages) first, then mw.msg, then built-in
 async function getDefaultSortHelp(qc: QuickCatContext): Promise<string> {
   const { ctx, logger } = qc
   const key = 'visualeditor-dialog-meta-categories-defaultsort-help'
@@ -116,7 +116,7 @@ function createCategoryRow(
       ⠿
     </span>
   ) as HTMLSpanElement
-  // Pointer events drive the drag on both mouse and touch (HTML5 DnD has no touch support)
+  // Pointer events drive drag on mouse & touch (HTML5 DnD lacks touch support)
   grip.addEventListener('pointerdown', (e) => {
     if (e.pointerType === 'mouse' && e.button !== 0) return
     e.preventDefault()
@@ -346,7 +346,7 @@ function createDefaultSortSection(
       className="ipe-quick-cat__ds-input"
       type="text"
       value={state.defaultSort}
-      placeholder={state.pageName || ''}
+      placeholder={state.defaultSortKey || ''}
     />
   ) as HTMLInputElement
   dsInput.addEventListener('input', () => {
@@ -513,7 +513,7 @@ async function saveCategories(qc: QuickCatContext, m: any, state: CategoryState 
       text: newText,
       summary: state.summary || DEFAULT_SUMMARY,
       minor: state.minor,
-      // Detect conflicts; after a warning (forceSave) the next submit overwrites
+      // Detect conflicts; after a warning (forceSave) next submit overwrites
       ...(state.forceSave || state.page.lastrevid <= 0 ? {} : { baserevid: state.page.lastrevid }),
     })
     qc.ctx.emit('analytics/event', { feature: 'quick-cat', subtype: 'save', page: state.title })
@@ -536,7 +536,7 @@ async function saveCategories(qc: QuickCatContext, m: any, state: CategoryState 
     logger.error('save failed:', err)
     const code = (err as any)?.code || (err as any)?.data?.error?.code
     if (code === 'pagedeleted' || code === 'editconflict') {
-      // Keep edits; a second submit (forceSave) overwrites the concurrent change
+      // Keep edits; resubmit (forceSave) overwrites the concurrent change
       state.forceSave = true
       notifyConflictError(qc, err)
       return
@@ -571,7 +571,7 @@ async function showModal(qc: QuickCatContext): Promise<any> {
     .createObject({
       title: `${t('modalTitle')}: ${title}`,
       content: (
-        <div className="ipe-quick-cat ipe-quick-cat--loading">{t('loading')}</div>
+        <div className="ipe-quick-cat ipe-quick-cat--loading" />
       ),
       // className lands on the modal window: keep only compact-buttons there;
       // plugin styles live on the content root (.ipe-quick-cat)
@@ -615,6 +615,7 @@ async function showModal(qc: QuickCatContext): Promise<any> {
     const parsed = parseCategories(content, nsInfo)
     state = {
       title,
+      defaultSortKey: (mw.config.get('wgTitle') as string) || '',
       pageName:
         ctx.currentPage?.wikiTitle?.getPrefixedText?.() ||
         ((mw.config.get('wgPageName') as string) || title).replace(/_/g, ' '),
@@ -665,7 +666,7 @@ export default defineIPEPlugin({
     ;(c as any)[APPLIED_FLAG] = true
     const qc = createQuickCatContext(c)
 
-    // Preferences UI via the custom config registry (reliable for store-installed plugins)
+    // Preferences via the config registry (reliable when store-installed)
     c.preferences?.registerCustomConfig?.(
       PLUGIN_NAME,
       Schema.object({

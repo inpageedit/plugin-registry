@@ -24,7 +24,7 @@ function getSearchCache(ctx: object): Map<string, { ts: number; items: CategoryS
   return cache
 }
 
-// Search existing category pages (incl. hard redirects); results cached by prefix
+// Search existing category pages (incl. hard redirects); cached by prefix
 export async function searchCategories(
   qc: QuickCatContext,
   query: string
@@ -37,43 +37,92 @@ export async function searchCategories(
 
   const nsId = Number((mw.config.get('wgNamespaceIds') as Record<string, number>)?.category) || 14
   try {
-    const { data } = await qc.ctx.api.get({
-      action: 'query',
-      generator: 'allpages',
-      gapnamespace: nsId,
-      gapprefix: q,
-      gaplimit: 10,
-      prop: 'info',
-    })
-    const pages = data?.query?.pages || {}
-    const pageList = Object.values(pages).filter((p: any) => p && !p.missing && p.title)
-    // prop=info marks redirects (boolean on modern MW); resolve targets via redirects=1
-    const redirectTitles = pageList
-      .filter((p: any) => typeof p.redirect === 'string' || p.redirect === true)
+    // opensearch: relevance-ranked suggestions (HotCat's primary engine);
+    // allpages: prefix list as a fallback for the exact prefix
+    const [osRes, apRes] = await Promise.all([
+      qc.ctx.api.get({ action: 'opensearch', search: q, namespace: nsId, limit: 10 }),
+      qc.ctx.api.get({
+        action: 'query',
+        generator: 'allpages',
+        gapnamespace: nsId,
+        gapprefix: q,
+        gaplimit: 10,
+        prop: 'info',
+      }),
+    ])
+    const osTitles: string[] = osRes?.data?.[1] || []
+    const apTitles = Object.values(apRes?.data?.query?.pages || {})
+      .filter((p: any) => p && !p.missing && p.title)
       .map((p: any) => p.title)
+
+    // Merge (opensearch first), dedupe by bare name
+    const seen = new Set<string>()
+    const titles: string[] = []
+    for (const t of [...osTitles, ...apTitles]) {
+      const name = stripCategoryPrefix(t, qc.nsInfo)
+      if (!name || seen.has(name)) continue
+      seen.add(name)
+      titles.push(t)
+    }
+
+    // Resolve hard redirects (prop=info flags them; redirects=1 gets targets)
     const redirectMap = new Map<string, string>()
-    if (redirectTitles.length) {
+    if (titles.length) {
       try {
-        const { data: d2 } = await qc.ctx.api.get({
+        const { data } = await qc.ctx.api.get({
           action: 'query',
-          redirects: 1,
           prop: 'info',
-          titles: redirectTitles.join('|'),
+          titles: titles.join('|'),
         })
-        for (const r of d2?.query?.redirects || []) {
-          if (r.from && r.to) redirectMap.set(r.from, r.to)
+        const redirectTitles = Object.values(data?.query?.pages || {})
+          .filter((p: any) => p && (typeof p.redirect === 'string' || p.redirect === true))
+          .map((p: any) => p.title)
+        if (redirectTitles.length) {
+          const { data: d2 } = await qc.ctx.api.get({
+            action: 'query',
+            redirects: 1,
+            prop: 'info',
+            titles: redirectTitles.join('|'),
+          })
+          for (const r of d2?.query?.redirects || []) {
+            if (r.from && r.to) redirectMap.set(r.from, r.to)
+          }
         }
       } catch (e) {
         qc.logger.warn('resolve redirect targets failed:', e)
       }
     }
-    const items: CategorySuggestion[] = pageList.map((p: any) => {
-      const target = redirectMap.get(p.title)
+
+    const items: CategorySuggestion[] = titles.map((t) => {
+      const target = redirectMap.get(t)
       return {
-        name: stripCategoryPrefix(p.title, qc.nsInfo),
+        name: stripCategoryPrefix(t, qc.nsInfo),
         redirect: target ? stripCategoryPrefix(target, qc.nsInfo) : null,
       }
     })
+
+    // HotCat-style relevance sort: prefix containment (shorter first), then
+    // prefix match, case-insensitive prefix, and lexicographic fallback
+    items.sort((a, b) => {
+      const na = a.name
+      const nb = b.name
+      if (na === nb) return 0
+      if (na.indexOf(nb) === 0) return 1
+      if (nb.indexOf(na) === 0) return -1
+      const aPre = na.indexOf(q) === 0 ? 1 : 0
+      const bPre = nb.indexOf(q) === 0 ? 1 : 0
+      if (aPre !== bPre) return bPre - aPre
+      const aLow = na.toLowerCase()
+      const bLow = nb.toLowerCase()
+      const qLow = q.toLowerCase()
+      const aPreL = aLow.indexOf(qLow) === 0 ? 1 : 0
+      const bPreL = bLow.indexOf(qLow) === 0 ? 1 : 0
+      if (aPreL !== bPreL) return bPreL - aPreL
+      if (aLow < bLow) return -1
+      if (bLow < aLow) return 1
+      return 0
+    })
+
     cache.set(q, { ts: Date.now(), items })
     return items
   } catch (e) {

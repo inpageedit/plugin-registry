@@ -29,7 +29,7 @@ export interface QuickCatLogger {
   error: (...args: unknown[]) => void
 }
 
-// Per-plugin context: replaces module-level singletons (currentCtx/_logger/seqs)
+// Per-plugin context: replaces module-level singletons (ctx/logger/seqs)
 export interface QuickCatContext {
   ctx: Ctx
   logger: QuickCatLogger

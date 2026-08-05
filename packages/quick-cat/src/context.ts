@@ -17,7 +17,6 @@ const ZH_SIMP: Record<string, string> = {
   deleteSelected: '删除所选',
   defaultSort: '默认排序键',
   noCategories: '此页面没有直接书写的分类。',
-  loading: '正在加载分类…',
   loadFailed: '分类加载失败',
   invalidTitle: '分类名无效',
   invalidTitleDesc: '分类名不能为空，且不能包含 [ ] | # < > { } 等字符。',
@@ -38,7 +37,6 @@ const EN: Record<string, string> = {
   deleteSelected: 'Delete selected',
   defaultSort: 'Default sort key',
   noCategories: 'This page has no directly written categories.',
-  loading: 'Loading categories…',
   loadFailed: 'Failed to load categories',
   invalidTitle: 'Invalid category name',
   invalidTitleDesc: 'Category names cannot be empty or contain [ ] | # < > { }.',
@@ -59,7 +57,7 @@ const MESSAGES: Record<string, Record<string, string>> = {
   en: EN,
 }
 
-// Official messages reused via ctx.$$ (follow every IPE language; the rest use quick-cat.*)
+// Official messages via ctx.$$ (follow all IPE languages); rest use quick-cat.*
 const OFFICIAL_KEYS: Record<string, string> = {
   cancel: 'Cancel',
   save: 'Save',
@@ -110,7 +108,7 @@ export function createQuickCatContext(ctx: Ctx): QuickCatContext {
         /* fall through */
       }
     }
-    // Built-in English fallback (standalone/dev contexts without an i18n service)
+    // Built-in English fallback (standalone/dev contexts without i18n)
     return MESSAGES.en[key] ?? OFFICIAL_KEYS[key] ?? key
   }
 

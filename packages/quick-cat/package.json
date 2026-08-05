@@ -1,6 +1,6 @@
 {
   "name": "inpageedit-plugin-quick-cat",
-  "description": "Edit page categories in a dialog similar to VisualEditor: add, remove and rename categories, edit sort keys, drag to reorder, and manage the default sort key, with autocomplete support.",
+  "description": "Edit page categories: add, remove, rename, sort keys, default sort, autocomplete and drag-to-reorder.",
   "version": "1.0.0",
   "author": "Wecury",
   "license": "MIT",
@@ -21,7 +21,7 @@
   },
   "$ipe": {
     "name": "Quick Cat",
-    "description": "Edit page categories in a dialog similar to VisualEditor, including sort keys and the default sort key, with autocomplete and drag-to-reorder.",
+    "description": "Edit page categories: add, remove, rename, sort keys, default sort, autocomplete and drag-to-reorder.",
     "categories": [
       "editor",
       "utility"

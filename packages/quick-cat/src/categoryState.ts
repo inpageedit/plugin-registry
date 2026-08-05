@@ -4,6 +4,7 @@ import type { CategoryRef, CategoryRow } from './parse.js'
 export interface CategoryState {
   title: string
   pageName: string
+  defaultSortKey: string
   page: IWikiPage
   content: string
   categories: CategoryRef[]

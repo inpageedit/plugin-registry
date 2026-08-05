@@ -21,7 +21,7 @@ const INFO_ICON_SVG = `
   </svg>
 `
 
-// Parse via DOMParser (not innerHTML) to build the SVG element from a static constant
+// Parse via DOMParser (not innerHTML) to build the SVG from a static constant
 function createSvgIcon(svg: string): HTMLElement {
   const doc = new DOMParser().parseFromString(svg.trim(), 'image/svg+xml')
   return doc.documentElement as unknown as HTMLElement

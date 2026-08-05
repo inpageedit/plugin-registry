@@ -38,7 +38,7 @@ export function escapeRegExp(str: string): string {
 // category links are ignored. Pure (no memo); callers may cache if needed.
 const RAW_TAGS = ['nowiki', 'pre', 'code', 'math', 'syntaxhighlight', 'source', 'timeline', 'poem', 'hiero']
 
-// End offset after a balanced {{...}} starting at i ('{' of '{{'), or -1 if unclosed
+// End offset after balanced {{...}} at i ('{' of '{{'); -1 if unclosed
 function skipTemplate(text: string, i: number): number {
   let depth = 1
   let j = i + 2
@@ -248,7 +248,7 @@ function findCategoryBlock(
   return { start: Math.min(...starts), end: Math.max(...ends) }
 }
 
-// True when the block is only categories/whitespace, so it can be rebuilt in place
+// True when the block is only categories/whitespace (rebuildable in place)
 function isBlockContiguous(
   text: string,
   block: { start: number; end: number },
@@ -284,7 +284,7 @@ function rebuildBlock(
   return out
 }
 
-// End offset of the last category link (HotCat-style insertion point); -1 if none
+// End offset of the last category link (HotCat insertion point); -1 if none
 function findLastCategoryEnd(text: string, nsInfo: CategoryNsInfo): number {
   const re = new RegExp(
     `\\[\\[\\s*(?:${nsInfo.alt})\\s*:\\s*[^\\[\\]|]*?(?:\\s*\\|\\s*[^\\[\\]]*?)?\\s*\\]\\]`,
@@ -302,7 +302,7 @@ export function isReordered(rows: CategoryRow[], originalCats: CategoryRef[]): b
     .map((c) => c._id)
   const cur = rows.filter((r) => r._id != null).map((r) => r._id as number)
   if (orig.join(',') !== cur.join(',')) return true
-  // An added (no _id) category before/among existing ones also counts as reorder
+  // An added (no _id) category among existing ones also counts as reorder
   let seenNew = false
   for (const r of rows) {
     if (r._id == null) seenNew = true
@@ -311,7 +311,7 @@ export function isReordered(rows: CategoryRow[], originalCats: CategoryRef[]): b
   return false
 }
 
-// Reorder: rebuild a contiguous block in place, else strip and append at the end.
+// Reorder: rebuild the contiguous block in place, else strip + append at end.
 function buildReorderedWikitext(
   original: string,
   rows: CategoryRow[],
@@ -325,7 +325,7 @@ function buildReorderedWikitext(
   if (block && lines.length && isBlockContiguous(original, block, originalCats, dsMatches)) {
     return rebuildBlock(original, block, lines)
   }
-  // Fallback: strip the old block and append at the end (keeps all body content)
+  // Fallback: strip the old block, append at end (keeps body content)
   let text = stripDefaultSort(original)
   text = stripCategoryLinks(text, nsInfo)
   // Only clean the tail so unrelated blank lines in the body are preserved
@@ -413,8 +413,8 @@ function buildInPlaceWikitext(
   return `${text}\n${newLines.join('\n')}\n`
 }
 
-// Reorder: rebuild a contiguous block in place, else strip and append at the end.
-// Otherwise: edit in place and insert new categories after the last link (HotCat).
+// Reorder: rebuild the contiguous block in place, else strip + append at end.
+// Otherwise: edit in place; insert new cats after the last link (HotCat).
 export function buildWikitext(
   original: string,
   rows: CategoryRow[],
