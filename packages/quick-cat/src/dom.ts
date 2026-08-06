@@ -1,4 +1,4 @@
-// DOM helpers: static SVG icons (elements are created via JSX / jsx-dom)
+// DOM helpers: static SVG icons
 
 const TAG_ICON_SVG = `
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -21,6 +21,16 @@ const INFO_ICON_SVG = `
   </svg>
 `
 
+const PLUS_ICON_SVG = `
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+    class="icon icon-tabler icons-tabler-outline icon-tabler-plus" aria-hidden="true">
+    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+    <path d="M12 5l0 14" />
+    <path d="M5 12l14 0" />
+  </svg>
+`
+
 // Parse via DOMParser (not innerHTML) to build the SVG from a static constant
 function createSvgIcon(svg: string): HTMLElement {
   const doc = new DOMParser().parseFromString(svg.trim(), 'image/svg+xml')
@@ -29,3 +39,4 @@ function createSvgIcon(svg: string): HTMLElement {
 
 export const createTagIcon = () => createSvgIcon(TAG_ICON_SVG)
 export const createInfoIcon = () => createSvgIcon(INFO_ICON_SVG)
+export const createPlusIcon = () => createSvgIcon(PLUS_ICON_SVG)

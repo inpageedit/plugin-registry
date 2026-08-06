@@ -11,7 +11,7 @@ import {
   type CategoryRow,
 } from './parse.js'
 import { PLUGIN_NAME, createQuickCatContext } from './context.js'
-import { createInfoIcon, createTagIcon } from './dom.js'
+import { createInfoIcon, createPlusIcon, createTagIcon } from './dom.js'
 import { attachAutocomplete } from './autocomplete.js'
 import {
   deleteSelected,
@@ -116,7 +116,7 @@ function createCategoryRow(
       ⠿
     </span>
   ) as HTMLSpanElement
-  // Pointer events drive drag on mouse & touch (HTML5 DnD lacks touch support)
+  // Pointer events: HTML5 DnD lacks touch support
   grip.addEventListener('pointerdown', (e) => {
     if (e.pointerType === 'mouse' && e.button !== 0) return
     e.preventDefault()
@@ -144,6 +144,8 @@ function createCategoryRow(
       row.name = cat
       nameInput.value = cat
     },
+    // Enter with no suggestions moves to the sort key for fast entry
+    onEnter: () => sortInput.focus(),
   })
   const nameWrap = (
     <span className="ipe-quick-cat__namewrap">
@@ -184,61 +186,12 @@ function createCategoryRow(
   return rowEl
 }
 
-function createAddBar(
-  qc: QuickCatContext,
-  m: any,
-  state: CategoryState,
-  refreshList: () => void
-): HTMLElement {
-  const { t } = qc
-  const input = (
-    <input
-      className="ipe-quick-cat__new"
-      type="text"
-      placeholder={t('addPh')}
-      autoComplete="off"
-      spellCheck={false}
-    />
-  ) as HTMLInputElement
-  const suggest = <div className="ipe-quick-cat__suggest" /> as HTMLDivElement
-  const addBtn = (
-    <button className="ipe-quick-cat__addbtn" type="button">
-      {t('add')}
-    </button>
-  ) as HTMLButtonElement
-
-  const doAdd = () => {
-    const raw = stripCategoryPrefix(input.value, qc.nsInfo)
-    if (!raw) return
-    const duplicate = state.rows.some((r) => r.name.toLowerCase() === raw.toLowerCase())
-    if (duplicate) {
-      qc.ctx.modal.notify('warning', { title: t('duplicate'), content: `Category: ${raw}` })
-      return
-    }
-    state.rows.push({ name: raw, sortkey: state.defaultSort, ns: null })
-    input.value = ''
-    suggest.textContent = ''
-    refreshList()
-    input.focus()
-  }
-
-  attachAutocomplete(qc, m, input, suggest, { onEnter: doAdd })
-  addBtn.addEventListener('click', doAdd)
-
-  return (
-    <div className="ipe-quick-cat__add">
-      {input}
-      {addBtn}
-      {suggest}
-    </div>
-  ) as HTMLElement
-}
-
 function createToolbar(
   qc: QuickCatContext,
   state: CategoryState,
   list: HTMLDivElement,
-  onDelete: () => void
+  onDelete: () => void,
+  onAddRow: () => void
 ): { toolbar: HTMLElement; refreshToolbar: () => void } {
   const { t } = qc
   const checkAll = (
@@ -247,6 +200,13 @@ function createToolbar(
   const countEl = (
     <span className="ipe-quick-cat__selected-count">{t('selectedCount', 0)}</span>
   ) as HTMLSpanElement
+  const addBtn = (
+    <button className="ipe-quick-cat__add-row" type="button">
+      {createPlusIcon()}
+      {t('add')}
+    </button>
+  ) as HTMLButtonElement
+  addBtn.addEventListener('click', onAddRow)
   const deleteBtn = (
     <button className="ipe-quick-cat__delete-selected" type="button" disabled>
       {t('deleteSelected')}
@@ -283,6 +243,7 @@ function createToolbar(
         <span>{t('selectAll')}</span>
       </label>
       {countEl}
+      {addBtn}
       {deleteBtn}
     </div>
   ) as HTMLElement
@@ -467,7 +428,15 @@ function renderDialog(qc: QuickCatContext, m: any, state: CategoryState): void {
   const list = <div className="ipe-quick-cat__list" /> as HTMLDivElement
 
   let refreshList: () => void = () => {}
-  const { toolbar, refreshToolbar } = createToolbar(qc, state, list, () => refreshList())
+  const addRow = () => {
+    state.rows.push({ name: '', sortkey: state.defaultSort, ns: null })
+    refreshList()
+    // Focus the new row's name input so the user can type right away
+    const rows = list.querySelectorAll('.ipe-quick-cat__row')
+    const nameInput = rows[rows.length - 1]?.querySelector('.ipe-quick-cat__name') as HTMLInputElement | null
+    nameInput?.focus()
+  }
+  const { toolbar, refreshToolbar } = createToolbar(qc, state, list, () => refreshList(), addRow)
   refreshList = () => {
     list.textContent = ''
     if (state.rows.length === 0) {
@@ -482,11 +451,11 @@ function renderDialog(qc: QuickCatContext, m: any, state: CategoryState): void {
   attachDragHandlers(state, list, refreshList)
   refreshList()
 
-  const addBar = createAddBar(qc, m, state, refreshList)
   const dsLabel = createDefaultSortSection(qc, m, state, list)
   const options = createOptionsSection(qc, state)
 
-  root.append(toolbar, list, addBar, dsLabel, options)
+  // Default sort at the top, then the category list, then the action toolbar
+  root.append(dsLabel, list, toolbar, options)
   m.setContent(root)
 }
 
@@ -495,10 +464,24 @@ async function saveCategories(qc: QuickCatContext, m: any, state: CategoryState 
   const { modal } = qc.ctx
   const { t, logger, nsInfo } = qc
 
-  const bad = state.rows.find((r) => !r.name || /[\[\]|#<>{}]/.test(r.name))
+  // Existing rows must keep a name; blank new rows are skipped on save
+  const bad = state.rows.find(
+    (r) => (r._id != null && !r.name) || (r.name && /[\[\]|#<>{}]/.test(r.name))
+  )
   if (bad) {
     modal.notify('error', { title: t('invalidTitle'), content: t('invalidTitleDesc') })
     return
+  }
+  // Reject duplicate non-empty names (case-insensitive, prefix-stripped)
+  const seenNames = new Set<string>()
+  for (const r of state.rows) {
+    if (!r.name) continue
+    const key = stripCategoryPrefix(r.name, nsInfo).toLowerCase()
+    if (seenNames.has(key)) {
+      modal.notify('error', { title: t('duplicate'), content: stripCategoryPrefix(r.name, nsInfo) })
+      return
+    }
+    seenNames.add(key)
   }
 
   if (isUnchanged(state, nsInfo)) {

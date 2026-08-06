@@ -19,7 +19,7 @@ export interface CategoryState {
   forceSave: boolean
 }
 
-// Pure state mutations; the dialog renderer calls these then refreshes the DOM
+// Pure state mutations; the renderer calls these then refreshes the DOM
 
 export function toggleSelection(state: CategoryState, row: CategoryRow, checked: boolean): void {
   if (checked) state.selected.add(row)

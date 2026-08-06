@@ -294,8 +294,8 @@ function findLastCategoryEnd(text: string, nsInfo: CategoryNsInfo): number {
   return ranges.length ? ranges[ranges.length - 1][1] : -1
 }
 
-// True when the user reordered existing categories via drag, or placed an added
-// category before/among existing ones (HotCat in-place insertion can't do that)
+// True when the user reordered categories or placed a new one among
+// existing ones (in-place HotCat insertion can't do that)
 export function isReordered(rows: CategoryRow[], originalCats: CategoryRef[]): boolean {
   const orig = originalCats
     .filter((c) => rows.some((r) => r._id === c._id))
@@ -334,7 +334,7 @@ function buildReorderedWikitext(
   return `${text}\n${lines.join('\n')}\n`
 }
 
-// Apply edits from the end so offsets stay valid even when text length changes
+// Apply edits from the end so earlier offsets stay valid
 interface TextEdit {
   start: number
   end: number
@@ -349,8 +349,8 @@ function applyTextEdits(original: string, edits: TextEdit[]): string {
   return text
 }
 
-// In-place: edit existing categories + DEFAULTSORT, then insert new categories
-// after the last link (HotCat behavior) so they stay with the existing ones
+// Edit existing categories + DEFAULTSORT in place, then insert new ones
+// after the last link (HotCat behavior) so they stay together
 function buildInPlaceWikitext(
   original: string,
   rows: CategoryRow[],

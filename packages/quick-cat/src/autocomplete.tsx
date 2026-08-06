@@ -131,7 +131,7 @@ export async function searchCategories(
   }
 }
 
-// Generic autocomplete dropdown: debounced input, guarded by a request sequence
+// Autocomplete dropdown: debounced input, guarded by a request sequence
 export function attachAutocomplete(
   qc: QuickCatContext,
   m: any,
@@ -150,6 +150,12 @@ export function attachAutocomplete(
   }
   const positionSuggest = () => {
     if (!suggest.children.length) return
+    // The input may have been detached (e.g. the list re-rendered after an
+    // add); never position a dropdown for a detached element
+    if (!input.isConnected) {
+      hideSuggest()
+      return
+    }
     const ir = input.getBoundingClientRect()
     const vh = window.innerHeight
     const want = 220

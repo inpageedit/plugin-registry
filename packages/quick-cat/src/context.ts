@@ -4,13 +4,12 @@ import type { Ctx, QuickCatContext, QuickCatLogger } from './types.js'
 export const PLUGIN_NAME = 'quick-cat'
 
 // quick-cat.* messages. IPE resolves language by exact variant code (no
-// aliasing), so ZH_SIMP covers every Simplified variant and ZH_TRAD reuses it.
+// aliasing), so ZH_SIMP covers all Simplified variants and ZH_TRAD reuses it.
 const ZH_SIMP: Record<string, string> = {
   tooltip: '快速分类',
   modalTitle: '快速分类',
-  addPh: '输入分类名以添加',
   namePh: '分类名',
-  sortKeyPh: '排序键（可选）',
+  sortKeyPh: '排序键',
   drag: '拖动排序',
   selectAll: '全选',
   selectedCount: '已选 {{ $1 }} 项',
@@ -28,9 +27,8 @@ const ZH_TRAD = ZH_SIMP
 const EN: Record<string, string> = {
   tooltip: 'Quick Cat',
   modalTitle: 'Quick Cat',
-  addPh: 'Type a category to add',
   namePh: 'Category name',
-  sortKeyPh: 'Sort key (optional)',
+  sortKeyPh: 'Sort key',
   drag: 'Drag to reorder',
   selectAll: 'Select all',
   selectedCount: '{{ $1 }} selected',
@@ -57,7 +55,7 @@ const MESSAGES: Record<string, Record<string, string>> = {
   en: EN,
 }
 
-// Official messages via ctx.$$ (follow all IPE languages); rest use quick-cat.*
+// Official messages follow IPE's dict; the rest use quick-cat.*
 const OFFICIAL_KEYS: Record<string, string> = {
   cancel: 'Cancel',
   save: 'Save',
@@ -97,8 +95,6 @@ export function createQuickCatContext(ctx: Ctx): QuickCatContext {
   }
 
   const t = (key: string, ...args: (string | number)[]): string => {
-    // Official messages reuse IPE's dict (follow every IPE language); the rest
-    // live under the 'quick-cat' namespace (registered via registerMessages)
     const msgKey = OFFICIAL_KEYS[key] ?? `${PLUGIN_NAME}.${key}`
     if (ctx.$$) {
       try {
