@@ -140,6 +140,7 @@ export function attachAutocomplete(
   handlers: AutocompleteHandlers = {}
 ): void {
   // Render as a fixed portal on body so the scrollable list can't clip it
+  let detachObserver: MutationObserver | null = null
   const hideSuggest = () => {
     suggest.remove()
     suggest.textContent = ''
@@ -147,6 +148,20 @@ export function attachAutocomplete(
     activeIndex = 0
     input.setAttribute('aria-expanded', 'false')
     input.removeAttribute('aria-activedescendant')
+    // Stop watching once hidden; the dropdown is no longer at risk
+    if (detachObserver) {
+      detachObserver.disconnect()
+      detachObserver = null
+    }
+  }
+  // Clean up an open dropdown as soon as its input leaves the DOM (e.g. the
+  // list re-rendered), so it never lingers as an orphan portal on body
+  const ensureDetachWatch = () => {
+    if (detachObserver || typeof MutationObserver === 'undefined') return
+    detachObserver = new MutationObserver(() => {
+      if (!input.isConnected) hideSuggest()
+    })
+    if (document.body) detachObserver.observe(document.body, { childList: true, subtree: true })
   }
   const positionSuggest = () => {
     if (!suggest.children.length) return
@@ -244,6 +259,7 @@ export function attachAutocomplete(
     }
     input.setAttribute('aria-expanded', 'true')
     setActive(0)
+    ensureDetachWatch()
     positionSuggest()
   }
 
@@ -289,7 +305,7 @@ export function attachAutocomplete(
   }
   document.addEventListener('click', onDocClick)
   m.on(m.Event.Close, () => {
-    suggest.remove()
+    hideSuggest()
     document.removeEventListener('click', onDocClick)
   })
 }
