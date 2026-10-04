@@ -38,7 +38,7 @@ export default defineIPEPlugin({
           modal
             .get$content()
             .querySelector<HTMLTextAreaElement>('textarea[name="text"]')!,
-          contentmodel,
+          contentmodel.toLowerCase(),
           {
             ns,
             page: title,
