@@ -22,7 +22,15 @@ export default defineIPEPlugin({
         input.value = mw.config.get('wgPageName')
         input.style.width = '100%'
         form.appendChild(input)
-        ctx.modal.confirm(
+        const submit = () => {
+          const pageName = input.value.trim()
+          if (!pageName) return false
+          ctx.quickEdit({
+            title: pageName,
+          })
+          return true
+        }
+        const modal = ctx.modal.confirm(
           {
             title: 'Edit any page',
             content: form,
@@ -31,14 +39,21 @@ export default defineIPEPlugin({
           },
           (result) => {
             if (!result) return true
-            const pageName = input.value.trim()
-            if (!pageName) return false
-            ctx.quickEdit({
-              title: pageName,
-            })
-            return true
+            return submit()
           }
         )
+        // Press Enter to confirm
+        form.addEventListener('submit', (e) => {
+          e.preventDefault()
+          if (submit()) {
+            modal.close()
+          }
+        })
+        // Auto focus and select all once the modal is mounted
+        requestAnimationFrame(() => {
+          input.focus()
+          input.select()
+        })
       },
     })
 
