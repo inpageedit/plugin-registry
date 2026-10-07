@@ -30,6 +30,16 @@ jobs:
         with:
           fetch-depth: 1
 
+      - name: Setup Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: lts/*
+
+      - name: Resolve Dependencies
+        run: |
+          npm i -g pnpm
+          pnpm i
+
       - name: Run Claude Code
         id: claude
         uses: anthropics/claude-code-action@v1
@@ -46,5 +56,6 @@ jobs:
           # Optional: Add claude_args to customize behavior and configuration
           # See https://github.com/anthropics/claude-code-action/blob/main/docs/usage.md
           # or https://code.claude.com/docs/en/cli-reference for available options
-          # claude_args: '--allowed-tools Bash(gh pr *)'
+          claude_args: |
+            --allowedTools "Bash(pnpm install:*),Bash(pnpm i:*),Bash(pnpm add:*),Bash(pnpm build:*),Bash(pnpm run:*),Bash(pnpm exec:*),Bash(npx tsc:*)"
 
