@@ -397,11 +397,11 @@ export class PluginQuickDelete extends BasePlugin {
                 </div>
               </div>
 
-              {(failed.length || unprocessed.length) && (
+              {failed.length || unprocessed.length ? (
                 <div style="color: var(--ipe-modal-text-secondary);">
                    Titles for <strong>failed + unprocessed</strong> items have been refilled into the input. Click Delete to retry.
                 </div>
-              )}
+              ) : null}
 
               {failed.length ? (
                 <div>
