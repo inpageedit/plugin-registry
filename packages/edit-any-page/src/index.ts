@@ -30,7 +30,7 @@ export default defineIPEPlugin({
           })
           return true
         }
-        const modal: any = ctx.modal.confirm(
+        const modal = ctx.modal.confirm(
           {
             title: 'Edit any page',
             content: form,
@@ -46,7 +46,7 @@ export default defineIPEPlugin({
         form.addEventListener('submit', (e) => {
           e.preventDefault()
           if (submit()) {
-            modal?.close?.()
+            modal.close()
           }
         })
         // Auto focus and select all once the modal is mounted
