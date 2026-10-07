@@ -1,0 +1,41 @@
+{
+  "name": "inpageedit-plugin-code-mirror",
+  "description": "CodeMirror6 for InPageEdit",
+  "author": "bhsd-harry",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "module": "./dist/index.mjs",
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs"
+    }
+  },
+  "scripts": {
+    "dev": "vite build --watch",
+    "build": "vite build"
+  },
+  "$ipe": {
+    "name": "CodeMirror6",
+    "categories": [
+      "editor"
+    ],
+    "loader": {
+      "kind": "module",
+      "entry": "dist/index.mjs",
+      "styles": [
+        "dist/style.css"
+      ],
+      "main_export": "default"
+    },
+    "dev_loader": {
+      "entry": "src/index.ts",
+      "styles": [
+        "src/style.scss"
+      ]
+    }
+  }
+}
