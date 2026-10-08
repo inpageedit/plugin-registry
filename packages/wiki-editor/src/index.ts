@@ -25,7 +25,7 @@ export default defineIPEPlugin({
       pluginCodeMirror = ctx.get('plugin:code-mirror-v6')
     })
 
-    ctx.on('quick-edit/wiki-page', async (payload) => {
+    ctx.on('quick-edit/wiki-page', (payload) => {
       if (pluginCodeMirror?.isActive) {
         return
       }
@@ -36,9 +36,10 @@ export default defineIPEPlugin({
       if (!textarea || !registered) {
         return
       }
-      await mw.loader.using(['ext.wikiEditor'])
       if (typeof window.mw?.addWikiEditor === 'function') {
         window.mw.addWikiEditor($(textarea))
+      } else {
+        mw.loader.load(['ext.wikiEditor'])
       }
     })
   },
